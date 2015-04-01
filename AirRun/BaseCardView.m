@@ -7,8 +7,26 @@
 //
 
 #import "BaseCardView.h"
+#import "UConstants.h"
 
 @implementation BaseCardView
+
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self baseConfig];
+    }
+    return self;
+}
+
+
+- (void)baseConfig
+{
+    [[self layer] setCornerRadius:5.0];
+    [self setBackgroundColor:CardBgColor];
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

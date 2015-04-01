@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "WeatherManager.h"
 
 @interface ViewController ()
 
@@ -17,6 +18,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+//    [[[WeatherManager alloc] init] getPM25WithCityName:@"chongqing" success:^(NSDictionary *responseObject) {
+//       
+//        NSLog(@"%@",responseObject);
+//    } failure:^(NSError *error) {
+//        
+//    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,6 +8,7 @@
 
 #import "LeftSideViewController.h"
 #import "HeaderView.h"
+#import "RunCompleteCardsVC.h"
 @interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -57,6 +58,13 @@
 //                                                         animated:YES];
 //            [self.sideMenuViewController hideMenuViewController];
             break;
+        case 4:
+        {
+            RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
+            [self.sideMenuViewController setContentViewController:runVC animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+        }
+            break;
         default:
             break;
     }
@@ -77,7 +85,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
-    return 4;
+    return 5;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -115,11 +123,10 @@
         [cell setSelectedBackgroundView:selectbg];
     }
     
-    NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置"];
-    NSArray *images = @[@"setting", @"setting", @"setting", @"setting"];
+    NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"GoGoGo"];
+    NSArray *images = @[@"setting", @"setting", @"setting", @"setting" , @"setting"];
     cell.textLabel.text = titles[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
-    
     
     return cell;
 }
