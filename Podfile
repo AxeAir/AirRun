@@ -4,6 +4,7 @@ target :KiwiUnitTest, :exclusive => true do
         pod 'Kiwi'
 end
 target 'AirRun' do
+pod 'AFNetworking', '~> 2.5.2'
 
 end
 
