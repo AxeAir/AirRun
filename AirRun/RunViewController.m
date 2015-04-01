@@ -12,6 +12,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "WGS84TOGCJ02.h"
 #import "RunCardView.h"
+#import "RESideMenu.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -49,6 +50,9 @@ typedef enum : NSUInteger {
     
     _runState = RunViewControllerRunStateStop;
     _points = [[NSMutableArray alloc] init];
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
+    self.navigationItem.leftBarButtonItem = menuButton;
     
     [self p_setMapView];
     [self p_setLocationManager];
@@ -173,6 +177,11 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark Button Event
+
+- (void)menuButtonTouch:(UIButton *)sender {
+    [self.sideMenuViewController presentLeftMenuViewController];
+//    - (void)presentLeftMenuViewController;
+}
 
 - (void)contiuneButtonTouch:(UIButton *)sender {
     

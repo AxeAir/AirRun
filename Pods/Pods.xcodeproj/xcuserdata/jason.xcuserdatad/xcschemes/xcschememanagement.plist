@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-AirRun-AFNetworking.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+		<key>Pods-AirRun.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
 		<key>Pods-KiwiUnitTest-Kiwi.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,7 +27,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>380539A6B50085639E0A6649</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E7951AABB6D995B88D5A938</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8E733D88E292EF74669567B1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>BD9906F9A18D6C923C036DCE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C3B89E68484F524067587B6F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

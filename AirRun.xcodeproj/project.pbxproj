@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		628F663BFB502D4B71C8F3D9 /* libPods-AirRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */; };
+		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
+		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
+		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
+		96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B41ACC51E300F56BEA /* RunViewController.m */; };
 		E50BE0481AC8854A0030863D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0471AC8854A0030863D /* main.m */; };
 		E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04A1AC8854A0030863D /* AppDelegate.m */; };
 		E50BE04E1AC8854A0030863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04D1AC8854A0030863D /* ViewController.m */; };
@@ -65,6 +69,14 @@
 /* Begin PBXFileReference section */
 		06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.debug.xcconfig"; sourceTree = "<group>"; };
 		8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.release.xcconfig"; sourceTree = "<group>"; };
+		96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
+		96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
+		96F596AD1ACC51B800F56BEA /* RunCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCardView.h; sourceTree = "<group>"; };
+		96F596AE1ACC51B800F56BEA /* RunCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunCardView.m; sourceTree = "<group>"; };
+		96F596B01ACC51D600F56BEA /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
+		96F596B11ACC51D600F56BEA /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
+		96F596B31ACC51E300F56BEA /* RunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunViewController.h; sourceTree = "<group>"; };
+		96F596B41ACC51E300F56BEA /* RunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewController.m; sourceTree = "<group>"; };
 		AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.release.xcconfig"; sourceTree = "<group>"; };
 		B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiUnitTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirRun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,6 +184,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		96F596AB1ACC519F00F56BEA /* Run */ = {
+			isa = PBXGroup;
+			children = (
+				96F596B31ACC51E300F56BEA /* RunViewController.h */,
+				96F596B41ACC51E300F56BEA /* RunViewController.m */,
+				96F596B01ACC51D600F56BEA /* MapViewDelegate.h */,
+				96F596B11ACC51D600F56BEA /* MapViewDelegate.m */,
+				96F596AC1ACC51A600F56BEA /* View */,
+			);
+			name = Run;
+			sourceTree = "<group>";
+		};
+		96F596AC1ACC51A600F56BEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96F596AD1ACC51B800F56BEA /* RunCardView.h */,
+				96F596AE1ACC51B800F56BEA /* RunCardView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E50BE0391AC8854A0030863D = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +296,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				96F596AB1ACC519F00F56BEA /* Run */,
 				E59139921ACBD9D800F9D048 /* RunCompleteCards */,
 				E5668F9A1ACA5D99009A0D61 /* Side */,
 			);
@@ -295,6 +329,8 @@
 		E5668F8F1ACA5D35009A0D61 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */,
+				96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */,
 				E591399A1ACBE13400F9D048 /* DateHelper.h */,
 				E591399B1ACBE13400F9D048 /* DateHelper.m */,
 			);
@@ -612,10 +648,14 @@
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
+				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
+				96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
+				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
+				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */,
 				E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */,
