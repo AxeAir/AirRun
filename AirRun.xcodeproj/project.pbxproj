@@ -15,6 +15,12 @@
 		E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0541AC8854A0030863D /* LaunchScreen.xib */; };
 		E50BE0621AC8854A0030863D /* AirRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0611AC8854A0030863D /* AirRunTests.m */; };
 		E50BE07B1AC887200030863D /* DemoTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE07A1AC887200030863D /* DemoTestsSpec.m */; };
+		E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */; };
+		E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F941ACA5D6D009A0D61 /* RESideMenu.m */; };
+		E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F961ACA5D6D009A0D61 /* UIViewController+RESideMenu.m */; };
+		E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */; };
+		E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5668F9E1ACA61CB009A0D61 /* bg@2x.png */; };
+		E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5668FA01ACA628C009A0D61 /* bg1@2x.png */; };
 		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +60,16 @@
 		E50BE06F1AC886000030863D /* KiwiUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0721AC886000030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50BE07A1AC887200030863D /* DemoTestsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTestsSpec.m; sourceTree = "<group>"; };
+		E5668F911ACA5D6D009A0D61 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
+		E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
+		E5668F931ACA5D6D009A0D61 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
+		E5668F941ACA5D6D009A0D61 /* RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESideMenu.m; sourceTree = "<group>"; };
+		E5668F951ACA5D6D009A0D61 /* UIViewController+RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+RESideMenu.h"; sourceTree = "<group>"; };
+		E5668F961ACA5D6D009A0D61 /* UIViewController+RESideMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+RESideMenu.m"; sourceTree = "<group>"; };
+		E5668F9B1ACA5DB2009A0D61 /* LeftSideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftSideViewController.h; sourceTree = "<group>"; };
+		E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSideViewController.m; sourceTree = "<group>"; };
+		E5668F9E1ACA61CB009A0D61 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
+		E5668FA01ACA628C009A0D61 /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
 		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -117,6 +133,10 @@
 		E50BE0441AC8854A0030863D /* AirRun */ = {
 			isa = PBXGroup;
 			children = (
+				E5668F8F1ACA5D35009A0D61 /* Helper */,
+				E5668F8E1ACA5D2B009A0D61 /* Resources */,
+				E5668F8D1ACA5D0A009A0D61 /* Vendors */,
+				E5668F8C1ACA5CC7009A0D61 /* Sections */,
 				E50BE0491AC8854A0030863D /* AppDelegate.h */,
 				E50BE04A1AC8854A0030863D /* AppDelegate.m */,
 				E50BE04C1AC8854A0030863D /* ViewController.h */,
@@ -170,6 +190,60 @@
 				E50BE0721AC886000030863D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				E5668F9A1ACA5D99009A0D61 /* Side */,
+			);
+			name = Sections;
+			sourceTree = "<group>";
+		};
+		E5668F8D1ACA5D0A009A0D61 /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				E5668F901ACA5D56009A0D61 /* RESideMenu */,
+			);
+			name = Vendors;
+			sourceTree = "<group>";
+		};
+		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E5668F9E1ACA61CB009A0D61 /* bg@2x.png */,
+				E5668FA01ACA628C009A0D61 /* bg1@2x.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		E5668F8F1ACA5D35009A0D61 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		E5668F901ACA5D56009A0D61 /* RESideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				E5668F911ACA5D6D009A0D61 /* RECommonFunctions.h */,
+				E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */,
+				E5668F931ACA5D6D009A0D61 /* RESideMenu.h */,
+				E5668F941ACA5D6D009A0D61 /* RESideMenu.m */,
+				E5668F951ACA5D6D009A0D61 /* UIViewController+RESideMenu.h */,
+				E5668F961ACA5D6D009A0D61 /* UIViewController+RESideMenu.m */,
+			);
+			name = RESideMenu;
+			sourceTree = "<group>";
+		};
+		E5668F9A1ACA5D99009A0D61 /* Side */ = {
+			isa = PBXGroup;
+			children = (
+				E5668F9B1ACA5DB2009A0D61 /* LeftSideViewController.h */,
+				E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */,
+			);
+			name = Side;
 			sourceTree = "<group>";
 		};
 		F0F87C6BE6D51CCC8BAF920F /* Frameworks */ = {
@@ -288,6 +362,8 @@
 				E50BE0511AC8854A0030863D /* Main.storyboard in Resources */,
 				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
+				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
+				E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,7 +423,11 @@
 			files = (
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
+				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
+				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
+				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
+				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
