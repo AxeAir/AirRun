@@ -10,4 +10,6 @@
 
 @interface DateHelper : NSObject
 
++ (NSString *)getFormatterDate:(NSString *)formatter;
+
 @end

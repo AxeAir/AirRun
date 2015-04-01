@@ -10,4 +10,13 @@
 
 @implementation DateHelper
 
+
++ (NSString *)getFormatterDate:(NSString *)formatter
+{
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+    dateformatter.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh_CN"];
+    [dateformatter setDateFormat:formatter];
+    return [dateformatter stringFromDate:[NSDate date]];
+}
+
 @end
