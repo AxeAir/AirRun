@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		96F596951ACBEEE300F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596941ACBEEE300F56BEA /* RunCardView.m */; };
+		96F596981ACBEF0200F56BEA /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596971ACBEF0200F56BEA /* RunViewController.m */; };
+		96F5969A1ACBEFA400F56BEA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 96F596991ACBEFA400F56BEA /* CoreLocation.framework */; };
+		96F596A31ACBF2C600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A21ACBF2C600F56BEA /* MapViewDelegate.m */; };
+		96F596A71ACBFA1500F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A61ACBFA1500F56BEA /* WGS84TOGCJ02.m */; };
 		E50BE0481AC8854A0030863D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0471AC8854A0030863D /* main.m */; };
 		E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04A1AC8854A0030863D /* AppDelegate.m */; };
 		E50BE04E1AC8854A0030863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04D1AC8854A0030863D /* ViewController.m */; };
@@ -42,6 +47,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		96F596931ACBEEE300F56BEA /* RunCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCardView.h; sourceTree = "<group>"; };
+		96F596941ACBEEE300F56BEA /* RunCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunCardView.m; sourceTree = "<group>"; };
+		96F596961ACBEF0200F56BEA /* RunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunViewController.h; sourceTree = "<group>"; };
+		96F596971ACBEF0200F56BEA /* RunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewController.m; sourceTree = "<group>"; };
+		96F596991ACBEFA400F56BEA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		96F596A11ACBF2C600F56BEA /* MapViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewDelegate.h; sourceTree = "<group>"; };
+		96F596A21ACBF2C600F56BEA /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
+		96F596A51ACBFA1500F56BEA /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
+		96F596A61ACBFA1500F56BEA /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.release.xcconfig"; sourceTree = "<group>"; };
 		B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiUnitTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0421AC8854A0030863D /* AirRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -78,6 +92,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				96F5969A1ACBEFA400F56BEA /* CoreLocation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +121,27 @@
 				AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		96F596911ACBEEC300F56BEA /* Run */ = {
+			isa = PBXGroup;
+			children = (
+				96F596921ACBEECD00F56BEA /* View */,
+				96F596961ACBEF0200F56BEA /* RunViewController.h */,
+				96F596971ACBEF0200F56BEA /* RunViewController.m */,
+				96F596A11ACBF2C600F56BEA /* MapViewDelegate.h */,
+				96F596A21ACBF2C600F56BEA /* MapViewDelegate.m */,
+			);
+			name = Run;
+			sourceTree = "<group>";
+		};
+		96F596921ACBEECD00F56BEA /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96F596931ACBEEE300F56BEA /* RunCardView.h */,
+				96F596941ACBEEE300F56BEA /* RunCardView.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		E50BE0391AC8854A0030863D = {
@@ -195,6 +231,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				96F596911ACBEEC300F56BEA /* Run */,
 				E5668F9A1ACA5D99009A0D61 /* Side */,
 			);
 			name = Sections;
@@ -220,6 +257,8 @@
 		E5668F8F1ACA5D35009A0D61 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				96F596A51ACBFA1500F56BEA /* WGS84TOGCJ02.h */,
+				96F596A61ACBFA1500F56BEA /* WGS84TOGCJ02.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -249,6 +288,7 @@
 		F0F87C6BE6D51CCC8BAF920F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				96F596991ACBEFA400F56BEA /* CoreLocation.framework */,
 				B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */,
 			);
 			name = Frameworks;
@@ -423,11 +463,15 @@
 			files = (
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
+				96F596951ACBEEE300F56BEA /* RunCardView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
+				96F596A71ACBFA1500F56BEA /* WGS84TOGCJ02.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
+				96F596A31ACBF2C600F56BEA /* MapViewDelegate.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
+				96F596981ACBEF0200F56BEA /* RunViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
