@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseCardView.h"
 
-@interface CompleteDisplayCard : UIView
+@interface CompleteDisplayCard : BaseCardView
+
+
 
 @end
