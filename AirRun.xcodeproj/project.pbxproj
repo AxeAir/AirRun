@@ -21,6 +21,11 @@
 		E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */; };
 		E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5668F9E1ACA61CB009A0D61 /* bg@2x.png */; };
 		E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5668FA01ACA628C009A0D61 /* bg1@2x.png */; };
+		E5668FA71ACBB22F009A0D61 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5668FA61ACBB22F009A0D61 /* setting@2x.png */; };
+		E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FAA1ACBB55C009A0D61 /* HeaderView.m */; };
+		E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FAD1ACBB576009A0D61 /* UserModel.m */; };
+		E5668FB01ACBB6C8009A0D61 /* header.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5668FAF1ACBB6C8009A0D61 /* header.jpg */; };
+		E5668FB71ACBC128009A0D61 /* JuheApisSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FB41ACBC128009A0D61 /* JuheApisSDK.a */; };
 		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
@@ -70,6 +75,16 @@
 		E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftSideViewController.m; sourceTree = "<group>"; };
 		E5668F9E1ACA61CB009A0D61 /* bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg@2x.png"; sourceTree = "<group>"; };
 		E5668FA01ACA628C009A0D61 /* bg1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg1@2x.png"; sourceTree = "<group>"; };
+		E5668FA61ACBB22F009A0D61 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		E5668FA91ACBB55C009A0D61 /* HeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HeaderView.h; sourceTree = "<group>"; };
+		E5668FAA1ACBB55C009A0D61 /* HeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HeaderView.m; sourceTree = "<group>"; };
+		E5668FAC1ACBB576009A0D61 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		E5668FAD1ACBB576009A0D61 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		E5668FAF1ACBB6C8009A0D61 /* header.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = header.jpg; sourceTree = "<group>"; };
+		E5668FB21ACBB7E0009A0D61 /* UConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UConstants.h; sourceTree = "<group>"; };
+		E5668FB41ACBC128009A0D61 /* JuheApisSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = JuheApisSDK.a; sourceTree = "<group>"; };
+		E5668FB51ACBC128009A0D61 /* JHAPISDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAPISDK.h; sourceTree = "<group>"; };
+		E5668FB61ACBC128009A0D61 /* JHOpenidSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHOpenidSupplier.h; sourceTree = "<group>"; };
 		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -78,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5668FB71ACBC128009A0D61 /* JuheApisSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +149,8 @@
 		E50BE0441AC8854A0030863D /* AirRun */ = {
 			isa = PBXGroup;
 			children = (
+				E5668FB11ACBB7C5009A0D61 /* Macro */,
+				E5668FA81ACBB4FE009A0D61 /* Model */,
 				E5668F8F1ACA5D35009A0D61 /* Helper */,
 				E5668F8E1ACA5D2B009A0D61 /* Resources */,
 				E5668F8D1ACA5D0A009A0D61 /* Vendors */,
@@ -203,6 +221,7 @@
 		E5668F8D1ACA5D0A009A0D61 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				E5668FB31ACBC119009A0D61 /* JuheAPI */,
 				E5668F901ACA5D56009A0D61 /* RESideMenu */,
 			);
 			name = Vendors;
@@ -211,6 +230,8 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5668FAF1ACBB6C8009A0D61 /* header.jpg */,
+				E5668FA61ACBB22F009A0D61 /* setting@2x.png */,
 				E5668F9E1ACA61CB009A0D61 /* bg@2x.png */,
 				E5668FA01ACA628C009A0D61 /* bg1@2x.png */,
 			);
@@ -242,8 +263,37 @@
 			children = (
 				E5668F9B1ACA5DB2009A0D61 /* LeftSideViewController.h */,
 				E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */,
+				E5668FA91ACBB55C009A0D61 /* HeaderView.h */,
+				E5668FAA1ACBB55C009A0D61 /* HeaderView.m */,
 			);
 			name = Side;
+			sourceTree = "<group>";
+		};
+		E5668FA81ACBB4FE009A0D61 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E5668FAC1ACBB576009A0D61 /* UserModel.h */,
+				E5668FAD1ACBB576009A0D61 /* UserModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E5668FB11ACBB7C5009A0D61 /* Macro */ = {
+			isa = PBXGroup;
+			children = (
+				E5668FB21ACBB7E0009A0D61 /* UConstants.h */,
+			);
+			name = Macro;
+			sourceTree = "<group>";
+		};
+		E5668FB31ACBC119009A0D61 /* JuheAPI */ = {
+			isa = PBXGroup;
+			children = (
+				E5668FB41ACBC128009A0D61 /* JuheApisSDK.a */,
+				E5668FB51ACBC128009A0D61 /* JHAPISDK.h */,
+				E5668FB61ACBC128009A0D61 /* JHOpenidSupplier.h */,
+			);
+			name = JuheAPI;
 			sourceTree = "<group>";
 		};
 		F0F87C6BE6D51CCC8BAF920F /* Frameworks */ = {
@@ -362,8 +412,10 @@
 				E50BE0511AC8854A0030863D /* Main.storyboard in Resources */,
 				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
+				E5668FB01ACBB6C8009A0D61 /* header.jpg in Resources */,
 				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
 				E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */,
+				E5668FA71ACBB22F009A0D61 /* setting@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,10 +476,12 @@
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
+				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
+				E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -564,6 +618,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AirRun/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirRun",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -574,6 +632,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AirRun/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/AirRun",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

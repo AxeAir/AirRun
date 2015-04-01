@@ -7,10 +7,11 @@
 //
 
 #import "LeftSideViewController.h"
-
+#import "HeaderView.h"
 @interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
+@property (strong, nonatomic) HeaderView *header;
 
 @end
 
@@ -19,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, (self.view.frame.size.height - 54 * 5) / 2.0f, self.view.frame.size.width, 54 * 5) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,100, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -78,6 +79,26 @@
 {
     return 4;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        return 100.0;
+    }
+    return 10.0;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    if (section == 0) {
+        _header = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        [_header configUserInfo:nil withBloak:^{
+            
+        }];
+        return _header;
+    }
+    return nil;
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -89,17 +110,21 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor whiteColor];
-        cell.textLabel.highlightedTextColor = [UIColor lightGrayColor];
-        cell.selectedBackgroundView = [[UIView alloc] init];
+        UIView *selectbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+        [selectbg setBackgroundColor:[UIColor colorWithHue:1 saturation:1 brightness:1 alpha:0.2]];
+        [cell setSelectedBackgroundView:selectbg];
     }
     
     NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置"];
-    NSArray *images = @[@"IconHome", @"IconCalendar", @"IconProfile", @"IconSettings", @"IconEmpty"];
+    NSArray *images = @[@"setting", @"setting", @"setting", @"setting"];
     cell.textLabel.text = titles[indexPath.row];
     cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
     
+    
     return cell;
 }
+
+
 
 
 @end
