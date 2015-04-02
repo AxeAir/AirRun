@@ -11,6 +11,7 @@
 #import "WeatherManager.h"
 
 
+
 SPEC_BEGIN(WeatherTestsSpec)
 
 describe(@"given city name chongqing", ^{
@@ -26,18 +27,34 @@ describe(@"given city name chongqing", ^{
         });
         
         it(@"respose PM2.5", ^{
-            __block NSDictionary *fetchedData = nil;
+            __block PM25Model *pm = nil;
             
-            [manager getPM25WithCityName:@"chonqing" success:^(NSDictionary *responseObject) {
-                fetchedData = [responseObject objectForKey:@"result"];
+            [manager getPM25WithCityName:@"chonqing" success:^(PM25Model *pm25) {
+                pm = pm25;
             } failure:^(NSError *error) {
                 
             }];
             
+            [[expectFutureValue(pm.PM25) shouldEventuallyBeforeTimingOutAfter(5.0)] beNonNil];
+            [[expectFutureValue(pm.cityName) shouldEventuallyBeforeTimingOutAfter(5.0)] beNonNil];
+        });
+        
+        it(@"respose weather", ^{
+            __block NSDictionary *fetchedData = nil;
+            
+            
+            [manager getWeatherWithLongitude:@122 latitude:@37 success:^(NSDictionary *responseObject) {
+                fetchedData = [responseObject objectForKey:@"result"];
+            } failure:^(NSError *error) {
+                
+            }];
             [[expectFutureValue(fetchedData) shouldEventuallyBeforeTimingOutAfter(5.0)] beNonNil];
         });
+        
+        
     });
 
 });
+
 
 SPEC_END

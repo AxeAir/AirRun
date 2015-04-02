@@ -63,15 +63,16 @@
 
 - (void)changeToDisplay
 {
+    
     [UIView animateWithDuration:0.3 animations:^{
         //[_scrollview setContentOffset:CGPointMake(0, 180) animated:YES];
         [_display setFrame:CGRectMake(10,10, Main_Screen_Width-20, 800)];
+        [_display adjust:_inputcard.textview.text];
         [_inputcard setAlpha:0];
         [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+1 )];
-        //[_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+180 )];
     } completion:^(BOOL finished) {
         _up = NO;
-         [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,HEIGHT(_display)+10 )];
+         [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,HEIGHT(_display)+21 )];
     }];
 }
 

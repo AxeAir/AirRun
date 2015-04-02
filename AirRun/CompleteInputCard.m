@@ -9,7 +9,7 @@
 #import "CompleteInputCard.h"
 #import "UConstants.h"
 #import "DateHelper.h"
-@interface CompleteInputCard()<UITextViewDelegate>
+@interface CompleteInputCard()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) NSMutableArray *buttonArray;
@@ -71,15 +71,13 @@
         [self addSubview:biaoqing];
     }
     
-    _textview = [[UILabel alloc] initWithFrame:CGRectMake(20, MaxY(dayLabel)+50, WIDTH(self)-40, 40)];
+    _textview = [[UITextField alloc] initWithFrame:CGRectMake(20, MaxY(dayLabel)+50, WIDTH(self)-40, 40)];
     [_textview setBackgroundColor:[UIColor whiteColor]];
     [[_textview layer] setCornerRadius:2];
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouchLabel:)];
-    [_textview addGestureRecognizer:tap];
-    [_textview setUserInteractionEnabled:YES];
-    //[_textview setPlaceholder:@"说点什么嘛?"];
-    
+    [_textview setDelegate:self];
+    [_textview setPlaceholder:@"说点什么嘛?"];
+    [self setTextFieldLeftPadding:_textview forWidth:5];
+    [_textview setFont:[UIFont systemFontOfSize:14]];
     [self addSubview:_textview];
     
     UIButton *downButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
@@ -91,6 +89,11 @@
 }
 
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [_delegate didTouchLabel];
+}
+
 #pragma event
 
 - (void)downButtonTouch:(id)sender
@@ -98,10 +101,6 @@
     [_delegate didClickDownButton];
 }
 
-- (void)didTouchLabel:(id)sender
-{
-    [_delegate didTouchLabel];
-}
 
 - (void)didSelectFace:(id)sender
 {
@@ -119,6 +118,16 @@
     }
     
     
+}
+
+#pragma mark private
+-(void)setTextFieldLeftPadding:(UITextField *)textField forWidth:(CGFloat)leftWidth
+{
+    CGRect frame = textField.frame;
+    frame.size.width = leftWidth;
+    UIView *leftview = [[UIView alloc] initWithFrame:frame];
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    textField.leftView = leftview;
 }
 
 @end

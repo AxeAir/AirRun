@@ -20,6 +20,5 @@ typedef void (^completeEdit)(NSString *string);
 
 - (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text;
 
-
 - (void)disimiss;
 @end

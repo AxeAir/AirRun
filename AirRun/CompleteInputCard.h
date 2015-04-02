@@ -18,7 +18,7 @@
 
 @interface CompleteInputCard : BaseCardView
 
-@property (nonatomic, strong) UILabel *textview;
+@property (nonatomic, strong) UITextField *textview;
 @property (nonatomic, weak) id<CompleteInputCardDelegate> delegate;
 
 @property (nonatomic, assign) NSInteger currentFaceIndex;

@@ -144,8 +144,6 @@ static completeEdit Stablock;
     [addimage setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
     [addimage addTarget:self action:@selector(disimiss) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:addimage];
-    
-    
 }
 
 
@@ -166,12 +164,12 @@ static completeEdit Stablock;
     [self disimiss];
 }
 
-/*
+
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
 }
-*/
+
 
 @end

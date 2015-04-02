@@ -112,10 +112,10 @@
     
     MKAnnotationView *annotationView = [[MKAnnotationView alloc] init];
     annotationView.image = image;
-    annotationView.annotation = annotation;
+    //annotationView.annotation = annotation;
     
     annotationView.canShowCallout = NO;
-    [_mapView addAnnotation:annotationView];
+    //[_mapView addAnnotation:annotationView];
     
 }
 
