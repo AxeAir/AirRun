@@ -17,6 +17,7 @@
 @property (strong, nonatomic) UILabel *pullDownLabel;
 @property (strong, nonatomic) UILabel *distanceLabel;
 @property (strong, nonatomic) UILabel *distanceUnitLabel;
+@property (strong, nonatomic) CAShapeLayer *topLineLayer;
 
 ///
 @property (strong, nonatomic) UIView *centerView;
@@ -26,11 +27,13 @@
 @property (strong, nonatomic) UILabel *timeUnitLabel;
 @property (strong, nonatomic) UILabel *kcalLabel;
 @property (strong, nonatomic) UILabel *kcalUnitLabel;
+@property (strong, nonatomic) CAShapeLayer *centerLineLayer;
 
 ///
 @property (strong, nonatomic) UIView *bottomView;
 @property (strong, nonatomic) UIButton *photoButton;
 @property (strong, nonatomic) UIButton *retractButton;
+@property (strong, nonatomic) CAShapeLayer *divedLineLayer;
 
 @end
 
@@ -79,140 +82,195 @@
         _bgView.backgroundColor = [UIColor colorWithRed:85/255.0 green:150/255.0 blue:204/255.0 alpha:0.9];
         [self addSubview:_bgView];
     }
+    _bgView.frame = self.bounds;
     
-    if (!_topView) {
-        [self p_setTopViewLayout];
-    }
+    [self p_setTopViewLayout];
     
-    if (!_centerView) {
-        [self p_setCenterViewLayout];
-    }
+    [self p_setCenterViewLayout];
     
-    if (!_bottomView) {
-        [self p_setBottomViewLayout];
-    }
+    [self p_setBottomViewLayout];
     
 }
 
 - (void)p_setTopViewLayout {//0.45高度
     
-    _topView = [[UIView alloc] initWithFrame:CGRectMake(15, 5, self.bounds.size.width - 30, self.bounds.size.height*0.45)];
-    [self addSubview:_topView];
+    if (!_topView) {
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(15, 5, self.bounds.size.width - 30, self.bounds.size.height*0.45)];
+        [self addSubview:_topView];
+    }
+    _topView.frame = CGRectMake(15, 5, self.bounds.size.width - 30, self.bounds.size.height*0.45);
     
-    _pullDownLabel = [[UILabel alloc] init];
-    _pullDownLabel.text = @"下拉暂停";
-    _pullDownLabel.textColor = [UIColor whiteColor];
-    _pullDownLabel.font = [UIFont systemFontOfSize:14];
-    [_pullDownLabel sizeToFit];
+    if (!_pullDownLabel) {
+        _pullDownLabel = [[UILabel alloc] init];
+        _pullDownLabel.text = @"下拉暂停";
+        _pullDownLabel.textColor = [UIColor whiteColor];
+        _pullDownLabel.font = [UIFont systemFontOfSize:14];
+        [_pullDownLabel sizeToFit];
+        [_topView addSubview:_pullDownLabel];
+    }
     _pullDownLabel.center = CGPointMake(_topView.bounds.size.width/2, _pullDownLabel.frame.size.height/2);
-    [_topView addSubview:_pullDownLabel];
     
-    _distanceLabel = [[UILabel alloc] init];
-    _distanceLabel.text = [NSString stringWithFormat:@"%.2f",_distance/1000.0];
-    _distanceLabel.font = [UIFont systemFontOfSize:30];
-    _distanceLabel.textColor = [UIColor whiteColor];
-    [_distanceLabel sizeToFit];
+    if (!_distanceLabel) {
+        _distanceLabel = [[UILabel alloc] init];
+        _distanceLabel.text = [NSString stringWithFormat:@"%.2f",_distance/1000.0];
+        _distanceLabel.font = [UIFont systemFontOfSize:30];
+        _distanceLabel.textColor = [UIColor whiteColor];
+        [_distanceLabel sizeToFit];
+        [_topView addSubview:_distanceLabel];
+    }
     _distanceLabel.center = CGPointMake(_topView.bounds.size.width/2, _topView.bounds.size.height/2);
-    [_topView addSubview:_distanceLabel];
+
+    if (!_distanceUnitLabel) {
+        _distanceUnitLabel = [[UILabel alloc] init];
+        _distanceUnitLabel.text = @"距离km";
+        _distanceUnitLabel.font = [UIFont systemFontOfSize:14];
+        _distanceUnitLabel.textColor = [UIColor whiteColor];
+        [_distanceUnitLabel sizeToFit];
+        [_topView addSubview:_distanceUnitLabel];
+    }
+   _distanceUnitLabel.center = CGPointMake(_topView.bounds.size.width/2, CGRectGetMaxY(_distanceLabel.frame) + _distanceUnitLabel.frame.size.height/2);
     
-    _distanceUnitLabel = [[UILabel alloc] init];
-    _distanceUnitLabel.text = @"距离km";
-    _distanceUnitLabel.font = [UIFont systemFontOfSize:14];
-    _distanceUnitLabel.textColor = [UIColor whiteColor];
-    [_distanceUnitLabel sizeToFit];
-    _distanceUnitLabel.center = CGPointMake(_topView.bounds.size.width/2, CGRectGetMaxY(_distanceLabel.frame) + _distanceUnitLabel.frame.size.height/2);
-    [_topView addSubview:_distanceUnitLabel];
     
-    [self p_addUnderLineAtView:_topView WithColor:[UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1]];
+    if (_topLineLayer) {
+        [_topLineLayer removeFromSuperlayer];
+    }
+    _topLineLayer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, _topView.bounds.size.height)];
+    [path addLineToPoint:CGPointMake(_topView.bounds.size.width, _topView.bounds.size.height)];
+    
+    _topLineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
+    _topLineLayer.lineWidth = 1;
+    _topLineLayer.path = path.CGPath;
+    [_topView.layer addSublayer:_topLineLayer];
     
 }
 
 - (void)p_setCenterViewLayout {
     
-    _centerView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_topView.frame), self.bounds.size.width-30, self.bounds.size.height*0.25)];
-    [self addSubview:_centerView];
+    if (!_centerView) {
+        _centerView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_topView.frame), self.bounds.size.width-30, self.bounds.size.height*0.25)];
+        [self addSubview:_centerView];
+    }
+    _centerView.frame = CGRectMake(15, CGRectGetMaxY(_topView.frame), self.bounds.size.width-30, self.bounds.size.height*0.25);
     
-    _speedUnitLabel = [[UILabel alloc] init];
-    _speedUnitLabel.text = @"平均速度";
-    _speedUnitLabel.textColor = [UIColor whiteColor];
-    _speedUnitLabel.font = [UIFont systemFontOfSize:14];
-    [_speedUnitLabel sizeToFit];
+    if (!_speedUnitLabel) {
+        _speedUnitLabel = [[UILabel alloc] init];
+        _speedUnitLabel.text = @"平均速度";
+        _speedUnitLabel.textColor = [UIColor whiteColor];
+        _speedUnitLabel.font = [UIFont systemFontOfSize:14];
+        [_speedUnitLabel sizeToFit];
+        [_centerView addSubview:_speedUnitLabel];
+    }
     _speedUnitLabel.center = CGPointMake(_speedUnitLabel.bounds.size.width/2, _centerView.bounds.size.height/2 + _speedUnitLabel.bounds.size.height/2);
-    [_centerView addSubview:_speedUnitLabel];
     
-    _speedLabel = [[UILabel alloc] init];
-    _speedLabel.text = _time == 0?@"0.0":[NSString stringWithFormat:@"%.1f",_speed*3.6];
-    _speedLabel.textColor = [UIColor whiteColor];
-    _speedLabel.font = [UIFont systemFontOfSize:20];
-    [_speedLabel sizeToFit];
+    if (!_speedLabel) {
+        _speedLabel = [[UILabel alloc] init];
+        _speedLabel.text = _time == 0?@"0.0":[NSString stringWithFormat:@"%.1f",_speed*3.6];
+        _speedLabel.textColor = [UIColor whiteColor];
+        _speedLabel.font = [UIFont systemFontOfSize:20];
+        [_speedLabel sizeToFit];
+        [_centerView addSubview:_speedLabel];
+    }
     _speedLabel.center = CGPointMake(_speedUnitLabel.center.x, _centerView.bounds.size.height/2-_speedLabel.bounds.size.height/2);
-    [_centerView addSubview:_speedLabel];
     
-    _timeLabel = [[UILabel alloc] init];
-    _timeLabel.text = [self p_getTimeStringWithSeconds:_time];
-    _timeLabel.textColor = [UIColor whiteColor];
-    _timeLabel.font = [UIFont systemFontOfSize:20];
-    [_timeLabel sizeToFit];
+    if (!_timeLabel) {
+        _timeLabel = [[UILabel alloc] init];
+        _timeLabel.text = [self p_getTimeStringWithSeconds:_time];
+        _timeLabel.textColor = [UIColor whiteColor];
+        _timeLabel.font = [UIFont systemFontOfSize:20];
+        [_timeLabel sizeToFit];
+        [_centerView addSubview:_timeLabel];
+    }
     _timeLabel.center = CGPointMake(_centerView.bounds.size.width/2, _centerView.bounds.size.height/2 - _timeLabel.bounds.size.height/2);
-    [_centerView addSubview:_timeLabel];
     
-    _timeUnitLabel = [[UILabel alloc] init];
-    _timeUnitLabel.text = @"时间";
-    [_timeUnitLabel sizeToFit];
-    _timeUnitLabel.textColor = [UIColor whiteColor];
-    _timeUnitLabel.font = [UIFont systemFontOfSize:14];
+    if (!_timeUnitLabel) {
+        _timeUnitLabel = [[UILabel alloc] init];
+        _timeUnitLabel.text = @"时间";
+        [_timeUnitLabel sizeToFit];
+        _timeUnitLabel.textColor = [UIColor whiteColor];
+        _timeUnitLabel.font = [UIFont systemFontOfSize:14];
+        [_centerView addSubview:_timeUnitLabel];
+
+    }
     _timeUnitLabel.center = CGPointMake(_centerView.bounds.size.width/2, _centerView.bounds.size.height/2+_timeUnitLabel.bounds.size.height/2);
-    [_centerView addSubview:_timeUnitLabel];
     
-    _kcalUnitLabel = [[UILabel alloc] init];
-    _kcalUnitLabel.textColor = [UIColor whiteColor];
-    _kcalUnitLabel.text = @"卡路里kcal";
-    _kcalUnitLabel.font = [UIFont systemFontOfSize:14];
-    [_kcalUnitLabel sizeToFit];
+    if (!_kcalUnitLabel) {
+        _kcalUnitLabel = [[UILabel alloc] init];
+        _kcalUnitLabel.textColor = [UIColor whiteColor];
+        _kcalUnitLabel.text = @"卡路里kcal";
+        _kcalUnitLabel.font = [UIFont systemFontOfSize:14];
+        [_kcalUnitLabel sizeToFit];
+        [_centerView addSubview:_kcalUnitLabel];
+    }
     _kcalUnitLabel.center = CGPointMake(_centerView.bounds.size.width-_kcalUnitLabel.bounds.size.width/2, _centerView.bounds.size.height/2+_kcalUnitLabel.bounds.size.height/2);
-    [_centerView addSubview:_kcalUnitLabel];
     
-    _kcalLabel = [[UILabel alloc] init];
-    _kcalLabel.text = [NSString stringWithFormat:@"%.1f",_kcal];
-    _kcalLabel.textColor = [UIColor whiteColor];
-    _kcalLabel.font = [UIFont systemFontOfSize:20];
-    [_kcalLabel sizeToFit];
+    if (!_kcalLabel) {
+        _kcalLabel = [[UILabel alloc] init];
+        _kcalLabel.text = [NSString stringWithFormat:@"%.1f",_kcal];
+        _kcalLabel.textColor = [UIColor whiteColor];
+        _kcalLabel.font = [UIFont systemFontOfSize:20];
+        [_kcalLabel sizeToFit];
+        [_centerView addSubview:_kcalLabel];
+    }
     _kcalLabel.center = CGPointMake(_kcalUnitLabel.center.x , _centerView.bounds.size.height/2-_kcalLabel.bounds.size.height/2);
-    [_centerView addSubview:_kcalLabel];
     
-    [self p_addUnderLineAtView:_centerView WithColor:[UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1]];
+    
+    if (_centerLineLayer) {
+        [_centerLineLayer removeFromSuperlayer];
+    }
+    _centerLineLayer = [CAShapeLayer layer];
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(0, _centerView.bounds.size.height)];
+    [path addLineToPoint:CGPointMake(_centerView.bounds.size.width, _centerView.bounds.size.height)];
+    
+    _centerLineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
+    _centerLineLayer.lineWidth = 1;
+    _centerLineLayer.path = path.CGPath;
+    [_centerView.layer addSublayer:_centerLineLayer];
     
 }
 
 - (void)p_setBottomViewLayout {
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_centerView.frame), self.bounds.size.width-30, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame))];
-    [self addSubview:_bottomView];
+    if (!_bottomView) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_centerView.frame), self.bounds.size.width-30, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame))];
+        [self addSubview:_bottomView];
+    }
+    _bottomView.frame = CGRectMake(15, CGRectGetMaxY(_centerView.frame), self.bounds.size.width-30, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame));
     
-    _photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_photoButton setTintColor:[UIColor whiteColor]];
-    [_photoButton setTitle:@"  记录" forState:UIControlStateNormal];
-    [_photoButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
-    [_photoButton sizeToFit];
+    if (!_photoButton) {
+        _photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_photoButton setTintColor:[UIColor whiteColor]];
+        [_photoButton setTitle:@"  记录" forState:UIControlStateNormal];
+        [_photoButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+        [_photoButton sizeToFit];
+        [_bottomView addSubview:_photoButton];
+    }
     _photoButton.center = CGPointMake(_photoButton.bounds.size.width/2, _bottomView.bounds.size.height/2);
-    [_bottomView addSubview:_photoButton];
     
-    _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_retractButton setTintColor:[UIColor whiteColor]];
-    [_retractButton setTitle:@"  收起" forState:UIControlStateNormal];
-    [_retractButton setImage:[UIImage imageNamed:@"menu_icon_bulb.png"] forState:UIControlStateNormal];
-    [_retractButton sizeToFit];
+    if (!_retractButton) {
+        _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_retractButton setTintColor:[UIColor whiteColor]];
+        [_retractButton setTitle:@"  收起" forState:UIControlStateNormal];
+        [_retractButton setImage:[UIImage imageNamed:@"menu_icon_bulb.png"] forState:UIControlStateNormal];
+        [_retractButton sizeToFit];
+        [_bottomView addSubview:_retractButton];
+    }
     _retractButton.center = CGPointMake(_bottomView.bounds.size.width-_retractButton.bounds.size.width/2, _bottomView.bounds.size.height/2);
-    [_bottomView addSubview:_retractButton];
     
-    CAShapeLayer *lineLayer = [CAShapeLayer layer];
+    
+    if (_divedLineLayer) {
+        [_divedLineLayer removeFromSuperlayer];
+    }
+    _divedLineLayer = [CAShapeLayer layer];
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:CGPointMake(_retractButton.frame.origin.x - 15, 10)];
     [path addLineToPoint:CGPointMake(_retractButton.frame.origin.x - 15, _bottomView.bounds.size.height-10)];
-    lineLayer.lineWidth = 1;
-    lineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
-    lineLayer.path = path.CGPath;
-    [_bottomView.layer addSublayer:lineLayer];
+    _divedLineLayer.lineWidth = 1;
+    _divedLineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
+    _divedLineLayer.path = path.CGPath;
+    [_bottomView.layer addSublayer:_divedLineLayer];
 }
 
 #pragma mark - Function

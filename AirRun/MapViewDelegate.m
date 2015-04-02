@@ -9,6 +9,8 @@
 #import "MapViewDelegate.h"
 #import "GradientPolylineOverlay.h"
 #import "GradientPolylineRenderer.h"
+#import "ImageOverLay.h"
+#import "ImageOverLayRenderer.h"
 
 @interface MapViewDelegate ()
 
@@ -19,6 +21,8 @@
 
 @property (strong, nonatomic) GradientPolylineOverlay *gradientLineOverlay;
 @property (strong, nonatomic) GradientPolylineRenderer *gradientRenderer;
+
+@property (strong, nonatomic) ImageOverLay *imageOverlay;
 
 @end
 
@@ -34,6 +38,14 @@
 }
 
 #pragma mark - Map Action
+
+- (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location {
+    
+    _imageOverlay = [[ImageOverLay alloc] initWithCoordinate:location.coordinate WithImage:image];
+//    [self.mapView addOverlay:imageOverlay];
+    [self.mapView insertOverlay:_imageOverlay aboveOverlay:self.gradientLineOverlay];
+    
+}
 
 -(void)drawGradientPolyLineWithPoints:(NSArray *)pointArray{
     
@@ -53,7 +65,8 @@
     }
     
     self.gradientLineOverlay = [[GradientPolylineOverlay alloc] initWithPoints:points velocity:velocity count:pointArray.count];
-    [self.mapView addOverlay:self.gradientLineOverlay];
+//    [self.mapView addOverlay:self.gradientLineOverlay];
+    [self.mapView insertOverlay:self.gradientLineOverlay belowOverlay:_imageOverlay];
     
 //    CLLocation *location = self.points[0];
 //    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
@@ -108,18 +121,6 @@
     
 }
 
-- (void)addImageToMapView:(UIImage *)image {
-    
-    MKAnnotationView *annotationView = [[MKAnnotationView alloc] init];
-    annotationView.image = image;
-    annotationView.annotation = annotation;
-    
-    annotationView.canShowCallout = NO;
-    [_mapView addAnnotation:annotationView];
-    
-}
-
-
 #pragma mark - MapDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
@@ -137,6 +138,11 @@
         GradientPolylineRenderer *polylineRenderer = [[GradientPolylineRenderer alloc] initWithOverlay:overlay];
         polylineRenderer.lineWidth = 8.0f;
         return polylineRenderer;
+    }
+    
+    if ([overlay isKindOfClass:[ImageOverLay class]]) {
+        ImageOverLayRenderer *imageRenderer = [[ImageOverLayRenderer alloc] initWithOverlay:overlay];
+        return imageRenderer;
     }
     return nil;
 }

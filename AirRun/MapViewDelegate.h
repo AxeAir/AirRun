@@ -15,5 +15,6 @@
 
 - (void)drawLineWithPoints:(NSArray *)points;
 - (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray;
+- (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location;
 
 @end

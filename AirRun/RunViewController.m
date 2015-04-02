@@ -13,6 +13,10 @@
 #import "WGS84TOGCJ02.h"
 #import "RunCardView.h"
 #import "RESideMenu.h"
+#import "RunSimpleCardView.h"
+#import <POP.h>
+#import "RunViewControllerAnimation.h"
+#import "RunPauseView.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -34,9 +38,14 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) UIButton *contiuneButton;
 @property (strong, nonatomic) UIButton *completeButton;
 
+@property (strong, nonatomic) RunPauseView *pauseView;
 @property (strong, nonatomic) RunCardView *runcardView;
+@property (strong, nonatomic) RunSimpleCardView *runSimpleCardView;
+@property (assign, nonatomic) CGPoint runCardViewLastPoint;
 
 @property (strong, nonatomic) NSTimer *runTimer;
+
+@property (strong, nonatomic) UIDynamicAnimator *animator;
 
 @end
 
@@ -53,6 +62,7 @@ typedef enum : NSUInteger {
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
+    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     [self p_setMapView];
     [self p_setLocationManager];
@@ -113,6 +123,9 @@ typedef enum : NSUInteger {
 
 - (void)p_setLayout {
     
+    _pauseView = [[RunPauseView alloc] initWithFrame:CGRectMake(0, 64-50, self.view.bounds.size.width, 50)];
+    [self.view addSubview:_pauseView];
+    
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_startButton setTitle:@"开始" forState:UIControlStateNormal];
     [_startButton setTintColor:[UIColor whiteColor]];
@@ -131,7 +144,9 @@ typedef enum : NSUInteger {
     _contiuneButton.backgroundColor = [UIColor colorWithRed:97/255.0 green:187/255.0 blue:162/255.0 alpha:1];
     _contiuneButton.frame = CGRectMake(0, 0, 80, 80);
     _contiuneButton.layer.cornerRadius = _contiuneButton.bounds.size.width/2;
-    _contiuneButton.center = CGPointMake(self.view.bounds.size.width/4, _startButton.center.y);
+    _contiuneButton.center = CGPointMake(-_contiuneButton.bounds.size.width/2-10, _startButton.center.y);
+    [self.view addSubview:_contiuneButton];
+//    _contiuneButton.center = CGPointMake(self.view.bounds.size.width/4, _startButton.center.y);
     [self p_addShowdowWithView:_contiuneButton];
     [_contiuneButton addTarget:self action:@selector(contiuneButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -141,18 +156,23 @@ typedef enum : NSUInteger {
     _completeButton.backgroundColor = [UIColor colorWithRed:245/255.0 green:143/255.0 blue:71/255.0 alpha:1];
     _completeButton.frame = CGRectMake(0, 0, 80, 80);
     _completeButton.layer.cornerRadius = _completeButton.bounds.size.width/2;
-    _completeButton.center = CGPointMake(self.view.bounds.size.width*3/4, _startButton.center.y);
+    _completeButton.center = CGPointMake(self.view.bounds.size.width+_completeButton.bounds.size.width/2+10, _startButton.center.y);
+    [self.view addSubview:_completeButton];
+//    _completeButton.center = CGPointMake(self.view.bounds.size.width*3/4, _startButton.center.y);
     [self p_addShowdowWithView:_completeButton];
     [_completeButton addTarget:self action:@selector(completeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     
-    _runcardView = [[RunCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 200)];
+    _runcardView = [[RunCardView alloc] initWithFrame:CGRectMake(0, 0, 30, 10)];
     _runcardView.layer.cornerRadius = 5;
     _runcardView.clipsToBounds = YES;
-    _runcardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_runcardView.bounds.size.height/2-10);
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(runcardViewTap:)];
-    [_runcardView addGestureRecognizer:tapGesture];
-//    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(runcardViewPan:)];
-//    [_runcardView addGestureRecognizer:panGesture];
+    _runcardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10);
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(runcardViewPan:)];
+    [_runcardView addGestureRecognizer:panGesture];
+    
+    _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 50)];
+    _runSimpleCardView.layer.cornerRadius = 5;
+    _runSimpleCardView.clipsToBounds = YES;
+    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_runSimpleCardView.bounds.size.height/2-10);
     
 }
 #pragma mark - Event
@@ -166,7 +186,60 @@ typedef enum : NSUInteger {
 
 - (void)runcardViewPan:(UIPanGestureRecognizer *)panGesture {
     
-    NSLog(@"pan");
+    UIView *view = panGesture.view;
+    CGPoint point = [panGesture locationInView:self.view];
+    
+    if (panGesture.state == UIGestureRecognizerStateBegan) {
+        _runCardViewLastPoint = point;
+    } else if (panGesture.state == UIGestureRecognizerStateChanged) {
+        
+        CGFloat deltaY = point.y - _runCardViewLastPoint.y;
+        CGRect frame = view.frame;
+        frame.origin.y += deltaY;
+        
+        if (frame.origin.y < self.view.bounds.size.height-10-view.bounds.size.height) {
+            return;
+        }
+        
+        _runcardView.frame = frame;
+        _runCardViewLastPoint = point;
+    } else if (panGesture.state == UIGestureRecognizerStateEnded) {
+        
+        if (view.frame.origin.y > self.view.bounds.size.height - 10 -view.bounds.size.height/2) {
+            //运动卡片下移动出界面
+            [RunViewControllerAnimation view:view
+                       SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+view.bounds.size.height/2)
+                  AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                      
+                      //继续按钮弹入
+                      [RunViewControllerAnimation view:_contiuneButton
+                                  SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width/4, _startButton.center.y)
+                            AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                                [RunViewControllerAnimation scalAnimationWithView:_contiuneButton WithCompleteBlock:nil];
+                            }];
+                      
+                      //完成按钮弹入
+                      [RunViewControllerAnimation view:_completeButton
+                                  SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width*3/4, _startButton.center.y)
+                            AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                                [RunViewControllerAnimation scalAnimationWithView:_completeButton WithCompleteBlock:nil];
+                            }];
+                      
+                      
+                  }];
+            
+        } else {
+            
+            //运动卡片回到原来的位置
+            [RunViewControllerAnimation view:view
+                        SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10)
+                  AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                      [RunViewControllerAnimation scalAnimationWithView:view WithCompleteBlock:nil];
+                  }];
+            
+        }
+        
+    }
     
 }
 
@@ -180,7 +253,6 @@ typedef enum : NSUInteger {
 
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
-//    - (void)presentLeftMenuViewController;
 }
 
 - (void)contiuneButtonTouch:(UIButton *)sender {
@@ -195,14 +267,52 @@ typedef enum : NSUInteger {
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
+    [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+        
+        [RunViewControllerAnimation smallView:sender
+                                      ToFrame:CGRectMake(sender.center.x, sender.center.y, 0, 0)
+                            WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                                [self.view addSubview:_runcardView];
+                                [RunViewControllerAnimation largeView:_runcardView
+                                                              ToFrame:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)
+                                                    WithCompleteBlock:nil];
+                                
+                            }];
+        
+    }];
     
-    [sender removeFromSuperview];
-    [self.view addSubview:_runcardView];
-    _runState = RunViewControllerRunStateRunning;
-    [_runTimer setFireDate:[NSDate distantPast]];
+//    [self p_scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+//        
+//        POPSpringAnimation *slideOutAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+//        slideOutAnimation.toValue = [NSValue valueWithCGRect:CGRectMake(sender.center.x, sender.center.y, 0, 0)];
+//        slideOutAnimation.springBounciness = 0.f;
+//        slideOutAnimation.springSpeed = 3;
+//        slideOutAnimation.completionBlock = ^(POPAnimation *anim, BOOL finished) {
+//            [self.view addSubview:_runcardView];
+//            
+//            POPSpringAnimation *slideInAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
+//            slideInAnimation.toValue = [NSValue valueWithCGRect:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)];
+//            slideInAnimation.springSpeed = 3;
+//            slideInAnimation.springBounciness = 20;
+//            
+//            [_runcardView pop_addAnimation:slideInAnimation forKey:@"slideInAnimation"];
+//            
+//        };
+//        [sender pop_addAnimation:slideOutAnimation forKey:@"slideOutAnimation"];
+//        
+//        
+//    }];
+    
+//    [sender removeFromSuperview];
+//    [self.view addSubview:_runcardView];
+//    _runState = RunViewControllerRunStateRunning;
+//    [_runTimer setFireDate:[NSDate distantPast]];
+//    [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
 }
 
 #pragma mark - Function
+
+#pragma mark Animation Function
 
 - (void)p_addShowdowWithView:(UIView *)view {
     
@@ -211,6 +321,14 @@ typedef enum : NSUInteger {
     view.layer.shadowOpacity = 0.8;
     view.layer.shadowRadius = 4;
     view.layer.shadowOffset = CGSizeMake(1, 1.0);
+    
+}
+
+#pragma mark Private Function
+
+- (void)p_pause {
+    
+    
     
 }
 

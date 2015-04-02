@@ -6,53 +6,53 @@
 	<dict>
 		<key>Pods-AirRun-AFNetworking.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>4</integer>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-AirRun-pop.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-AirRun.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>3</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-KiwiUnitTest-Kiwi.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>2</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 		<key>Pods-KiwiUnitTest.xcscheme</key>
 		<dict>
-			<key>orderHint</key>
-			<integer>1</integer>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>380539A6B50085639E0A6649</key>
+		<key>076E3D797B31A5E5BE1B389E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4E7951AABB6D995B88D5A938</key>
+		<key>63C9176B39CE00882741C304</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8E733D88E292EF74669567B1</key>
+		<key>AA70C5ED941D4BBE9854C421</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD9906F9A18D6C923C036DCE</key>
+		<key>F8FD9F0727FF9214BF1CE919</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C3B89E68484F524067587B6F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F38FE8EAC9DD61799BA28F93</key>
+		<key>FCC9F370960648C242181AB3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
