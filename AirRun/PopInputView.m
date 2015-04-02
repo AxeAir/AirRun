@@ -59,7 +59,7 @@ static completeEdit Stablock;
     finalFrame.origin.y = -(HEIGHT(_inputView));
     _inputView.frame=finalFrame;
     
-    [UIView animateWithDuration:0.5 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+    [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         [_inputView setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
     } completion:^(BOOL finished) {
         [_textView becomeFirstResponder];
