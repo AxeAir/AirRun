@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E8652725522C9E913796C49"
-               BuildableName = "libPods-AirRun-AFNetworking.a"
-               BlueprintName = "Pods-AirRun-AFNetworking"
+               BlueprintIdentifier = "29F5F4C0B697F8C4D696F590"
+               BuildableName = "libPods-AirRun-FMDB.a"
+               BlueprintName = "Pods-AirRun-FMDB"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

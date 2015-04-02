@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		628F663BFB502D4B71C8F3D9 /* libPods-AirRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */; };
+		96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D0B1ACDB62200DECE02 /* RunPauseView.m */; };
+		96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D0D1ACDB62200DECE02 /* RunSimpleCardView.m */; };
+		96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D111ACDB64500DECE02 /* RunViewControllerAnimation.m */; };
+		96474D171ACDB65F00DECE02 /* ImageOverLay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D141ACDB65F00DECE02 /* ImageOverLay.m */; };
+		96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D161ACDB65F00DECE02 /* ImageOverLayRenderer.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
@@ -83,6 +88,16 @@
 /* Begin PBXFileReference section */
 		06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.debug.xcconfig"; sourceTree = "<group>"; };
 		8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.release.xcconfig"; sourceTree = "<group>"; };
+		96474D0A1ACDB62200DECE02 /* RunPauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunPauseView.h; sourceTree = "<group>"; };
+		96474D0B1ACDB62200DECE02 /* RunPauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunPauseView.m; sourceTree = "<group>"; };
+		96474D0C1ACDB62200DECE02 /* RunSimpleCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSimpleCardView.h; sourceTree = "<group>"; };
+		96474D0D1ACDB62200DECE02 /* RunSimpleCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunSimpleCardView.m; sourceTree = "<group>"; };
+		96474D101ACDB64500DECE02 /* RunViewControllerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunViewControllerAnimation.h; sourceTree = "<group>"; };
+		96474D111ACDB64500DECE02 /* RunViewControllerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewControllerAnimation.m; sourceTree = "<group>"; };
+		96474D131ACDB65F00DECE02 /* ImageOverLay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageOverLay.h; sourceTree = "<group>"; };
+		96474D141ACDB65F00DECE02 /* ImageOverLay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOverLay.m; sourceTree = "<group>"; };
+		96474D151ACDB65F00DECE02 /* ImageOverLayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageOverLayRenderer.h; sourceTree = "<group>"; };
+		96474D161ACDB65F00DECE02 /* ImageOverLayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOverLayRenderer.m; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -224,6 +239,8 @@
 		96F596AB1ACC519F00F56BEA /* Run */ = {
 			isa = PBXGroup;
 			children = (
+				96474D101ACDB64500DECE02 /* RunViewControllerAnimation.h */,
+				96474D111ACDB64500DECE02 /* RunViewControllerAnimation.m */,
 				96F596B31ACC51E300F56BEA /* RunViewController.h */,
 				96F596B41ACC51E300F56BEA /* RunViewController.m */,
 				96F596B01ACC51D600F56BEA /* MapViewDelegate.h */,
@@ -236,6 +253,14 @@
 		96F596AC1ACC51A600F56BEA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96474D131ACDB65F00DECE02 /* ImageOverLay.h */,
+				96474D141ACDB65F00DECE02 /* ImageOverLay.m */,
+				96474D151ACDB65F00DECE02 /* ImageOverLayRenderer.h */,
+				96474D161ACDB65F00DECE02 /* ImageOverLayRenderer.m */,
+				96474D0A1ACDB62200DECE02 /* RunPauseView.h */,
+				96474D0B1ACDB62200DECE02 /* RunPauseView.m */,
+				96474D0C1ACDB62200DECE02 /* RunSimpleCardView.h */,
+				96474D0D1ACDB62200DECE02 /* RunSimpleCardView.m */,
 				96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */,
 				96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */,
 				96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */,
@@ -731,11 +756,15 @@
 				E5AC95C01ACD639300A6F133 /* DataBaseModel.m in Sources */,
 				E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
+				96474D171ACDB65F00DECE02 /* ImageOverLay.m in Sources */,
 				E5AC95BD1ACD5AEE00A6F133 /* RunningRecordModel.m in Sources */,
 				96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */,
+				96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
+				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
+				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
 				E59139991ACBDDCF00F9D048 /* CompleteInputCard.m in Sources */,
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
@@ -745,6 +774,7 @@
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
+				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
 				E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */,

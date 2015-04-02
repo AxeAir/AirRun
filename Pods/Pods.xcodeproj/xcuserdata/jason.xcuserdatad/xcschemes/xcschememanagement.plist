@@ -9,6 +9,21 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-AirRun-FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-AirRun-MTLFMDBAdapter.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-AirRun-Mantle.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-AirRun-pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +47,42 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>076E3D797B31A5E5BE1B389E</key>
+		<key>2251AE95296330421C07EC85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63C9176B39CE00882741C304</key>
+		<key>25A89130733FAA5D9FF12838</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AA70C5ED941D4BBE9854C421</key>
+		<key>29F5F4C0B697F8C4D696F590</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F8FD9F0727FF9214BF1CE919</key>
+		<key>356EB4345E6DA3C36869341A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FCC9F370960648C242181AB3</key>
+		<key>37F9364B636EC27DE9D9E66A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6E8652725522C9E913796C49</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8881EB55FF2607BFDFD9D384</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>95757A982D943F7F625FE94B</key>
 		<dict>
 			<key>primary</key>
 			<true/>

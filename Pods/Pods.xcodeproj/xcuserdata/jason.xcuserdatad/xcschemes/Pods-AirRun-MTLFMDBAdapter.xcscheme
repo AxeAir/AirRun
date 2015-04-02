@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6E8652725522C9E913796C49"
-               BuildableName = "libPods-AirRun-AFNetworking.a"
-               BlueprintName = "Pods-AirRun-AFNetworking"
+               BlueprintIdentifier = "8881EB55FF2607BFDFD9D384"
+               BuildableName = "libPods-AirRun-MTLFMDBAdapter.a"
+               BlueprintName = "Pods-AirRun-MTLFMDBAdapter"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
