@@ -8,17 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		628F663BFB502D4B71C8F3D9 /* libPods-AirRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */; };
-		96474CCB1ACD2B4100DECE02 /* ImageOverLay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474CCA1ACD2B4100DECE02 /* ImageOverLay.m */; };
-		96474CCE1ACD2D9000DECE02 /* ImageOverLayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474CCD1ACD2D9000DECE02 /* ImageOverLayRenderer.m */; };
-		96474D031ACD536B00DECE02 /* RunSimpleCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D021ACD536B00DECE02 /* RunSimpleCardView.m */; };
-		96474D061ACD983A00DECE02 /* RunViewControllerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D051ACD983A00DECE02 /* RunViewControllerAnimation.m */; };
-		96474D091ACDA17400DECE02 /* RunPauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D081ACDA17400DECE02 /* RunPauseView.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
 		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
 		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
 		96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B41ACC51E300F56BEA /* RunViewController.m */; };
+		E503A4C71ACD14310039EDD6 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E503A4C61ACD14310039EDD6 /* down@2x.png */; };
 		E50BE0481AC8854A0030863D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0471AC8854A0030863D /* main.m */; };
 		E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04A1AC8854A0030863D /* AppDelegate.m */; };
 		E50BE04E1AC8854A0030863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04D1AC8854A0030863D /* ViewController.m */; };
@@ -53,6 +49,17 @@
 		E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E59BF3ED1ACBF8FE0033D1DC /* BaseCardView.m */; };
 		E59BF3F01ACC1CF60033D1DC /* map.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E59BF3EF1ACC1CF60033D1DC /* map.jpg */; };
 		E59BF3F21ACC1FF80033D1DC /* cardbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E59BF3F11ACC1FF80033D1DC /* cardbg.jpg */; };
+		E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95B51ACD201600A6F133 /* PopInputView.m */; };
+		E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95B71ACD2E0A00A6F133 /* close.png */; };
+		E5AC95BA1ACD311B00A6F133 /* ic_menu_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */; };
+		E5AC95BD1ACD5AEE00A6F133 /* RunningRecordModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95BC1ACD5AEE00A6F133 /* RunningRecordModel.m */; };
+		E5AC95C01ACD639300A6F133 /* DataBaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95BF1ACD639300A6F133 /* DataBaseModel.m */; };
+		E5AC95C31ACD651100A6F133 /* DataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */; };
+		E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C51ACD6A6D00A6F133 /* WeatherModel.m */; };
+		E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C81ACD6B2400A6F133 /* PM25Model.m */; };
+		E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */; };
+		E5AC95CF1ACD80FB00A6F133 /* UIView+CHQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */; };
+		E5AC95D11ACDA7C300A6F133 /* DataBaseTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95D01ACDA7C300A6F133 /* DataBaseTestsSpec.m */; };
 		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
@@ -76,16 +83,6 @@
 /* Begin PBXFileReference section */
 		06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.debug.xcconfig"; sourceTree = "<group>"; };
 		8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.release.xcconfig"; sourceTree = "<group>"; };
-		96474CC91ACD2B4100DECE02 /* ImageOverLay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageOverLay.h; sourceTree = "<group>"; };
-		96474CCA1ACD2B4100DECE02 /* ImageOverLay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOverLay.m; sourceTree = "<group>"; };
-		96474CCC1ACD2D9000DECE02 /* ImageOverLayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageOverLayRenderer.h; sourceTree = "<group>"; };
-		96474CCD1ACD2D9000DECE02 /* ImageOverLayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOverLayRenderer.m; sourceTree = "<group>"; };
-		96474D011ACD536B00DECE02 /* RunSimpleCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSimpleCardView.h; sourceTree = "<group>"; };
-		96474D021ACD536B00DECE02 /* RunSimpleCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunSimpleCardView.m; sourceTree = "<group>"; };
-		96474D041ACD983A00DECE02 /* RunViewControllerAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunViewControllerAnimation.h; sourceTree = "<group>"; };
-		96474D051ACD983A00DECE02 /* RunViewControllerAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewControllerAnimation.m; sourceTree = "<group>"; };
-		96474D071ACDA17400DECE02 /* RunPauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunPauseView.h; sourceTree = "<group>"; };
-		96474D081ACDA17400DECE02 /* RunPauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunPauseView.m; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -101,6 +98,7 @@
 		AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.release.xcconfig"; sourceTree = "<group>"; };
 		B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiUnitTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirRun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E503A4C61ACD14310039EDD6 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
 		E50BE0421AC8854A0030863D /* AirRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0461AC8854A0030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50BE0471AC8854A0030863D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -159,6 +157,24 @@
 		E59BF3ED1ACBF8FE0033D1DC /* BaseCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCardView.m; sourceTree = "<group>"; };
 		E59BF3EF1ACC1CF60033D1DC /* map.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = map.jpg; sourceTree = "<group>"; };
 		E59BF3F11ACC1FF80033D1DC /* cardbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cardbg.jpg; sourceTree = "<group>"; };
+		E5AC95B41ACD201600A6F133 /* PopInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopInputView.h; sourceTree = "<group>"; };
+		E5AC95B51ACD201600A6F133 /* PopInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopInputView.m; sourceTree = "<group>"; };
+		E5AC95B71ACD2E0A00A6F133 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu_mark.png; sourceTree = "<group>"; };
+		E5AC95BB1ACD5AEE00A6F133 /* RunningRecordModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningRecordModel.h; sourceTree = "<group>"; };
+		E5AC95BC1ACD5AEE00A6F133 /* RunningRecordModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningRecordModel.m; sourceTree = "<group>"; };
+		E5AC95BE1ACD639300A6F133 /* DataBaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseModel.h; sourceTree = "<group>"; };
+		E5AC95BF1ACD639300A6F133 /* DataBaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseModel.m; sourceTree = "<group>"; };
+		E5AC95C11ACD651100A6F133 /* DataBaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseHelper.h; sourceTree = "<group>"; };
+		E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseHelper.m; sourceTree = "<group>"; };
+		E5AC95C41ACD6A6D00A6F133 /* WeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
+		E5AC95C51ACD6A6D00A6F133 /* WeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherModel.m; sourceTree = "<group>"; };
+		E5AC95C71ACD6B2400A6F133 /* PM25Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PM25Model.h; sourceTree = "<group>"; };
+		E5AC95C81ACD6B2400A6F133 /* PM25Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PM25Model.m; sourceTree = "<group>"; };
+		E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = perm_group_location.png; sourceTree = "<group>"; };
+		E5AC95CD1ACD80FB00A6F133 /* UIView+CHQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CHQuartz.h"; sourceTree = "<group>"; };
+		E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CHQuartz.m"; sourceTree = "<group>"; };
+		E5AC95D01ACDA7C300A6F133 /* DataBaseTestsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseTestsSpec.m; sourceTree = "<group>"; };
 		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -212,8 +228,6 @@
 				96F596B41ACC51E300F56BEA /* RunViewController.m */,
 				96F596B01ACC51D600F56BEA /* MapViewDelegate.h */,
 				96F596B11ACC51D600F56BEA /* MapViewDelegate.m */,
-				96474D041ACD983A00DECE02 /* RunViewControllerAnimation.h */,
-				96474D051ACD983A00DECE02 /* RunViewControllerAnimation.m */,
 				96F596AC1ACC51A600F56BEA /* View */,
 			);
 			name = Run;
@@ -228,14 +242,6 @@
 				96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */,
 				96F596AD1ACC51B800F56BEA /* RunCardView.h */,
 				96F596AE1ACC51B800F56BEA /* RunCardView.m */,
-				96474CC91ACD2B4100DECE02 /* ImageOverLay.h */,
-				96474CCA1ACD2B4100DECE02 /* ImageOverLay.m */,
-				96474CCC1ACD2D9000DECE02 /* ImageOverLayRenderer.h */,
-				96474CCD1ACD2D9000DECE02 /* ImageOverLayRenderer.m */,
-				96474D011ACD536B00DECE02 /* RunSimpleCardView.h */,
-				96474D021ACD536B00DECE02 /* RunSimpleCardView.m */,
-				96474D071ACDA17400DECE02 /* RunPauseView.h */,
-				96474D081ACDA17400DECE02 /* RunPauseView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -316,6 +322,7 @@
 				E50BE0711AC886000030863D /* Supporting Files */,
 				E50BE07A1AC887200030863D /* DemoTestsSpec.m */,
 				E5668FC91ACBC998009A0D61 /* WeatherTestsSpec.m */,
+				E5AC95D01ACDA7C300A6F133 /* DataBaseTestsSpec.m */,
 			);
 			path = KiwiUnitTest;
 			sourceTree = "<group>";
@@ -341,6 +348,7 @@
 		E5668F8D1ACA5D0A009A0D61 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC95CC1ACD80F400A6F133 /* Draw */,
 				E5668FB31ACBC119009A0D61 /* JuheAPI */,
 				E5668F901ACA5D56009A0D61 /* RESideMenu */,
 			);
@@ -350,6 +358,10 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */,
+				E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */,
+				E5AC95B71ACD2E0A00A6F133 /* close.png */,
+				E503A4C61ACD14310039EDD6 /* down@2x.png */,
 				E59BF3F11ACC1FF80033D1DC /* cardbg.jpg */,
 				E59BF3EF1ACC1CF60033D1DC /* map.jpg */,
 				E591399D1ACBE63D00F9D048 /* biaoqing@2x.png */,
@@ -364,6 +376,8 @@
 		E5668F8F1ACA5D35009A0D61 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC95C11ACD651100A6F133 /* DataBaseHelper.h */,
+				E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */,
 				96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */,
 				96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */,
 				E591399A1ACBE13400F9D048 /* DateHelper.h */,
@@ -399,8 +413,16 @@
 		E5668FA81ACBB4FE009A0D61 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC95BE1ACD639300A6F133 /* DataBaseModel.h */,
+				E5AC95BF1ACD639300A6F133 /* DataBaseModel.m */,
 				E5668FAC1ACBB576009A0D61 /* UserModel.h */,
 				E5668FAD1ACBB576009A0D61 /* UserModel.m */,
+				E5AC95BB1ACD5AEE00A6F133 /* RunningRecordModel.h */,
+				E5AC95BC1ACD5AEE00A6F133 /* RunningRecordModel.m */,
+				E5AC95C41ACD6A6D00A6F133 /* WeatherModel.h */,
+				E5AC95C51ACD6A6D00A6F133 /* WeatherModel.m */,
+				E5AC95C71ACD6B2400A6F133 /* PM25Model.h */,
+				E5AC95C81ACD6B2400A6F133 /* PM25Model.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -453,8 +475,19 @@
 				E59139981ACBDDCF00F9D048 /* CompleteInputCard.m */,
 				E59BF3E91ACBF7E10033D1DC /* CompleteDisplayCard.h */,
 				E59BF3EA1ACBF7E10033D1DC /* CompleteDisplayCard.m */,
+				E5AC95B41ACD201600A6F133 /* PopInputView.h */,
+				E5AC95B51ACD201600A6F133 /* PopInputView.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		E5AC95CC1ACD80F400A6F133 /* Draw */ = {
+			isa = PBXGroup;
+			children = (
+				E5AC95CD1ACD80FB00A6F133 /* UIView+CHQuartz.h */,
+				E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */,
+			);
+			name = Draw;
 			sourceTree = "<group>";
 		};
 		F0F87C6BE6D51CCC8BAF920F /* Frameworks */ = {
@@ -482,6 +515,7 @@
 				E50BE03F1AC8854A0030863D /* Frameworks */,
 				E50BE0401AC8854A0030863D /* Resources */,
 				043B65407BC4F395ADC657F8 /* Copy Pods Resources */,
+				3D5D9312119D6C20E86976F6 /* Find unused imports */,
 			);
 			buildRules = (
 			);
@@ -581,10 +615,14 @@
 				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
 				E59BF3F01ACC1CF60033D1DC /* map.jpg in Resources */,
+				E503A4C71ACD14310039EDD6 /* down@2x.png in Resources */,
 				E5668FB01ACBB6C8009A0D61 /* header.jpg in Resources */,
+				E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */,
+				E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */,
 				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
 				E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */,
 				E591399E1ACBE63D00F9D048 /* biaoqing@2x.png in Resources */,
+				E5AC95BA1ACD311B00A6F133 /* ic_menu_mark.png in Resources */,
 				E59BF3F21ACC1FF80033D1DC /* cardbg.jpg in Resources */,
 				E5668FA71ACBB22F009A0D61 /* setting@2x.png in Resources */,
 			);
@@ -637,6 +675,20 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
+		3D5D9312119D6C20E86976F6 /* Find unused imports */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Find unused imports";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"/Users/mrche/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/mrche/Documents/ios/AirRun\"";
+		};
 		C8B543BDF53D2743FEFED493 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -674,8 +726,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5AC95C31ACD651100A6F133 /* DataBaseHelper.m in Sources */,
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
+				E5AC95C01ACD639300A6F133 /* DataBaseModel.m in Sources */,
+				E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
+				E5AC95BD1ACD5AEE00A6F133 /* RunningRecordModel.m in Sources */,
 				96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
@@ -685,18 +741,16 @@
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
-				96474D061ACD983A00DECE02 /* RunViewControllerAnimation.m in Sources */,
-				96474D031ACD536B00DECE02 /* RunSimpleCardView.m in Sources */,
 				96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
-				96474CCE1ACD2D9000DECE02 /* ImageOverLayRenderer.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
-				96474CCB1ACD2B4100DECE02 /* ImageOverLay.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
+				E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
-				96474D091ACDA17400DECE02 /* RunPauseView.m in Sources */,
+				E5AC95CF1ACD80FB00A6F133 /* UIView+CHQuartz.m in Sources */,
+				E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */,
@@ -716,6 +770,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E5AC95D11ACDA7C300A6F133 /* DataBaseTestsSpec.m in Sources */,
 				E50BE07B1AC887200030863D /* DemoTestsSpec.m in Sources */,
 				E5668FCA1ACBC998009A0D61 /* WeatherTestsSpec.m in Sources */,
 			);

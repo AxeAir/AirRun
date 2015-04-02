@@ -5,18 +5,6 @@
 //  Created by Mac on 14-2-28.
 //  Copyright (c) 2014年 NanJingXianLang. All rights reserved.
 //
-#define SportViewButtonMusic 12000
-#define SportViewButtonLevel 12001
-#define SportViewButtonAdd   12002
-#define SportViewButtonRank  12003
-#define SportViewButtonDetail  12004
-#define SportViewButtonMore  12005
-
-#define SportTypeRun  0
-#define SportTypeRide  1
-#define SportTypeWalk  2
-
-
 
 #ifndef Medical_Wisdom_UConstants_h
 #define Medical_Wisdom_UConstants_h
@@ -176,7 +164,7 @@
 
 
 
-#define CardBgColor [UIColor colorWithRed:85/255.0 green:150.0/255.0 blue:200.0/255.0 alpha:0.7]
+#define CardBgColor [UIColor colorWithRed:85/255.0 green:150.0/255.0 blue:200.0/255.0 alpha:0.8]
 
 #define Today_Extension_Group @"group.xxTeam.SportMan.SportManTodayExtension"
 #define Today_Extension @"xxTeam.SportMan.SportManTodayExtension"

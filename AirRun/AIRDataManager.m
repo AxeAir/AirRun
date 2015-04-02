@@ -1,27 +1,9 @@
-//
-//  V2DataManager.m
-//  v2ex-iOS
-//
-//  Created by Singro on 3/17/14.
-//  Copyright (c) 2014 Singro. All rights reserved.
-//
-
 #import "AIRDataManager.h"
 #import "UConstants.h"
 #import <AFNetworking.h>
 
 
-
-static NSString *const kOnceString =  @"once";
-static NSString *const kNextString =  @"next";
-
-static NSString *const kUsername = @"username";
-static NSString *const kUserid = @"userid";
-static NSString *const kAvatarURL = @"avatarURL";
-static NSString *const kUserIsLogin = @"userIsLogin";
-
-
-typedef NS_ENUM(NSInteger, V2RequestMethod) {
+typedef NS_ENUM(NSInteger, AIRRequestMethod) {
     V2RequestMethodJSONGET    = 1,
     V2RequestMethodHTTPPOST   = 2,
     V2RequestMethodHTTPGET    = 3,
@@ -29,8 +11,6 @@ typedef NS_ENUM(NSInteger, V2RequestMethod) {
 };
 
 @interface AIRDataManager ()
-
-//@property (nonatomic, readwrite, strong) V2UserModel *user;
 
 
 @property (nonatomic, strong) AFHTTPSessionManager *manager;
@@ -54,16 +34,7 @@ typedef NS_ENUM(NSInteger, V2RequestMethod) {
 }
 
 - (void)setPreferHttps:(BOOL)preferHttps {
-    _preferHttps = preferHttps;
-    
     NSURL *baseUrl;
-    
-    if (preferHttps) {
-        baseUrl = [NSURL URLWithString:@"https://www.v2ex.com"];
-    } else {
-        baseUrl = [NSURL URLWithString:@"http://www.v2ex.com"];
-    }
-    
     self.manager = [[AFHTTPSessionManager alloc] initWithBaseURL:baseUrl];
     AFHTTPRequestSerializer* serializer = [AFHTTPRequestSerializer serializer];
     self.manager.requestSerializer = serializer;
@@ -79,7 +50,7 @@ typedef NS_ENUM(NSInteger, V2RequestMethod) {
     return manager;
 }
 
-- (NSURLSessionDataTask *)requestWithMethod:(V2RequestMethod)method
+- (NSURLSessionDataTask *)requestWithMethod:(AIRRequestMethod)method
                                   URLString:(NSString *)URLString
                                  parameters:(NSDictionary *)parameters
                                     success:(void (^)(NSURLSessionDataTask *task, id responseObject))success

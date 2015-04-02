@@ -11,6 +11,6 @@
 
 @interface CompleteDisplayCard : BaseCardView
 
-
+- (void)adjust:(NSString *)heart;
 
 @end

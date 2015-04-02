@@ -10,8 +10,9 @@
 #import "CompleteInputCard.h"
 #import "CompleteDisplayCard.h"
 #import "UConstants.h"
+#import "PopInputView.h"
 
-@interface RunCompleteCardsVC ()<UIScrollViewDelegate>
+@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
@@ -33,6 +34,7 @@
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"cardbg.jpg"]]];
     
     _inputcard = [[CompleteInputCard alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 180)];
+    _inputcard.delegate = self;
     [_scrollview addSubview:_inputcard];
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800)];
@@ -61,15 +63,16 @@
 
 - (void)changeToDisplay
 {
+    
     [UIView animateWithDuration:0.3 animations:^{
         //[_scrollview setContentOffset:CGPointMake(0, 180) animated:YES];
         [_display setFrame:CGRectMake(10,10, Main_Screen_Width-20, 800)];
+        [_display adjust:_inputcard.textview.text];
         [_inputcard setAlpha:0];
         [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+1 )];
-        //[_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+180 )];
     } completion:^(BOOL finished) {
         _up = NO;
-         [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,HEIGHT(_display)+10 )];
+         [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,HEIGHT(_display)+21 )];
     }];
 }
 
@@ -94,6 +97,32 @@
     [super didReceiveMemoryWarning];
 
 }
+
+
+#pragma mark Delegate
+
+
+/**
+ *  点击想下按钮
+ */
+- (void)didClickDownButton
+{
+    [self changeToDisplay];
+}
+
+/**
+ *  点击新的出现输入框
+ */
+- (void)didTouchLabel
+{
+    [[[PopInputView alloc] initWithSuperView:self.view] showWithCompleteBlock:^(NSString *string) {
+        NSLog(@"输入的内容为:%@",string);
+        if (![string isEqualToString:@""]) {
+            _inputcard.textview.text = string;
+        }
+    } Text:_inputcard.textview.text];
+}
+
 
 //隐藏状态栏
 - (BOOL)prefersStatusBarHidden

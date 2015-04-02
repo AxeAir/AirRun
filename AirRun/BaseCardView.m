@@ -25,6 +25,7 @@
 - (void)baseConfig
 {
     [[self layer] setCornerRadius:5.0];
+    [[self layer] setMasksToBounds:YES];
     [self setBackgroundColor:CardBgColor];
 }
 
