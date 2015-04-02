@@ -29,7 +29,7 @@ describe(@"given city name chongqing", ^{
         it(@"respose PM2.5", ^{
             __block PM25Model *pm = nil;
             
-            [manager getPM25WithCityName:@"chonqing" success:^(PM25Model *pm25) {
+            [manager getPM25WithCityName:@"chongqing" success:^(PM25Model *pm25) {
                 pm = pm25;
             } failure:^(NSError *error) {
                 

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import "RunViewController.h"
 #import "LeftSideViewController.h"
+#import "DataBaseHelper.h"
 
 
 @interface AppDelegate ()
@@ -21,6 +22,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [[[DataBaseHelper alloc] init] initDB];//初始化数据库
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]];
     LeftSideViewController *leftMenuViewController = [[LeftSideViewController alloc] init];

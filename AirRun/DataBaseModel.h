@@ -8,7 +8,21 @@
 
 #import <Foundation/Foundation.h>
 #import <Mantle.h>
+#import "DataBaseHelper.h"
 
 @interface DataBaseModel : MTLModel
 
+/**
+ *  保存当前实体到数据库
+ */
+- (BOOL)save4database;
+
+/**
+ *  查询某张特定的表的所有数据,通用方法
+ *
+ *  @param tablename 表名
+ *
+ *  @return 数组
+ */
++ (NSArray *)SelectAll2Array;
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <MTLFMDBAdapter.h>
 
 @interface DataBaseHelper : NSObject
 
@@ -17,7 +18,7 @@
  *
  *  @param object 实体
  */
-- (void)save4database:(id)object;
+- (BOOL)save4database:(id)object;
 
 /**
  *  在数据库更新实体

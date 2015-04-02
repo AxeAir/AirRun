@@ -20,19 +20,30 @@ PODS:
   - AFNetworking/UIKit (2.5.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
   - Kiwi (2.3.1)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
+  - MTLFMDBAdapter (0.1.8):
+    - FMDB (~> 2.3)
+    - Mantle (~> 1.5)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.2)
   - Kiwi
   - Mantle (~> 1.5.4)
+  - MTLFMDBAdapter (~> 0.1.8)
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
+  MTLFMDBAdapter: 491e80bb9fcda3f6a9e7b2cbad4a8e7be93189be
 
 COCOAPODS: 0.35.0

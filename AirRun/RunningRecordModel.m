@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 AEXAIR. All rights reserved.
 //
 
-#import "RunningRecord.h"
+#import "RunningRecordModel.h"
 
-@implementation RunningRecord
+@implementation RunningRecordModel
 
 
 #pragma mark Mantle property
@@ -16,6 +16,25 @@
     return @{
             
              };
+}
+
++ (NSDictionary *)FMDBColumnsByPropertyKey
+{
+    return @{};
+}
+
++ (NSArray *)FMDBPrimaryKeys
+{
+    return @[@"UUID"];
+}
+
++ (NSString *)FMDBTableName {
+    return @"RunningRecord";
+}
+
+- (void)setNilValueForKey:(NSString *)key
+{
+    [self setValue:@0 forKey:key];
 }
 
 

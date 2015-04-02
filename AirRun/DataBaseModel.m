@@ -11,10 +11,20 @@
 @implementation DataBaseModel
 
 
-//- (void)save4database
-//{
-//    DataBaseHelper *dbHelper = [[DataBaseHelper alloc] init];
-//    [dbHelper save4database:self];
-//}
+- (BOOL)save4database
+{
+    DataBaseHelper *dbHelper = [[DataBaseHelper alloc] init];
+    return [dbHelper save4database:self];
+}
+
++ (NSArray *)SelectAll2Array
+{
+    DataBaseHelper *dbHelper = [[DataBaseHelper alloc] init];
+    
+    NSString *cn = [NSString stringWithFormat:@"%@",[self class]];
+    cn= [cn stringByReplacingOccurrencesOfString:@"Model" withString:@""];
+    NSString *sql = [NSString stringWithFormat:@"select * from %@ where 1",cn];
+    return [dbHelper selectCustomSql:sql classname:self];
+}
 
 @end
