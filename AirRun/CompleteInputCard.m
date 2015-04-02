@@ -11,9 +11,8 @@
 #import "DateHelper.h"
 @interface CompleteInputCard()<UITextViewDelegate>
 
-@property (nonatomic, strong) UITextView *textview;
-
 @property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic, strong) NSMutableArray *buttonArray;
 
 @end
 
@@ -41,15 +40,15 @@
     [self addSubview:dayLabel];
     
     UILabel *weekLabel = [[UILabel alloc] init];
-    [weekLabel setFrame:CGRectMake(MaxX(dayLabel), 10, 0, 0)];
-    [weekLabel setText:[DateHelper getFormatterDate:@"EEEE"]];
+    [weekLabel setFrame:CGRectMake(MaxX(dayLabel)+5, 10, 0, 0)];
+    [weekLabel setText:[[DateHelper getFormatterDate:@"EEEE"] stringByReplacingOccurrencesOfString:@"星期" withString:@"周"]];
     [weekLabel setFont:[UIFont systemFontOfSize:12]];
     [weekLabel setTextColor:[UIColor whiteColor]];
     [weekLabel sizeToFit];
     [self addSubview:weekLabel];
     
     UILabel *monthLabel = [[UILabel alloc] init];
-    [monthLabel setFrame:CGRectMake(MaxX(dayLabel), MaxY(weekLabel), 0, 0)];
+    [monthLabel setFrame:CGRectMake(MaxX(dayLabel)+5, MaxY(weekLabel), 0, 0)];
     [monthLabel setText:[NSString stringWithFormat:@"%@月",[DateHelper getFormatterDate:@"MM"]]];
     [monthLabel setFont:[UIFont systemFontOfSize:12]];
     [monthLabel setTextColor:[UIColor whiteColor]];
@@ -57,41 +56,69 @@
     [self addSubview:monthLabel];
     
     
-    UIImageView *biaoqing = [[UIImageView alloc] initWithFrame:CGRectMake(20, MaxY(dayLabel)+10, 25, 25)];
-    [biaoqing setImage:[UIImage imageNamed:@"biaoqing"]];
-    [self addSubview:biaoqing];
+    NSInteger wid = WIDTH(self)/5;
     
+    _buttonArray = [[NSMutableArray alloc] init];
+    for (int i=0; i<5; i++) {
+        NSInteger offset = i*wid;
+        UIButton *biaoqing = [[UIButton alloc] initWithFrame:CGRectMake((wid-25)/2+offset, MaxY(dayLabel)+10, 25, 25)];
+        [biaoqing setImage:[UIImage imageNamed:@"biaoqing"] forState:UIControlStateNormal];
+        
+        [biaoqing setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateSelected];
+        biaoqing.tag = 20000+i;
+        [_buttonArray addObject:biaoqing];
+        [biaoqing addTarget:self action:@selector(didSelectFace:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:biaoqing];
+    }
     
-    _textview = [[UITextView alloc] initWithFrame:CGRectMake(20, MaxY(biaoqing)+10, WIDTH(self)-40, 40)];
+    _textview = [[UILabel alloc] initWithFrame:CGRectMake(20, MaxY(dayLabel)+50, WIDTH(self)-40, 40)];
     [_textview setBackgroundColor:[UIColor whiteColor]];
     [[_textview layer] setCornerRadius:2];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTouchLabel:)];
+    [_textview addGestureRecognizer:tap];
+    [_textview setUserInteractionEnabled:YES];
     //[_textview setPlaceholder:@"说点什么嘛?"];
-    [_textview setDelegate:self];
     
     [self addSubview:_textview];
     
-}
-
-- (void)textViewDidBeginEditing:(UITextView *)textView
-{
-    [self openCard];
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField
-{
+    UIButton *downButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 30)];
+    downButton.center = CGPointMake(WIDTH(self)/2, MaxY(_textview)+30);
+    [downButton setImage:[UIImage imageNamed:@"down"] forState:UIControlStateNormal];
+    [downButton addTarget:self action:@selector(downButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:downButton];
     
 }
 
 
-- (void)openCard
-{
+#pragma event
 
+- (void)downButtonTouch:(id)sender
+{
+    [_delegate didClickDownButton];
+}
+
+- (void)didTouchLabel:(id)sender
+{
+    [_delegate didTouchLabel];
+}
+
+- (void)didSelectFace:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if (button.selected) {
+        
+    }
+    else
+    {
+        for (UIButton *btn in _buttonArray) {
+            [btn setSelected:NO];
+        }
+        button.selected = YES;
+        _currentFaceIndex = button.tag-20000+1;
+    }
+    
     
 }
 
-
-- (void)closeCard
-{
-    
-}
 @end

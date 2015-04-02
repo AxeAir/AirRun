@@ -9,12 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "BaseCardView.h"
 
+@protocol CompleteInputCardDelegate
+
+- (void)didClickDownButton;
+- (void)didTouchLabel;
+@end
+
+
 @interface CompleteInputCard : BaseCardView
 
+@property (nonatomic, strong) UILabel *textview;
+@property (nonatomic, weak) id<CompleteInputCardDelegate> delegate;
 
-- (void)openCard;
-
-
-- (void)closeCard;
+@property (nonatomic, assign) NSInteger currentFaceIndex;
 
 @end
+
+

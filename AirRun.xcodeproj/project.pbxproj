@@ -12,6 +12,7 @@
 		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
 		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
 		96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B41ACC51E300F56BEA /* RunViewController.m */; };
+		E503A4C71ACD14310039EDD6 /* down@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E503A4C61ACD14310039EDD6 /* down@2x.png */; };
 		E50BE0481AC8854A0030863D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0471AC8854A0030863D /* main.m */; };
 		E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04A1AC8854A0030863D /* AppDelegate.m */; };
 		E50BE04E1AC8854A0030863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04D1AC8854A0030863D /* ViewController.m */; };
@@ -46,6 +47,9 @@
 		E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = E59BF3ED1ACBF8FE0033D1DC /* BaseCardView.m */; };
 		E59BF3F01ACC1CF60033D1DC /* map.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E59BF3EF1ACC1CF60033D1DC /* map.jpg */; };
 		E59BF3F21ACC1FF80033D1DC /* cardbg.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E59BF3F11ACC1FF80033D1DC /* cardbg.jpg */; };
+		E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95B51ACD201600A6F133 /* PopInputView.m */; };
+		E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95B71ACD2E0A00A6F133 /* close.png */; };
+		E5AC95BA1ACD311B00A6F133 /* ic_menu_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */; };
 		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +84,7 @@
 		AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.release.xcconfig"; sourceTree = "<group>"; };
 		B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiUnitTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirRun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E503A4C61ACD14310039EDD6 /* down@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down@2x.png"; sourceTree = "<group>"; };
 		E50BE0421AC8854A0030863D /* AirRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0461AC8854A0030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50BE0471AC8854A0030863D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -138,6 +143,10 @@
 		E59BF3ED1ACBF8FE0033D1DC /* BaseCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCardView.m; sourceTree = "<group>"; };
 		E59BF3EF1ACC1CF60033D1DC /* map.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = map.jpg; sourceTree = "<group>"; };
 		E59BF3F11ACC1FF80033D1DC /* cardbg.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cardbg.jpg; sourceTree = "<group>"; };
+		E5AC95B41ACD201600A6F133 /* PopInputView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopInputView.h; sourceTree = "<group>"; };
+		E5AC95B51ACD201600A6F133 /* PopInputView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopInputView.m; sourceTree = "<group>"; };
+		E5AC95B71ACD2E0A00A6F133 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu_mark.png; sourceTree = "<group>"; };
 		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +324,9 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */,
+				E5AC95B71ACD2E0A00A6F133 /* close.png */,
+				E503A4C61ACD14310039EDD6 /* down@2x.png */,
 				E59BF3F11ACC1FF80033D1DC /* cardbg.jpg */,
 				E59BF3EF1ACC1CF60033D1DC /* map.jpg */,
 				E591399D1ACBE63D00F9D048 /* biaoqing@2x.png */,
@@ -418,6 +430,8 @@
 				E59139981ACBDDCF00F9D048 /* CompleteInputCard.m */,
 				E59BF3E91ACBF7E10033D1DC /* CompleteDisplayCard.h */,
 				E59BF3EA1ACBF7E10033D1DC /* CompleteDisplayCard.m */,
+				E5AC95B41ACD201600A6F133 /* PopInputView.h */,
+				E5AC95B51ACD201600A6F133 /* PopInputView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -447,6 +461,7 @@
 				E50BE03F1AC8854A0030863D /* Frameworks */,
 				E50BE0401AC8854A0030863D /* Resources */,
 				043B65407BC4F395ADC657F8 /* Copy Pods Resources */,
+				3D5D9312119D6C20E86976F6 /* Find unused imports */,
 			);
 			buildRules = (
 			);
@@ -546,10 +561,13 @@
 				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
 				E59BF3F01ACC1CF60033D1DC /* map.jpg in Resources */,
+				E503A4C71ACD14310039EDD6 /* down@2x.png in Resources */,
 				E5668FB01ACBB6C8009A0D61 /* header.jpg in Resources */,
+				E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */,
 				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
 				E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */,
 				E591399E1ACBE63D00F9D048 /* biaoqing@2x.png in Resources */,
+				E5AC95BA1ACD311B00A6F133 /* ic_menu_mark.png in Resources */,
 				E59BF3F21ACC1FF80033D1DC /* cardbg.jpg in Resources */,
 				E5668FA71ACBB22F009A0D61 /* setting@2x.png in Resources */,
 			);
@@ -601,6 +619,20 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		3D5D9312119D6C20E86976F6 /* Find unused imports */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Find unused imports";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh \"/Users/mrche/Library/Application Support/Developer/Shared/Xcode/Plug-ins/xcfui.xcplugin/Contents/Resources/fui_script.sh\" \"/Users/mrche/Documents/ios/AirRun\"";
 		};
 		C8B543BDF53D2743FEFED493 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -655,6 +687,7 @@
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
+				E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */,
@@ -802,6 +835,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"WARNING_LDFLAGS[arch=*]" = "-Wextra";
 			};
 			name = Debug;
 		};
