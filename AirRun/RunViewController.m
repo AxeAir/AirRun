@@ -84,7 +84,7 @@ typedef enum : NSUInteger {
 - (void)p_setMapView {
     
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64)];
-    _mapViewDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView DelegateIsGradient:NO];
+    _mapViewDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     
     self.mapView.delegate = _mapViewDelegate;
     self.mapView.mapType = MKMapTypeStandard;
@@ -294,8 +294,7 @@ typedef enum : NSUInteger {
         [self.points addObject:newLocation];
     }
     
-    
-    [_mapViewDelegate drawLineWithPoints:self.points];
+    [_mapViewDelegate drawGradientPolyLineWithPoints:self.points];
     
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude-0.001215, newLocation.coordinate.longitude);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);

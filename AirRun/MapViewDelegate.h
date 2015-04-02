@@ -11,9 +11,9 @@
 
 @interface MapViewDelegate : NSObject <MKMapViewDelegate>
 
-- (instancetype)initWithMapView:(MKMapView *)mapView DelegateIsGradient:(BOOL)gardient;
+- (instancetype)initWithMapView:(MKMapView *)mapView;
 
 - (void)drawLineWithPoints:(NSArray *)points;
-
+- (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray;
 
 @end

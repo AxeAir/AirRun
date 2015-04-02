@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		628F663BFB502D4B71C8F3D9 /* libPods-AirRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */; };
+		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
+		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
 		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
 		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
@@ -69,6 +71,10 @@
 /* Begin PBXFileReference section */
 		06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.debug.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.debug.xcconfig"; sourceTree = "<group>"; };
 		8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.release.xcconfig"; sourceTree = "<group>"; };
+		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
+		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
+		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
+		96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineRenderer.m; sourceTree = "<group>"; };
 		96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		96F596AD1ACC51B800F56BEA /* RunCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCardView.h; sourceTree = "<group>"; };
@@ -199,6 +205,10 @@
 		96F596AC1ACC51A600F56BEA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */,
+				96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */,
+				96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */,
+				96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */,
 				96F596AD1ACC51B800F56BEA /* RunCardView.h */,
 				96F596AE1ACC51B800F56BEA /* RunCardView.m */,
 			);
@@ -641,6 +651,7 @@
 			files = (
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
+				96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
@@ -654,6 +665,7 @@
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
+				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
