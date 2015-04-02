@@ -7,6 +7,8 @@
 //
 
 #import "MapViewDelegate.h"
+#import "GradientPolylineOverlay.h"
+#import "GradientPolylineRenderer.h"
 
 @interface MapViewDelegate ()
 
@@ -15,23 +17,52 @@
 @property (strong, nonatomic) MKPolyline *routeLine;
 @property (strong, nonatomic) MKPolylineRenderer *lineRenderer;
 
-@property (assign, nonatomic) BOOL gradient;
+@property (strong, nonatomic) GradientPolylineOverlay *gradientLineOverlay;
+@property (strong, nonatomic) GradientPolylineRenderer *gradientRenderer;
 
 @end
 
 @implementation MapViewDelegate
 
-- (instancetype)initWithMapView:(MKMapView *)mapView DelegateIsGradient:(BOOL)gardient {
+- (instancetype)initWithMapView:(MKMapView *)mapView{
     
     self = [super init];
     if (self) {
         _mapView = mapView;
-        _gradient = gardient;
     }
     return self;
 }
 
 #pragma mark - Map Action
+
+-(void)drawGradientPolyLineWithPoints:(NSArray *)pointArray{
+    
+    CLLocationCoordinate2D *points;
+    float *velocity;
+    points = malloc(sizeof(CLLocationCoordinate2D)*pointArray.count);
+    velocity = malloc(sizeof(float)*pointArray.count);
+    
+    for (int i = 0; i < pointArray.count; i++) {
+        CLLocation *location = pointArray[i];
+        points[i] = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+        velocity[i] = location.speed;
+    }
+    
+    if (self.gradientLineOverlay) {
+        [self.mapView removeOverlay:self.gradientLineOverlay];
+    }
+    
+    self.gradientLineOverlay = [[GradientPolylineOverlay alloc] initWithPoints:points velocity:velocity count:pointArray.count];
+    [self.mapView addOverlay:self.gradientLineOverlay];
+    
+//    CLLocation *location = self.points[0];
+//    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
+//    [self.mapView setRegion:region animated:YES];
+    
+    free(velocity);
+    
+}
 
 - (void)drawLineWithPoints:(NSArray *)points{
     
@@ -77,21 +108,37 @@
     
 }
 
+- (void)addImageToMapView:(UIImage *)image {
+    
+    MKAnnotationView *annotationView = [[MKAnnotationView alloc] init];
+    annotationView.image = image;
+    annotationView.annotation = annotation;
+    
+    annotationView.canShowCallout = NO;
+    [_mapView addAnnotation:annotationView];
+    
+}
+
 
 #pragma mark - MapDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
     
-    MKPolylineRenderer *renderer = nil;
     if ([overlay isKindOfClass:[MKPolyline class]])
     {
+        MKPolylineRenderer *renderer = nil;
         renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
-        
         renderer.strokeColor = [[UIColor orangeColor] colorWithAlphaComponent:1];
         renderer.lineWidth = 5;
+        return renderer;
     }
     
-    return renderer;
+    if ([overlay isKindOfClass:[GradientPolylineOverlay class]]) {
+        GradientPolylineRenderer *polylineRenderer = [[GradientPolylineRenderer alloc] initWithOverlay:overlay];
+        polylineRenderer.lineWidth = 8.0f;
+        return polylineRenderer;
+    }
+    return nil;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
