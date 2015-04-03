@@ -65,13 +65,10 @@
     }
     
     self.gradientLineOverlay = [[GradientPolylineOverlay alloc] initWithPoints:points velocity:velocity count:pointArray.count];
-//    [self.mapView addOverlay:self.gradientLineOverlay];
     [self.mapView insertOverlay:self.gradientLineOverlay belowOverlay:_imageOverlay];
+    [self drawLineWithPoints:pointArray];
     
-//    CLLocation *location = self.points[0];
-//    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
-//    [self.mapView setRegion:region animated:YES];
+    
     
     free(velocity);
     
@@ -114,7 +111,8 @@
     
     self.routeLine = [MKPolyline polylineWithPoints:mapPoints count:points.count];
     if (nil != self.routeLine) {
-        [self.mapView addOverlay:self.routeLine];
+//        [self.mapView addOverlay:self.routeLine];
+        [self.mapView insertOverlay:_routeLine belowOverlay:_gradientLineOverlay];
     }
     
     free(mapPoints);
@@ -129,8 +127,8 @@
     {
         MKPolylineRenderer *renderer = nil;
         renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
-        renderer.strokeColor = [[UIColor orangeColor] colorWithAlphaComponent:1];
-        renderer.lineWidth = 5;
+        renderer.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
+        renderer.lineWidth = 9;
         return renderer;
     }
     

@@ -13,6 +13,9 @@
 		96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D111ACDB64500DECE02 /* RunViewControllerAnimation.m */; };
 		96474D171ACDB65F00DECE02 /* ImageOverLay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D141ACDB65F00DECE02 /* ImageOverLay.m */; };
 		96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D161ACDB65F00DECE02 /* ImageOverLayRenderer.m */; };
+		96474D4E1ACE678900DECE02 /* RegisterAndLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D4D1ACE678900DECE02 /* RegisterAndLoginViewController.m */; };
+		96474D521ACE6D8700DECE02 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D511ACE6D8700DECE02 /* SignUpView.m */; };
+		96474D571ACEADF400DECE02 /* SignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D561ACEADF400DECE02 /* SignInView.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
@@ -98,6 +101,12 @@
 		96474D141ACDB65F00DECE02 /* ImageOverLay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOverLay.m; sourceTree = "<group>"; };
 		96474D151ACDB65F00DECE02 /* ImageOverLayRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageOverLayRenderer.h; sourceTree = "<group>"; };
 		96474D161ACDB65F00DECE02 /* ImageOverLayRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageOverLayRenderer.m; sourceTree = "<group>"; };
+		96474D4C1ACE678900DECE02 /* RegisterAndLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterAndLoginViewController.h; sourceTree = "<group>"; };
+		96474D4D1ACE678900DECE02 /* RegisterAndLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterAndLoginViewController.m; sourceTree = "<group>"; };
+		96474D501ACE6D8700DECE02 /* SignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpView.h; sourceTree = "<group>"; };
+		96474D511ACE6D8700DECE02 /* SignUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpView.m; sourceTree = "<group>"; };
+		96474D551ACEADF400DECE02 /* SignInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInView.h; sourceTree = "<group>"; };
+		96474D561ACEADF400DECE02 /* SignInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInView.m; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -236,6 +245,27 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		96474D4B1ACE675F00DECE02 /* RegisterAndLogin */ = {
+			isa = PBXGroup;
+			children = (
+				96474D4F1ACE679900DECE02 /* View */,
+				96474D4C1ACE678900DECE02 /* RegisterAndLoginViewController.h */,
+				96474D4D1ACE678900DECE02 /* RegisterAndLoginViewController.m */,
+			);
+			name = RegisterAndLogin;
+			sourceTree = "<group>";
+		};
+		96474D4F1ACE679900DECE02 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				96474D501ACE6D8700DECE02 /* SignUpView.h */,
+				96474D511ACE6D8700DECE02 /* SignUpView.m */,
+				96474D551ACEADF400DECE02 /* SignInView.h */,
+				96474D561ACEADF400DECE02 /* SignInView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		96F596AB1ACC519F00F56BEA /* Run */ = {
 			isa = PBXGroup;
 			children = (
@@ -363,6 +393,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				96474D4B1ACE675F00DECE02 /* RegisterAndLogin */,
 				96F596AB1ACC519F00F56BEA /* Run */,
 				E59139921ACBD9D800F9D048 /* RunCompleteCards */,
 				E5668F9A1ACA5D99009A0D61 /* Side */,
@@ -767,6 +798,7 @@
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
 				E59139991ACBDDCF00F9D048 /* CompleteInputCard.m in Sources */,
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
+				96474D521ACE6D8700DECE02 /* SignUpView.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
@@ -774,6 +806,7 @@
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
+				96474D571ACEADF400DECE02 /* SignInView.m in Sources */,
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
@@ -785,6 +818,7 @@
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */,
 				E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */,
+				96474D4E1ACE678900DECE02 /* RegisterAndLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
