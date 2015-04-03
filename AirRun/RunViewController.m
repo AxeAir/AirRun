@@ -17,6 +17,7 @@
 #import <POP.h>
 #import "RunViewControllerAnimation.h"
 #import "RunPauseView.h"
+#import "RunningRecordModel.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -180,7 +181,7 @@ typedef enum : NSUInteger {
         
     };
     
-    _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 50)];
+    _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 60)];
     _runSimpleCardView.layer.cornerRadius = 5;
     _runSimpleCardView.clipsToBounds = YES;
 //    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_runSimpleCardView.bounds.size.height/2-10);
@@ -259,9 +260,7 @@ typedef enum : NSUInteger {
             //运动卡片回到原来的位置
             [RunViewControllerAnimation view:view
                         SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10)
-                  AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
-                      [RunViewControllerAnimation scalAnimationWithView:view WithCompleteBlock:nil];
-                  }];
+                  AnimationWthiCompleteBlock:nil];
             
         }
         
@@ -310,6 +309,20 @@ typedef enum : NSUInteger {
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
+    RunningRecordModel *model = [[RunningRecordModel alloc] init];
+    
+//    @property(nonatomic, strong) NSString  *path;
+    model.time = _runcardView.time;
+    model.kcar = _runcardView.kcal;
+    model.distance = _runcardView.distance;
+//    @property(nonatomic, strong) NSString  *weather;
+//    @property(nonatomic, assign) float     pm25;
+    model.averagespeed = _runcardView.speed;
+    
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
+    model.finishtime = [dateFormatter stringFromDate:[NSDate date]];
+    [model save4database];
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
@@ -320,6 +333,7 @@ typedef enum : NSUInteger {
         [RunViewControllerAnimation smallView:sender
                                       ToFrame:CGRectMake(sender.center.x, sender.center.y, 0, 0)
                             WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                                [sender removeFromSuperview];
                                 [self.view addSubview:_runcardView];
                                 [RunViewControllerAnimation largeView:_runcardView
                                                               ToFrame:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)
@@ -330,7 +344,7 @@ typedef enum : NSUInteger {
     }];
     
     //逻辑
-    [sender removeFromSuperview];
+    
     _runState = RunViewControllerRunStateRunning;
     [_runTimer setFireDate:[NSDate distantPast]];
     [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
@@ -435,6 +449,7 @@ typedef enum : NSUInteger {
         _runcardView.gps = newLocation.horizontalAccuracy;
         
         _runSimpleCardView.distance = _runcardView.distance;
+        _runSimpleCardView.speed = _runcardView.speed;
         
         //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
         if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
