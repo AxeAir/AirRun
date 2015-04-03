@@ -24,5 +24,10 @@ typedef void (^importPhoto)();
 - (void)disimiss;
 
 
-- (void)addSmallPictures;
+/**
+ *  添加图片缩略图
+ *
+ *  @param imageArray 图片数组
+ */
+- (void)addSmallPictures:(NSArray *)imageArray;
 @end

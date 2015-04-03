@@ -285,17 +285,6 @@
     CGContextStrokePath(context);
 }
 
--(void)drawText:(CGRect)rect text:(NSString *)text
-{
-    //CGContextRef context=UIGraphicsGetCurrentContext();
-    [text drawInRect:rect withFont:[UIFont systemFontOfSize:16]];
-}
-
--(void)drawText:(CGRect)rect text:(NSString *)text fontSize:(NSInteger)size
-{
-    [text drawInRect:rect withFont:[UIFont systemFontOfSize:size]];
-}
-
 -(CGMutablePathRef)pathwithFrame:(CGRect)frame withRadius:(float)radius
 {
     CGPoint x1,x2,x3,x4; //x为4个顶点

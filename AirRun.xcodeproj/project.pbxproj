@@ -43,6 +43,8 @@
 		E52D16F41ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E91ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m */; };
 		E52D16F51ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16EB1ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m */; };
 		E52D16F81ACE780300DBFA04 /* ImageHeler.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16F71ACE780300DBFA04 /* ImageHeler.m */; };
+		E52D16FB1ACE843800DBFA04 /* ImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16FA1ACE843800DBFA04 /* ImageViewer.m */; };
+		E52D16FD1ACE90C100DBFA04 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E52D16FC1ACE90C100DBFA04 /* trash@2x.png */; };
 		E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */; };
 		E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F941ACA5D6D009A0D61 /* RESideMenu.m */; };
 		E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F961ACA5D6D009A0D61 /* UIViewController+RESideMenu.m */; };
@@ -61,6 +63,7 @@
 		E5668FC31ACBC694009A0D61 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FC21ACBC694009A0D61 /* AdSupport.framework */; };
 		E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FC51ACBC739009A0D61 /* WeatherManager.m */; };
 		E5668FCA1ACBC998009A0D61 /* WeatherTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FC91ACBC998009A0D61 /* WeatherTestsSpec.m */; };
+		E58E41391ACECB6400839947 /* seabg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E58E41381ACECB6400839947 /* seabg@2x.png */; };
 		E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E59139941ACBDA5600F9D048 /* RunCompleteCardsVC.m */; };
 		E59139991ACBDDCF00F9D048 /* CompleteInputCard.m in Sources */ = {isa = PBXBuildFile; fileRef = E59139981ACBDDCF00F9D048 /* CompleteInputCard.m */; };
 		E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E591399B1ACBE13400F9D048 /* DateHelper.m */; };
@@ -175,6 +178,9 @@
 		E52D16EB1ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QBImagePickerThumbnailView.m; sourceTree = "<group>"; };
 		E52D16F61ACE780300DBFA04 /* ImageHeler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHeler.h; sourceTree = "<group>"; };
 		E52D16F71ACE780300DBFA04 /* ImageHeler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHeler.m; sourceTree = "<group>"; };
+		E52D16F91ACE843800DBFA04 /* ImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewer.h; sourceTree = "<group>"; };
+		E52D16FA1ACE843800DBFA04 /* ImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewer.m; sourceTree = "<group>"; };
+		E52D16FC1ACE90C100DBFA04 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
 		E5668F911ACA5D6D009A0D61 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		E5668F931ACA5D6D009A0D61 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
@@ -204,6 +210,7 @@
 		E5668FC41ACBC739009A0D61 /* WeatherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherManager.h; sourceTree = "<group>"; };
 		E5668FC51ACBC739009A0D61 /* WeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherManager.m; sourceTree = "<group>"; };
 		E5668FC91ACBC998009A0D61 /* WeatherTestsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherTestsSpec.m; sourceTree = "<group>"; };
+		E58E41381ACECB6400839947 /* seabg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "seabg@2x.png"; sourceTree = "<group>"; };
 		E59139931ACBDA5600F9D048 /* RunCompleteCardsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCompleteCardsVC.h; sourceTree = "<group>"; };
 		E59139941ACBDA5600F9D048 /* RunCompleteCardsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunCompleteCardsVC.m; sourceTree = "<group>"; };
 		E59139971ACBDDCF00F9D048 /* CompleteInputCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteInputCard.h; sourceTree = "<group>"; };
@@ -488,6 +495,8 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E58E41381ACECB6400839947 /* seabg@2x.png */,
+				E52D16FC1ACE90C100DBFA04 /* trash@2x.png */,
 				E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */,
 				E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */,
 				E5AC95B71ACD2E0A00A6F133 /* close.png */,
@@ -609,6 +618,8 @@
 				E59BF3EA1ACBF7E10033D1DC /* CompleteDisplayCard.m */,
 				E5AC95B41ACD201600A6F133 /* PopInputView.h */,
 				E5AC95B51ACD201600A6F133 /* PopInputView.m */,
+				E52D16F91ACE843800DBFA04 /* ImageViewer.h */,
+				E52D16FA1ACE843800DBFA04 /* ImageViewer.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -754,6 +765,8 @@
 				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
 				E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */,
 				E591399E1ACBE63D00F9D048 /* biaoqing@2x.png in Resources */,
+				E58E41391ACECB6400839947 /* seabg@2x.png in Resources */,
+				E52D16FD1ACE90C100DBFA04 /* trash@2x.png in Resources */,
 				E5AC95BA1ACD311B00A6F133 /* ic_menu_mark.png in Resources */,
 				E59BF3F21ACC1FF80033D1DC /* cardbg.jpg in Resources */,
 				E5668FA71ACBB22F009A0D61 /* setting@2x.png in Resources */,
@@ -904,6 +917,7 @@
 				E52D16EC1ACE6C1D00DBFA04 /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
+				E52D16FB1ACE843800DBFA04 /* ImageViewer.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E5668FAE1ACBB576009A0D61 /* UserModel.m in Sources */,
 				E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */,

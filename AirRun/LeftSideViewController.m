@@ -10,6 +10,7 @@
 #import "HeaderView.h"
 #import "RunCompleteCardsVC.h"
 #import "RunViewController.h"
+#import "UConstants.h"
 #import "SettingViewController.h"
 @interface LeftSideViewController ()
 
@@ -23,7 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,100, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,50, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -133,8 +134,18 @@
     
     NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"GoGoGo"];
     NSArray *images = @[@"setting", @"setting", @"setting", @"setting" , @"setting"];
-    cell.textLabel.text = titles[indexPath.row];
-    cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
+    
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(50, 12, 30, 30)];
+    [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];
+    
+    [cell addSubview:image];
+    
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(image)+10, 12, 100, 30)];
+    [title setTextColor:[UIColor whiteColor]];
+    [title setText:titles[indexPath.row]];
+    [cell addSubview:title];
+    //cell.textLabel.text = titles[indexPath.row];
+    //cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
     
     return cell;
 }

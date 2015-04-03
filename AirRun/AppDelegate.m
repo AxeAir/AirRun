@@ -30,7 +30,7 @@
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
-    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"bg"];
+    sideMenuViewController.backgroundImage = [UIImage imageNamed:@"seabg"];
     sideMenuViewController.menuPreferredStatusBarStyle = 1; // UIStatusBarStyleLightContent
     sideMenuViewController.delegate = self;
     sideMenuViewController.contentViewShadowColor = [UIColor blackColor];

@@ -77,9 +77,6 @@
 -(void)drawLines:(NSArray *)pointArray;
 
 
--(void)drawText:(CGRect)rect text:(NSString*)text;
--(void)drawText:(CGRect)rect text:(NSString*)text fontSize:(NSInteger)size;
-
 -(CGMutablePathRef)pathwithFrame:(CGRect)frame withRadius:(float)radius;
 
 
