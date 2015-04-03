@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 typedef void (^completeEdit)(NSString *string);
+typedef void (^importPhoto)();
 
 @interface PopInputView : UIView
 
@@ -18,7 +19,10 @@ typedef void (^completeEdit)(NSString *string);
 
 - (void)showWithCompleteBlock:(completeEdit)block;
 
-- (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text;
+- (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text photoBlock:(importPhoto)improtblock;
 
 - (void)disimiss;
+
+
+- (void)addSmallPictures;
 @end

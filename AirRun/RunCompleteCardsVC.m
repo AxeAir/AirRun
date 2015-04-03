@@ -11,8 +11,10 @@
 #import "CompleteDisplayCard.h"
 #import "UConstants.h"
 #import "PopInputView.h"
+#import "QBImagePickerController.h"
+#import "ImageHeler.h"
 
-@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate>
+@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
@@ -20,12 +22,16 @@
 
 @property (nonatomic, assign) BOOL up;
 
+
+@property (nonatomic, strong) NSMutableArray *ImageArray;
+
 @end
 
 @implementation RunCompleteCardsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self ininVar];
     _up = YES;
     
     _scrollview = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -41,9 +47,15 @@
     [_scrollview addSubview:_display];
     
     [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+1 )];
-    //MaxY(display)+20
+
     [self.view addSubview:_scrollview];
     
+}
+
+
+- (void)ininVar
+{
+    _ImageArray = [[NSMutableArray alloc] init];
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -61,6 +73,9 @@
     
 }
 
+/**
+ *  切换到数据卡片
+ */
 - (void)changeToDisplay
 {
     
@@ -76,6 +91,9 @@
     }];
 }
 
+/**
+ *  切换到输入卡片
+ */
 - (void)changeToInput
 {
     [UIView animateWithDuration:0.3 animations:^{
@@ -93,15 +111,7 @@
     }];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-
-}
-
-
 #pragma mark Delegate
-
-
 /**
  *  点击想下按钮
  */
@@ -120,7 +130,17 @@
         if (![string isEqualToString:@""]) {
             _inputcard.textview.text = string;
         }
-    } Text:_inputcard.textview.text];
+    } Text:_inputcard.textview.text photoBlock:^() {
+        QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
+        imagePickerController.delegate = self;
+        imagePickerController.allowsMultipleSelection = YES;
+        imagePickerController.maximumNumberOfSelection = 6;
+        imagePickerController.filterType = QBImagePickerControllerFilterTypePhotos;
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
+        [self presentViewController:navigationController animated:YES completion:^{
+            
+        }];
+    }];
 }
 
 
@@ -129,4 +149,61 @@
 {
     return YES;
 }
+
+- (void)dismissImagePickerController
+{
+    if (self.presentedViewController) {
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    } else {
+        [self.navigationController popToViewController:self animated:YES];
+    }
+}
+
+#pragma mark - QBImagePickerControllerDelegate
+
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAsset:(ALAsset *)asset
+{
+    NSLog(@"*** qb_imagePickerController:didSelectAsset:");
+    NSLog(@"%@", asset);
+    
+    [self dismissImagePickerController];
+}
+
+- (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAssets:(NSArray *)assets
+{
+    NSLog(@"*** qb_imagePickerController:didSelectAssets:");
+    NSLog(@"%@", assets);
+    
+    for (ALAsset *aset in assets) {
+        [_ImageArray addObject:[ImageHeler fullResolutionImageFromALAsset:aset]];
+    }
+    NSLog(@"%@",_ImageArray);
+    [self dismissImagePickerController];
+}
+
+- (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController
+{
+    NSLog(@"*** qb_imagePickerControllerDidCancel:");
+    
+    [self dismissImagePickerController];
+}
+
+- (void)qb_imagePickerControllerDidClickCarmera
+{
+    NSLog(@"open camera");
+    [self dismissImagePickerController];
+    UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
+    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        pickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
+        //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+        pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
+        
+    }
+    pickerImage.delegate = self;
+    pickerImage.allowsEditing = NO;
+    [self presentViewController:pickerImage animated:YES completion:^{
+        
+    }];
+}
+
 @end
