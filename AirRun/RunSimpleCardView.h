@@ -8,9 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^retractButtonBlock)(UIButton *button);
+
 @interface RunSimpleCardView : UIView
 
+@property (copy, nonatomic) retractButtonBlock retractButtonBlock;
+
 @property (assign, nonatomic) NSInteger time;
-@property (assign, nonatomic) NSInteger distance;
+@property (assign, nonatomic) CGFloat distance;
 
 @end

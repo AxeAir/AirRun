@@ -42,10 +42,9 @@ typedef enum : NSUInteger {
 @property (strong, nonatomic) RunCardView *runcardView;
 @property (strong, nonatomic) RunSimpleCardView *runSimpleCardView;
 @property (assign, nonatomic) CGPoint runCardViewLastPoint;
+@property (assign, nonatomic) CGFloat runCardLastKmDistance;
 
 @property (strong, nonatomic) NSTimer *runTimer;
-
-@property (strong, nonatomic) UIDynamicAnimator *animator;
 
 @end
 
@@ -62,7 +61,6 @@ typedef enum : NSUInteger {
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
-    _animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     
     [self p_setMapView];
     [self p_setLocationManager];
@@ -168,21 +166,43 @@ typedef enum : NSUInteger {
     _runcardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10);
     UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(runcardViewPan:)];
     [_runcardView addGestureRecognizer:panGesture];
+    __weak RunViewController *this = self;
+    _runcardView.retractTouchBlock = ^(UIButton * button) {
+        
+        [RunViewControllerAnimation view:this.runcardView
+                   SlideOutToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height+this.runcardView.bounds.size.height/2) AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                       
+                       [RunViewControllerAnimation view:this.runSimpleCardView
+                                   SlideInToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height-this.runSimpleCardView.bounds.size.height/2-10)
+                             AnimationWthiCompleteBlock:nil];
+                       
+                   }];
+        
+    };
     
     _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 50)];
     _runSimpleCardView.layer.cornerRadius = 5;
     _runSimpleCardView.clipsToBounds = YES;
-    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_runSimpleCardView.bounds.size.height/2-10);
+//    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_runSimpleCardView.bounds.size.height/2-10);
+    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+_runSimpleCardView.bounds.size.height/2);
+    _runSimpleCardView.retractButtonBlock = ^(UIButton *button){
+        
+        [RunViewControllerAnimation view:this.runSimpleCardView
+                   SlideOutToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height+this.runSimpleCardView.bounds.size.height/2)
+              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                  
+                  [RunViewControllerAnimation view:this.runcardView
+                              SlideInToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height- 100 -10)
+                        AnimationWthiCompleteBlock:nil];
+                  
+              }];
+        
+    };
+    [self.view addSubview:_runSimpleCardView];
     
 }
 #pragma mark - Event
 #pragma mark Gesture Event
-
-- (void)runcardViewTap:(UITapGestureRecognizer *)tapGesture {
-    [_runcardView removeFromSuperview];
-    [self.view addSubview:_contiuneButton];
-    [self.view addSubview:_completeButton];
-}
 
 - (void)runcardViewPan:(UIPanGestureRecognizer *)panGesture {
     
@@ -225,6 +245,12 @@ typedef enum : NSUInteger {
                                 [RunViewControllerAnimation scalAnimationWithView:_completeButton WithCompleteBlock:nil];
                             }];
                       
+                      [UIView animateWithDuration:0.5 animations:^{
+                          _pauseView.transform = CGAffineTransformMakeTranslation(0, _pauseView.bounds.size.height);
+                      }];
+                      
+                      //
+                      [self p_pause];
                       
                   }];
             
@@ -247,6 +273,7 @@ typedef enum : NSUInteger {
 
 - (void)runTimerEvent:(NSTimer *)timer {
     _runcardView.time += 1;
+    _runSimpleCardView.time = _runcardView.time;
 }
 
 #pragma mark Button Event
@@ -257,9 +284,28 @@ typedef enum : NSUInteger {
 
 - (void)contiuneButtonTouch:(UIButton *)sender {
     
-    [_contiuneButton removeFromSuperview];
-    [_completeButton removeFromSuperview];
-    [self.view addSubview:_runcardView];
+    [RunViewControllerAnimation scalAnimationWithView:_contiuneButton
+                                    WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                                        
+                                        [UIView animateWithDuration:0.5 animations:^{
+                                            _pauseView.transform = CGAffineTransformIdentity;
+                                        }];
+                                        
+                                        [RunViewControllerAnimation view:_contiuneButton
+                                                   SlideOutToCenterPoint:CGPointMake(-_contiuneButton.bounds.size.width/2-10, _startButton.center.y)
+                                              AnimationWthiCompleteBlock:nil];
+                                        
+                                        [RunViewControllerAnimation view:_completeButton
+                                                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width+_completeButton.bounds.size.width/2+10, _startButton.center.y)
+                                              AnimationWthiCompleteBlock:nil];
+                                        
+                                        [RunViewControllerAnimation view:_runcardView
+                                                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10)
+                                              AnimationWthiCompleteBlock:nil];
+                                        
+                                    }];
+    [self p_continue];
+    
 }
 
 - (void)completeButtonTouch:(UIButton *)sender {
@@ -267,6 +313,8 @@ typedef enum : NSUInteger {
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
+    
+    //动画
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
         [RunViewControllerAnimation smallView:sender
@@ -281,38 +329,15 @@ typedef enum : NSUInteger {
         
     }];
     
-//    [self p_scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-//        
-//        POPSpringAnimation *slideOutAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
-//        slideOutAnimation.toValue = [NSValue valueWithCGRect:CGRectMake(sender.center.x, sender.center.y, 0, 0)];
-//        slideOutAnimation.springBounciness = 0.f;
-//        slideOutAnimation.springSpeed = 3;
-//        slideOutAnimation.completionBlock = ^(POPAnimation *anim, BOOL finished) {
-//            [self.view addSubview:_runcardView];
-//            
-//            POPSpringAnimation *slideInAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewFrame];
-//            slideInAnimation.toValue = [NSValue valueWithCGRect:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)];
-//            slideInAnimation.springSpeed = 3;
-//            slideInAnimation.springBounciness = 20;
-//            
-//            [_runcardView pop_addAnimation:slideInAnimation forKey:@"slideInAnimation"];
-//            
-//        };
-//        [sender pop_addAnimation:slideOutAnimation forKey:@"slideOutAnimation"];
-//        
-//        
-//    }];
-    
-//    [sender removeFromSuperview];
-//    [self.view addSubview:_runcardView];
-//    _runState = RunViewControllerRunStateRunning;
-//    [_runTimer setFireDate:[NSDate distantPast]];
-//    [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
+    //逻辑
+    [sender removeFromSuperview];
+    _runState = RunViewControllerRunStateRunning;
+    [_runTimer setFireDate:[NSDate distantPast]];
+    [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
 }
 
 #pragma mark - Function
 
-#pragma mark Animation Function
 
 - (void)p_addShowdowWithView:(UIView *)view {
     
@@ -326,9 +351,25 @@ typedef enum : NSUInteger {
 
 #pragma mark Private Function
 
+- (void)p_complete {
+    
+}
+
+- (void)p_continue {
+    
+    _runState = RunViewControllerRunStateRunning;
+    [_runTimer setFireDate:[NSDate distantPast]];
+    
+}
+
 - (void)p_pause {
     
+    _runState = RunViewControllerRunStatePause;
+    [_runTimer setFireDate:[NSDate distantFuture]];
     
+    _pauseView.time = _runcardView.time;
+    _pauseView.distance = _runcardView.distance;
+    _pauseView.speed = _runcardView.speed;
     
 }
 
@@ -391,16 +432,21 @@ typedef enum : NSUInteger {
         _runcardView.distance += distance;
         _runcardView.speed = _runcardView.distance/_runcardView.time;
         _runcardView.kcal += [self p_getCalorie:2.0/3600.0 speed:_runcardView.currentSpeed*3.6];
-        //距离上一次提醒已经超过1公里了-----进行公里提醒
-//        if (self.selfRecord.distance - self.lastestDistance >= 1000) {
-//            self.lastestDistance = self.selfRecord.distance;
-//            self.kilometerCount ++;
-//            
+        _runcardView.gps = newLocation.horizontalAccuracy;
+        
+        _runSimpleCardView.distance = _runcardView.distance;
+        
+        //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
+        if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
+            _runCardLastKmDistance = _runcardView.distance;
+            
+            
+            [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:newLocation];
 //            NSURL *url = [[NSBundle mainBundle] URLForResource:@"drum01" withExtension:@"mp3"];
 //            MyAudioPlayer *audioPlayer = [MyAudioPlayer sharePlayerWithURL:url];
 //            [audioPlayer play];
-//            
-//        }
+            
+        }
     }
     
     self.currentLocation = newLocation;

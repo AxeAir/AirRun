@@ -14,6 +14,7 @@
 
 ///
 @property (strong, nonatomic) UIView *topView;
+@property (strong, nonatomic) UILabel *gpsLable;
 @property (strong, nonatomic) UILabel *pullDownLabel;
 @property (strong, nonatomic) UILabel *distanceLabel;
 @property (strong, nonatomic) UILabel *distanceUnitLabel;
@@ -40,6 +41,33 @@
 @implementation RunCardView
 
 #pragma mark - Set Method
+
+- (void)setGps:(CGFloat)gps {
+    
+    _gps = gps;
+    
+    if (gps < 0)
+    {
+        //no single
+        _gpsLable.textColor = [UIColor grayColor];
+    }
+    else if (gps > 163)
+    {
+        //poor single
+        _gpsLable.textColor = [UIColor redColor];
+    }
+    else if (gps > 48)
+    {
+        //average single
+        _gpsLable.textColor = [UIColor orangeColor];
+    }
+    else
+    {
+        // Full Signal
+        _gpsLable.textColor = [UIColor greenColor];
+    }
+    
+}
 
 - (void)setSpeed:(CGFloat)speed {
     
@@ -109,6 +137,16 @@
         [_topView addSubview:_pullDownLabel];
     }
     _pullDownLabel.center = CGPointMake(_topView.bounds.size.width/2, _pullDownLabel.frame.size.height/2);
+    
+    if (!_gpsLable) {
+        _gpsLable = [[UILabel alloc] init];
+        _gpsLable.text = @"GPS";
+        _gpsLable.textColor = [UIColor greenColor];
+        _gpsLable.font = [UIFont systemFontOfSize:14];
+        [_gpsLable sizeToFit];
+        [_topView addSubview:_gpsLable];
+    }
+    _gpsLable.center = CGPointMake(_topView.bounds.size.width-_gpsLable.bounds.size.width/2, _gpsLable.bounds.size.height/2);
     
     if (!_distanceLabel) {
         _distanceLabel = [[UILabel alloc] init];
@@ -244,6 +282,7 @@
         [_photoButton setTintColor:[UIColor whiteColor]];
         [_photoButton setTitle:@"  记录" forState:UIControlStateNormal];
         [_photoButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
+        [_photoButton addTarget:self action:@selector(photoButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_photoButton sizeToFit];
         [_bottomView addSubview:_photoButton];
     }
@@ -254,6 +293,7 @@
         [_retractButton setTintColor:[UIColor whiteColor]];
         [_retractButton setTitle:@"  收起" forState:UIControlStateNormal];
         [_retractButton setImage:[UIImage imageNamed:@"menu_icon_bulb.png"] forState:UIControlStateNormal];
+        [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_retractButton sizeToFit];
         [_bottomView addSubview:_retractButton];
     }
@@ -273,7 +313,25 @@
     [_bottomView.layer addSublayer:_divedLineLayer];
 }
 
+#pragma mark - Event
+#pragma mark Button Event
+
+- (void)photoButtonTouch:(UIButton *)sender {
+    if (_photoTouchBlock) {
+        _photoTouchBlock(sender);
+    }
+}
+
+- (void)retractButtonTouch:(UIButton *)sender {
+    
+    if (_retractTouchBlock) {
+        _retractTouchBlock(sender);
+    }
+    
+}
+
 #pragma mark - Function
+
 #pragma mark Private Function
 - (void)p_addUnderLineAtView:(UIView *)view WithColor:(UIColor *)color {
     

@@ -15,7 +15,7 @@
 @property (strong, nonatomic) UILabel *distanceLabel;
 @property (strong, nonatomic) UILabel *distanceUnitLable;
 
-@property (strong, nonatomic) UILabel *timeLable;
+@property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UILabel *timeUnitLable;
 
 @property (strong, nonatomic) UIButton *retractButton;
@@ -24,6 +24,26 @@
 @end
 
 @implementation RunSimpleCardView
+
+
+
+- (void)setTime:(NSInteger)time {
+    
+    _time = time;
+    _timeLabel.text = [self p_getTimeStringWithSeconds:_time];
+    [_timeLabel sizeToFit];
+    _timeLabel.center = CGPointMake(self.bounds.size.width/2-_timeLabel.bounds.size.width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
+    
+}
+
+- (void)setDistance:(CGFloat)distance {
+    
+    _distance = distance;
+    _distanceLabel.text = [NSString stringWithFormat:@"%.2f",_distance/1000.0];
+    [_distanceLabel sizeToFit];
+    _distanceLabel.center = CGPointMake(_distanceUnitLable.center.x, self.bounds.size.height/2-_distanceLabel.bounds.size.height/2);
+}
+
 
 - (void)layoutSubviews {
     
@@ -60,15 +80,15 @@
     }
     _distanceLabel.center = CGPointMake(_distanceUnitLable.center.x, self.bounds.size.height/2-_distanceLabel.bounds.size.height/2);
     
-    if (!_timeLable) {
-        _timeLable = [[UILabel alloc] init];
-        _timeLable.text = [self p_getTimeStringWithSeconds:_time];
-        _timeLable.textColor = [UIColor whiteColor];
-        _timeLable.font = [UIFont systemFontOfSize:20];
-        [_timeLable sizeToFit];
-        [self addSubview:_timeLable];
+    if (!_timeLabel) {
+        _timeLabel = [[UILabel alloc] init];
+        _timeLabel.text = [self p_getTimeStringWithSeconds:_time];
+        _timeLabel.textColor = [UIColor whiteColor];
+        _timeLabel.font = [UIFont systemFontOfSize:20];
+        [_timeLabel sizeToFit];
+        [self addSubview:_timeLabel];
     }
-    _timeLable.center = CGPointMake(self.bounds.size.width/2-_timeLable.bounds.size.width/2, self.bounds.size.height/2-_timeLable.bounds.size.height/2);
+    _timeLabel.center = CGPointMake(self.bounds.size.width/2-_timeLabel.bounds.size.width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
 
     
     if (!_timeUnitLable) {
@@ -79,7 +99,7 @@
         [_timeUnitLable sizeToFit];
         [self addSubview:_timeUnitLable];
     }
-    _timeUnitLable.center = CGPointMake(_timeLable.center.x , self.bounds.size.height/2 + _timeUnitLable.bounds.size.height/2);
+    _timeUnitLable.center = CGPointMake(_timeLabel.center.x , self.bounds.size.height/2 + _timeUnitLable.bounds.size.height/2);
     
     if (!_retractButton) {
         _retractButton = [UIButton buttonWithType: UIButtonTypeSystem];
@@ -87,6 +107,7 @@
         [_retractButton setTintColor:[UIColor whiteColor]];
         [_retractButton sizeToFit];
         [self addSubview:_retractButton];
+        [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     }
     _retractButton.center = CGPointMake(self.bounds.size.width-15-_retractButton.bounds.size.width/2, self.bounds.size.height/2);
     
@@ -98,6 +119,17 @@
     lineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
     lineLayer.path = path.CGPath;
     [self.layer addSublayer:lineLayer];
+}
+
+#pragma mark - Event
+#pragma mark - Button Event;
+
+- (void)retractButtonTouch:(UIButton *)sender {
+    
+    if (_retractButtonBlock) {
+        _retractButtonBlock(sender);
+    }
+    
 }
 
 - (NSString *)p_getTimeStringWithSeconds:(NSInteger)seconds {
