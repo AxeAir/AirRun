@@ -21,9 +21,13 @@
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
+
+
+// Blocks
+@property (nonatomic, copy) CompleteBlock completeBlock;
+
 @end
 
-static completeBlock STAcompleteBlock;
 
 @implementation ImageViewer
 
@@ -110,7 +114,7 @@ static completeBlock STAcompleteBlock;
         self.transform=CGAffineTransformMakeScale(0.01f, 0.01f);//先让要显示的view最小直至消失
     } completion:^(BOOL finished) {
         [self removeFromSuperview];
-         STAcompleteBlock(_data);
+         _completeBlock(_data);
     }];
 }
 
@@ -126,20 +130,28 @@ static completeBlock STAcompleteBlock;
 }
 
 
-- (void)showWithCompleteArray:(completeBlock)block
+- (void)showWithCompleteArray:(CompleteBlock)block
 {
-    STAcompleteBlock = block;
+    _completeBlock = block;
     [self show];
 }
 
 #pragma Action
 
+/**
+ *  隐藏
+ *
+ *  @param sender
+ */
 - (void)dismissself:(id)sender
 {
     [self dismiss];
 }
-
-
+/**
+ *  删除图片
+ *
+ *  @param sender
+ */
 - (void)deleteCurrentImage:(id)sender
 {
     /**
@@ -191,7 +203,7 @@ static completeBlock STAcompleteBlock;
             [self setAlpha:0.0];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
-            STAcompleteBlock(_data);
+            _completeBlock(_data);
         }];
     }
     
@@ -206,6 +218,8 @@ static completeBlock STAcompleteBlock;
     }
     return nil;
 }
+
+
 
 - (void)scrollViewDidScroll:(UIScrollView *)sender {
     int page = _scrollview.contentOffset.x / WIDTH(self);

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-typedef void (^completeBlock)(NSMutableArray *array);
+typedef void (^CompleteBlock)(NSMutableArray *array);
 
 @interface ImageViewer : UIView
 
@@ -17,7 +17,7 @@ typedef void (^completeBlock)(NSMutableArray *array);
 
 - (void)show;
 
-- (void)showWithCompleteArray:(completeBlock)block;
+- (void)showWithCompleteArray:(CompleteBlock)block;
 
 - (instancetype)initWithArray:(NSArray *)array WithSuperView:(UIView*)superview;
 
