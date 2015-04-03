@@ -7,6 +7,7 @@
 //
 
 #import "SettingViewController.h"
+#import "UConstants.h"
 
 @interface SettingViewController ()
 
@@ -16,6 +17,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setTitle:@"设置"];
+    [[self.navigationController navigationBar] setBarTintColor:RGBCOLOR(85, 150, 204)];
 }
 
 - (instancetype)init

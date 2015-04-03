@@ -22,8 +22,9 @@
 
 @property (nonatomic, assign) BOOL up;
 
-
 @property (nonatomic, strong) NSMutableArray *ImageArray;
+
+@property (nonatomic, strong) PopInputView *popview;
 
 @end
 
@@ -125,7 +126,11 @@
  */
 - (void)didTouchLabel
 {
-    [[[PopInputView alloc] initWithSuperView:self.view] showWithCompleteBlock:^(NSString *string) {
+    if (_popview ==nil) {
+        _popview = [[PopInputView alloc] initWithSuperView:self.view];
+    }
+    
+    [_popview showWithCompleteBlock:^(NSString *string) {
         NSLog(@"输入的内容为:%@",string);
         if (![string isEqualToString:@""]) {
             _inputcard.textview.text = string;
@@ -178,6 +183,7 @@
         [_ImageArray addObject:[ImageHeler fullResolutionImageFromALAsset:aset]];
     }
     NSLog(@"%@",_ImageArray);
+    [_popview addSmallPictures:_ImageArray];
     [self dismissImagePickerController];
 }
 

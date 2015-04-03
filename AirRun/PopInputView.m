@@ -9,17 +9,22 @@
 #import "PopInputView.h"
 #import "UConstants.h"
 #import "UIView+CHQuartz.h"
+#import "ImageViewer.h"
 @interface PopInputView() 
 
 @property (nonatomic, strong) UIView *maksView;
 @property (nonatomic, strong) UIView *inputView;
+
+@property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UITextView *textView;
 
 @property (nonatomic, strong) UIView *sView;
 
-
 @property (nonatomic, strong) UIButton *okButton;
 
+@property (nonatomic, strong) UIImageView *smallImage;
+
+@property (nonatomic, strong) NSArray *ImageArray;
 
 @end
 static completeEdit Stablock;
@@ -48,18 +53,23 @@ static importPhoto StaImportblock;
 
 - (void)commonInit
 {
-    [self creatMaskatSuperView:_sView];
+
+    [self creatMaskatSuperView];
     [self creatPopView];
 }
 
 
 - (void)show
 {
+    [self commonInit];
     [_sView addSubview:self];
+    [_sView addSubview:_maksView];
+    [_sView addSubview:_inputView];
     
     CGRect finalFrame = _inputView.frame;
     finalFrame.origin.y = -(HEIGHT(_inputView));
     _inputView.frame=finalFrame;
+    [self setAlpha:1.0];
     
     [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         [_inputView setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
@@ -101,9 +111,10 @@ static importPhoto StaImportblock;
 
 - (void)creatPopView
 {
-    _inputView = [[UIView alloc] initWithFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
+    if (_inputView == nil) {
+        _inputView = [[UIView alloc] initWithFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
+    }
     [_inputView setBackgroundColor:[UIColor whiteColor]];
-    [_sView addSubview:_inputView];
 
     //header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_inputView), 40)];
@@ -138,28 +149,48 @@ static importPhoto StaImportblock;
     [_inputView addSubview:_textView];
     
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(_inputView), 40)];
-    [_inputView addSubview:bottomView];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(_inputView), 40)];
+    [_inputView addSubview:_bottomView];
     
     UIButton *addimage = [[UIButton alloc] init];
     [addimage setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     [addimage setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
     [addimage addTarget:self action:@selector(addImage:) forControlEvents:UIControlEventTouchUpInside];
-    [bottomView addSubview:addimage];
+    [_bottomView addSubview:addimage];
 }
 
 
-- (void)creatMaskatSuperView:(UIView *)superView;
+- (void)creatMaskatSuperView
 {
-    _maksView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    if (_maksView ==nil) {
+        _maksView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        
+    }
     [_maksView setBackgroundColor:[UIColor blackColor]];
     [_maksView setAlpha:0.5];
-    [superView addSubview:_maksView];
+    
 }
 
 
 
-
+- (void)addSmallPictures:(NSArray *)imageArray
+{
+    if ([imageArray count]>=1) {
+        _ImageArray = imageArray;
+        if(_smallImage == nil)
+        {
+            _smallImage = [[UIImageView alloc] init];
+        }
+        [[_smallImage layer] setCornerRadius:15];
+        [[_smallImage layer] setMasksToBounds:YES];
+        [_smallImage setFrame:CGRectMake(5, 5, 30, 30)];
+        [_smallImage setImage:[imageArray objectAtIndex:0]];
+        [_smallImage setUserInteractionEnabled:YES];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(touchImage2Edit:)];
+        [_smallImage addGestureRecognizer:tap];
+        [_bottomView addSubview:_smallImage];
+    }
+}
 
 
 
@@ -170,13 +201,28 @@ static importPhoto StaImportblock;
     [self disimiss];
 }
 
+/**
+ *  点击添加图片按钮
+ *
+ *  @param sender <#sender description#>
+ */
 - (void)addImage:(id)sender
 {
     StaImportblock();
-    //[self presentViewController:navigationController animated:YES completion:NULL];
 }
 
 
+- (void)touchImage2Edit:(id)sender
+{
+    [_textView resignFirstResponder];
+    ImageViewer *viewer = [[ImageViewer alloc] initWithArray:_ImageArray WithSuperView:_sView];
+    [viewer showWithCompleteArray:^(NSMutableArray *array) {
+        _ImageArray = array;
+    }];
+    
+}
+
+#pragma overrite
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
