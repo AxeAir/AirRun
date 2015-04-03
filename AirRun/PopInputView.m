@@ -12,26 +12,26 @@
 #import "ImageViewer.h"
 @interface PopInputView() 
 
-@property (nonatomic, strong) UIView *maksView;
-@property (nonatomic, strong) UIView *inputView;
+@property (nonatomic, strong) UIView *BackgroundMaksView;
 
 @property (nonatomic, strong) UIView *bottomView;
 @property (nonatomic, strong) UITextView *textView;
-
-@property (nonatomic, strong) UIView *sView;
-
+@property (nonatomic, strong) UIView *superView;//父级视图
 @property (nonatomic, strong) UIButton *okButton;
+@property (nonatomic, strong) UIImageView *smallImage;//缩略图
+@property (nonatomic, strong) NSArray *ImageArray;//图片数组
 
-@property (nonatomic, strong) UIImageView *smallImage;
 
-@property (nonatomic, strong) NSArray *ImageArray;
+
+//Blocks
+@property (nonatomic, copy) EditCompleteBlock editcompleteBlock;
+@property (nonatomic, copy) ImportPhotosBlock importBlock;
 
 @end
-static completeEdit Stablock;
-static importPhoto StaImportblock;
+
 @implementation PopInputView
 
-
+#pragma mark init
 - (instancetype)init
 {
     self = [super init];
@@ -45,7 +45,7 @@ static importPhoto StaImportblock;
 {
     self = [self init];
     if (self) {
-        _sView = superview;
+        _superView = superview;
         [self commonInit];
     }
     return self;
@@ -53,72 +53,13 @@ static importPhoto StaImportblock;
 
 - (void)commonInit
 {
-
-    [self creatMaskatSuperView];
-    [self creatPopView];
-}
-
-
-- (void)show
-{
-    [self commonInit];
-    [_sView addSubview:self];
-    [_sView addSubview:_maksView];
-    [_sView addSubview:_inputView];
+    [self setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
+    [self setBackgroundColor:[UIColor whiteColor]];
+    [self setBackgroundColor:[UIColor whiteColor]];
     
-    CGRect finalFrame = _inputView.frame;
-    finalFrame.origin.y = -(HEIGHT(_inputView));
-    _inputView.frame=finalFrame;
-    [self setAlpha:1.0];
-    
-    [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        [_inputView setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
-    } completion:^(BOOL finished) {
-        [_textView becomeFirstResponder];
-    }];
-}
-
-
-
-- (void)showWithCompleteBlock:(completeEdit)block
-{
-    Stablock = block;
-    [self show];
-}
-
-- (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text photoBlock:(importPhoto)improtblock
-{
-    [self showWithCompleteBlock:block];
-    StaImportblock = improtblock;
-    _textView.text = text;
-}
-
-- (void)disimiss
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        CGRect finalFrame = _inputView.frame;
-        finalFrame.origin.y = -(HEIGHT(_inputView));
-        _inputView.frame=finalFrame;
-        [_maksView setAlpha:0];
-    } completion:^(BOOL finished) {
-        [_inputView removeFromSuperview];
-        [_maksView removeFromSuperview];
-
-    }];
-}
-
-
-
-- (void)creatPopView
-{
-    if (_inputView == nil) {
-        _inputView = [[UIView alloc] initWithFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
-    }
-    [_inputView setBackgroundColor:[UIColor whiteColor]];
-
     //header
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_inputView), 40)];
-    [_inputView addSubview:headerView];
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
+    [self addSubview:headerView];
     
     UILabel *title = [[UILabel alloc] init];
     [title setFrame:CGRectMake(0, 0, 100, 20)];
@@ -135,22 +76,17 @@ static importPhoto StaImportblock;
     [close addTarget:self action:@selector(disimiss) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:close];
     
-    
     _okButton = [[UIButton alloc] init];
     [_okButton setImage:[UIImage imageNamed:@"ic_menu_mark"] forState:UIControlStateNormal];
     [_okButton setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
     [_okButton addTarget:self action:@selector(ok:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:_okButton];
     
-
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, MaxY(headerView), WIDTH(_inputView), 110)];
-    [[_textView layer] setBorderWidth:1];
-    [[_textView layer] setBorderColor:[UIColor blackColor].CGColor];
-    [_inputView addSubview:_textView];
+    _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, MaxY(headerView), WIDTH(self), 110)];
+    [self addSubview:_textView];
     
-    
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(_inputView), 40)];
-    [_inputView addSubview:_bottomView];
+    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(self), 40)];
+    [self addSubview:_bottomView];
     
     UIButton *addimage = [[UIButton alloc] init];
     [addimage setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
@@ -160,18 +96,50 @@ static importPhoto StaImportblock;
 }
 
 
-- (void)creatMaskatSuperView
+#pragma mark Public
+
+- (void)show
 {
-    if (_maksView ==nil) {
-        _maksView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-        
-    }
-    [_maksView setBackgroundColor:[UIColor blackColor]];
-    [_maksView setAlpha:0.5];
+    [self commonInit];
+    [self showMask];
+    [_superView addSubview:self];
     
+    CGRect finalFrame = self.frame;
+    finalFrame.origin.y = -(HEIGHT(self));
+    self.frame=finalFrame;
+    
+    [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        
+        [self setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
+    } completion:^(BOOL finished) {
+        [_textView becomeFirstResponder];
+    }];
 }
 
+- (void)showWithCompleteBlock:(EditCompleteBlock)block
+{
+    _editcompleteBlock = block;
+    [self show];
+}
 
+- (void)showWithCompleteBlock:(EditCompleteBlock)block Text:(NSString *)text photoBlock:(ImportPhotosBlock)improtblock
+{
+    [self showWithCompleteBlock:block];
+    _importBlock = improtblock;
+    _textView.text = text;
+}
+
+- (void)disimiss
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        CGRect finalFrame = self.frame;
+        finalFrame.origin.y = -(HEIGHT(self));
+        self.frame=finalFrame;
+        [self hideMaks];
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
+}
 
 - (void)addSmallPictures:(NSArray *)imageArray
 {
@@ -192,43 +160,78 @@ static importPhoto StaImportblock;
     }
 }
 
+#pragma mark private
+- (void)showMask
+{
+    if (_BackgroundMaksView ==nil) {
+        _BackgroundMaksView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    }
+    [_BackgroundMaksView setBackgroundColor:[UIColor blackColor]];
+    [_BackgroundMaksView setAlpha:0.0];
+    [_superView insertSubview:_BackgroundMaksView belowSubview:self];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        [_BackgroundMaksView setAlpha:0.8];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)hideMaks
+{
+    if (_BackgroundMaksView!=nil) {
+        [UIView animateWithDuration:0.2 animations:^{
+            [_BackgroundMaksView setAlpha:0.0];
+        } completion:^(BOOL finished) {
+            [_BackgroundMaksView removeFromSuperview];
+        }];
+    }
+    
+}
 
 
 #pragma mark Event
 - (void)ok:(id)sender
 {
-    Stablock([_textView text]);
+    _editcompleteBlock([_textView text]);
     [self disimiss];
 }
 
 /**
  *  点击添加图片按钮
  *
- *  @param sender <#sender description#>
+ *  @param sender 
  */
 - (void)addImage:(id)sender
 {
-    StaImportblock();
+    _importBlock();
 }
 
-
+/**
+ *  编辑已选图片
+ *
+ *  @param sender
+ */
 - (void)touchImage2Edit:(id)sender
 {
     [_textView resignFirstResponder];
-    ImageViewer *viewer = [[ImageViewer alloc] initWithArray:_ImageArray WithSuperView:_sView];
+    ImageViewer *viewer = [[ImageViewer alloc] initWithArray:_ImageArray WithSuperView:_superView];
     [viewer showWithCompleteArray:^(NSMutableArray *array) {
         _ImageArray = array;
     }];
     
 }
 
-#pragma overrite
+
+#pragma mark overrite
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
     
-    [self drawLineFrom:CGPointMake(0, 140) to:CGPointMake(100, 140) color:[UIColor blackColor] width:1];
+    [self drawLineFrom:CGPointMake(0, 40) to:CGPointMake(WIDTH(self), 40) color:[UIColor blackColor] width:1];
+    
+    [self drawLineFrom:CGPointMake(0, 150) to:CGPointMake(WIDTH(self), 150) color:[UIColor blackColor] width:1];
 }
 
 

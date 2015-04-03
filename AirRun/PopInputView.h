@@ -8,21 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^completeEdit)(NSString *string);
-typedef void (^importPhoto)();
+typedef void (^EditCompleteBlock)(NSString *string);
+typedef void (^ImportPhotosBlock)();
 
 @interface PopInputView : UIView
+
 
 - (instancetype)initWithSuperView:(UIView *)superview;
 
 - (void)show;
 
-- (void)showWithCompleteBlock:(completeEdit)block;
+- (void)showWithCompleteBlock:(EditCompleteBlock)block;
 
-- (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text photoBlock:(importPhoto)improtblock;
+- (void)showWithCompleteBlock:(EditCompleteBlock)block Text:(NSString *)text photoBlock:(ImportPhotosBlock)improtblock;
 
+
+/**
+ *  消失
+ */
 - (void)disimiss;
-
 
 /**
  *  添加图片缩略图
