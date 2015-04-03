@@ -7,7 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <UIKit/UIKit.h>
+
 
 @interface ImageHeler : NSObject
+
++ (UIImage *)fullResolutionImageFromALAsset:(ALAsset *)asset;
 
 @end

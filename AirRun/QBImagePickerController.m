@@ -366,4 +366,10 @@ ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterType(QBImagePick
     [self passSelectedAssetsToDelegate];
 }
 
+
+- (void)assetsCollectionViewControllerDidClickCamera
+{
+    [_delegate qb_imagePickerControllerDidClickCarmera];
+}
+
 @end

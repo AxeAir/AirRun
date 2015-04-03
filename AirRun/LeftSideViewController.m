@@ -10,6 +10,7 @@
 #import "HeaderView.h"
 #import "RunCompleteCardsVC.h"
 #import "RunViewController.h"
+#import "SettingViewController.h"
 @interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -58,6 +59,12 @@
 //            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[DEMOSecondViewController alloc] init]]
 //                                                         animated:YES];
 //            [self.sideMenuViewController hideMenuViewController];
+            break;
+        case 3:
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
+                                                         animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+            
             break;
         case 4:
         {

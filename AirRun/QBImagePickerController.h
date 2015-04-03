@@ -25,7 +25,7 @@ UIKIT_EXTERN ALAssetsFilter * ALAssetsFilterFromQBImagePickerControllerFilterTyp
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAsset:(ALAsset *)asset;
 - (void)qb_imagePickerController:(QBImagePickerController *)imagePickerController didSelectAssets:(NSArray *)assets;
 - (void)qb_imagePickerControllerDidCancel:(QBImagePickerController *)imagePickerController;
-
+- (void)qb_imagePickerControllerDidClickCarmera;
 @end
 
 @interface QBImagePickerController : UITableViewController

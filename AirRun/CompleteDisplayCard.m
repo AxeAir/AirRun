@@ -24,6 +24,9 @@
 @property (nonatomic, strong) UIButton *shareButton;
 
 
+@property (nonatomic, strong) NSString *heart;//新的体会
+
+
 @end
 
 @implementation CompleteDisplayCard
@@ -211,7 +214,7 @@
         if (_heartLabel==nil) {
             _heartLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, MaxY(_speedAndTime)+10, WIDTH(self)-60, 30)];
         }
-        
+        _heart = heart;
         [_heartLabel setNumberOfLines:0];
         [_heartLabel setFont:[UIFont systemFontOfSize:12]];
         _heartLabel.text = heart;
@@ -271,7 +274,11 @@
 {
     [self drawLineFrom:CGPointMake(20, MaxY(_distanceAndCarl)+7.5) to:CGPointMake(WIDTH(self)-20, MaxY(_distanceAndCarl)+7.5) color:RGBCOLOR(145, 194, 235) width:1];
     
-    [self drawLineFrom:CGPointMake(20, MaxY(_speedAndTime)+7.5) to:CGPointMake(WIDTH(self)-20, MaxY(_speedAndTime)+7.5) color:RGBCOLOR(145, 194, 235) width:1];
+    
+    if (_heart !=nil) {
+        [self drawLineFrom:CGPointMake(20, MaxY(_speedAndTime)+7.5) to:CGPointMake(WIDTH(self)-20, MaxY(_speedAndTime)+7.5) color:RGBCOLOR(145, 194, 235) width:1];
+    }
+    
 
 }
 

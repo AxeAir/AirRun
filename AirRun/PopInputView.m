@@ -8,7 +8,8 @@
 
 #import "PopInputView.h"
 #import "UConstants.h"
-@interface PopInputView()
+#import "UIView+CHQuartz.h"
+@interface PopInputView() 
 
 @property (nonatomic, strong) UIView *maksView;
 @property (nonatomic, strong) UIView *inputView;
@@ -22,6 +23,7 @@
 
 @end
 static completeEdit Stablock;
+static importPhoto StaImportblock;
 @implementation PopInputView
 
 
@@ -74,15 +76,15 @@ static completeEdit Stablock;
     [self show];
 }
 
-- (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text
+- (void)showWithCompleteBlock:(completeEdit)block Text:(NSString *)text photoBlock:(importPhoto)improtblock
 {
     [self showWithCompleteBlock:block];
+    StaImportblock = improtblock;
     _textView.text = text;
 }
 
 - (void)disimiss
 {
-    
     [UIView animateWithDuration:0.2 animations:^{
         CGRect finalFrame = _inputView.frame;
         finalFrame.origin.y = -(HEIGHT(_inputView));
@@ -105,7 +107,6 @@ static completeEdit Stablock;
 
     //header
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_inputView), 40)];
-    [headerView setBackgroundColor:[UIColor grayColor]];
     [_inputView addSubview:headerView];
     
     UILabel *title = [[UILabel alloc] init];
@@ -127,22 +128,23 @@ static completeEdit Stablock;
     _okButton = [[UIButton alloc] init];
     [_okButton setImage:[UIImage imageNamed:@"ic_menu_mark"] forState:UIControlStateNormal];
     [_okButton setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
-    [_okButton addTarget:self action:@selector(ok) forControlEvents:UIControlEventTouchUpInside];
+    [_okButton addTarget:self action:@selector(ok:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:_okButton];
     
 
     _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, MaxY(headerView), WIDTH(_inputView), 110)];
+    [[_textView layer] setBorderWidth:1];
+    [[_textView layer] setBorderColor:[UIColor blackColor].CGColor];
     [_inputView addSubview:_textView];
     
     
-    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(self), 40)];
-    [bottomView setBackgroundColor:[UIColor whiteColor]];
+    UIView *bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(_inputView), 40)];
     [_inputView addSubview:bottomView];
     
     UIButton *addimage = [[UIButton alloc] init];
     [addimage setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
     [addimage setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
-    [addimage addTarget:self action:@selector(disimiss) forControlEvents:UIControlEventTouchUpInside];
+    [addimage addTarget:self action:@selector(addImage:) forControlEvents:UIControlEventTouchUpInside];
     [bottomView addSubview:addimage];
 }
 
@@ -157,11 +159,21 @@ static completeEdit Stablock;
 
 
 
+
+
+
+
 #pragma mark Event
-- (void)ok
+- (void)ok:(id)sender
 {
     Stablock([_textView text]);
     [self disimiss];
+}
+
+- (void)addImage:(id)sender
+{
+    StaImportblock();
+    //[self presentViewController:navigationController animated:YES completion:NULL];
 }
 
 
@@ -169,6 +181,8 @@ static completeEdit Stablock;
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
     // Drawing code
+    
+    [self drawLineFrom:CGPointMake(0, 140) to:CGPointMake(100, 140) color:[UIColor blackColor] width:1];
 }
 
 

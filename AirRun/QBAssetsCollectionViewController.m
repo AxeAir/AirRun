@@ -44,7 +44,7 @@
                 forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                        withReuseIdentifier:@"FooterView"];
         
-        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(done:)];
+        UIBarButtonItem *doneButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCamera target:self action:@selector(camera:)];
         self.navigationItem.rightBarButtonItem = doneButton;
     }
     
@@ -214,6 +214,12 @@
     }
 }
 
+- (void)camera:(id)sender
+{
+    if (self.delegate&&[self.delegate respondsToSelector:@selector(assetsCollectionViewControllerDidClickCamera)]) {
+        [self.delegate assetsCollectionViewControllerDidClickCamera];
+    }
+}
 
 #pragma mark - Managing Selection
 
@@ -300,14 +306,14 @@
                 NSString *format;
                 if (self.numberOfPhotos == 1) {
                     if (self.numberOfVideos == 1) {
-                        format = @"format_photo_and_video";
+                        format = @"";
                     } else {
-                        format = @"format_photo_and_videos";
+                        format = @"";
                     }
                 } else if (self.numberOfVideos == 1) {
-                    format = @"format_photos_and_video";
+                    format = @"";
                 } else {
-                    format = @"format_photos_and_videos";
+                    format = @"";
                 }
                 
                 footerView.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(format, @"QBImagePickerController", nil),
