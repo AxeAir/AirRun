@@ -18,6 +18,9 @@
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UILabel *timeUnitLable;
 
+@property (strong, nonatomic) UILabel *speedLabel;
+@property (strong, nonatomic) UILabel *speedUnitLable;
+
 @property (strong, nonatomic) UIButton *retractButton;
 
 
@@ -25,14 +28,20 @@
 
 @implementation RunSimpleCardView
 
-
+- (void)setSpeed:(CGFloat)speed {
+    
+    _speed = speed;
+    _speedLabel.text = [NSString stringWithFormat:@"%.1f",_speed*3.6];
+    [_speedLabel sizeToFit];
+    _speedLabel.center = CGPointMake(_speedUnitLable.center.x, self.bounds.size.height/2-_speedLabel.bounds.size.height/2);
+}
 
 - (void)setTime:(NSInteger)time {
     
     _time = time;
     _timeLabel.text = [self p_getTimeStringWithSeconds:_time];
     [_timeLabel sizeToFit];
-    _timeLabel.center = CGPointMake(self.bounds.size.width/2-_timeLabel.bounds.size.width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
+    _timeLabel.center = CGPointMake((_retractButton.frame.origin.x-15)/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
     
 }
 
@@ -59,6 +68,16 @@
 }
 
 - (void)p_setLayout {
+    
+    if (!_retractButton) {
+        _retractButton = [UIButton buttonWithType: UIButtonTypeSystem];
+        [_retractButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+        [_retractButton setTintColor:[UIColor whiteColor]];
+        [_retractButton sizeToFit];
+        [self addSubview:_retractButton];
+        [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    _retractButton.center = CGPointMake(self.bounds.size.width-15-_retractButton.bounds.size.width/2, self.bounds.size.height/2);
     
     if (!_distanceUnitLable) {
         _distanceUnitLable = [[UILabel alloc] init];
@@ -88,7 +107,8 @@
         [_timeLabel sizeToFit];
         [self addSubview:_timeLabel];
     }
-    _timeLabel.center = CGPointMake(self.bounds.size.width/2-_timeLabel.bounds.size.width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
+    CGFloat width = _retractButton.frame.origin.x - 15;
+    _timeLabel.center = CGPointMake(width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
 
     
     if (!_timeUnitLable) {
@@ -99,17 +119,29 @@
         [_timeUnitLable sizeToFit];
         [self addSubview:_timeUnitLable];
     }
-    _timeUnitLable.center = CGPointMake(_timeLabel.center.x , self.bounds.size.height/2 + _timeUnitLable.bounds.size.height/2);
+    _timeUnitLable.center = CGPointMake(width/2 , self.bounds.size.height/2 + _timeUnitLable.bounds.size.height/2);
     
-    if (!_retractButton) {
-        _retractButton = [UIButton buttonWithType: UIButtonTypeSystem];
-        [_retractButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
-        [_retractButton setTintColor:[UIColor whiteColor]];
-        [_retractButton sizeToFit];
-        [self addSubview:_retractButton];
-        [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    
+    if (!_speedUnitLable) {
+        _speedUnitLable = [[UILabel alloc] init];
+        _speedUnitLable.text = @"平均速度";
+        _speedUnitLable.textColor = [UIColor whiteColor];
+        _speedUnitLable.font = [UIFont systemFontOfSize:14];
+        [_speedUnitLable sizeToFit];
+        [self addSubview:_speedUnitLable];
     }
-    _retractButton.center = CGPointMake(self.bounds.size.width-15-_retractButton.bounds.size.width/2, self.bounds.size.height/2);
+    _speedUnitLable.center = CGPointMake(_retractButton.frame.origin.x-18-_speedUnitLable.bounds.size.width/2, self.bounds.size.height/2+_speedUnitLable.bounds.size.height/2);
+    
+    if (!_speedLabel) {
+        _speedLabel = [[UILabel alloc] init];
+        _speedLabel.text = [NSString stringWithFormat:@"%.1f",_speed*3.6];
+        _speedLabel.textColor = [UIColor whiteColor];
+        _speedLabel.font = [UIFont systemFontOfSize:20];
+        [_speedLabel sizeToFit];
+        [self addSubview:_speedLabel];
+    }
+    _speedLabel.center = CGPointMake(_speedUnitLable.center.x, self.bounds.size.height/2-_speedLabel.bounds.size.height/2);
+    
     
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     UIBezierPath *path = [UIBezierPath bezierPath];
