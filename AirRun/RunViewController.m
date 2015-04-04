@@ -18,6 +18,7 @@
 #import "RunViewControllerAnimation.h"
 #import "RunPauseView.h"
 #import "RunningRecordModel.h"
+#import "RunCompleteCardsVC.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -322,6 +323,9 @@ typedef enum : NSUInteger {
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     model.finishtime = [dateFormatter stringFromDate:[NSDate date]];
     [model save4database];
+    
+    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:model addPhotos:nil WithPoints:_points];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

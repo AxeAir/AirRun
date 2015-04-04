@@ -39,6 +39,21 @@
 
 #pragma mark - Map Action
 
+- (void)drawPath:(NSArray *)path {
+    
+    //画起点和重点
+    CLLocation *startPoint = path.firstObject;
+    CLLocation *endPoint = path.lastObject;
+    [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:startPoint];
+    [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:endPoint];
+    
+    //画路线
+    [self drawGradientPolyLineWithPoints:path];
+    
+    //地图适应
+    [self p_zoomToFitMapAnnotations:path];
+}
+
 - (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location {
     
     _imageOverlay = [[ImageOverLay alloc] initWithCoordinate:location.coordinate WithImage:image];
@@ -118,6 +133,38 @@
     free(mapPoints);
     
 }
+#pragma mark - Private Function
+
+-(void)p_zoomToFitMapAnnotations:(NSArray *)path {
+    if(path.count == 0)
+        return;
+    
+    CLLocationCoordinate2D topLeftCoord;
+    topLeftCoord.latitude = -90;
+    topLeftCoord.longitude = 180;
+    
+    CLLocationCoordinate2D bottomRightCoord;
+    bottomRightCoord.latitude = 90;
+    bottomRightCoord.longitude = -180;
+    
+    for(CLLocation *location in path)
+    {
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, location.coordinate.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, location.coordinate.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, location.coordinate.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, location.coordinate.latitude);
+    }
+    
+    MKCoordinateRegion region;
+    region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
+    region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1; // Add a little extra space on the sides
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1; // Add a little extra space on the sides
+    
+    region = [_mapView regionThatFits:region];
+    [_mapView setRegion:region animated:YES];
+}
 
 #pragma mark - MapDelegate
 
@@ -159,6 +206,7 @@
     }
     return nil;
 }
+
 
 
 @end
