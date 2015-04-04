@@ -39,6 +39,7 @@
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentDirectory = [paths objectAtIndex:0];
     NSString *dbPath = [documentDirectory stringByAppendingPathComponent:@"airrun.sqlite"];
+    NSLog(@"%@",dbPath);
     _db = [FMDatabase databaseWithPath:dbPath];
     [_db open];
 }
