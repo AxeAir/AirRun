@@ -11,6 +11,7 @@
 #import "RunCompleteCardsVC.h"
 #import "RunViewController.h"
 #import "UConstants.h"
+#import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
 @interface LeftSideViewController ()
 
@@ -109,6 +110,11 @@
     if (section == 0) {
         _header = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
         [_header configUserInfo:nil withBloak:^{
+            
+            RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
+            [self presentViewController:RegisterAndLogin animated:YES completion:^{
+                
+            }];
             
         }];
         return _header;

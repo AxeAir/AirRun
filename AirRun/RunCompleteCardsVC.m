@@ -19,13 +19,11 @@
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
 @property (nonatomic, strong) CompleteDisplayCard *display;
-
-@property (nonatomic, assign) BOOL up;
-
-@property (nonatomic, strong) NSMutableArray *ImageArray;
-
-@property (nonatomic, strong) PopInputView *popview;
-
+@property (nonatomic, strong) PopInputView *popview;//弹出层
+@property (nonatomic, assign) BOOL up;//记录当前状态
+@property (nonatomic, strong) RunningRecordModel *parameters;
+@property (nonatomic, strong) NSArray *runningImages;//跑步中的图片
+@property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
 @end
 
 @implementation RunCompleteCardsVC
@@ -53,6 +51,16 @@
     
 }
 
+
+- (instancetype)initWithParameters:(RunningRecordModel *)parameters addPhotos:(NSArray *)runningImages
+{
+    self = [super init];
+    if (self) {
+        _parameters = parameters;
+        _runningImages = runningImages;
+    }
+    return self;
+}
 
 - (void)ininVar
 {

@@ -12,9 +12,8 @@
 
 @interface ImageViewer()<UIScrollViewDelegate>
 
-@property (nonatomic, strong) UIView *mainView;
-@property (nonatomic, strong) UIView *maksView;
-@property (nonatomic, strong) UIView *sView;
+@property (nonatomic, strong) UIView *BackgroundMaksView;
+@property (nonatomic, strong) UIView *superView;
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) NSMutableArray *data;
@@ -35,7 +34,7 @@
 {
     self = [super init];
     if (self) {
-        _sView = superview;
+        _superView = superview;
         _data = [[NSMutableArray alloc] initWithArray:array];
         [self commonInit];
     }
@@ -44,19 +43,9 @@
 
 - (void)commonInit
 {
-    _mainView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
-    [self setFrame:_mainView.frame];
+    [self setFrame:CGRectMake(0, 0, Main_Screen_Width, Main_Screen_Height)];
     [self setAlpha:0.0];
-    [self addSubview:_mainView];
-    [_sView addSubview:self];
-    [self creatMaskatSuperView];
-    [self createScrollview];
-    [self creatBottomBar];
-}
-
-
-- (void)createScrollview
-{
+    
     _scrollview = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     int i=0;
     for (UIImage *image in _data) {
@@ -72,7 +61,71 @@
     [_scrollview setMaximumZoomScale:5.0];
     [_scrollview setPagingEnabled:YES];
     [_scrollview setContentSize:CGSizeMake(Main_Screen_Width*[_data count], Main_Screen_Height)];
-    [_mainView addSubview:_scrollview];
+    [self addSubview:_scrollview];
+    [_superView addSubview:self];
+    [self creatBottomBar];
+}
+
+#pragma mark Public
+- (void)dismiss
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        [self setFrame:CGRectMake(35, 245, 30, 30)];
+        self.transform=CGAffineTransformMakeScale(0.01f, 0.01f);//先让要显示的view最小直至消失
+        [self hideMaks];
+    } completion:^(BOOL finished) {
+        [self removeFromSuperview];
+         _completeBlock(_data);
+    }];
+}
+
+- (void)show
+{
+    self.transform=CGAffineTransformMakeScale(0.01f, 0.01f);//先让要显示的view最小直至消失
+    [UIView animateWithDuration:0.3 animations:^{
+        self.transform=CGAffineTransformMakeScale(1.0f, 1.0f);
+        [self setAlpha:1.0];
+        [self showMask];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+
+- (void)showWithCompleteArray:(CompleteBlock)block
+{
+    _completeBlock = block;
+    [self show];
+}
+
+
+#pragma mark private
+- (void)showMask
+{
+    if (_BackgroundMaksView ==nil) {
+        _BackgroundMaksView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    }
+    [_BackgroundMaksView setBackgroundColor:[UIColor blackColor]];
+    [_BackgroundMaksView setAlpha:0.0];
+    [_superView insertSubview:_BackgroundMaksView belowSubview:self];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        [_BackgroundMaksView setAlpha:0.9];
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)hideMaks
+{
+    if (_BackgroundMaksView!=nil) {
+        [UIView animateWithDuration:0.2 animations:^{
+            [_BackgroundMaksView setAlpha:0.0];
+        } completion:^(BOOL finished) {
+            [_BackgroundMaksView removeFromSuperview];
+        }];
+    }
+    
 }
 
 
@@ -80,7 +133,7 @@
 {
     UIView *bottom = [[UIView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height-40, Main_Screen_Width, 40)];
     [bottom setBackgroundColor:[UIColor blackColor]];
-    [_mainView addSubview:bottom];
+    [self addSubview:bottom];
     
     
     UIButton *delete = [[UIButton alloc] initWithFrame:CGRectMake(Main_Screen_Width-35, 5, 30, 30)];
@@ -96,45 +149,8 @@
     
 }
 
-- (void)creatMaskatSuperView
-{
-    _maksView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [_maksView setBackgroundColor:[UIColor blackColor]];
-    [_maksView setAlpha:0.9];
-    [_mainView addSubview:_maksView];
-}
 
 
-
-
-- (void)dismiss
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        [self setFrame:CGRectMake(35, 245, 30, 30)];
-        self.transform=CGAffineTransformMakeScale(0.01f, 0.01f);//先让要显示的view最小直至消失
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-         _completeBlock(_data);
-    }];
-}
-
-- (void)show
-{
-    self.transform=CGAffineTransformMakeScale(0.01f, 0.01f);//先让要显示的view最小直至消失
-    [UIView animateWithDuration:0.3 animations:^{
-        self.transform=CGAffineTransformMakeScale(1.0f, 1.0f);
-        [self setAlpha:1.0];
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-
-- (void)showWithCompleteArray:(CompleteBlock)block
-{
-    _completeBlock = block;
-    [self show];
-}
 
 #pragma Action
 
