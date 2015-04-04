@@ -310,8 +310,7 @@ typedef enum : NSUInteger {
 - (void)completeButtonTouch:(UIButton *)sender {
     
     RunningRecordModel *model = [[RunningRecordModel alloc] init];
-    
-//    @property(nonatomic, strong) NSString  *path;
+    model.path = [self p_convertPointsToJsonString];
     model.time = _runcardView.time;
     model.kcar = _runcardView.kcal;
     model.distance = _runcardView.distance;
@@ -323,6 +322,7 @@ typedef enum : NSUInteger {
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     model.finishtime = [dateFormatter stringFromDate:[NSDate date]];
     [model save4database];
+    
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
@@ -367,6 +367,33 @@ typedef enum : NSUInteger {
 
 - (void)p_complete {
     
+}
+
+- (NSString *)p_convertPointsToJsonString {
+    
+    NSMutableArray *pointDicArray = [[NSMutableArray alloc] init];
+    for (CLLocation *location in self.points) {
+        
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
+        
+        //键:值
+        NSDictionary *pointDic = @{@"latitude":[NSNumber numberWithDouble:location.coordinate.latitude],
+                                   @"longitude":[NSNumber numberWithDouble:location.coordinate.longitude],
+                                   @"altitude":[NSNumber numberWithDouble:location.altitude],
+                                   @"hAccuracy":[NSNumber numberWithDouble:location.horizontalAccuracy],
+                                   @"vAccuracy":[NSNumber numberWithDouble:location.verticalAccuracy],
+                                   @"course":[NSNumber numberWithDouble:location.course],
+                                   @"speed":[NSNumber numberWithDouble:location.speed],
+                                   @"timestamp":[dateFormatter stringFromDate:location.timestamp]
+                                   };
+        [pointDicArray addObject:pointDic];
+        
+    }
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pointDicArray options:NSJSONWritingPrettyPrinted error:&error];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
 }
 
 - (void)p_continue {
@@ -416,7 +443,6 @@ typedef enum : NSUInteger {
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     
     CLLocation *newLocation = locations[0];
-    NSLog(@"location: %@",newLocation);
     
     //更新坐标点
     if (newLocation.coordinate.latitude == 0 || newLocation.coordinate.longitude == 0) {
