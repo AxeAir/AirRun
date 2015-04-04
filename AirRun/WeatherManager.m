@@ -38,6 +38,7 @@
                             }
                         } Failure:^(NSError *error) {
                             NSLog(@"error:   %@",error.description);
+                            failure(error);
                         }];
 }
 
@@ -73,6 +74,7 @@
                             }
                         } Failure:^(NSError *error) {
                             NSLog(@"error:   %@",error.description);
+                            failure(error);
                         }];
     
 }

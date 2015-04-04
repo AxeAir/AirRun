@@ -13,6 +13,7 @@
 #import "UConstants.h"
 #import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
+#import "TimelineController.h"
 @interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -58,9 +59,9 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
-//            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[DEMOSecondViewController alloc] init]]
-//                                                         animated:YES];
-//            [self.sideMenuViewController hideMenuViewController];
+            [self.sideMenuViewController setContentViewController:[[TimelineController alloc] init]
+                                                         animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
             break;
         case 3:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] init]]

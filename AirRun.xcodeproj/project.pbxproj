@@ -85,6 +85,9 @@
 		E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */; };
 		E5AC95CF1ACD80FB00A6F133 /* UIView+CHQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */; };
 		E5AC95D11ACDA7C300A6F133 /* DataBaseTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95D01ACDA7C300A6F133 /* DataBaseTestsSpec.m */; };
+		E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */; };
+		E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */; };
+		E5FAC7E91AD02EDF00A2C7DD /* header1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */; };
 		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
@@ -248,6 +251,11 @@
 		E5AC95CD1ACD80FB00A6F133 /* UIView+CHQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CHQuartz.h"; sourceTree = "<group>"; };
 		E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CHQuartz.m"; sourceTree = "<group>"; };
 		E5AC95D01ACDA7C300A6F133 /* DataBaseTestsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseTestsSpec.m; sourceTree = "<group>"; };
+		E5FAC7E21AD0106C00A2C7DD /* TimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineController.h; sourceTree = "<group>"; };
+		E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineController.m; sourceTree = "<group>"; };
+		E5FAC7E51AD0169B00A2C7DD /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
+		E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
+		E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = header1.jpg; sourceTree = "<group>"; };
 		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -478,6 +486,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				E5FAC7E11AD0103200A2C7DD /* TimeLine */,
 				96474D581ACED5CA00DECE02 /* RegisterAndLogIn */,
 				E52D16D31ACE4F1600DBFA04 /* Setting */,
 				96F596AB1ACC519F00F56BEA /* Run */,
@@ -501,6 +510,7 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */,
 				E58E41381ACECB6400839947 /* seabg@2x.png */,
 				E52D16FC1ACE90C100DBFA04 /* trash@2x.png */,
 				E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */,
@@ -643,6 +653,17 @@
 			name = Draw;
 			sourceTree = "<group>";
 		};
+		E5FAC7E11AD0103200A2C7DD /* TimeLine */ = {
+			isa = PBXGroup;
+			children = (
+				E5FAC7E21AD0106C00A2C7DD /* TimelineController.h */,
+				E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */,
+				E5FAC7E51AD0169B00A2C7DD /* TimelineTableViewCell.h */,
+				E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */,
+			);
+			name = TimeLine;
+			sourceTree = "<group>";
+		};
 		F0F87C6BE6D51CCC8BAF920F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -769,6 +790,7 @@
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
 				E59BF3F01ACC1CF60033D1DC /* map.jpg in Resources */,
 				E503A4C71ACD14310039EDD6 /* down@2x.png in Resources */,
+				E5FAC7E91AD02EDF00A2C7DD /* header1.jpg in Resources */,
 				E5668FB01ACBB6C8009A0D61 /* header.jpg in Resources */,
 				E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */,
 				E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */,
@@ -903,8 +925,10 @@
 				E52D16EF1ACE6C1D00DBFA04 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
+				E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */,
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
+				E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */,
 				96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */,
 				96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
