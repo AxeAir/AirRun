@@ -9,6 +9,7 @@ pod 'pop'
 pod 'Mantle', '~> 1.5.4'
 pod 'MTLFMDBAdapter', '~> 0.1.8'
 pod 'MBProgressHUD'
+pod 'TMCache', '~> 1.2.3'
 end
 
 target 'AirRunTests' do

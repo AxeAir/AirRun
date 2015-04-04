@@ -34,6 +34,7 @@ PODS:
     - FMDB (~> 2.3)
     - Mantle (~> 1.5)
   - pop (1.0.7)
+  - TMCache (1.2.3)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.2)
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - MBProgressHUD
   - MTLFMDBAdapter (~> 0.1.8)
   - pop
+  - TMCache (~> 1.2.3)
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
@@ -51,5 +53,6 @@ SPEC CHECKSUMS:
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
   MTLFMDBAdapter: 491e80bb9fcda3f6a9e7b2cbad4a8e7be93189be
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  TMCache: 5f68bc38d741aa8df4c63131b847522783665d81
 
 COCOAPODS: 0.35.0
