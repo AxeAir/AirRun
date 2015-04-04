@@ -20,7 +20,7 @@
 @property (nonatomic, strong) CompleteInputCard *inputcard;
 @property (nonatomic, strong) CompleteDisplayCard *display;
 @property (nonatomic, strong) PopInputView *popview;//弹出层
-@property (nonatomic, assign) BOOL up;//记录当前状态
+@property (nonatomic, getter=isUp) BOOL up;//记录当前状态
 @property (nonatomic, strong) RunningRecordModel *parameters;
 @property (nonatomic, strong) NSArray *runningImages;//跑步中的图片
 @property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
@@ -74,7 +74,7 @@
         DLog(@"下拉");
         [self changeToInput];
     }
-    else if((scrollView.contentOffset.y>50)&& _up==YES)
+    else if((scrollView.contentOffset.y>50)&& self.isUp)
     {
         DLog(@"上拉");
         [self changeToDisplay ];

@@ -13,11 +13,16 @@
 @interface PopInputView() 
 
 @property (nonatomic, strong) UIView *BackgroundMaksView;
-
+@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *bottomView;
+@property (nonatomic, strong) UILabel *titleLabel;
+
+
 @property (nonatomic, strong) UITextView *textView;
 @property (nonatomic, strong) UIView *superView;//父级视图
 @property (nonatomic, strong) UIButton *okButton;
+@property (nonatomic, strong) UIButton *closeButton;
+@property (nonatomic, strong) UIButton *addimageButton;
 @property (nonatomic, strong) UIImageView *smallImage;//缩略图
 @property (nonatomic, strong) NSArray *ImageArray;//图片数组
 
@@ -46,7 +51,7 @@
     self = [self init];
     if (self) {
         _superView = superview;
-        [self commonInit];
+        //[self commonInit];
     }
     return self;
 }
@@ -55,44 +60,58 @@
 {
     [self setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
     [self setBackgroundColor:[UIColor whiteColor]];
-    [self setBackgroundColor:[UIColor whiteColor]];
     
     //header
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
-    [self addSubview:headerView];
+    if (_headerView ==nil) {
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
+        [self addSubview:_headerView];
+    }
+    //titleLabel
+    if (_titleLabel == nil) {
+        _titleLabel = [[UILabel alloc] init];
+        [_headerView addSubview:_titleLabel];
+    }
+    [_titleLabel setFrame:CGRectMake(0, 0, 100, 20)];
+    _titleLabel.center = _headerView.center;
+    [_titleLabel setTextAlignment:NSTextAlignmentCenter];
+    _titleLabel.text =@"跑步日记";
     
-    UILabel *title = [[UILabel alloc] init];
-    [title setFrame:CGRectMake(0, 0, 100, 20)];
-    title.center = headerView.center;
-    [title setTextAlignment:NSTextAlignmentCenter];
-    title.text =@"跑步日记";
-    [headerView addSubview:title];
+    //header closeButton
+    if (_closeButton == nil) {
+        _closeButton = [[UIButton alloc] init];
+        [_headerView addSubview:_closeButton];
+    }
+    [_closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [_closeButton setFrame:CGRectMake(5, 5, 30, 30)];
+    [_closeButton addTarget:self action:@selector(disimiss) forControlEvents:UIControlEventTouchUpInside];
     
-    
-    //header close
-    UIButton *close = [[UIButton alloc] init];
-    [close setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [close setFrame:CGRectMake(5, 5, 30, 30)];
-    [close addTarget:self action:@selector(disimiss) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:close];
-    
-    _okButton = [[UIButton alloc] init];
+    //header okButton
+    if (_okButton == nil) {
+        _okButton = [[UIButton alloc] init];
+        [_headerView addSubview:_okButton];
+    }
     [_okButton setImage:[UIImage imageNamed:@"ic_menu_mark"] forState:UIControlStateNormal];
-    [_okButton setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
+    [_okButton setFrame:CGRectMake(WIDTH(_headerView)-35, 5, 30, 30)];
     [_okButton addTarget:self action:@selector(ok:) forControlEvents:UIControlEventTouchUpInside];
-    [headerView addSubview:_okButton];
     
-    _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, MaxY(headerView), WIDTH(self), 110)];
-    [self addSubview:_textView];
+    if (_textView == nil) {
+        _textView = [[UITextView alloc] initWithFrame:CGRectMake(0, MaxY(_headerView), WIDTH(self), 110)];
+        [self addSubview:_textView];
+    }
     
-    _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(self), 40)];
-    [self addSubview:_bottomView];
+    if (_bottomView == nil) {
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_textView), WIDTH(self), 40)];
+        [self addSubview:_bottomView];
+    }
     
-    UIButton *addimage = [[UIButton alloc] init];
-    [addimage setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [addimage setFrame:CGRectMake(WIDTH(headerView)-35, 5, 30, 30)];
-    [addimage addTarget:self action:@selector(addImage:) forControlEvents:UIControlEventTouchUpInside];
-    [_bottomView addSubview:addimage];
+    if (_addimageButton == nil) {
+        _addimageButton = [[UIButton alloc] init];
+        [_bottomView addSubview:_addimageButton];
+    }
+    [_addimageButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [_addimageButton setFrame:CGRectMake(WIDTH(_headerView)-35, 5, 30, 30)];
+    [_addimageButton addTarget:self action:@selector(addImage:) forControlEvents:UIControlEventTouchUpInside];
+   
 }
 
 
