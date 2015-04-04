@@ -8,7 +8,7 @@ pod 'AFNetworking', '~> 2.5.2'
 pod 'pop'
 pod 'Mantle', '~> 1.5.4'
 pod 'MTLFMDBAdapter', '~> 0.1.8'
-
+pod 'MBProgressHUD'
 end
 
 target 'AirRunTests' do

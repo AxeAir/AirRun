@@ -16,6 +16,8 @@
 		96474D5C1ACED5F000DECE02 /* RegisterAndLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D5B1ACED5F000DECE02 /* RegisterAndLoginViewController.m */; };
 		96474D611ACED60300DECE02 /* SignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D5E1ACED60300DECE02 /* SignInView.m */; };
 		96474D621ACED60300DECE02 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D601ACED60300DECE02 /* SignUpView.m */; };
+		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
+		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
@@ -122,6 +124,10 @@
 		96474D5E1ACED60300DECE02 /* SignInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInView.m; sourceTree = "<group>"; };
 		96474D5F1ACED60300DECE02 /* SignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpView.h; sourceTree = "<group>"; };
 		96474D601ACED60300DECE02 /* SignUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpView.m; sourceTree = "<group>"; };
+		96982B401ACF7EE000040A50 /* ValidateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateHelper.h; sourceTree = "<group>"; };
+		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
+		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
+		96982B441ACF804200040A50 /* HUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDHelper.m; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -515,6 +521,10 @@
 		E5668F8F1ACA5D35009A0D61 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				96982B431ACF804200040A50 /* HUDHelper.h */,
+				96982B441ACF804200040A50 /* HUDHelper.m */,
+				96982B401ACF7EE000040A50 /* ValidateHelper.h */,
+				96982B411ACF7EE000040A50 /* ValidateHelper.m */,
 				E5AC95C11ACD651100A6F133 /* DataBaseHelper.h */,
 				E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */,
 				96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */,
@@ -896,7 +906,9 @@
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
 				96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */,
+				96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
+				96982B451ACF804200040A50 /* HUDHelper.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,

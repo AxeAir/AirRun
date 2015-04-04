@@ -9,6 +9,8 @@
 #import "RegisterAndLoginViewController.h"
 #import "SignUpView.h"
 #import "SignInView.h"
+#import "ValidateHelper.h"
+#import "HUDHelper.h"
 
 typedef enum : NSUInteger {
     RegisterAndLoginViewControllerStateSignUp,
@@ -64,6 +66,26 @@ typedef enum : NSUInteger {
     [super viewDidAppear:animated];
     
     [self p_startAnimation];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark - Override
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    [_signUpView.nickNameField resignFirstResponder];
+    [_signUpView.emailField resignFirstResponder];
+    [_signUpView.passwordField resignFirstResponder];
+    [_signInView.emailField resignFirstResponder];
+    [_signInView.passwordField resignFirstResponder];
     
 }
 
@@ -146,6 +168,7 @@ typedef enum : NSUInteger {
     _signInOrUpButton.layer.borderWidth = 1;
     _signInOrUpButton.layer.borderColor = [UIColor whiteColor].CGColor;
     _signInOrUpButton.alpha = 0;
+    [_signInOrUpButton addTarget:self action:@selector(signInOrSignUpButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_signInOrUpButton];
     
 }
@@ -190,6 +213,56 @@ typedef enum : NSUInteger {
 
 #pragma mark - Event
 #pragma mark Button Event
+
+- (void)signInOrSignUpButtonTouch:(UIButton *)sender {
+    
+    if (_state == RegisterAndLoginViewControllerStateSignIn) { //登陆状态
+        
+        NSString *email = _signInView.emailField.text;
+        NSString *password = _signInView.passwordField.text;
+        
+        if (![ValidateHelper isValidateIsEmptyWithTextField:email]) {
+            [HUDHelper showError:@"邮箱不能为空" addView:self.view delay:1];
+            return;
+        }
+        
+        if (![ValidateHelper isValidateIsEmptyWithTextField:password]) {
+            [HUDHelper showError:@"密码不能为空" addView:self.view delay:1];
+            return;
+        }
+        
+        if (![ValidateHelper isValidateEmail:email]) {
+            [HUDHelper showError:@"邮箱格式不正确" addView:self.view delay:1];
+            return;
+        }
+        
+    } else if (_state == RegisterAndLoginViewControllerStateSignUp) { //注册状态
+        
+        NSString *nickName = _signUpView.nickNameField.text;
+        NSString *email = _signUpView.emailField.text;
+        NSString *password = _signUpView.passwordField.text;
+        
+        if (![ValidateHelper isValidateIsEmptyWithTextField:nickName]) {
+            [HUDHelper showError:@"昵称不能为空" addView:self.view delay:1];
+            return;
+        }
+        if (![ValidateHelper isValidateIsEmptyWithTextField:email]) {
+            [HUDHelper showError:@"邮箱不能为空" addView:self.view delay:1];
+            return;
+        }
+        if (![ValidateHelper isValidateIsEmptyWithTextField:password]) {
+            [HUDHelper showError:@"密码不能为空" addView:self.view delay:1];
+            return;
+        }
+        if (![ValidateHelper isValidateEmail:email]) {
+            [HUDHelper showError:@"邮箱格式不正确" addView:self.view delay:1];
+            return;
+        }
+        
+    }
+    
+    
+}
 
 - (void)changeButtonTouch:(UIButton *)sender {
     
@@ -236,7 +309,40 @@ typedef enum : NSUInteger {
     }
     
 }
+#pragma mark Notification Event
 
+- (void)keyboardShow:(NSNotification *)notification {
+    
+    NSLog(@"%@",notification);
+    
+    NSDictionary *userInfo = notification.userInfo;
+    CGFloat animationDuration = [userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+    CGRect endFrame = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
+    
+    CGFloat deltaY = 0;
+    if (_state == RegisterAndLoginViewControllerStateSignIn) {//登陆
+        deltaY = CGRectGetMaxY(_signInView.frame) - endFrame.origin.y;
+    } else if (_state == RegisterAndLoginViewControllerStateSignUp) { //注册
+        deltaY = CGRectGetMaxY(_signUpView.frame) - endFrame.origin.y;
+    }
+    
+    if (deltaY > 0) {
+        [UIView animateWithDuration:animationDuration animations:^{
+            self.view.transform = CGAffineTransformTranslate(self.view.transform, 0, -deltaY);
+        }];
+    }
+    
+}
+
+- (void)keyboardHide:(NSNotification *)notification {
+    
+    NSDictionary *userInfo = notification.userInfo;
+    CGFloat animationDuration = [userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
+    [UIView animateWithDuration:animationDuration animations:^{
+        self.view.transform = CGAffineTransformIdentity;
+    }];
+    
+}
 
 
 
