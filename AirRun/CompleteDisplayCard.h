@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "BaseCardView.h"
 
+@class MapViewDelegate;
 @interface CompleteDisplayCard : BaseCardView
 
+@property (nonatomic, strong) MapViewDelegate *mapDelegate;
+
 - (void)adjust:(NSString *)heart;
+
 
 @end

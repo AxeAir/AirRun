@@ -18,6 +18,7 @@
 #import "RunViewControllerAnimation.h"
 #import "RunPauseView.h"
 #import "RunningRecordModel.h"
+#import "RunCompleteCardsVC.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -25,7 +26,7 @@ typedef enum : NSUInteger {
     RunViewControllerRunStatePause,
 } RunViewControllerRunState;
 
-@interface RunViewController () <CLLocationManagerDelegate>
+@interface RunViewController () <CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
@@ -180,6 +181,15 @@ typedef enum : NSUInteger {
                    }];
         
     };
+    _runcardView.photoTouchBlock = ^(UIButton *button){
+        
+        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.delegate = this;
+        imagePickerController.editing = YES;
+        [this presentViewController:imagePickerController animated:YES completion:nil];
+        
+    };
     
     _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 60)];
     _runSimpleCardView.layer.cornerRadius = 5;
@@ -322,6 +332,9 @@ typedef enum : NSUInteger {
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     model.finishtime = [dateFormatter stringFromDate:[NSDate date]];
     [model save4database];
+    
+    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:model addPhotos:nil WithPoints:_points];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 
@@ -481,7 +494,6 @@ typedef enum : NSUInteger {
         if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
             _runCardLastKmDistance = _runcardView.distance;
             
-            
             [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:newLocation];
 //            NSURL *url = [[NSBundle mainBundle] URLForResource:@"drum01" withExtension:@"mp3"];
 //            MyAudioPlayer *audioPlayer = [MyAudioPlayer sharePlayerWithURL:url];
@@ -505,6 +517,21 @@ typedef enum : NSUInteger {
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
     [self.mapView setRegion:region animated:YES];
     
+}
+
+#pragma mark - UIImagePickerController Delegate
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    if (info) {
+        UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
+        [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*

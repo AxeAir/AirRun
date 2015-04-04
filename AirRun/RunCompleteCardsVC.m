@@ -13,6 +13,7 @@
 #import "PopInputView.h"
 #import "QBImagePickerController.h"
 #import "ImageHeler.h"
+#import "MapViewDelegate.h"
 
 @interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
@@ -22,6 +23,7 @@
 @property (nonatomic, strong) PopInputView *popview;//弹出层
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
 @property (nonatomic, strong) RunningRecordModel *parameters;
+@property (nonatomic, strong) NSArray *path;
 @property (nonatomic, strong) NSArray *runningImages;//跑步中的图片
 @property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
 @end
@@ -43,6 +45,7 @@
     [_scrollview addSubview:_inputcard];
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800)];
+    [_display.mapDelegate drawPath:_path];
     [_scrollview addSubview:_display];
     
     [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+1 )];
@@ -51,13 +54,20 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = YES;
+    
+}
 
-- (instancetype)initWithParameters:(RunningRecordModel *)parameters addPhotos:(NSArray *)runningImages
+- (instancetype)initWithParameters:(RunningRecordModel *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path
 {
     self = [super init];
     if (self) {
         _parameters = parameters;
         _runningImages = runningImages;
+        _path = path;
     }
     return self;
 }

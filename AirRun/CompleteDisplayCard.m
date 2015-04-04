@@ -9,12 +9,17 @@
 #import "CompleteDisplayCard.h"
 #import "UConstants.h"
 #import "UIView+CHQuartz.h"
+#import "MapViewDelegate.h"
+#import <MapKit/MapKit.h>
 
 @interface CompleteDisplayCard()<UIScrollViewDelegate>
 
 
 @property (nonatomic, strong) UIView *titleView;
-@property (nonatomic, strong) UIScrollView *scrollView;
+//@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) MKMapView *mapView;
+
+
 @property (nonatomic, strong) UIPageControl* pagecontrol;
 
 @property (nonatomic, strong) UIView *speedAndTime;
@@ -75,27 +80,32 @@
     [pm25d setTextAlignment:NSTextAlignmentCenter];
     [_titleView addSubview:pm25d];
     
+    _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, MaxY(_titleView), WIDTH(self), 300)];
+    [self addSubview:_mapView];
+    
+    _mapDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
+    _mapView.delegate = _mapDelegate;
+    
+//    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MaxY(_titleView), WIDTH(self), 300)];
+//    [_scrollView setContentSize:CGSizeMake(WIDTH(self)*3, 300)];
+//    _scrollView.showsVerticalScrollIndicator = NO;
+//    _scrollView.showsHorizontalScrollIndicator = NO;
+//    _scrollView.delegate = self;
+//    _scrollView.scrollEnabled = YES;
+//    _scrollView.pagingEnabled = YES; //使用翻页属性
+//    _scrollView.bounces = NO;
+//    
+//    UIImageView *map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map.jpg"]];
+//    [map setFrame:CGRectMake(0, 0, WIDTH(self), 300)];
+//    
+//    [_scrollView addSubview:map];
+//    
+//    [self addSubview:_scrollView];
     
     
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MaxY(_titleView), WIDTH(self), 300)];
-    [_scrollView setContentSize:CGSizeMake(WIDTH(self)*3, 300)];
-    _scrollView.showsVerticalScrollIndicator = NO;
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    _scrollView.delegate = self;
-    _scrollView.scrollEnabled = YES;
-    _scrollView.pagingEnabled = YES; //使用翻页属性
-    _scrollView.bounces = NO;
-    
-    UIImageView *map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map.jpg"]];
-    [map setFrame:CGRectMake(0, 0, WIDTH(self), 300)];
-    
-    [_scrollView addSubview:map];
-    
-    [self addSubview:_scrollView];
-    
-    
-    _pagecontrol = [[UIPageControl alloc] initWithFrame:CGRectMake(0, MaxY(_scrollView), WIDTH(self), 20)];
+    _pagecontrol = [[UIPageControl alloc] initWithFrame:CGRectMake(0, MaxY(_mapView), WIDTH(self), 20)];
     _pagecontrol.numberOfPages =3;
+    _pagecontrol.alpha = 0;
     [self addSubview:_pagecontrol];
     
     _distanceAndCarl = [self creatDistance:@"3.45" andCarl:@"4000"];
@@ -265,10 +275,10 @@
     
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)sender {
-    int page = _scrollView.contentOffset.x / WIDTH(self);
-    _pagecontrol.currentPage = page;
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)sender {
+//    int page = _scrollView.contentOffset.x / WIDTH(self);
+//    _pagecontrol.currentPage = page;
+//}
 
 - (void)drawRect:(CGRect)rect
 {

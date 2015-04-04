@@ -11,6 +11,8 @@
 #import "GradientPolylineRenderer.h"
 #import "ImageOverLay.h"
 #import "ImageOverLayRenderer.h"
+#import "CustomAnnotation.h"
+#import "CustomAnnotationView.h"
 
 @interface MapViewDelegate ()
 
@@ -38,6 +40,32 @@
 }
 
 #pragma mark - Map Action
+
+- (void)drawPath:(NSArray *)path {
+    
+    //画路线
+    [self drawGradientPolyLineWithPoints:path];
+    
+    //地图适应
+    [self p_zoomToFitMapAnnotations:path];
+    
+    //画起点和终点
+    CLLocation *startPoint = path.firstObject;
+    CLLocation *endPoint = path.lastObject;
+    [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:startPoint];
+    [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:endPoint];
+    
+    //画公里节点
+    NSInteger kmIndex = 0;
+    CLLocation *lastKMLocation = path.firstObject;
+    for (CLLocation *location in path) {
+        if ([location distanceFromLocation:lastKMLocation] >= 1000) {
+            kmIndex++;
+            lastKMLocation = location;
+            [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:location];
+        }
+    }
+}
 
 - (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location {
     
@@ -119,6 +147,48 @@
     
 }
 
+- (void)addimage:(UIImage *)image AnontationWithLocation:(CLLocation *)location {
+    
+    CustomAnnotation *customAnnotation = [[CustomAnnotation alloc] init];
+    customAnnotation.imageArray = @[image];
+    customAnnotation.coordinate = location.coordinate;
+//    customAnnotation.delegate = self;
+    [self.mapView addAnnotation:customAnnotation];
+    
+}
+#pragma mark - Private Function
+
+-(void)p_zoomToFitMapAnnotations:(NSArray *)path {
+    if(path.count == 0)
+        return;
+    
+    CLLocationCoordinate2D topLeftCoord;
+    topLeftCoord.latitude = -90;
+    topLeftCoord.longitude = 180;
+    
+    CLLocationCoordinate2D bottomRightCoord;
+    bottomRightCoord.latitude = 90;
+    bottomRightCoord.longitude = -180;
+    
+    for(CLLocation *location in path)
+    {
+        topLeftCoord.longitude = fmin(topLeftCoord.longitude, location.coordinate.longitude);
+        topLeftCoord.latitude = fmax(topLeftCoord.latitude, location.coordinate.latitude);
+        
+        bottomRightCoord.longitude = fmax(bottomRightCoord.longitude, location.coordinate.longitude);
+        bottomRightCoord.latitude = fmin(bottomRightCoord.latitude, location.coordinate.latitude);
+    }
+    
+    MKCoordinateRegion region;
+    region.center.latitude = topLeftCoord.latitude - (topLeftCoord.latitude - bottomRightCoord.latitude) * 0.5;
+    region.center.longitude = topLeftCoord.longitude + (bottomRightCoord.longitude - topLeftCoord.longitude) * 0.5;
+    region.span.latitudeDelta = fabs(topLeftCoord.latitude - bottomRightCoord.latitude) * 1.1; // Add a little extra space on the sides
+    region.span.longitudeDelta = fabs(bottomRightCoord.longitude - topLeftCoord.longitude) * 1.1; // Add a little extra space on the sides
+    
+    region = [_mapView regionThatFits:region];
+    [_mapView setRegion:region animated:YES];
+}
+
 #pragma mark - MapDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
@@ -157,8 +227,14 @@
         return pinAnnotation;
         
     }
+    
+    if ([annotation isKindOfClass:[CustomAnnotation class]]) {
+        MKAnnotationView *customAnnotationView = [CustomAnnotation creatAnnotationForMapView:_mapView Annotation:annotation];
+        return customAnnotationView;
+    }
     return nil;
 }
+
 
 
 @end
