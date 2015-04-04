@@ -18,6 +18,8 @@
 		96474D621ACED60300DECE02 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D601ACED60300DECE02 /* SignUpView.m */; };
 		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
+		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
+		96982B4B1AD0198900040A50 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B491AD0198900040A50 /* CustomAnnotationView.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
@@ -128,6 +130,10 @@
 		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
 		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
 		96982B441ACF804200040A50 /* HUDHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HUDHelper.m; sourceTree = "<group>"; };
+		96982B461AD0198900040A50 /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
+		96982B471AD0198900040A50 /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
+		96982B481AD0198900040A50 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		96982B491AD0198900040A50 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -332,6 +338,10 @@
 		96F596AC1ACC51A600F56BEA /* View */ = {
 			isa = PBXGroup;
 			children = (
+				96982B461AD0198900040A50 /* CustomAnnotation.h */,
+				96982B471AD0198900040A50 /* CustomAnnotation.m */,
+				96982B481AD0198900040A50 /* CustomAnnotationView.h */,
+				96982B491AD0198900040A50 /* CustomAnnotationView.m */,
 				96474D131ACDB65F00DECE02 /* ImageOverLay.h */,
 				96474D141ACDB65F00DECE02 /* ImageOverLay.m */,
 				96474D151ACDB65F00DECE02 /* ImageOverLayRenderer.h */,
@@ -891,6 +901,7 @@
 				E5AC95BD1ACD5AEE00A6F133 /* RunningRecordModel.m in Sources */,
 				E52D16F41ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m in Sources */,
 				96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */,
+				96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */,
 				96474D611ACED60300DECE02 /* SignInView.m in Sources */,
 				96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
@@ -898,6 +909,7 @@
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
+				96982B4B1AD0198900040A50 /* CustomAnnotationView.m in Sources */,
 				E59139991ACBDDCF00F9D048 /* CompleteInputCard.m in Sources */,
 				E52D16F31ACE6C1D00DBFA04 /* QBImagePickerController.m in Sources */,
 				E52D16EF1ACE6C1D00DBFA04 /* QBAssetsCollectionVideoIndicatorView.m in Sources */,
@@ -1071,7 +1083,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AirRun/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1087,7 +1099,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AirRun/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
