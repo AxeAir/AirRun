@@ -33,7 +33,7 @@
  *  @param success   成功回调
  *  @param failure   失败回调
  */
-- (void)getWeatherWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude success:(void (^)(NSDictionary * responseObject))success failure:(void (^)(NSError *error))failure;
+- (void)getWeatherWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude success:(void (^)(WeatherModel * responseObject))success failure:(void (^)(NSError *error))failure;
 
 
 /**
