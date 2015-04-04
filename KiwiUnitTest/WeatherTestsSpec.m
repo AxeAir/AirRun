@@ -40,14 +40,14 @@ describe(@"given city name chongqing", ^{
         });
         
         it(@"respose weather", ^{
-            __block NSDictionary *fetchedData = nil;
+            __block WeatherModel *fetchedData = nil;
             
-            
-            [manager getWeatherWithLongitude:@122 latitude:@37 success:^(NSDictionary *responseObject) {
-                fetchedData = [responseObject objectForKey:@"result"];
+            [manager getWeatherWithLongitude:@106 latitude:@29 success:^(WeatherModel *responseObject) {
+                fetchedData = responseObject;
             } failure:^(NSError *error) {
                 
             }];
+            [[expectFutureValue(fetchedData.city) shouldEventuallyBeforeTimingOutAfter(5.0)] beNonNil];
             [[expectFutureValue(fetchedData) shouldEventuallyBeforeTimingOutAfter(5.0)] beNonNil];
         });
         

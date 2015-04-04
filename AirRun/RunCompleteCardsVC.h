@@ -7,7 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "RunningRecordModel.h"
 
 @interface RunCompleteCardsVC : UIViewController
+
+/**
+ *  带参数的初始化卡片
+ *
+ *  @param parameters 参数不能为空
+ *
+ *  @return 
+ */
+- (instancetype)initWithParameters:(RunningRecordModel *)parameters addPhotos:(NSArray *)runningImages;
+
 
 @end

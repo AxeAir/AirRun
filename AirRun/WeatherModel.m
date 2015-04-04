@@ -13,9 +13,20 @@
 #pragma mark Mantle property
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
+             @"city":@"result.today.city",
+             @"temperature":@"result.today.temperature",
+             @"weather":@"result.today.weather",
+             @"weatherFa":@"result.today.weather_id.fa",
+             @"weatherFb":@"result.today.weather_id.fb",
+             @"wind":@"result.today.wind",
+             @"dressingIndex":@"result.today.dressing_index",
+             @"dressingAdvice":@"result.today.dressing_advice",
+             @"uvIndex":@"result.today.uv_index",
+             @"washIndex":@"result.today.wash_index",
+             @"travelIndex":@"result.today.travel_index",
+             @"exerciseIndex":@"result.today.exercise_index",
              
              };
 }
-
 
 @end

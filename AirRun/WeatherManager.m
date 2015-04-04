@@ -44,7 +44,7 @@
 
 
 
-- (void)getWeatherWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
+- (void)getWeatherWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude success:(void (^)(WeatherModel *))success failure:(void (^)(NSError *))failure
 {
     [[JHOpenidSupplier shareSupplier] registerJuheAPIByOpenId:@"JH33e45daec2d71d0d5f9a9c05da34aff9"];
     NSString *path = @"http://v.juhe.cn/weather/geo";
@@ -64,7 +64,8 @@
                                 int error_code = [[responseObject objectForKey:@"error_code"] intValue];
                                 if (!error_code) {
                                     //[self SetWeatherCache:responseObject];
-                                    success(responseObject);
+                                    
+                                    success([MTLJSONAdapter modelOfClass:[WeatherModel class] fromJSONDictionary:responseObject error:nil]);
                                     
                                 }else{
                                     NSLog(@" %@", responseObject);

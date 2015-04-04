@@ -21,20 +21,11 @@
     return self;
 }
 
-
 - (void)baseConfig
 {
     [[self layer] setCornerRadius:5.0];
     [[self layer] setMasksToBounds:YES];
     [self setBackgroundColor:CardBgColor];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
 
 @end
