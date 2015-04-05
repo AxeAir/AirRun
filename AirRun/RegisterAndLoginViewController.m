@@ -11,6 +11,7 @@
 #import "SignInView.h"
 #import "ValidateHelper.h"
 #import "HUDHelper.h"
+#import <AVOSCloud.h>
 
 typedef enum : NSUInteger {
     RegisterAndLoginViewControllerStateSignUp,
@@ -236,6 +237,16 @@ typedef enum : NSUInteger {
             return;
         }
         
+        [AVUser logInWithUsernameInBackground:email password:password block:^(AVUser *user, NSError *error) {
+            if (user != nil) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+            } else {
+                
+            }
+        }];
+        
     } else if (_state == RegisterAndLoginViewControllerStateSignUp) { //注册状态
         
         NSString *nickName = _signUpView.nickNameField.text;
@@ -258,6 +269,23 @@ typedef enum : NSUInteger {
             [HUDHelper showError:@"邮箱格式不正确" addView:self.view delay:1];
             return;
         }
+        
+        AVUser *user = [AVUser user];
+        user.username = email;
+        user.password = password;
+        user.email = email;
+        [user setObject:nickName forKey:@"nickName"];
+        
+        [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [self dismissViewControllerAnimated:YES completion:^{
+                    
+                }];
+                
+            } else {
+                
+            }
+        }];
         
     }
     

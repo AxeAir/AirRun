@@ -22,7 +22,7 @@
 @property (nonatomic, strong) CompleteDisplayCard *display;
 @property (nonatomic, strong) PopInputView *popview;//弹出层
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
-@property (nonatomic, strong) RunningRecordModel *parameters;
+@property (nonatomic, strong) RunningRecord *parameters;
 @property (nonatomic, strong) NSArray *path;
 @property (nonatomic, strong) NSArray *runningImages;//跑步中的图片
 @property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
@@ -61,7 +61,7 @@
     
 }
 
-- (instancetype)initWithParameters:(RunningRecordModel *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path
+- (instancetype)initWithParameters:(RunningRecord *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path
 {
     self = [super init];
     if (self) {

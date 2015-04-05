@@ -11,7 +11,7 @@
 
 @interface TimelineTableViewCell()
 
-@property (nonatomic, strong) RunningRecordModel *runningRecord;
+@property (nonatomic, strong) RunningRecord *runningRecord;
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *heartView;
 @property (nonatomic, strong) UIView *footerView;
@@ -36,7 +36,7 @@
 
 @implementation TimelineTableViewCell
 
-- (instancetype)initWithRunningRecord:(RunningRecordModel *)aRunningrecord
+- (instancetype)initWithRunningRecord:(RunningRecord *)aRunningrecord
 {
     self = [self init];
     if (self) {
@@ -48,7 +48,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString *)reuseIdentifier
-                runningRecord:(RunningRecordModel *)aRunningrecord
+                runningRecord:(RunningRecord *)aRunningrecord
 {
     self = [self initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
