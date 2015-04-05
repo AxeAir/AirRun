@@ -26,6 +26,7 @@
     
     self.tableView.tableHeaderView = [self tableHeaderView];
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+    [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,7 +73,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 10.0;
+    return 20.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
@@ -148,7 +149,7 @@
         _headerbackgroundImageView.frame = currentFrame;
     }
     
-    CGFloat sectionHeaderHeight = 10;
+    CGFloat sectionHeaderHeight = 20;
     if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
         scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
     } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {

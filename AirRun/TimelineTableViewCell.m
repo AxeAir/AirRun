@@ -61,7 +61,7 @@
 - (void)commonInit
 {
     if (_headerView ==nil) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 50)];
+        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 0)];
         [self.contentView addSubview:_headerView];
     }
     [_headerView setBackgroundColor:RGBCOLOR(128, 199, 237)];

@@ -11,13 +11,13 @@
 @implementation DataBaseModel
 
 
-- (BOOL)save4database
+- (BOOL)save
 {
     DataBaseHelper *dbHelper = [[DataBaseHelper alloc] init];
     return [dbHelper save4database:self];
 }
 
-+ (NSArray *)SelectAll2Array
++ (NSArray *)selectAll
 {
     DataBaseHelper *dbHelper = [[DataBaseHelper alloc] init];
     

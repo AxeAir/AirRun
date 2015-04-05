@@ -90,6 +90,7 @@
 		E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */; };
 		E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */; };
 		E5FAC7E91AD02EDF00A2C7DD /* header1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */; };
+		E5FAC7EC1AD0E9BE00A2C7DD /* RunningImgeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7EB1AD0E9BE00A2C7DD /* RunningImgeModel.m */; };
 		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
@@ -262,6 +263,8 @@
 		E5FAC7E51AD0169B00A2C7DD /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
 		E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineTableViewCell.m; sourceTree = "<group>"; };
 		E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = header1.jpg; sourceTree = "<group>"; };
+		E5FAC7EA1AD0E9BE00A2C7DD /* RunningImgeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningImgeModel.h; sourceTree = "<group>"; };
+		E5FAC7EB1AD0E9BE00A2C7DD /* RunningImgeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningImgeModel.m; sourceTree = "<group>"; };
 		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -586,10 +589,12 @@
 			children = (
 				E5AC95BE1ACD639300A6F133 /* DataBaseModel.h */,
 				E5AC95BF1ACD639300A6F133 /* DataBaseModel.m */,
-				E5668FAC1ACBB576009A0D61 /* UserModel.h */,
-				E5668FAD1ACBB576009A0D61 /* UserModel.m */,
 				E5AC95BB1ACD5AEE00A6F133 /* RunningRecordModel.h */,
 				E5AC95BC1ACD5AEE00A6F133 /* RunningRecordModel.m */,
+				E5FAC7EA1AD0E9BE00A2C7DD /* RunningImgeModel.h */,
+				E5FAC7EB1AD0E9BE00A2C7DD /* RunningImgeModel.m */,
+				E5668FAC1ACBB576009A0D61 /* UserModel.h */,
+				E5668FAD1ACBB576009A0D61 /* UserModel.m */,
 				E5AC95C41ACD6A6D00A6F133 /* WeatherModel.h */,
 				E5AC95C51ACD6A6D00A6F133 /* WeatherModel.m */,
 				E5AC95C71ACD6B2400A6F133 /* PM25Model.h */,
@@ -958,6 +963,7 @@
 				E52D16ED1ACE6C1D00DBFA04 /* QBAssetsCollectionFooterView.m in Sources */,
 				E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */,
 				E52D16EE1ACE6C1D00DBFA04 /* QBAssetsCollectionOverlayView.m in Sources */,
+				E5FAC7EC1AD0E9BE00A2C7DD /* RunningImgeModel.m in Sources */,
 				E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */,
 				96474D5C1ACED5F000DECE02 /* RegisterAndLoginViewController.m in Sources */,
 				E52D16F81ACE780300DBFA04 /* ImageHeler.m in Sources */,

@@ -54,7 +54,6 @@
          path TEXT,\
          time INTEGER, \
          kcar INTEGER, \
-         NSInteger INTEGER, \
          weather TEXT, \
          pm25 FLOAT, \
          distance INTEGER,\
@@ -66,6 +65,21 @@
          timestamp TEXT)"];
         NSLog(@"RunningRecord 创建完成");
     }
+    
+    if(![_db tableExists:@"RunningImge"])
+    {
+        [_db executeUpdate:@"CREATE TABLE RunningImge (\
+         UUID TEXT PRIMARY KEY,\
+         userUUID TEXT,\
+         imagename INTEGER, \
+         remoteURL INTEGER, \
+         latitude INTEGER, \
+         longitude TEXT, \
+         recordUUID FLOAT)"];
+        NSLog(@"RunningImge 创建完成");
+    }
+    
+
 }
 
 - (BOOL)save4database:(id)object
