@@ -15,7 +15,7 @@
 /**
  *  保存当前实体到数据库
  */
-- (BOOL)save4database;
+- (BOOL)save;
 
 /**
  *  查询某张特定的表的所有数据,通用方法
@@ -24,5 +24,5 @@
  *
  *  @return 数组
  */
-+ (NSArray *)SelectAll2Array;
++ (NSArray *)selectAll;
 @end

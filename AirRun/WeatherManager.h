@@ -12,7 +12,11 @@
 #import "WeatherModel.h"
 #import "PM25Model.h"
 #import <Mantle.h>
+#import <TMCache.h>
+
+
 @interface WeatherManager : NSObject
+
 
 
 /**

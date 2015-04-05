@@ -20,6 +20,7 @@ PODS:
   - AFNetworking/UIKit (2.5.2):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - BlurImageProcessor (1.0.0)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
   - FMDB/common (2.5)
@@ -38,6 +39,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 2.5.2)
+  - BlurImageProcessor (~> 1.0.0)
   - Kiwi
   - Mantle (~> 1.5.4)
   - MBProgressHUD
@@ -47,6 +49,7 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  BlurImageProcessor: a4794ad3128748dbff8b40ae43ce9386d3667bba
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
@@ -55,4 +58,4 @@ SPEC CHECKSUMS:
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   TMCache: 5f68bc38d741aa8df4c63131b847522783665d81
 
-COCOAPODS: 0.36.3
+COCOAPODS: 0.35.0

@@ -21,7 +21,7 @@ describe(@"RunningRecord", ^{
     
     context(@"insert", ^{
         it(@"should return YES", ^{
-            BOOL success= [model save4database];
+            BOOL success= [model save];
             [[theValue(success) should] beYes];
             
         });
@@ -31,7 +31,7 @@ describe(@"RunningRecord", ^{
     
     context(@"select", ^{
         it(@"the array should not be nil", ^{
-            NSArray *models =[RunningRecordModel SelectAll2Array];
+            NSArray *models =[RunningRecordModel selectAll];
             [[theValue([models count]) shouldNot] beZero];
         });
         

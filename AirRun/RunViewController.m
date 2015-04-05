@@ -340,7 +340,7 @@ typedef enum : NSUInteger {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
     model.finishtime = [dateFormatter stringFromDate:[NSDate date]];
-    [model save4database];
+    [model save];
     
     RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:model addPhotos:nil WithPoints:_points];
     [self.navigationController pushViewController:vc animated:YES];
