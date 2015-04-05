@@ -19,6 +19,9 @@
 #import "RunPauseView.h"
 #import "RunningRecord.h"
 #import "RunCompleteCardsVC.h"
+#import <AVFoundation/AVFoundation.h>
+#import "CountView.h"
+#import "RunningImgeModel.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -28,10 +31,14 @@ typedef enum : NSUInteger {
 
 @interface RunViewController () <CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property (strong, nonatomic) AVAudioPlayer *audioPlayer;
+@property (strong, nonatomic) CountView *countView;
+
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray *points;
+@property (strong, nonatomic) NSMutableArray *imageArray;
 @property (strong, nonatomic) CLLocation *currentLocation;
 
 @property (assign, nonatomic) RunViewControllerRunState runState;
@@ -60,6 +67,7 @@ typedef enum : NSUInteger {
     
     _runState = RunViewControllerRunStateStop;
     _points = [[NSMutableArray alloc] init];
+    _imageArray = [[NSMutableArray alloc] init];
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
@@ -67,6 +75,7 @@ typedef enum : NSUInteger {
     [self p_setMapView];
     [self p_setLocationManager];
     [self p_setLayout];
+    
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -260,7 +269,7 @@ typedef enum : NSUInteger {
                           _pauseView.transform = CGAffineTransformMakeTranslation(0, _pauseView.bounds.size.height);
                       }];
                       
-                      //
+                      [self p_audioPlay:@"pause"];
                       [self p_pause];
                       
                   }];
@@ -313,6 +322,7 @@ typedef enum : NSUInteger {
                                               AnimationWthiCompleteBlock:nil];
                                         
                                     }];
+    [self p_audioPlay:@"continue"];
     [self p_continue];
     
 }
@@ -343,24 +353,39 @@ typedef enum : NSUInteger {
     //动画
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
-        [RunViewControllerAnimation smallView:sender
-                                      ToFrame:CGRectMake(sender.center.x, sender.center.y, 0, 0)
-                            WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-                                [sender removeFromSuperview];
-                                [self.view addSubview:_runcardView];
-                                [RunViewControllerAnimation largeView:_runcardView
-                                                              ToFrame:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)
-                                                    WithCompleteBlock:nil];
-                                
-                            }];
+        _countView = [[CountView alloc] initWithCount:5];
+        _countView.frame = self.view.bounds;
+        _countView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        [self.view addSubview:_countView];
+        [_countView startCountWithCompleteBlock:^(CountView *countView) {
+            
+            [self p_audioPlay:@"start"];
+            
+            [countView removeFromSuperview];
+            [RunViewControllerAnimation smallView:sender
+                                          ToFrame:CGRectMake(sender.center.x, sender.center.y, 0, 0)
+                                WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                                    [sender removeFromSuperview];
+                                    [self.view addSubview:_runcardView];
+                                    [RunViewControllerAnimation largeView:_runcardView
+                                                                  ToFrame:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)
+                                                        WithCompleteBlock:nil];
+                                    
+                                }];
+            
+            
+            //逻辑
+            _runState = RunViewControllerRunStateRunning;
+            [_runTimer setFireDate:[NSDate distantPast]];
+            [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
+            
+        }];
+        
+        
         
     }];
     
-    //逻辑
-    
-    _runState = RunViewControllerRunStateRunning;
-    [_runTimer setFireDate:[NSDate distantPast]];
-    [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
+   
 }
 
 #pragma mark - Function
@@ -377,6 +402,15 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark Private Function
+
+- (void)p_audioPlay:(NSString *)name {
+    
+    NSURL *startUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@"m4a"];
+    _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:startUrl error:nil];
+    [_audioPlayer prepareToPlay];
+    [_audioPlayer play];
+    
+}
 
 - (void)p_complete {
     
@@ -494,10 +528,11 @@ typedef enum : NSUInteger {
         if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
             _runCardLastKmDistance = _runcardView.distance;
             
+            NSInteger km = _runcardView.distance/1000;
+            NSString *audioName = [NSString stringWithFormat:@"%ldkilo",(long)km];
+            [self p_audioPlay:audioName];
+            
             [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:newLocation];
-//            NSURL *url = [[NSBundle mainBundle] URLForResource:@"drum01" withExtension:@"mp3"];
-//            MyAudioPlayer *audioPlayer = [MyAudioPlayer sharePlayerWithURL:url];
-//            [audioPlayer play];
             
         }
     }
@@ -528,7 +563,6 @@ typedef enum : NSUInteger {
         [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];

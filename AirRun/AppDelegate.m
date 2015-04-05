@@ -11,6 +11,8 @@
 #import "LeftSideViewController.h"
 #import "DataBaseHelper.h"
 #import <AVOSCloud.h>
+#import "DocumentHelper.h"
+#import "UConstants.h"
 
 
 @interface AppDelegate ()
@@ -26,6 +28,8 @@
                       clientKey:@"140a1m8lrhg0s0lyzasvsrg3ou5zfrd13nqkdg13zytwytk5"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[[DataBaseHelper alloc] init] initDB];//初始化数据库
+    [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
+    
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]];
     LeftSideViewController *leftMenuViewController = [[LeftSideViewController alloc] init];
