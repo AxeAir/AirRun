@@ -10,6 +10,8 @@
 #import "RunViewController.h"
 #import "LeftSideViewController.h"
 #import "DataBaseHelper.h"
+#import "DocumentHelper.h"
+#import "UConstants.h"
 
 
 @interface AppDelegate ()
@@ -23,6 +25,8 @@
  
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[[DataBaseHelper alloc] init] initDB];//初始化数据库
+    [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
+    
     
     UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]];
     LeftSideViewController *leftMenuViewController = [[LeftSideViewController alloc] init];

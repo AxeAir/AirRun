@@ -20,6 +20,12 @@
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
 		96982B4B1AD0198900040A50 /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B491AD0198900040A50 /* CustomAnnotationView.m */; };
+		96982B4E1AD0207000040A50 /* DocumentHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B4D1AD0207000040A50 /* DocumentHelper.m */; };
+		96982B561AD1287B00040A50 /* CountView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B551AD1287B00040A50 /* CountView.m */; };
+		96982B591AD162C500040A50 /* pause.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B571AD162C500040A50 /* pause.m4a */; };
+		96982B5A1AD162C500040A50 /* start.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B581AD162C500040A50 /* start.m4a */; };
+		96982B5D1AD162DC00040A50 /* 1kilo.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B5B1AD162DC00040A50 /* 1kilo.m4a */; };
+		96982B5E1AD162DC00040A50 /* continue.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B5C1AD162DC00040A50 /* continue.m4a */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
@@ -134,6 +140,14 @@
 		96982B471AD0198900040A50 /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
 		96982B481AD0198900040A50 /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
 		96982B491AD0198900040A50 /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		96982B4C1AD0207000040A50 /* DocumentHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentHelper.h; sourceTree = "<group>"; };
+		96982B4D1AD0207000040A50 /* DocumentHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentHelper.m; sourceTree = "<group>"; };
+		96982B541AD1287B00040A50 /* CountView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CountView.h; sourceTree = "<group>"; };
+		96982B551AD1287B00040A50 /* CountView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CountView.m; sourceTree = "<group>"; };
+		96982B571AD162C500040A50 /* pause.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pause.m4a; sourceTree = "<group>"; };
+		96982B581AD162C500040A50 /* start.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = start.m4a; sourceTree = "<group>"; };
+		96982B5B1AD162DC00040A50 /* 1kilo.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = 1kilo.m4a; sourceTree = "<group>"; };
+		96982B5C1AD162DC00040A50 /* continue.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = continue.m4a; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -321,6 +335,17 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		96982B531AD03B9A00040A50 /* audio */ = {
+			isa = PBXGroup;
+			children = (
+				96982B571AD162C500040A50 /* pause.m4a */,
+				96982B581AD162C500040A50 /* start.m4a */,
+				96982B5B1AD162DC00040A50 /* 1kilo.m4a */,
+				96982B5C1AD162DC00040A50 /* continue.m4a */,
+			);
+			name = audio;
+			sourceTree = "<group>";
+		};
 		96F596AB1ACC519F00F56BEA /* Run */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,6 +381,8 @@
 				96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */,
 				96F596AD1ACC51B800F56BEA /* RunCardView.h */,
 				96F596AE1ACC51B800F56BEA /* RunCardView.m */,
+				96982B541AD1287B00040A50 /* CountView.h */,
+				96982B551AD1287B00040A50 /* CountView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -511,6 +538,7 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				96982B531AD03B9A00040A50 /* audio */,
 				E58E41381ACECB6400839947 /* seabg@2x.png */,
 				E52D16FC1ACE90C100DBFA04 /* trash@2x.png */,
 				E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */,
@@ -543,6 +571,8 @@
 				E591399B1ACBE13400F9D048 /* DateHelper.m */,
 				E52D16F61ACE780300DBFA04 /* ImageHeler.h */,
 				E52D16F71ACE780300DBFA04 /* ImageHeler.m */,
+				96982B4C1AD0207000040A50 /* DocumentHelper.h */,
+				96982B4D1AD0207000040A50 /* DocumentHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -738,6 +768,11 @@
 				TargetAttributes = {
 					E50BE0411AC8854A0030863D = {
 						CreatedOnToolsVersion = 6.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					E50BE05A1AC8854A0030863D = {
 						CreatedOnToolsVersion = 6.2;
@@ -775,11 +810,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E50BE0511AC8854A0030863D /* Main.storyboard in Resources */,
+				96982B5A1AD162C500040A50 /* start.m4a in Resources */,
 				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
+				96982B591AD162C500040A50 /* pause.m4a in Resources */,
 				E59BF3F01ACC1CF60033D1DC /* map.jpg in Resources */,
 				E503A4C71ACD14310039EDD6 /* down@2x.png in Resources */,
+				96982B5D1AD162DC00040A50 /* 1kilo.m4a in Resources */,
 				E5668FB01ACBB6C8009A0D61 /* header.jpg in Resources */,
+				96982B5E1AD162DC00040A50 /* continue.m4a in Resources */,
 				E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */,
 				E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */,
 				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
@@ -895,6 +934,7 @@
 				E52D16F11ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m in Sources */,
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E5AC95C01ACD639300A6F133 /* DataBaseModel.m in Sources */,
+				96982B4E1AD0207000040A50 /* DocumentHelper.m in Sources */,
 				E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
 				96474D171ACDB65F00DECE02 /* ImageOverLay.m in Sources */,
@@ -924,6 +964,7 @@
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
+				96982B561AD1287B00040A50 /* CountView.m in Sources */,
 				E52D16D61ACE4F3300DBFA04 /* SettingViewController.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
@@ -1083,7 +1124,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AirRun/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1099,7 +1140,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = AirRun/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

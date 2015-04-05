@@ -163,7 +163,6 @@
 #endif
 
 
-
 #define CardBgColor [UIColor colorWithRed:85/255.0 green:150.0/255.0 blue:200.0/255.0 alpha:0.8]
 
 #define Today_Extension_Group @"group.xxTeam.SportMan.SportManTodayExtension"
@@ -174,6 +173,8 @@
 
 #define FRIEND_URL @"http://192.168.1.104:8000/message/searchtips/contacts/"
 #define TEST_URL @"http://219.153.64.13:8521/"
+
+#define AMap3DMapKey @"14310395712445e9fbdd1e3cb842c3be"
 
 
 
