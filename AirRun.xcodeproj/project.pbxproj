@@ -25,6 +25,7 @@
 		96982B681AD16D2900040A50 /* continue.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B641AD16D2900040A50 /* continue.m4a */; };
 		96982B691AD16D2900040A50 /* pause.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B651AD16D2900040A50 /* pause.m4a */; };
 		96982B6A1AD16D2900040A50 /* start.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 96982B661AD16D2900040A50 /* start.m4a */; };
+		96982B6D1AD16DE600040A50 /* DocumentHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B6C1AD16DE600040A50 /* DocumentHelper.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
@@ -149,6 +150,8 @@
 		96982B641AD16D2900040A50 /* continue.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = continue.m4a; sourceTree = "<group>"; };
 		96982B651AD16D2900040A50 /* pause.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = pause.m4a; sourceTree = "<group>"; };
 		96982B661AD16D2900040A50 /* start.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = start.m4a; sourceTree = "<group>"; };
+		96982B6B1AD16DE600040A50 /* DocumentHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentHelper.h; sourceTree = "<group>"; };
+		96982B6C1AD16DE600040A50 /* DocumentHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentHelper.m; sourceTree = "<group>"; };
 		96F398F41ACCED270090CCD8 /* GradientPolylineOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineOverlay.h; sourceTree = "<group>"; };
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
@@ -569,6 +572,8 @@
 		E5668F8F1ACA5D35009A0D61 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				96982B6B1AD16DE600040A50 /* DocumentHelper.h */,
+				96982B6C1AD16DE600040A50 /* DocumentHelper.m */,
 				96982B431ACF804200040A50 /* HUDHelper.h */,
 				96982B441ACF804200040A50 /* HUDHelper.m */,
 				96982B401ACF7EE000040A50 /* ValidateHelper.h */,
@@ -973,6 +978,7 @@
 				E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */,
 				E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */,
 				E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */,
+				96982B6D1AD16DE600040A50 /* DocumentHelper.m in Sources */,
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
 				E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */,
