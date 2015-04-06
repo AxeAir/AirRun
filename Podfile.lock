@@ -21,6 +21,8 @@ PODS:
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
   - AVOSCloud (3.0.2)
+  - AVOSCloudSNS (3.0.2):
+    - AVOSCloud
   - BlurImageProcessor (1.0.0)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
@@ -41,6 +43,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworking (~> 2.5.2)
   - AVOSCloud (~> 3.0.2)
+  - AVOSCloudSNS (~> 3.0.2)
   - BlurImageProcessor (~> 1.0.0)
   - Kiwi
   - Mantle (~> 1.5.4)
@@ -52,6 +55,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
   AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
+  AVOSCloudSNS: 7d83ffbd3738b92c9ece62e93a65fa593587274b
   BlurImageProcessor: a4794ad3128748dbff8b40ae43ce9386d3667bba
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55

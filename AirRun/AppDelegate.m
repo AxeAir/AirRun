@@ -13,7 +13,9 @@
 #import <AVOSCloud.h>
 #import "DocumentHelper.h"
 #import "UConstants.h"
-
+#import "RunningRecord.h"
+#import "RunningImage.h"
+#import <AVOSCloudSNS.h>
 
 @interface AppDelegate ()
 
@@ -26,6 +28,32 @@
  
     [AVOSCloud setApplicationId:@"8idak6ebtenkwv4pv2caugmbuws9flvwse7k2275cm4s2vz7"
                       clientKey:@"140a1m8lrhg0s0lyzasvsrg3ou5zfrd13nqkdg13zytwytk5"];
+    [RunningRecord registerSubclass];
+    [RunningImage registerSubclass];
+    
+    
+    
+    NSArray *images = @[[RunningImage object],[RunningImage object]];
+    
+    
+    RunningRecord *record = [RunningRecord object];
+    [record saveWithImages:images];
+    
+    AVQuery *query = [AVQuery queryWithClassName:@"RunningRecord"];
+    query.cachePolicy = kPFCachePolicyNetworkElseCache;
+    //设置缓存有效期
+    query.maxCacheAge = 24*3600;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // 检索成功
+            NSLog(@"Successfully retrieved %ld scores.", objects.count);
+        } else {
+            // 输出错误信息
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[[DataBaseHelper alloc] init] initDB];//初始化数据库
     [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
@@ -74,6 +102,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
+    return [AVOSCloudSNS handleOpenURL:url];
 }
 
 @end

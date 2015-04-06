@@ -11,7 +11,7 @@
 @implementation RunningImage
 
 + (NSString *)parseClassName {
-    return @"RunningRecord";
+    return @"RunningImage";
 }
 
 

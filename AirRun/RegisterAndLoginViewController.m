@@ -12,6 +12,9 @@
 #import "ValidateHelper.h"
 #import "HUDHelper.h"
 #import <AVOSCloud.h>
+#import <AVOSCloudSNS.h>
+#import "RESideMenu.h"
+#import "RunViewController.h"
 
 typedef enum : NSUInteger {
     RegisterAndLoginViewControllerStateSignUp,
@@ -128,6 +131,7 @@ typedef enum : NSUInteger {
     [_weibo sizeToFit];
     _weibo.center = CGPointMake(self.view.bounds.size.width/2-_weibo.bounds.size.width/2-20, self.view.bounds.size.height-10-_weibo.bounds.size.height/2);
     _weibo.alpha = 0;
+    [_weibo addTarget:self action:@selector(weiboLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_weibo];
     
     _wechat = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -239,9 +243,9 @@ typedef enum : NSUInteger {
         
         [AVUser logInWithUsernameInBackground:email password:password block:^(AVUser *user, NSError *error) {
             if (user != nil) {
-                [self dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
+                RunViewController *run = [[RunViewController alloc] init];
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                [self.sideMenuViewController hideMenuViewController];
             } else {
                 
             }
@@ -278,9 +282,9 @@ typedef enum : NSUInteger {
         
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
-                [self dismissViewControllerAnimated:YES completion:^{
-                    
-                }];
+                RunViewController *run = [[RunViewController alloc] init];
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                [self.sideMenuViewController hideMenuViewController];
                 
             } else {
                 
@@ -370,6 +374,16 @@ typedef enum : NSUInteger {
         self.view.transform = CGAffineTransformIdentity;
     }];
     
+}
+
+
+- (void)weiboLogin
+{
+    [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
+    
+    [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+        //you code here
+    } toPlatform:AVOSCloudSNSSinaWeibo];
 }
 
 @end

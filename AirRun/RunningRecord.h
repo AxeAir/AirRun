@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <AVOSCloud.h>
+#import "RunningImage.h"
 
 @interface RunningRecord : AVObject<AVSubclassing>
 

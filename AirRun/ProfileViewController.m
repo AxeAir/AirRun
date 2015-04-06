@@ -11,7 +11,8 @@
 #import <AVOSCloud.h>
 #import "AirPickerView.h"
 #import "EditNickNameViewController.h"
-
+#import "RESideMenu.h"
+#import "RegisterAndLoginViewController.h"
 @interface ProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIPickerView *genderPickerView;
@@ -249,12 +250,12 @@
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 48)];
-    
     UIButton *logout = [[UIButton alloc] initWithFrame:CGRectMake(0, 25, Main_Screen_Width, 48)];
     [footer addSubview:logout];
     [logout setBackgroundColor:RGBCOLOR(214, 36, 36)];
     [logout setTitle:@"退出登录" forState:UIControlStateNormal];
     [logout setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [logout addTarget:self action:@selector(logout:) forControlEvents:UIControlEventTouchUpInside];
     return footer;
 }
 
@@ -290,6 +291,17 @@
             _imagePickerController.allowsEditing=YES;
             [self presentViewController:_imagePickerController animated:YES completion:nil];
         }
+        
+    }
+    if (actionSheet.tag == 900001) {
+        if (buttonIndex == 0) {
+            [AVUser logOut];
+            RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:RegisterAndLogin] animated:YES];
+            [self.sideMenuViewController hideMenuViewController];
+        }
+        
+        
         
     }
 }
@@ -348,6 +360,14 @@
     [actionsheet setTag:900000];
     [actionsheet showInView:self.view];
     
+}
+
+- (void)logout:(id)sender
+{
+    UIActionSheet *actionsheet =[[UIActionSheet alloc] initWithTitle:@"退出登陆会清楚本地所有数据，是否继续" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil, nil];
+    [actionsheet setTag:900001];
+    [actionsheet showInView:self.view];
+
 }
 
 

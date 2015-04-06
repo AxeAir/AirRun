@@ -21,7 +21,7 @@
 #import "RunCompleteCardsVC.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CountView.h"
-#import "RunningImgeModel.h"
+#import "RunningImage.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
