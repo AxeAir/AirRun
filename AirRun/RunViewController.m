@@ -21,7 +21,7 @@
 #import "RunCompleteCardsVC.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CountView.h"
-#import "RunningImgeModel.h"
+#import "RunningImage.h"
 #import "DocumentHelper.h"
 #import "DataBaseHelper.h"
 
@@ -567,15 +567,15 @@ typedef enum : NSUInteger {
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         formatter.dateFormat = @"yyyyMMddHHmmss";//根据时间做图片名称
         [DocumentHelper saveImage:image ToFolderName:kImageFolder WithImageName:[formatter stringFromDate:[NSDate date]]];
-        RunningImgeModel *imgModel = [[RunningImgeModel alloc] init];
-        imgModel.UUID = [DataBaseHelper GenerateUUID];
-//        @property (nonatomic, strong) NSString *userUUID;
-        imgModel.imagename = [formatter stringFromDate:[NSDate date]];
-//        @property (nonatomic, strong) NSString *remoteURL;
-        imgModel.latitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.latitude];
-        imgModel.longitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.longitude];
-//        @property (nonatomic, strong) NSString *recordUUID;
-        [_imageArray addObject:imgModel];
+//        RunningImgeModel *imgModel = [[RunningImgeModel alloc] init];
+//        imgModel.UUID = [DataBaseHelper GenerateUUID];
+////        @property (nonatomic, strong) NSString *userUUID;
+//        imgModel.imagename = [formatter stringFromDate:[NSDate date]];
+////        @property (nonatomic, strong) NSString *remoteURL;
+//        imgModel.latitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.latitude];
+//        imgModel.longitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.longitude];
+////        @property (nonatomic, strong) NSString *recordUUID;
+//        [_imageArray addObject:imgModel];
         
     }
     [self dismissViewControllerAnimated:YES completion:nil];

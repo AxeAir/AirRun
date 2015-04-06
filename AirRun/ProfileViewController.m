@@ -11,8 +11,10 @@
 #import <AVOSCloud.h>
 #import "AirPickerView.h"
 #import "EditNickNameViewController.h"
+#import "EditSignViewController.h"
 #import "RESideMenu.h"
 #import "RegisterAndLoginViewController.h"
+#import "NSDate+change.h"
 @interface ProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIPickerView *genderPickerView;
@@ -136,6 +138,10 @@
             break;
         case 6:{
             [title setText:@"签名"];
+            if ([user objectForKey:@"introduction"]) {
+                cell.detailTextLabel.text =[user objectForKey:@"introduction"];
+            }
+            
         }
             break;
         case 7:{
@@ -187,9 +193,7 @@
                 [user save];
                 
             } name:cell.detailTextLabel.text];
-            [self presentViewController:[[UINavigationController alloc] initWithRootViewController:editVC] animated:YES completion:^{
-                
-            }];
+            [self.navigationController pushViewController:editVC animated:YES];
         }
             break;
         case 2:{
@@ -225,8 +229,8 @@
         case 4:{
             
             NSMutableArray *temp = [[NSMutableArray alloc] init];
-            NSInteger i = 140;
-            for (; i<=200; i++) {
+            NSInteger i = 30;
+            for (; i<=100; i++) {
                 [temp addObject:[NSString stringWithFormat:@"%ld",i]];
             }
             
@@ -237,6 +241,46 @@
                 [user setObject:string forKey:@"weight"];
                 [user save];
             }];
+        }
+            break;
+            
+        case 5:{
+            
+            AirPickerView *air = [[AirPickerView alloc] initWithDatePickerFrames:CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300) date:nil];
+//            [air showInView:self.view completeBlock:^(NSInteger index, NSString *string) {
+//                
+//                
+//                [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ kg",string]];
+//                AVUser *user = [AVUser currentUser];
+//                [user setObject:string forKey:@"weight"];
+//                //[user save];
+//            }];
+            
+            [air showDateInView:self.view completeBlock:^(NSDate *date) {
+                
+                NSString *dateString = [NSDate BirthDateStringWithBirthDate:date];
+                [cell.detailTextLabel setText:dateString];
+                AVUser *user = [AVUser currentUser];
+                [user setObject:dateString forKey:@"birthday"];
+                [user save];
+            }];
+            
+        }
+            break;
+            
+        case 6:{
+            
+            EditSignViewController *sign = [[EditSignViewController alloc] initWithBlock:^(NSString *name) {
+                
+                cell.detailTextLabel.text = name;
+                AVUser *user = [AVUser currentUser];
+                [user setObject:name forKey:@"introduction"];
+                [user save];
+            } sign:cell.detailTextLabel.text];
+            
+            [self.navigationController pushViewController:sign animated:YES];
+            
+            
         }
             break;
             

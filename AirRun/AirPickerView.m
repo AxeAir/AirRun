@@ -14,10 +14,13 @@
 @property (nonatomic, strong) UIPickerView *pickerView;
 @property (nonatomic, strong) UIView *maskView;
 @property (nonatomic, copy) selectComplete selectCompleteBlock;
+@property (nonatomic, copy) selectDateComplete selectDateCompleteBlock;
 
 @property (nonatomic, strong) NSArray *dataSource;
 
 @property (nonatomic, assign) NSInteger currentIndex;
+
+@property (nonatomic, strong) UIDatePicker *datePicker;
 
 @end
 
@@ -35,13 +38,20 @@
     return self;
 }
 
+
+- (instancetype)initWithDatePickerFrames:(CGRect)frame date:(NSDate *)date
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonDate];
+    }
+    return self;
+}
+
 - (void)commonInit
 {
     
     [self setBackgroundColor:[UIColor grayColor]];
-    
-    
-    
     _pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 30,WIDTH(self) , HEIGHT(self)-40)];
     _pickerView.delegate = self;
     _pickerView.dataSource = self;
@@ -62,6 +72,31 @@
     [cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:cancelButton];
 }
+
+
+- (void)commonDate
+{
+    [self setBackgroundColor:[UIColor grayColor]];
+    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30,WIDTH(self) , HEIGHT(self)-40)];
+    _datePicker.datePickerMode = UIDatePickerModeDate;
+    
+    [self addSubview:_datePicker];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
+    [headerView setBackgroundColor:[UIColor redColor]];
+    [self addSubview:headerView];
+    
+    UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH(self)-50, 0, 50, 40)];
+    [okButton setTitle:@"确定" forState:UIControlStateNormal];
+    [okButton addTarget:self action:@selector(dateOkbutton:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:okButton];
+    
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 40)];
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:cancelButton];
+}
+
 
 
 - (void)showInView:(UIView *)superview completeBlock:(selectComplete)block
@@ -86,6 +121,31 @@
     }];
     
 }
+
+
+- (void)showDateInView:(UIView *)superview completeBlock:(selectDateComplete)block
+{
+    
+    _selectDateCompleteBlock = block;
+    _maskView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [_maskView setBackgroundColor:[UIColor clearColor]];
+    [superview addSubview:_maskView];
+    
+    [superview addSubview:self];
+    CGRect finalFrame = self.frame;
+    CGRect startFrame = finalFrame;
+    startFrame.origin.y = Main_Screen_Height;
+    
+    [self setFrame:startFrame];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.frame = finalFrame;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+
 
 - (void)dismiss
 {
@@ -131,5 +191,13 @@
     [self dismiss];
     _selectCompleteBlock(_currentIndex, [_dataSource objectAtIndex:_currentIndex]);
 }
+
+
+- (void)dateOkbutton:(id)sender
+{
+    [self dismiss];
+    _selectDateCompleteBlock(_datePicker.date);
+}
+
 
 @end

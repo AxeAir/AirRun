@@ -72,17 +72,13 @@
 {
     _editCompleteBlock(_nameTextField.text);
     [_nameTextField resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)cancelEdit:(id)sender
 {
     [_nameTextField resignFirstResponder];
-    [self dismissViewControllerAnimated:YES completion:^{
-        
-    }];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 
