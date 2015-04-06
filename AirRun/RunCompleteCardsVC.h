@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RunningRecordModel.h"
+#import "RunningRecord.h"
 
 @interface RunCompleteCardsVC : UIViewController
 
@@ -18,7 +18,7 @@
  *
  *  @return 
  */
-- (instancetype)initWithParameters:(RunningRecordModel *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path;
+- (instancetype)initWithParameters:(RunningRecord *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path;
 
 
 @end

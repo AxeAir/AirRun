@@ -8,6 +8,7 @@
 
 #import "HeaderView.h"
 #import "UConstants.h"
+#import <AVOSCloud.h>
 
 @interface HeaderView()
 
@@ -22,21 +23,36 @@ static SelectAvatar Ablock;
 
 @implementation HeaderView
 
-- (void)configUserInfo:(UserModel *)user withBloak:(SelectAvatar)block
+- (void)configUserwithBloak:(SelectAvatar)block
 {
     Ablock = block;
-    _AvatarView  = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"header.jpg"]];
+    
+    
+    AVUser *currentuser = [AVUser currentUser];
+
+    _AvatarView  = [[UIImageView alloc] init];
     [_AvatarView setFrame:CGRectMake(20, 20, 60, 60)];
     [[_AvatarView layer] setCornerRadius:30];
     [[_AvatarView layer] setMasksToBounds:YES];
     [_AvatarView setUserInteractionEnabled:YES];
+    
+    if (currentuser) {
+        AVFile *avatarData = [currentuser objectForKey:@"avatar"];
+        NSData *resumeData = [avatarData getData];
+        [_AvatarView setImage:[UIImage imageWithData:resumeData]];
+    }
+    
     [self addSubview:_AvatarView];
     
     _UsernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_AvatarView)+10, 25, 200, 30)];
-    _UsernameLabel.text = @"Yeti";
+    
     [_UsernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [_UsernameLabel setTextColor:[UIColor whiteColor]];
     [self addSubview:_UsernameLabel];
+    
+    if (currentuser) {
+        _UsernameLabel.text =[currentuser objectForKey:@"nickName"] ;
+    }
     
     _UserIntroduce = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_AvatarView)+10, MaxY(_UsernameLabel)+2, 200, 20)];
     _UserIntroduce.text = @"大家好  我是Yeti";

@@ -17,7 +17,7 @@
 #import <POP.h>
 #import "RunViewControllerAnimation.h"
 #import "RunPauseView.h"
-#import "RunningRecordModel.h"
+#import "RunningRecord.h"
 #import "RunCompleteCardsVC.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CountView.h"
@@ -331,14 +331,14 @@ typedef enum : NSUInteger {
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
-    RunningRecordModel *model = [[RunningRecordModel alloc] init];
+    RunningRecord *model = [[RunningRecord alloc] init];
     model.path = [self p_convertPointsToJsonString];
-    model.time = _runcardView.time;
-    model.kcar = _runcardView.kcal;
-    model.distance = _runcardView.distance;
+//    model.time = _runcardView.time;
+//    model.kcar = _runcardView.kcal;
+//    model.distance = _runcardView.distance;
 //    @property(nonatomic, strong) NSString  *weather;
 //    @property(nonatomic, assign) float     pm25;
-    model.averagespeed = _runcardView.speed;
+    //model.averagespeed = _runcardView.speed;
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";

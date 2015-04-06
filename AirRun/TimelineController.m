@@ -51,11 +51,11 @@
     static NSString *identifer = @"timelineCell";
     TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     
-    RunningRecordModel *model = [[RunningRecordModel alloc] init];
+    RunningRecord *model = [[RunningRecord alloc] init];
     model.weather = @"dd";
-    model.distance = 10000;
-    model.averagespeed = 12.1;
-    model.time = 1222;
+//    model.distance = 10000;
+//    model.averagespeed = 12.1;
+//    model.time = 1222;
     
     
     if (cell == nil) {

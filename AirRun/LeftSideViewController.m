@@ -14,6 +14,8 @@
 #import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
 #import "TimelineController.h"
+#import <AVOSCloud.h>
+#import "ProfileViewController.h"
 @interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -110,14 +112,24 @@
 {
     if (section == 0) {
         _header = [[HeaderView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        [_header configUserInfo:nil withBloak:^{
+        [_header configUserwithBloak:^{
             
-            RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
-            [self presentViewController:RegisterAndLogin animated:YES completion:^{
+            AVUser *currentUser = [AVUser currentUser];
+            if (currentUser != nil) {
+                // 允许用户使用应用
+                ProfileViewController *profile = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
+                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:profile] animated:YES];
+                [self.sideMenuViewController hideMenuViewController];
                 
-            }];
-            
+            } else {
+                //缓存用户对象为空时，可打开用户注册界面…
+                RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
+                [self presentViewController:RegisterAndLogin animated:YES completion:^{
+                    
+                }];
+            }
         }];
+        
         return _header;
     }
     return nil;

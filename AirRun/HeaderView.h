@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "UserModel.h"
 
 typedef void (^SelectAvatar)();
 @interface HeaderView : UIView
 
-- (void)configUserInfo:(UserModel *)user withBloak:(SelectAvatar)block;
+- (void)configUserwithBloak:(SelectAvatar)block;
 
 @end

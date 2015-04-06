@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "UConstants.h"
+#import "ProfileViewController.h"
 
 @interface SettingViewController ()
 
@@ -113,6 +114,22 @@
     
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     return cell;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:
+        {
+            ProfileViewController *profile = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
+            [self.navigationController pushViewController:profile animated:YES];
+        }
+        break;
+        default:
+            break;
+    }
 }
 
 

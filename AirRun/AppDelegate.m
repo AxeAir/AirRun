@@ -10,6 +10,7 @@
 #import "RunViewController.h"
 #import "LeftSideViewController.h"
 #import "DataBaseHelper.h"
+#import <AVOSCloud.h>
 #import "DocumentHelper.h"
 #import "UConstants.h"
 
@@ -23,6 +24,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
  
+    [AVOSCloud setApplicationId:@"8idak6ebtenkwv4pv2caugmbuws9flvwse7k2275cm4s2vz7"
+                      clientKey:@"140a1m8lrhg0s0lyzasvsrg3ou5zfrd13nqkdg13zytwytk5"];
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [[[DataBaseHelper alloc] init] initDB];//初始化数据库
     [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
