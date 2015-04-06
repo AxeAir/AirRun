@@ -27,6 +27,14 @@
     return filePath;
 }
 
++ (void)saveImage:(UIImage *)image ToFolderName:(NSString *)folderName WithImageName:(NSString *)imgName {
+    
+    NSString *path = [self DocumentPath:folderName];
+    path = [path stringByAppendingString:imgName];
+    [UIImagePNGRepresentation(image)writeToFile:path atomically:YES];
+    
+}
+
 + (NSString *)DocumentPath:(NSString *)filename {
     
     NSString *documentsPath = [self documentsPath];

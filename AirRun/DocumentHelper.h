@@ -14,13 +14,12 @@ static NSString *const kImageFolder = @"Image";
 @interface DocumentHelper : NSObject
 
 + (NSString *)documentsPath;
-
 + (NSString *)DocumentPath:(NSString *)filename;
 
 + (NSString *)saveImage:(UIImage *)image ToSandBoxWithFileName:(NSString *)name;
++ (void)saveImage:(UIImage *)image ToFolderName:(NSString *)folderName WithImageName:(NSString *)imgName;
 
 + (BOOL)checkFileExist:(NSString *)fileName;
-
 + (BOOL)checkFile:(NSString *)fileName AtFolder:(NSString *)folderName;
 
 + (BOOL)image:(UIImage *)image_1 isEqualImage:(UIImage *)image_2;
