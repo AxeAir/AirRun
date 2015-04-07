@@ -241,6 +241,7 @@
     [_shareButton setTitle:@"分享跑步卡片" forState:UIControlStateNormal];
     [[_shareButton titleLabel] setFont:[UIFont boldSystemFontOfSize:16]];
     [_shareButton setBackgroundColor:RGBCOLOR(97, 187, 162)];
+    [_shareButton addTarget:self action:@selector(shareButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_shareButton];
     
 
@@ -288,6 +289,14 @@
     
 
 }
+
+#pragma mark Action
+
+- (void)shareButtonTouch:(id)sender
+{
+    [_delegate completeDisplayCard:self didSelectButton:CompleteDisplayCardButtonTypeShare];
+}
+
 
 
 @end

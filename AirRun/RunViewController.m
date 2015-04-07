@@ -23,7 +23,6 @@
 #import "CountView.h"
 #import "RunningImage.h"
 #import "DocumentHelper.h"
-#import "DataBaseHelper.h"
 #import <objc/runtime.h>
 
 typedef enum : NSUInteger {

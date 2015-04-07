@@ -12,12 +12,23 @@
 @class MKMapSnapshot;
 @class MapViewDelegate;
 
+typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
+        CompleteDisplayCardButtonTypeShare
+};
 
+@protocol CompleteDisplayCardDelegate;
 
 @interface CompleteDisplayCard : BaseCardView
 @property (nonatomic, strong) MapViewDelegate *mapDelegate;
 
+@property (nonatomic, weak) id<CompleteDisplayCardDelegate> delegate;
 - (void)adjust:(NSString *)heart;
 - (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock;
+
+@end
+
+@protocol CompleteDisplayCardDelegate
+
+- (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type;
 
 @end

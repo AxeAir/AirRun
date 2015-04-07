@@ -1,13 +1,18 @@
 //
 //  RunningRecordEntity.h
-//  Pods
+//  AirRun
 //
-//  Created by ChenHao on 4/7/15.
-//
+//  Created by ChenHao on 4/8/15.
+//  Copyright (c) 2015 AEXAIR. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import <AVOSCloud.h>
+#import <CoreData+MagicalRecord.h>
+#import "AirLocalPersistence.h"
+#import "BlockMacro.h"
 
 
 @interface RunningRecordEntity : NSManagedObject
@@ -22,5 +27,22 @@
 @property (nonatomic, retain) NSDate * finishtime;
 @property (nonatomic, retain) NSData * mapshot;
 @property (nonatomic, retain) NSString * heart;
+@property (nonatomic, retain) NSString * objectId;
+@property (nonatomic, retain) NSString * identifer;
+@property (nonatomic, retain) NSData * heartimages;
+
+- (instancetype)init;
+
+/**
+ *  生成标识符
+ */
+- (void)generateIdentifer;
+
+
+- (void)setImages:(NSArray *)images;
+
+- (NSArray *)getImages;
+
+- (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 
 @end

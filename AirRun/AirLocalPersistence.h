@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import <CoreData+MagicalRecord.h>
-typedef void (^CompleteBlock)(void);
-typedef void (^FetchCompleteBlock)(NSArray *arraydata);
-typedef void (^ErrorBlock)(void);
+#import "BlockMacro.h"
 
 @interface AirLocalPersistence : NSObject
 

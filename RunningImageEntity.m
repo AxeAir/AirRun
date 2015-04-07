@@ -1,9 +1,9 @@
 //
 //  RunningImageEntity.m
-//  Pods
+//  AirRun
 //
-//  Created by ChenHao on 4/7/15.
-//
+//  Created by ChenHao on 4/8/15.
+//  Copyright (c) 2015 AEXAIR. All rights reserved.
 //
 
 #import "RunningImageEntity.h"
@@ -14,5 +14,7 @@
 @dynamic latitude;
 @dynamic longitude;
 @dynamic image;
+@dynamic isheart;
+@dynamic recordid;
 
 @end

@@ -63,8 +63,9 @@
 		E55BCC891AD3BC1B00F9B5F2 /* AirLocalPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */; };
 		E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */; };
 		E55BCC931AD3E74E00F9B5F2 /* AexAir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */; };
-		E55BCCA11AD4036B00F9B5F2 /* RunningImageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC9E1AD4036B00F9B5F2 /* RunningImageEntity.m */; };
-		E55BCCA21AD4036B00F9B5F2 /* RunningRecordEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCA01AD4036B00F9B5F2 /* RunningRecordEntity.m */; };
+		E55BCCA71AD4543700F9B5F2 /* RunningRecordEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCA61AD4543700F9B5F2 /* RunningRecordEntity.m */; };
+		E55BCCAA1AD4543800F9B5F2 /* RunningImageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCA91AD4543800F9B5F2 /* RunningImageEntity.m */; };
+		E55BCCAD1AD4595A00F9B5F2 /* BlockMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCAC1AD4595A00F9B5F2 /* BlockMacro.m */; };
 		E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */; };
 		E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F941ACA5D6D009A0D61 /* RESideMenu.m */; };
 		E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F961ACA5D6D009A0D61 /* UIViewController+RESideMenu.m */; };
@@ -232,10 +233,12 @@
 		E55BCC8A1AD3BC3900F9B5F2 /* AirServerPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirServerPersistence.h; sourceTree = "<group>"; };
 		E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirServerPersistence.m; sourceTree = "<group>"; };
 		E55BCC921AD3E74E00F9B5F2 /* AexAir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AexAir.xcdatamodel; sourceTree = "<group>"; };
-		E55BCC9D1AD4036B00F9B5F2 /* RunningImageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningImageEntity.h; sourceTree = "<group>"; };
-		E55BCC9E1AD4036B00F9B5F2 /* RunningImageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningImageEntity.m; sourceTree = "<group>"; };
-		E55BCC9F1AD4036B00F9B5F2 /* RunningRecordEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningRecordEntity.h; sourceTree = "<group>"; };
-		E55BCCA01AD4036B00F9B5F2 /* RunningRecordEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningRecordEntity.m; sourceTree = "<group>"; };
+		E55BCCA51AD4543700F9B5F2 /* RunningRecordEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RunningRecordEntity.h; path = ../RunningRecordEntity.h; sourceTree = "<group>"; };
+		E55BCCA61AD4543700F9B5F2 /* RunningRecordEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RunningRecordEntity.m; path = ../RunningRecordEntity.m; sourceTree = "<group>"; };
+		E55BCCA81AD4543800F9B5F2 /* RunningImageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RunningImageEntity.h; path = ../RunningImageEntity.h; sourceTree = "<group>"; };
+		E55BCCA91AD4543800F9B5F2 /* RunningImageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RunningImageEntity.m; path = ../RunningImageEntity.m; sourceTree = "<group>"; };
+		E55BCCAB1AD4595A00F9B5F2 /* BlockMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockMacro.h; sourceTree = "<group>"; };
+		E55BCCAC1AD4595A00F9B5F2 /* BlockMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockMacro.m; sourceTree = "<group>"; };
 		E5668F911ACA5D6D009A0D61 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		E5668F931ACA5D6D009A0D61 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
@@ -588,10 +591,10 @@
 			isa = PBXGroup;
 			children = (
 				E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */,
-				E55BCC9D1AD4036B00F9B5F2 /* RunningImageEntity.h */,
-				E55BCC9E1AD4036B00F9B5F2 /* RunningImageEntity.m */,
-				E55BCC9F1AD4036B00F9B5F2 /* RunningRecordEntity.h */,
-				E55BCCA01AD4036B00F9B5F2 /* RunningRecordEntity.m */,
+				E55BCCA81AD4543800F9B5F2 /* RunningImageEntity.h */,
+				E55BCCA91AD4543800F9B5F2 /* RunningImageEntity.m */,
+				E55BCCA51AD4543700F9B5F2 /* RunningRecordEntity.h */,
+				E55BCCA61AD4543700F9B5F2 /* RunningRecordEntity.m */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -705,6 +708,8 @@
 			isa = PBXGroup;
 			children = (
 				E5668FB21ACBB7E0009A0D61 /* UConstants.h */,
+				E55BCCAB1AD4595A00F9B5F2 /* BlockMacro.h */,
+				E55BCCAC1AD4595A00F9B5F2 /* BlockMacro.m */,
 			);
 			name = Macro;
 			sourceTree = "<group>";
@@ -1047,6 +1052,7 @@
 				96F398FC1AD2CFAD0090CCD8 /* EditImageView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
+				E55BCCAA1AD4543800F9B5F2 /* RunningImageEntity.m in Sources */,
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
@@ -1072,12 +1078,13 @@
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
 				E55BCC931AD3E74E00F9B5F2 /* AexAir.xcdatamodeld in Sources */,
+				E55BCCAD1AD4595A00F9B5F2 /* BlockMacro.m in Sources */,
 				E52BAC431AD13E9000EC051C /* AirPickerView.m in Sources */,
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
 				E52D16D61ACE4F3300DBFA04 /* SettingViewController.m in Sources */,
 				E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */,
+				E55BCCA71AD4543700F9B5F2 /* RunningRecordEntity.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
-				E55BCCA21AD4036B00F9B5F2 /* RunningRecordEntity.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
 				96474D621ACED60300DECE02 /* SignUpView.m in Sources */,
 				E55BCC891AD3BC1B00F9B5F2 /* AirLocalPersistence.m in Sources */,
@@ -1097,7 +1104,6 @@
 				E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
 				E52D16FB1ACE843800DBFA04 /* ImageViewer.m in Sources */,
-				E55BCCA11AD4036B00F9B5F2 /* RunningImageEntity.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */,
 			);

@@ -36,16 +36,6 @@
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
     
-    RunningRecordEntity *entity = [RunningRecordEntity MR_createEntity];
-    
-    entity.path= @"dsfsd";
-    entity.time =@2;
-    [[AirLocalPersistence shareLocalPersistenceInstance] createObject:entity withCompleteBlock:^{
-        NSLog(@"dsfsdf");
-    } withErrorBlock:^{
-        
-    }];
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
     

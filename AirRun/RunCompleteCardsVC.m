@@ -21,7 +21,7 @@
 
 static const char *INDEX = "index";
 
-@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,CompleteDisplayCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
@@ -29,7 +29,7 @@ static const char *INDEX = "index";
 
 @property (nonatomic, strong) PopInputView *popview;//弹出层
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
-@property (nonatomic, strong) RunningRecord *parameters;
+@property (nonatomic, strong) RunningRecordEntity *parameters;
 @property (nonatomic, strong) NSArray *path;
 @property (nonatomic, strong) NSMutableArray *imgMs;//跑步中的图片(model)
 @property (nonatomic, strong) NSMutableArray *images;//跑步中的图片(image)
@@ -53,6 +53,7 @@ static const char *INDEX = "index";
     [_scrollview addSubview:_inputcard];
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800)];
+    _display.delegate = self;
     [_display.mapDelegate drawPath:_path];
     [self p_loadMapViewAnnotation];
     __weak RunCompleteCardsVC *this = self;
@@ -95,7 +96,7 @@ static const char *INDEX = "index";
     }];
 }
 
-- (instancetype)initWithParameters:(RunningRecord *)parameters WithPoints:(NSArray *)pints WithImages:(NSArray *)images
+- (instancetype)initWithParameters:(RunningRecordEntity *)parameters WithPoints:(NSArray *)pints WithImages:(NSArray *)images
 {
     self = [super init];
     if (self) {
@@ -231,6 +232,23 @@ static const char *INDEX = "index";
         [self.navigationController popToViewController:self animated:YES];
     }
 }
+
+- (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
+{
+    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
+    
+    if (_ImageArray !=nil) {
+        [record setImages:_ImageArray];
+    }
+    
+    [record savewithCompleteBlock:^{
+        NSLog(@"数据本地持久化成功");
+    } withErrorBlock:^{
+        
+    }];
+    
+}
+
 
 #pragma mark - QBImagePickerControllerDelegate
 
