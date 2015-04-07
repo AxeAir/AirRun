@@ -24,6 +24,7 @@
 #import "RunningImage.h"
 #import "DocumentHelper.h"
 #import "DataBaseHelper.h"
+#import <objc/runtime.h>
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -31,10 +32,19 @@ typedef enum : NSUInteger {
     RunViewControllerRunStatePause,
 } RunViewControllerRunState;
 
+const static NSInteger RuncardViewHieght = 150;
+const static NSInteger RunSimpleCardViewHeight = 70;
+const static NSInteger PauseViewHeight = 50;
+
+const char *INPOSITION = "InPosition";
+const char *OUTPOSITION = "OutPosition";
+
 @interface RunViewController () <CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) CountView *countView;
+
+@property (strong, nonatomic) UIBarButtonItem *photoButton;
 
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
@@ -46,6 +56,7 @@ typedef enum : NSUInteger {
 @property (assign, nonatomic) RunViewControllerRunState runState;
 
 @property (strong, nonatomic) UIButton *startButton;
+@property (strong, nonatomic) UIButton *pauseButton;
 @property (strong, nonatomic) UIButton *contiuneButton;
 @property (strong, nonatomic) UIButton *completeButton;
 
@@ -74,14 +85,25 @@ typedef enum : NSUInteger {
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
+    _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
+    self.navigationItem.rightBarButtonItem = _photoButton;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg.png"]
+                       forBarPosition:UIBarPositionAny
+                           barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
     [self p_setMapView];
     [self p_setLocationManager];
     [self p_setLayout];
+    [self p_setStartRunLayout];
     
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    
     
     _runTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runTimerEvent:) userInfo:nil repeats:YES];
     if (_runState != RunViewControllerRunStateRunning) {
@@ -134,9 +156,6 @@ typedef enum : NSUInteger {
 
 - (void)p_setLayout {
     
-    _pauseView = [[RunPauseView alloc] initWithFrame:CGRectMake(0, 64-50, self.view.bounds.size.width, 50)];
-    [self.view addSubview:_pauseView];
-    
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_startButton setTitle:@"开始" forState:UIControlStateNormal];
     [_startButton setTintColor:[UIColor whiteColor]];
@@ -144,10 +163,28 @@ typedef enum : NSUInteger {
     _startButton.layer.cornerRadius = _startButton.bounds.size.width/2;
     _startButton.clipsToBounds = YES;
     _startButton.backgroundColor = [UIColor colorWithRed:97/255.0 green:187/255.0 blue:162/255.0 alpha:1];
-    _startButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-50-_startButton.bounds.size.height/2);
+    _startButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-10-_startButton.bounds.size.height/2);
     [_startButton addTarget:self action:@selector(startButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_startButton];
-    [self p_addShowdowWithView:_startButton];
+    
+}
+
+- (void)p_setStartRunLayout {
+    
+    _pauseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_pauseButton setTitle:@"暂停" forState:UIControlStateNormal];
+    [_pauseButton setTintColor:[UIColor whiteColor]];
+    _pauseButton.frame = CGRectMake(0, 0, 100, 100);
+    _pauseButton.layer.cornerRadius = _startButton.bounds.size.width/2;
+    _pauseButton.clipsToBounds = YES;
+    _pauseButton.backgroundColor = [UIColor colorWithRed:255/255.0 green:143/255.0 blue:94/255.0 alpha:1];
+//    _pauseButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-50-_startButton.bounds.size.height/2);
+    _pauseButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+_pauseButton.bounds.size.height/2+10);
+    [_pauseButton addTarget:self action:@selector(pauseButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_pauseButton];
+    
+    _pauseView = [[RunPauseView alloc] initWithFrame:CGRectMake(0, -PauseViewHeight, self.view.bounds.size.width, PauseViewHeight)];
+    [self.view addSubview:_pauseView];
     
     _contiuneButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_contiuneButton setTitle:@"继续" forState:UIControlStateNormal];
@@ -157,7 +194,7 @@ typedef enum : NSUInteger {
     _contiuneButton.layer.cornerRadius = _contiuneButton.bounds.size.width/2;
     _contiuneButton.center = CGPointMake(-_contiuneButton.bounds.size.width/2-10, _startButton.center.y);
     [self.view addSubview:_contiuneButton];
-//    _contiuneButton.center = CGPointMake(self.view.bounds.size.width/4, _startButton.center.y);
+    //    _contiuneButton.center = CGPointMake(self.view.bounds.size.width/4, _startButton.center.y);
     [self p_addShowdowWithView:_contiuneButton];
     [_contiuneButton addTarget:self action:@selector(contiuneButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -169,127 +206,61 @@ typedef enum : NSUInteger {
     _completeButton.layer.cornerRadius = _completeButton.bounds.size.width/2;
     _completeButton.center = CGPointMake(self.view.bounds.size.width+_completeButton.bounds.size.width/2+10, _startButton.center.y);
     [self.view addSubview:_completeButton];
-//    _completeButton.center = CGPointMake(self.view.bounds.size.width*3/4, _startButton.center.y);
+    //    _completeButton.center = CGPointMake(self.view.bounds.size.width*3/4, _startButton.center.y);
     [self p_addShowdowWithView:_completeButton];
     [_completeButton addTarget:self action:@selector(completeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     
-    _runcardView = [[RunCardView alloc] initWithFrame:CGRectMake(0, 0, 30, 10)];
-    _runcardView.layer.cornerRadius = 5;
+    _runcardView = [[RunCardView alloc] initWithFrame:CGRectMake(0, -RuncardViewHieght, self.view.bounds.size.width, RuncardViewHieght)];
     _runcardView.clipsToBounds = YES;
-    _runcardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10);
-    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(runcardViewPan:)];
-    [_runcardView addGestureRecognizer:panGesture];
     __weak RunViewController *this = self;
     _runcardView.retractTouchBlock = ^(UIButton * button) {
         
-        [RunViewControllerAnimation view:this.runcardView
-                   SlideOutToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height+this.runcardView.bounds.size.height/2) AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-                       
-                       [RunViewControllerAnimation view:this.runSimpleCardView
-                                   SlideInToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height-this.runSimpleCardView.bounds.size.height/2-10)
-                             AnimationWthiCompleteBlock:nil];
-                       
-                   }];
+        [RunViewControllerAnimation view:this.pauseButton
+                   SlideOutToCenterPoint: CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height+this.pauseButton.bounds.size.height/2+10)
+              AnimationWthiCompleteBlock:nil];
+        
+        [this.navigationController setNavigationBarHidden:YES animated:YES];
+        [UIView animateWithDuration:0.5 animations:^{
+            this.runcardView.frame = CGRectMake(0, -RuncardViewHieght, this.view.bounds.size.width, RuncardViewHieght);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 animations:^{
+                
+                this.runSimpleCardView.frame = CGRectMake(0, 0, this.view.bounds.size.width, RunSimpleCardViewHeight);
+            }];
+            
+        }];
         
     };
-    _runcardView.photoTouchBlock = ^(UIButton *button){
-        
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePickerController.delegate = this;
-        imagePickerController.editing = YES;
-        [this presentViewController:imagePickerController animated:YES completion:nil];
-        
-    };
+    [self.view addSubview:_runcardView];
+
     
-    _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-30, 60)];
-    _runSimpleCardView.layer.cornerRadius = 5;
+    _runSimpleCardView = [[RunSimpleCardView alloc] initWithFrame:CGRectMake(0, -RunSimpleCardViewHeight, self.view.bounds.size.width, RunSimpleCardViewHeight)];
     _runSimpleCardView.clipsToBounds = YES;
-//    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_runSimpleCardView.bounds.size.height/2-10);
-    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+_runSimpleCardView.bounds.size.height/2);
+    //    _runSimpleCardView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+_runSimpleCardView.bounds.size.height/2);
     _runSimpleCardView.retractButtonBlock = ^(UIButton *button){
         
-        [RunViewControllerAnimation view:this.runSimpleCardView
-                   SlideOutToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height+this.runSimpleCardView.bounds.size.height/2)
-              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-                  
-                  [RunViewControllerAnimation view:this.runcardView
-                              SlideInToCenterPoint:CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height- 100 -10)
-                        AnimationWthiCompleteBlock:nil];
-                  
+        [RunViewControllerAnimation view:this.pauseButton
+                    SlideInToCenterPoint: CGPointMake(this.view.bounds.size.width/2, this.view.bounds.size.height-10- this.pauseButton.bounds.size.height/2)
+              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                  [RunViewControllerAnimation scalAnimationWithView:this.pauseButton WithCompleteBlock:nil];
               }];
         
+        [UIView animateWithDuration:0.3 animations:^{
+            this.runSimpleCardView.frame = CGRectMake(0, -RunSimpleCardViewHeight, this.view.bounds.size.width, RunSimpleCardViewHeight);
+        } completion:^(BOOL finished) {
+            [this.navigationController setNavigationBarHidden:NO animated:YES];
+            [UIView animateWithDuration:0.5 animations:^{
+//                this.navigationController.navigationBar.frame = CGRectMake(0, 0, this.view.bounds.size.width, 64);
+                this.runcardView.frame = CGRectMake(0, 64, this.view.bounds.size.width, RuncardViewHieght);
+            }];
+        }];
+
     };
     [self.view addSubview:_runSimpleCardView];
     
+    
 }
 #pragma mark - Event
-#pragma mark Gesture Event
-
-- (void)runcardViewPan:(UIPanGestureRecognizer *)panGesture {
-    
-    UIView *view = panGesture.view;
-    CGPoint point = [panGesture locationInView:self.view];
-    
-    if (panGesture.state == UIGestureRecognizerStateBegan) {
-        _runCardViewLastPoint = point;
-    } else if (panGesture.state == UIGestureRecognizerStateChanged) {
-        
-        CGFloat deltaY = point.y - _runCardViewLastPoint.y;
-        CGRect frame = view.frame;
-        frame.origin.y += deltaY;
-        
-        if (frame.origin.y < self.view.bounds.size.height-10-view.bounds.size.height) {
-            return;
-        }
-        
-        _runcardView.frame = frame;
-        _runCardViewLastPoint = point;
-    } else if (panGesture.state == UIGestureRecognizerStateEnded) {
-        
-        if (view.frame.origin.y > self.view.bounds.size.height - 10 -view.bounds.size.height/2) {
-            //运动卡片下移动出界面
-            [RunViewControllerAnimation view:view
-                       SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+view.bounds.size.height/2)
-                  AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-                      
-                      //继续按钮弹入
-                      [RunViewControllerAnimation view:_contiuneButton
-                                  SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width/4, _startButton.center.y)
-                            AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
-                                [RunViewControllerAnimation scalAnimationWithView:_contiuneButton WithCompleteBlock:nil];
-                            }];
-                      
-                      //完成按钮弹入
-                      [RunViewControllerAnimation view:_completeButton
-                                  SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width*3/4, _startButton.center.y)
-                            AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
-                                [RunViewControllerAnimation scalAnimationWithView:_completeButton WithCompleteBlock:nil];
-                            }];
-                      
-                      [UIView animateWithDuration:0.5 animations:^{
-                          _pauseView.transform = CGAffineTransformMakeTranslation(0, _pauseView.bounds.size.height);
-                      }];
-                      
-                      [self p_audioPlay:@"pause"];
-                      [self p_pause];
-                      
-                  }];
-            
-        } else {
-            
-            //运动卡片回到原来的位置
-            [RunViewControllerAnimation view:view
-                        SlideInToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10)
-                  AnimationWthiCompleteBlock:nil];
-            
-        }
-        
-    }
-    
-}
-
 #pragma mark Timer Event
 
 - (void)runTimerEvent:(NSTimer *)timer {
@@ -299,34 +270,86 @@ typedef enum : NSUInteger {
 
 #pragma mark Button Event
 
+- (void)pauseButtonTouch:(UIButton *)sender {
+    
+    [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+        
+        [self p_pause];
+        [UIView animateWithDuration:0.3 animations:^{
+            self.runcardView.frame = CGRectMake(0, -RuncardViewHieght, self.view.bounds.size.width, RuncardViewHieght);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 animations:^{
+                self.pauseView.frame = CGRectMake(0, 64, self.view.bounds.size.width, PauseViewHeight);
+            }];
+        }];
+
+        
+        [RunViewControllerAnimation view:_pauseButton
+                   SlideOutToCenterPoint: CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+_pauseButton.bounds.size.height/2+10)
+              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                  
+                  [RunViewControllerAnimation view:_contiuneButton
+                             SlideInToCenterPoint: CGPointMake(self.view.bounds.size.width/4,self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
+                        AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                            [RunViewControllerAnimation scalAnimationWithView:_contiuneButton WithCompleteBlock:nil];
+                        }];
+                  
+                  [RunViewControllerAnimation view:_completeButton
+                             SlideInToCenterPoint: CGPointMake(self.view.bounds.size.width*3/4,self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
+                        AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                            [RunViewControllerAnimation scalAnimationWithView:_completeButton WithCompleteBlock:nil];
+                        }];
+                  
+              }];
+    }];
+    
+}
+
+- (void)photoButtonTouch:(UIBarButtonItem *)sender {
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.delegate = self;
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
 }
 
 - (void)contiuneButtonTouch:(UIButton *)sender {
     
-    [RunViewControllerAnimation scalAnimationWithView:_contiuneButton
-                                    WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-                                        
-                                        [UIView animateWithDuration:0.5 animations:^{
-                                            _pauseView.transform = CGAffineTransformIdentity;
-                                        }];
-                                        
-                                        [RunViewControllerAnimation view:_contiuneButton
-                                                   SlideOutToCenterPoint:CGPointMake(-_contiuneButton.bounds.size.width/2-10, _startButton.center.y)
-                                              AnimationWthiCompleteBlock:nil];
-                                        
-                                        [RunViewControllerAnimation view:_completeButton
-                                                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width+_completeButton.bounds.size.width/2+10, _startButton.center.y)
-                                              AnimationWthiCompleteBlock:nil];
-                                        
-                                        [RunViewControllerAnimation view:_runcardView
-                                                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height- 100 -10)
-                                              AnimationWthiCompleteBlock:nil];
-                                        
-                                    }];
-    [self p_audioPlay:@"continue"];
-    [self p_continue];
+    [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+        
+        [self p_audioPlay:@"continue"];
+        [self p_continue];
+        
+        [RunViewControllerAnimation view:_contiuneButton
+                   SlideOutToCenterPoint: CGPointMake(-_contiuneButton.bounds.size.width/2-10, self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
+              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                  
+                  [RunViewControllerAnimation view:_pauseButton
+                              SlideInToCenterPoint: CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-_pauseButton.bounds.size.height/2-10)
+                        AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished) {
+                            [RunViewControllerAnimation scalAnimationWithView:_pauseButton WithCompleteBlock:nil];
+                        }];
+              }];
+        
+        [RunViewControllerAnimation view:_completeButton
+                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width+_completeButton.bounds.size.width/2+10, self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
+              AnimationWthiCompleteBlock:nil];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            _pauseView.frame = CGRectMake(0, -PauseViewHeight, self.view.bounds.size.width, PauseViewHeight);
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.3 animations:^{
+                _runcardView.frame = CGRectMake(0, 64, self.view.bounds.size.width, RuncardViewHieght);
+            }];
+        }];
+        
+    }];
+    
+    
     
 }
 
@@ -354,41 +377,35 @@ typedef enum : NSUInteger {
 - (void)startButtonTouch:(UIButton *)sender {
     
     //动画
+    
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
-        _countView = [[CountView alloc] initWithCount:5];
-        _countView.frame = self.view.bounds;
-        _countView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
-        [self.view addSubview:_countView];
-        [_countView startCountWithCompleteBlock:^(CountView *countView) {
-            
-            [self p_audioPlay:@"start"];
-            
-            [countView removeFromSuperview];
-            [RunViewControllerAnimation smallView:sender
-                                          ToFrame:CGRectMake(sender.center.x, sender.center.y, 0, 0)
-                                WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
-                                    [sender removeFromSuperview];
-                                    [self.view addSubview:_runcardView];
-                                    [RunViewControllerAnimation largeView:_runcardView
-                                                                  ToFrame:CGRectMake(15, self.view.bounds.size.height-200-10, self.view.bounds.size.width-30, 200)
-                                                        WithCompleteBlock:nil];
-                                    
-                                }];
-            
-            
-            //逻辑
-            _runState = RunViewControllerRunStateRunning;
-            [_runTimer setFireDate:[NSDate distantPast]];
-            [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
-            
+        //逻辑
+        [self p_audioPlay:@"start"];
+        _runState = RunViewControllerRunStateRunning;
+        [_runTimer setFireDate:[NSDate distantPast]];
+        [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
+
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            _runcardView.frame = CGRectMake(0, 64, self.view.bounds.size.width, RuncardViewHieght);
         }];
         
-        
-        
+        [RunViewControllerAnimation view:_startButton
+                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+10+_startButton.bounds.size.height/2)
+              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                  
+                  //暂停按钮滑入
+                  [RunViewControllerAnimation view:_pauseButton
+                              SlideInToCenterPoint: CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
+                        AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                            [RunViewControllerAnimation scalAnimationWithView:_pauseButton WithCompleteBlock:nil];
+                        }];
+                  
+              }];
+
     }];
     
-   
 }
 
 #pragma mark - Function
@@ -412,10 +429,6 @@ typedef enum : NSUInteger {
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:startUrl error:nil];
     [_audioPlayer prepareToPlay];
     [_audioPlayer play];
-    
-}
-
-- (void)p_complete {
     
 }
 
@@ -461,7 +474,7 @@ typedef enum : NSUInteger {
     _pauseView.time = _runcardView.time;
     _pauseView.distance = _runcardView.distance;
     _pauseView.speed = _runcardView.speed;
-    
+    _pauseView.kcal = _runcardView.kcal;
 }
 
 - (CGFloat)p_getCalorie:(CGFloat)time speed:(CGFloat)speed{
@@ -551,7 +564,7 @@ typedef enum : NSUInteger {
     
     [_mapViewDelegate drawGradientPolyLineWithPoints:self.points];
     
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude-0.001215, newLocation.coordinate.longitude);
+    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
     [self.mapView setRegion:region animated:YES];
     

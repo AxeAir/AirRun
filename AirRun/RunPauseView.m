@@ -8,6 +8,8 @@
 
 #import "RunPauseView.h"
 
+const static NSInteger Margin = 5;
+
 @interface RunPauseView ()
 
 @property (strong, nonatomic) UIView *bgView;
@@ -21,9 +23,21 @@
 @property (strong, nonatomic) UILabel *distanceLable;
 @property (strong, nonatomic) UILabel *distanceUnitLable;
 
+@property (strong, nonatomic) UILabel *kcalLabel;
+@property (strong, nonatomic) UILabel *kcalUnitLabel;
+
 @end
 
 @implementation RunPauseView
+
+- (void)setKcal:(CGFloat)kcal {
+    
+    _kcal = kcal;
+    _kcalLabel.text = [NSString stringWithFormat:@"%.1f",_kcal];
+    [_kcalLabel sizeToFit];
+    
+}
+
 
 - (void)setSpeed:(CGFloat)speed {
     
@@ -70,9 +84,9 @@
     if (!_speedUnitLable) {
         _speedUnitLable = [[UILabel alloc] init];
         _speedUnitLable.text = @"平均速度";
-        [self p_commonSetLabel:_speedUnitLable WithFontSize:14];
+        [self p_commonSetLabel:_speedUnitLable WithFontSize:12];
     }
-    _speedUnitLable.center = CGPointMake(15+_speedUnitLable.bounds.size.width/2, self.bounds.size.height/2+_speedUnitLable.bounds.size.height/2);
+    _speedUnitLable.center = CGPointMake(Margin+_speedUnitLable.bounds.size.width/2, self.bounds.size.height/2+_speedUnitLable.bounds.size.height/2);
     
     if (!_speedLabel) {
         _speedLabel = [[UILabel alloc] init];
@@ -84,23 +98,37 @@
     if (!_timeUnitLable) {
         _timeUnitLable = [[UILabel alloc] init];
         _timeUnitLable.text = @"时间";
-        [self p_commonSetLabel:_timeUnitLable WithFontSize:14];
+        [self p_commonSetLabel:_timeUnitLable WithFontSize:12];
     }
-    _timeUnitLable.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2+_timeUnitLable.bounds.size.height/2);
+    _timeUnitLable.center = CGPointMake(self.bounds.size.width/3+5, self.bounds.size.height/2+_timeUnitLable.bounds.size.height/2);
     
     if (!_timeLable) {
         _timeLable = [[UILabel alloc] init];
         _timeLable.text = [self p_getTimeStringWithSeconds:_time];
         [self p_commonSetLabel:_timeLable WithFontSize:20];
     }
-    _timeLable.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2-_timeLable.bounds.size.height/2);
+    _timeLable.center = CGPointMake(self.bounds.size.width/3+5, self.bounds.size.height/2-_timeLable.bounds.size.height/2);
+    
+    if (!_kcalUnitLabel) {
+        _kcalUnitLabel = [[UILabel alloc] init];
+        _kcalUnitLabel.text = @"卡路里";
+        [self p_commonSetLabel:_kcalUnitLabel WithFontSize:12];
+    }
+    _kcalUnitLabel.center = CGPointMake(self.bounds.size.width*2/3-5, self.bounds.size.height/2+_kcalUnitLabel.bounds.size.height/2);
+    
+    if (!_kcalLabel) {
+        _kcalLabel = [[UILabel alloc] init];
+        _kcalLabel.text = @"0.0";
+        [self p_commonSetLabel:_kcalLabel WithFontSize:20];
+    }
+    _kcalLabel.center = CGPointMake(self.bounds.size.width*2/3-5, self.bounds.size.height/2-_kcalLabel.bounds.size.height/2);
     
     if (!_distanceUnitLable) {
         _distanceUnitLable = [[UILabel alloc] init];
         _distanceUnitLable.text = @"距离km";
-        [self p_commonSetLabel:_distanceUnitLable WithFontSize:14];
+        [self p_commonSetLabel:_distanceUnitLable WithFontSize:12];
     }
-    _distanceUnitLable.center = CGPointMake(self.bounds.size.width-15-_distanceUnitLable.bounds.size.width/2, self.bounds.size.height/2+_distanceUnitLable.bounds.size.height/2);
+    _distanceUnitLable.center = CGPointMake(self.bounds.size.width-Margin-_distanceUnitLable.bounds.size.width/2, self.bounds.size.height/2+_distanceUnitLable.bounds.size.height/2);
     
     if (!_distanceLable) {
         _distanceLable = [[UILabel alloc] init];

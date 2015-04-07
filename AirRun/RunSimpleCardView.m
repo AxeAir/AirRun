@@ -22,6 +22,7 @@
 @property (strong, nonatomic) UILabel *speedUnitLable;
 
 @property (strong, nonatomic) UIButton *retractButton;
+@property (strong, nonatomic) UIButton *photoButton;
 
 
 @end
@@ -41,7 +42,8 @@
     _time = time;
     _timeLabel.text = [self p_getTimeStringWithSeconds:_time];
     [_timeLabel sizeToFit];
-    _timeLabel.center = CGPointMake((_retractButton.frame.origin.x-15)/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
+    CGFloat width = _photoButton.frame.origin.x - 15;
+    _timeLabel.center = CGPointMake(width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
     
 }
 
@@ -69,15 +71,15 @@
 
 - (void)p_setLayout {
     
-    if (!_retractButton) {
-        _retractButton = [UIButton buttonWithType: UIButtonTypeSystem];
-        [_retractButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
-        [_retractButton setTintColor:[UIColor whiteColor]];
-        [_retractButton sizeToFit];
-        [self addSubview:_retractButton];
-        [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    if (!_photoButton) {
+        _photoButton = [UIButton buttonWithType: UIButtonTypeSystem];
+        [_photoButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+        [_photoButton setTintColor:[UIColor whiteColor]];
+        [_photoButton sizeToFit];
+        [self addSubview:_photoButton];
+        [_photoButton addTarget:self action:@selector(photoButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     }
-    _retractButton.center = CGPointMake(self.bounds.size.width-15-_retractButton.bounds.size.width/2, self.bounds.size.height/2);
+    _photoButton.center = CGPointMake(self.bounds.size.width-15-_photoButton.bounds.size.width/2, self.bounds.size.height/2);
     
     if (!_distanceUnitLable) {
         _distanceUnitLable = [[UILabel alloc] init];
@@ -107,7 +109,7 @@
         [_timeLabel sizeToFit];
         [self addSubview:_timeLabel];
     }
-    CGFloat width = _retractButton.frame.origin.x - 15;
+    CGFloat width = _photoButton.frame.origin.x - 15;
     _timeLabel.center = CGPointMake(width/2, self.bounds.size.height/2-_timeLabel.bounds.size.height/2);
 
     
@@ -130,7 +132,7 @@
         [_speedUnitLable sizeToFit];
         [self addSubview:_speedUnitLable];
     }
-    _speedUnitLable.center = CGPointMake(_retractButton.frame.origin.x-18-_speedUnitLable.bounds.size.width/2, self.bounds.size.height/2+_speedUnitLable.bounds.size.height/2);
+    _speedUnitLable.center = CGPointMake(_photoButton.frame.origin.x-18-_speedUnitLable.bounds.size.width/2, self.bounds.size.height/2+_speedUnitLable.bounds.size.height/2);
     
     if (!_speedLabel) {
         _speedLabel = [[UILabel alloc] init];
@@ -142,6 +144,14 @@
     }
     _speedLabel.center = CGPointMake(_speedUnitLable.center.x, self.bounds.size.height/2-_speedLabel.bounds.size.height/2);
     
+    if (!_retractButton) {
+        _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [_retractButton setImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
+        _retractButton.tintColor = [UIColor whiteColor];
+        [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_retractButton];
+    }
+    _retractButton.frame = CGRectMake(0, self.bounds.size.height-10, self.bounds.size.width, 10);
     
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     UIBezierPath *path = [UIBezierPath bezierPath];
@@ -156,6 +166,12 @@
 #pragma mark - Event
 #pragma mark - Button Event;
 
+- (void)photoButtonTouch:(UIButton *)sender {
+    if (_photoButtonBlock) {
+        _photoButtonBlock(sender);
+    }
+}
+
 - (void)retractButtonTouch:(UIButton *)sender {
     
     if (_retractButtonBlock) {
@@ -164,6 +180,7 @@
     
 }
 
+#pragma mark - Action
 - (NSString *)p_getTimeStringWithSeconds:(NSInteger)seconds {
     
     NSInteger tempSeconds = seconds;

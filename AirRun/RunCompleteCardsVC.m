@@ -26,7 +26,6 @@ static const char *INDEX = "index";
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
 @property (nonatomic, strong) CompleteDisplayCard *display;
-//@property (strong, nonatomic) EditImageView *editImageView;
 
 @property (nonatomic, strong) PopInputView *popview;//弹出层
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
@@ -85,6 +84,15 @@ static const char *INDEX = "index";
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //为地图截图
+    [_display mapViewShotWithComplete:^(MKMapSnapshot *snapshot) {
+        _parameters.mapshot = [AVFile fileWithData:UIImageJPEGRepresentation(snapshot.image, 0.5)];
+    }];
 }
 
 - (instancetype)initWithParameters:(RunningRecord *)parameters WithPoints:(NSArray *)pints WithImages:(NSArray *)images

@@ -123,7 +123,7 @@
         
         if (idx != _imgViews.count) {//不是最后一张图片
             //后面的imageView向前移动
-            for (int i=idx; i<_imgViews.count; i++) {
+            for (long i=(long)idx; i<_imgViews.count; i++) {
                 UIImageView *imgView = _imgViews[i];
                 CGRect frame = CGRectMake(i*_scrollView.frame.size.width, 0, _scrollView.frame.size.width, _scrollView.frame.size.height);
                 [UIView animateWithDuration:0.5 animations:^{
