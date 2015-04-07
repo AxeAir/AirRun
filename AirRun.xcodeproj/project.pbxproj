@@ -59,6 +59,10 @@
 		E52D16F81ACE780300DBFA04 /* ImageHeler.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16F71ACE780300DBFA04 /* ImageHeler.m */; };
 		E52D16FB1ACE843800DBFA04 /* ImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16FA1ACE843800DBFA04 /* ImageViewer.m */; };
 		E52D16FD1ACE90C100DBFA04 /* trash@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E52D16FC1ACE90C100DBFA04 /* trash@2x.png */; };
+		E55BCC891AD3BC1B00F9B5F2 /* AirLocalPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */; };
+		E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */; };
+		E55BCC931AD3E74E00F9B5F2 /* AexAir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */; };
+		E55BCC961AD3F39B00F9B5F2 /* RunningRecordEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC951AD3F39A00F9B5F2 /* RunningRecordEntity.m */; };
 		E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */; };
 		E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F941ACA5D6D009A0D61 /* RESideMenu.m */; };
 		E5668F991ACA5D6D009A0D61 /* UIViewController+RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F961ACA5D6D009A0D61 /* UIViewController+RESideMenu.m */; };
@@ -88,7 +92,6 @@
 		E5AC95B81ACD2E0A00A6F133 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95B71ACD2E0A00A6F133 /* close.png */; };
 		E5AC95BA1ACD311B00A6F133 /* ic_menu_mark.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */; };
 		E5AC95BD1ACD5AEE00A6F133 /* RunningRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95BC1ACD5AEE00A6F133 /* RunningRecord.m */; };
-		E5AC95C31ACD651100A6F133 /* DataBaseHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */; };
 		E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C51ACD6A6D00A6F133 /* WeatherModel.m */; };
 		E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C81ACD6B2400A6F133 /* PM25Model.m */; };
 		E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */; };
@@ -220,6 +223,13 @@
 		E52D16F91ACE843800DBFA04 /* ImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewer.h; sourceTree = "<group>"; };
 		E52D16FA1ACE843800DBFA04 /* ImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewer.m; sourceTree = "<group>"; };
 		E52D16FC1ACE90C100DBFA04 /* trash@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "trash@2x.png"; sourceTree = "<group>"; };
+		E55BCC871AD3BC1B00F9B5F2 /* AirLocalPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirLocalPersistence.h; sourceTree = "<group>"; };
+		E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirLocalPersistence.m; sourceTree = "<group>"; };
+		E55BCC8A1AD3BC3900F9B5F2 /* AirServerPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirServerPersistence.h; sourceTree = "<group>"; };
+		E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirServerPersistence.m; sourceTree = "<group>"; };
+		E55BCC921AD3E74E00F9B5F2 /* AexAir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AexAir.xcdatamodel; sourceTree = "<group>"; };
+		E55BCC941AD3F39A00F9B5F2 /* RunningRecordEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningRecordEntity.h; sourceTree = "<group>"; };
+		E55BCC951AD3F39A00F9B5F2 /* RunningRecordEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningRecordEntity.m; sourceTree = "<group>"; };
 		E5668F911ACA5D6D009A0D61 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
 		E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RECommonFunctions.m; sourceTree = "<group>"; };
 		E5668F931ACA5D6D009A0D61 /* RESideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESideMenu.h; sourceTree = "<group>"; };
@@ -266,8 +276,6 @@
 		E5AC95B91ACD311B00A6F133 /* ic_menu_mark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_menu_mark.png; sourceTree = "<group>"; };
 		E5AC95BB1ACD5AEE00A6F133 /* RunningRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningRecord.h; sourceTree = "<group>"; };
 		E5AC95BC1ACD5AEE00A6F133 /* RunningRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningRecord.m; sourceTree = "<group>"; };
-		E5AC95C11ACD651100A6F133 /* DataBaseHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataBaseHelper.h; sourceTree = "<group>"; };
-		E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataBaseHelper.m; sourceTree = "<group>"; };
 		E5AC95C41ACD6A6D00A6F133 /* WeatherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherModel.h; sourceTree = "<group>"; };
 		E5AC95C51ACD6A6D00A6F133 /* WeatherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherModel.m; sourceTree = "<group>"; };
 		E5AC95C71ACD6B2400A6F133 /* PM25Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PM25Model.h; sourceTree = "<group>"; };
@@ -428,6 +436,8 @@
 		E50BE0441AC8854A0030863D /* AirRun */ = {
 			isa = PBXGroup;
 			children = (
+				E55BCC8D1AD3E63100F9B5F2 /* Entity */,
+				E55BCC861AD3BBE900F9B5F2 /* Persistence */,
 				E52BAC4A1AD2B47200EC051C /* General */,
 				E5668FB81ACBC39A009A0D61 /* Manager */,
 				E5668FB11ACBB7C5009A0D61 /* Macro */,
@@ -557,6 +567,27 @@
 			name = ImagePickerController;
 			sourceTree = "<group>";
 		};
+		E55BCC861AD3BBE900F9B5F2 /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				E55BCC871AD3BC1B00F9B5F2 /* AirLocalPersistence.h */,
+				E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */,
+				E55BCC8A1AD3BC3900F9B5F2 /* AirServerPersistence.h */,
+				E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */,
+			);
+			name = Persistence;
+			sourceTree = "<group>";
+		};
+		E55BCC8D1AD3E63100F9B5F2 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */,
+				E55BCC941AD3F39A00F9B5F2 /* RunningRecordEntity.h */,
+				E55BCC951AD3F39A00F9B5F2 /* RunningRecordEntity.m */,
+			);
+			name = Entity;
+			sourceTree = "<group>";
+		};
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,8 +644,6 @@
 				96982B441ACF804200040A50 /* HUDHelper.m */,
 				96982B401ACF7EE000040A50 /* ValidateHelper.h */,
 				96982B411ACF7EE000040A50 /* ValidateHelper.m */,
-				E5AC95C11ACD651100A6F133 /* DataBaseHelper.h */,
-				E5AC95C21ACD651100A6F133 /* DataBaseHelper.m */,
 				96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */,
 				96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */,
 				E591399A1ACBE13400F9D048 /* DateHelper.h */,
@@ -993,7 +1022,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5AC95C31ACD651100A6F133 /* DataBaseHelper.m in Sources */,
 				E52D16F11ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m in Sources */,
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */,
@@ -1004,6 +1032,7 @@
 				96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */,
 				96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */,
 				96474D611ACED60300DECE02 /* SignInView.m in Sources */,
+				E55BCC961AD3F39B00F9B5F2 /* RunningRecordEntity.m in Sources */,
 				96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
@@ -1031,12 +1060,15 @@
 				96982B451ACF804200040A50 /* HUDHelper.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
+				E55BCC931AD3E74E00F9B5F2 /* AexAir.xcdatamodeld in Sources */,
 				E52BAC431AD13E9000EC051C /* AirPickerView.m in Sources */,
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
 				E52D16D61ACE4F3300DBFA04 /* SettingViewController.m in Sources */,
+				E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
 				96474D621ACED60300DECE02 /* SignUpView.m in Sources */,
+				E55BCC891AD3BC1B00F9B5F2 /* AirLocalPersistence.m in Sources */,
 				E52D16F01ACE6C1D00DBFA04 /* QBAssetsCollectionViewCell.m in Sources */,
 				E52D16F21ACE6C1D00DBFA04 /* QBAssetsCollectionViewLayout.m in Sources */,
 				E52D16F51ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m in Sources */,
@@ -1327,6 +1359,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E55BCC921AD3E74E00F9B5F2 /* AexAir.xcdatamodel */,
+			);
+			currentVersion = E55BCC921AD3E74E00F9B5F2 /* AexAir.xcdatamodel */;
+			path = AexAir.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E50BE03A1AC8854A0030863D /* Project object */;
 }

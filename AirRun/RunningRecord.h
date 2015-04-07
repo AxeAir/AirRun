@@ -13,17 +13,19 @@
 @interface RunningRecord : AVObject<AVSubclassing>
 
 @property (nonatomic, strong) NSString  *path;
-@property (nonatomic, strong) NSNumber  *time;
-@property (nonatomic, strong) NSNumber  *kcar;
-@property (nonatomic, strong) NSNumber  *distance;
-@property (nonatomic, strong) NSString  *weather;
-@property (nonatomic, strong) NSNumber  *pm25;
-@property (nonatomic, strong) NSNumber  *averagespeed;
+@property (nonatomic, strong) NSNumber  *time;//跑步时间  整型  单位为s
+@property (nonatomic, strong) NSNumber  *kcar;//卡路里，float类型
+@property (nonatomic, strong) NSNumber  *distance;//距离，整型，单位为米
+@property (nonatomic, strong) NSString  *weather;//天气，整型
+@property (nonatomic, strong) NSNumber  *pm25;//pm25 整型
+@property (nonatomic, strong) NSNumber  *averagespeed; //平局速度，float
 @property (nonatomic, strong) NSString  *finishtime;
 @property (nonatomic, strong) AVFile    *mapshot;
 @property (nonatomic, strong) NSString  *heart;
 
-- (void)saveWithImages:(NSArray *)images;
+
+
+- (void)saveWithImages:(NSArray *)images heartImages:(NSArray *)heartImages;
 
 
 @end

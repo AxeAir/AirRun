@@ -24,19 +24,14 @@ PODS:
   - AVOSCloudSNS (3.0.2):
     - AVOSCloud
   - BlurImageProcessor (1.0.0)
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
   - Kiwi (2.3.1)
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core (= 2.2)
+  - MagicalRecord/Core (2.2)
   - Mantle (1.5.4):
     - Mantle/extobjc (= 1.5.4)
   - Mantle/extobjc (1.5.4)
   - MBProgressHUD (0.9.1)
-  - MTLFMDBAdapter (0.1.8):
-    - FMDB (~> 2.3)
-    - Mantle (~> 1.5)
   - pop (1.0.7)
   - TMCache (1.2.3)
 
@@ -46,9 +41,9 @@ DEPENDENCIES:
   - AVOSCloudSNS (~> 3.0.2)
   - BlurImageProcessor (~> 1.0.0)
   - Kiwi
+  - MagicalRecord (~> 2.2)
   - Mantle (~> 1.5.4)
   - MBProgressHUD
-  - MTLFMDBAdapter (~> 0.1.8)
   - pop
   - TMCache (~> 1.2.3)
 
@@ -57,11 +52,10 @@ SPEC CHECKSUMS:
   AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
   AVOSCloudSNS: 7d83ffbd3738b92c9ece62e93a65fa593587274b
   BlurImageProcessor: a4794ad3128748dbff8b40ae43ce9386d3667bba
-  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
+  MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
   Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
   MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
-  MTLFMDBAdapter: 491e80bb9fcda3f6a9e7b2cbad4a8e7be93189be
   pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
   TMCache: 5f68bc38d741aa8df4c63131b847522783665d81
 

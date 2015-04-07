@@ -10,7 +10,7 @@
 
 @implementation RunningRecord
 
-- (void)saveWithImages:(NSArray *)images
+- (void)saveWithImages:(NSArray *)images heartImages:(NSArray *)heartImages
 {
     AVUser *user = [AVUser currentUser];
     if (user) {
@@ -25,6 +25,24 @@
             img.ACL=acl;
             [img saveEventually];
         }
+        
+        
+        NSMutableArray *heartFiles = [[NSMutableArray alloc] init];
+        for (UIImage *image in heartImages) {
+            NSData *imageData = UIImagePNGRepresentation(image);
+            AVFile *imageFile = [AVFile fileWithName:@"image.png" data:imageData];
+            
+            [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                [heartFiles addObject:[imageFile objectId]];
+            } progressBlock:^(NSInteger percentDone) {
+                
+            }];
+            
+            
+            
+        }
+        [self addObjectsFromArray:heartFiles forKey:@"heartImages"];
+        [self save];
     }
 }
 

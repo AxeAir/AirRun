@@ -14,8 +14,9 @@
 #import "QBImagePickerController.h"
 #import "ImageHeler.h"
 #import "MapViewDelegate.h"
+#import "RunningRecord.h"
 
-@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CompleteDisplayCardDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
@@ -46,11 +47,13 @@
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800)];
     [_display.mapDelegate drawPath:_path];
+    [_display setDelegate:self];
     [_scrollview addSubview:_display];
     
     [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+1 )];
 
     [self.view addSubview:_scrollview];
+    
     
 }
 
@@ -130,6 +133,23 @@
     }];
 }
 
+
+- (void)saveRecort
+{
+    
+}
+
+#pragma mark Action
+
+- (void)sharaButtonTouch:(id)sender
+{
+    
+}
+
+
+
+
+
 #pragma mark Delegate
 /**
  *  点击想下按钮
@@ -180,6 +200,18 @@
     } else {
         [self.navigationController popToViewController:self animated:YES];
     }
+}
+
+
+
+
+- (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
+{
+    NSLog(@"%@",_ImageArray);
+    
+    
+    RunningRecord *record = [RunningRecord object];
+    [record saveWithImages:nil heartImages:_ImageArray];
 }
 
 #pragma mark - QBImagePickerControllerDelegate

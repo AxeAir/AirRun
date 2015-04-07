@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="RunningImageEntity" syncable="YES"/>
+    <entity name="RunningRecordEntity" representedClassName="RunningRecordEntity" syncable="YES">
+        <attribute name="averagespeed" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="finishtime" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="heart" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="kcar" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="mapshot" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pm25" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="195"/>
+        <element name="RunningImageEntity" positionX="-54" positionY="63" width="128" height="45"/>
+    </elements>
+</model>

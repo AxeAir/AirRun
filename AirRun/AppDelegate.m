@@ -9,14 +9,16 @@
 #import "AppDelegate.h"
 #import "RunViewController.h"
 #import "LeftSideViewController.h"
-#import "DataBaseHelper.h"
 #import <AVOSCloud.h>
 #import "DocumentHelper.h"
 #import "UConstants.h"
 #import "RunningRecord.h"
 #import "RunningImage.h"
 #import <AVOSCloudSNS.h>
+#import <CoreData+MagicalRecord.h>
 
+#import "RunningRecordEntity.h"
+#import "AirLocalPersistence.h"
 @interface AppDelegate ()
 
 @end
@@ -31,10 +33,20 @@
     [RunningRecord registerSubclass];
     [RunningImage registerSubclass];
     
+    [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
+    
+    RunningRecordEntity *entity = [RunningRecordEntity MR_createEntity];
+    
+    entity.path= @"dsfsd";
+    entity.time =@2;
+    [[AirLocalPersistence shareLocalPersistenceInstance] createObject:entity withCompleteBlock:^{
+        NSLog(@"dsfsdf");
+    } withErrorBlock:^{
+        
+    }];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [[[DataBaseHelper alloc] init] initDB];//初始化数据库
     [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
     
     
@@ -81,6 +93,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [MagicalRecord cleanUp];
 }
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
