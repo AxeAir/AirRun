@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "BaseCardView.h"
 
+@class MKMapSnapshot;
 @class MapViewDelegate;
-@interface CompleteDisplayCard : BaseCardView
 
+
+
+@interface CompleteDisplayCard : BaseCardView
 @property (nonatomic, strong) MapViewDelegate *mapDelegate;
 
 - (void)adjust:(NSString *)heart;
-
+- (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock;
 
 @end

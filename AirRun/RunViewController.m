@@ -21,7 +21,7 @@
 #import "RunCompleteCardsVC.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CountView.h"
-#import "RunningImgeModel.h"
+#import "RunningImage.h"
 #import "DocumentHelper.h"
 #import "DataBaseHelper.h"
 
@@ -195,7 +195,8 @@ typedef enum : NSUInteger {
     _runcardView.photoTouchBlock = ^(UIButton *button){
         
         UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePickerController.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePickerController.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePickerController.delegate = this;
         imagePickerController.editing = YES;
         [this presentViewController:imagePickerController animated:YES completion:nil];
@@ -331,21 +332,21 @@ typedef enum : NSUInteger {
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
-    RunningRecord *model = [[RunningRecord alloc] init];
-    model.path = [self p_convertPointsToJsonString];
-//    model.time = _runcardView.time;
-//    model.kcar = _runcardView.kcal;
-//    model.distance = _runcardView.distance;
-//    @property(nonatomic, strong) NSString  *weather;
-//    @property(nonatomic, assign) float     pm25;
-    //model.averagespeed = _runcardView.speed;
+    RunningRecord *record = [[RunningRecord alloc] init];
+    record.path = [self p_convertPointsToJsonString];
+    record.time = @(_runcardView.time);
+    record.kcar = @(_runcardView.kcal);
+    record.distance = @(_runcardView.distance);
+//    @property (nonatomic, strong) NSString  *weather;
+//    @property (nonatomic, strong) NSNumber  *pm25;
+    record.averagespeed = @(_runcardView.speed);
     
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    model.finishtime = [dateFormatter stringFromDate:[NSDate date]];
-    [model save];
+    record.finishtime = [dateFormatter stringFromDate:[NSDate date]];
+//    @property (nonatomic, strong) AVFile  *mapshot;
     
-    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:model addPhotos:nil WithPoints:_points];
+    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:record WithPoints:_points WithImages:_imageArray];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -564,18 +565,13 @@ typedef enum : NSUInteger {
         UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
         [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
         
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        formatter.dateFormat = @"yyyyMMddHHmmss";//根据时间做图片名称
-        [DocumentHelper saveImage:image ToFolderName:kImageFolder WithImageName:[formatter stringFromDate:[NSDate date]]];
-        RunningImgeModel *imgModel = [[RunningImgeModel alloc] init];
-        imgModel.UUID = [DataBaseHelper GenerateUUID];
-//        @property (nonatomic, strong) NSString *userUUID;
-        imgModel.imagename = [formatter stringFromDate:[NSDate date]];
-//        @property (nonatomic, strong) NSString *remoteURL;
-        imgModel.latitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.latitude];
-        imgModel.longitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.longitude];
-//        @property (nonatomic, strong) NSString *recordUUID;
-        [_imageArray addObject:imgModel];
+        RunningImage *imgM = [[RunningImage alloc] init];
+        NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
+        imgM.image = [AVFile fileWithData:imgData];
+        imgM.longitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.longitude];
+        imgM.latitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.latitude];
+        
+        [_imageArray addObject:imgM];
         
     }
     [self dismissViewControllerAnimated:YES completion:nil];

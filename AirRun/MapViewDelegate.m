@@ -14,7 +14,7 @@
 #import "CustomAnnotation.h"
 #import "CustomAnnotationView.h"
 
-@interface MapViewDelegate ()
+@interface MapViewDelegate () <CustomeAnnotationDelegate>
 
 @property (weak, nonatomic) MKMapView *mapView;
 
@@ -40,6 +40,10 @@
 }
 
 #pragma mark - Map Action
+
+- (void)clearAnnotation {
+    [_mapView removeAnnotations:_mapView.annotations];
+}
 
 - (void)drawPath:(NSArray *)path {
     
@@ -152,7 +156,7 @@
     CustomAnnotation *customAnnotation = [[CustomAnnotation alloc] init];
     customAnnotation.imageArray = @[image];
     customAnnotation.coordinate = location.coordinate;
-//    customAnnotation.delegate = self;
+    customAnnotation.delegate = self;
     [self.mapView addAnnotation:customAnnotation];
     
 }
@@ -235,6 +239,15 @@
     return nil;
 }
 
+#pragma mark - CustomAnnotationDelegate
+
+- (void)tapCustomeAnnotation:(CustomAnnotation *)annotation {
+    
+    if (_imgAnnotationBlock) {
+        _imgAnnotationBlock(annotation);
+    }
+    
+}
 
 
 @end

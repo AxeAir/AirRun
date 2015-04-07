@@ -18,7 +18,7 @@
  *
  *  @return 
  */
-- (instancetype)initWithParameters:(RunningRecord *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path;
+- (instancetype)initWithParameters:(RunningRecord *)parameters WithPoints:(NSArray *)pints WithImages:(NSArray *)images;
 
 
 @end
