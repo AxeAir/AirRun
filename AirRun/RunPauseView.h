@@ -13,5 +13,6 @@
 @property (assign, nonatomic) CGFloat distance;
 @property (assign, nonatomic) NSInteger time;
 @property (assign, nonatomic) CGFloat speed;
+@property (assign, nonatomic) CGFloat kcal;
 
 @end

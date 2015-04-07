@@ -9,10 +9,16 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
+@class CustomAnnotation;
+typedef void(^imgAnnotationTapBlock)(CustomAnnotation *annotation);
+
 @interface MapViewDelegate : NSObject <MKMapViewDelegate>
+
+@property (copy, nonatomic) imgAnnotationTapBlock imgAnnotationBlock;
 
 - (instancetype)initWithMapView:(MKMapView *)mapView;
 
+- (void)clearAnnotation;
 - (void)drawLineWithPoints:(NSArray *)points;
 - (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray;
 - (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location;

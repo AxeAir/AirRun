@@ -86,23 +86,6 @@
     _mapDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     _mapView.delegate = _mapDelegate;
     
-//    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, MaxY(_titleView), WIDTH(self), 300)];
-//    [_scrollView setContentSize:CGSizeMake(WIDTH(self)*3, 300)];
-//    _scrollView.showsVerticalScrollIndicator = NO;
-//    _scrollView.showsHorizontalScrollIndicator = NO;
-//    _scrollView.delegate = self;
-//    _scrollView.scrollEnabled = YES;
-//    _scrollView.pagingEnabled = YES; //使用翻页属性
-//    _scrollView.bounces = NO;
-//    
-//    UIImageView *map = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"map.jpg"]];
-//    [map setFrame:CGRectMake(0, 0, WIDTH(self), 300)];
-//    
-//    [_scrollView addSubview:map];
-//    
-//    [self addSubview:_scrollView];
-    
-    
     _pagecontrol = [[UIPageControl alloc] initWithFrame:CGRectMake(0, MaxY(_mapView), WIDTH(self), 20)];
     _pagecontrol.numberOfPages =3;
     _pagecontrol.alpha = 0;
@@ -258,7 +241,6 @@
     [_shareButton setTitle:@"分享跑步卡片" forState:UIControlStateNormal];
     [[_shareButton titleLabel] setFont:[UIFont boldSystemFontOfSize:16]];
     [_shareButton setBackgroundColor:RGBCOLOR(97, 187, 162)];
-    [_shareButton addTarget:self action:@selector(shareButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_shareButton];
     
 
@@ -276,15 +258,19 @@
     
 }
 
-#pragma mark Action
+- (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock {
+    
+    MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
+    options.region = self.mapView.region;
+    options.scale = [UIScreen mainScreen].scale;
+    options.size = self.mapView.frame.size;
+    
+    MKMapSnapshotter *snapshotter = [[MKMapSnapshotter alloc] initWithOptions:options];
+    [snapshotter startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
+        completeBlock(snapshot);
+    }];
 
-- (void)shareButtonTouch:(id)sender
-{
-    [_delegate completeDisplayCard:self didSelectButton:CompleteDisplayCardButtonTypeShare];
 }
-
-
-
 
 //- (void)scrollViewDidScroll:(UIScrollView *)sender {
 //    int page = _scrollView.contentOffset.x / WIDTH(self);

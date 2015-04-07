@@ -7,6 +7,7 @@
 //
 
 #import "RunCompleteCardsVC.h"
+#import <objc/runtime.h>
 #import "CompleteInputCard.h"
 #import "CompleteDisplayCard.h"
 #import "UConstants.h"
@@ -14,18 +15,24 @@
 #import "QBImagePickerController.h"
 #import "ImageHeler.h"
 #import "MapViewDelegate.h"
-#import "RunningRecord.h"
+#import "RunningImage.h"
+#import "CustomAnnotation.h"
+#import "EditImageView.h"
 
-@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CompleteDisplayCardDelegate>
+static const char *INDEX = "index";
+
+@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
 @property (nonatomic, strong) CompleteDisplayCard *display;
+
 @property (nonatomic, strong) PopInputView *popview;//弹出层
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
 @property (nonatomic, strong) RunningRecord *parameters;
 @property (nonatomic, strong) NSArray *path;
-@property (nonatomic, strong) NSArray *runningImages;//跑步中的图片
+@property (nonatomic, strong) NSMutableArray *imgMs;//跑步中的图片(model)
+@property (nonatomic, strong) NSMutableArray *images;//跑步中的图片(image)
 @property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
 @end
 
@@ -47,13 +54,28 @@
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800)];
     [_display.mapDelegate drawPath:_path];
-    [_display setDelegate:self];
+    [self p_loadMapViewAnnotation];
+    __weak RunCompleteCardsVC *this = self;
+    _display.mapDelegate.imgAnnotationBlock = ^(CustomAnnotation *annotation){
+        
+        UIImage *img = annotation.imageArray[0];
+        NSInteger index = [objc_getAssociatedObject(img, INDEX) integerValue];
+        EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view];
+        editImageView.currentIndex = index;
+        editImageView.deleteBlock = ^(UIImage *image,NSInteger idx){
+            [this.imgMs removeObjectAtIndex:idx];
+        };
+        editImageView.closeBlock = ^(EditImageView *editImageView) {
+            [this p_loadMapViewAnnotation];
+        };
+        
+    };
+    
     [_scrollview addSubview:_display];
     
     [_scrollview setContentSize:CGSizeMake(Main_Screen_Width,Main_Screen_Height+1 )];
 
     [self.view addSubview:_scrollview];
-    
     
 }
 
@@ -64,13 +86,22 @@
     
 }
 
-- (instancetype)initWithParameters:(RunningRecord *)parameters addPhotos:(NSArray *)runningImages WithPoints:(NSArray *)path
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    //为地图截图
+    [_display mapViewShotWithComplete:^(MKMapSnapshot *snapshot) {
+        _parameters.mapshot = [AVFile fileWithData:UIImageJPEGRepresentation(snapshot.image, 0.5)];
+    }];
+}
+
+- (instancetype)initWithParameters:(RunningRecord *)parameters WithPoints:(NSArray *)pints WithImages:(NSArray *)images
 {
     self = [super init];
     if (self) {
+        _path = pints;
         _parameters = parameters;
-        _runningImages = runningImages;
-        _path = path;
+        _imgMs = [images mutableCopy];
     }
     return self;
 }
@@ -78,6 +109,21 @@
 - (void)ininVar
 {
     _ImageArray = [[NSMutableArray alloc] init];
+}
+
+- (void)p_loadMapViewAnnotation {
+    _images = [[NSMutableArray alloc] init];
+    [_display.mapDelegate clearAnnotation];
+    for (RunningImage *imgM in _imgMs) {
+        CLLocation *location = [[CLLocation alloc] initWithLatitude:[imgM.latitude doubleValue] longitude:[imgM.longitude doubleValue]];
+        UIImage *img = [UIImage imageWithData:[imgM.image getData]];
+        [_images addObject:img];
+        NSInteger index =[_imgMs indexOfObject:imgM];
+        objc_setAssociatedObject(img, INDEX, @(index), OBJC_ASSOCIATION_ASSIGN);//将下标关联
+        
+        [_display.mapDelegate addimage:img AnontationWithLocation:location];
+    }
+    
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
@@ -94,6 +140,7 @@
     }
     
 }
+
 
 /**
  *  切换到数据卡片
@@ -132,23 +179,6 @@
         
     }];
 }
-
-
-- (void)saveRecort
-{
-    
-}
-
-#pragma mark Action
-
-- (void)sharaButtonTouch:(id)sender
-{
-    
-}
-
-
-
-
 
 #pragma mark Delegate
 /**
@@ -200,18 +230,6 @@
     } else {
         [self.navigationController popToViewController:self animated:YES];
     }
-}
-
-
-
-
-- (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
-{
-    NSLog(@"%@",_ImageArray);
-    
-    
-    RunningRecord *record = [RunningRecord object];
-    [record saveWithImages:nil heartImages:_ImageArray];
 }
 
 #pragma mark - QBImagePickerControllerDelegate

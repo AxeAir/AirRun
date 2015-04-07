@@ -28,6 +28,7 @@
 		96982B6D1AD16DE600040A50 /* DocumentHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B6C1AD16DE600040A50 /* DocumentHelper.m */; };
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
+		96F398FC1AD2CFAD0090CCD8 /* EditImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398FB1AD2CFAD0090CCD8 /* EditImageView.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
 		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
 		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
@@ -161,6 +162,8 @@
 		96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineOverlay.m; sourceTree = "<group>"; };
 		96F398F61ACCED270090CCD8 /* GradientPolylineRenderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradientPolylineRenderer.h; sourceTree = "<group>"; };
 		96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineRenderer.m; sourceTree = "<group>"; };
+		96F398FA1AD2CFAD0090CCD8 /* EditImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditImageView.h; sourceTree = "<group>"; };
+		96F398FB1AD2CFAD0090CCD8 /* EditImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditImageView.m; sourceTree = "<group>"; };
 		96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		96F596AD1ACC51B800F56BEA /* RunCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCardView.h; sourceTree = "<group>"; };
@@ -750,6 +753,8 @@
 				E5AC95B51ACD201600A6F133 /* PopInputView.m */,
 				E52D16F91ACE843800DBFA04 /* ImageViewer.h */,
 				E52D16FA1ACE843800DBFA04 /* ImageViewer.m */,
+				96F398FA1AD2CFAD0090CCD8 /* EditImageView.h */,
+				96F398FB1AD2CFAD0090CCD8 /* EditImageView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -869,6 +874,7 @@
 				TargetAttributes = {
 					E50BE0411AC8854A0030863D = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = SZ6E4TG6HK;
 					};
 					E50BE05A1AC8854A0030863D = {
 						CreatedOnToolsVersion = 6.2;
@@ -1038,6 +1044,7 @@
 				96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */,
 				96474D611ACED60300DECE02 /* SignInView.m in Sources */,
 				96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */,
+				96F398FC1AD2CFAD0090CCD8 /* EditImageView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
@@ -1228,6 +1235,7 @@
 			baseConfigurationReference = 06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1244,6 +1252,7 @@
 			baseConfigurationReference = 8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

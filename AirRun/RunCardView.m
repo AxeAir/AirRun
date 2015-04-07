@@ -8,6 +8,8 @@
 
 #import "RunCardView.h"
 
+const static NSInteger kTopCenterViewMargin = 30;
+
 @interface RunCardView ()
 
 @property (strong, nonatomic) UIView *bgView;
@@ -15,7 +17,6 @@
 ///
 @property (strong, nonatomic) UIView *topView;
 @property (strong, nonatomic) UILabel *gpsLable;
-@property (strong, nonatomic) UILabel *pullDownLabel;
 @property (strong, nonatomic) UILabel *distanceLabel;
 @property (strong, nonatomic) UILabel *distanceUnitLabel;
 @property (strong, nonatomic) CAShapeLayer *topLineLayer;
@@ -99,7 +100,7 @@
     _distance = distance;
     _distanceLabel.text = [NSString stringWithFormat:@"%.2f",_distance/1000.0];
     [_distanceLabel sizeToFit];
-    _distanceLabel.center = CGPointMake(_topView.bounds.size.width/2, _topView.bounds.size.height/2);
+    _distanceLabel.center = CGPointMake(_topView.bounds.size.width/2, _topView.bounds.size.height/2-_distanceLabel.bounds.size.height/3);
 }
 
 #pragma mark - Layout
@@ -120,33 +121,13 @@
     
 }
 
-- (void)p_setTopViewLayout {//0.45高度
+- (void)p_setTopViewLayout {//0.35高度
     
     if (!_topView) {
-        _topView = [[UIView alloc] initWithFrame:CGRectMake(15, 5, self.bounds.size.width - 30, self.bounds.size.height*0.45)];
+        _topView = [[UIView alloc] initWithFrame:CGRectMake(kTopCenterViewMargin, 0, self.bounds.size.width - kTopCenterViewMargin*2, self.bounds.size.height*0.35)];
         [self addSubview:_topView];
     }
-    _topView.frame = CGRectMake(15, 5, self.bounds.size.width - 30, self.bounds.size.height*0.45);
-    
-    if (!_pullDownLabel) {
-        _pullDownLabel = [[UILabel alloc] init];
-        _pullDownLabel.text = @"下拉暂停";
-        _pullDownLabel.textColor = [UIColor whiteColor];
-        _pullDownLabel.font = [UIFont systemFontOfSize:14];
-        [_pullDownLabel sizeToFit];
-        [_topView addSubview:_pullDownLabel];
-    }
-    _pullDownLabel.center = CGPointMake(_topView.bounds.size.width/2, _pullDownLabel.frame.size.height/2);
-    
-    if (!_gpsLable) {
-        _gpsLable = [[UILabel alloc] init];
-        _gpsLable.text = @"GPS";
-        _gpsLable.textColor = [UIColor greenColor];
-        _gpsLable.font = [UIFont systemFontOfSize:14];
-        [_gpsLable sizeToFit];
-        [_topView addSubview:_gpsLable];
-    }
-    _gpsLable.center = CGPointMake(_topView.bounds.size.width-_gpsLable.bounds.size.width/2, _gpsLable.bounds.size.height/2);
+    _topView.frame = CGRectMake(kTopCenterViewMargin, 0, self.bounds.size.width - kTopCenterViewMargin*2, self.bounds.size.height*0.35);
     
     if (!_distanceLabel) {
         _distanceLabel = [[UILabel alloc] init];
@@ -156,7 +137,17 @@
         [_distanceLabel sizeToFit];
         [_topView addSubview:_distanceLabel];
     }
-    _distanceLabel.center = CGPointMake(_topView.bounds.size.width/2, _topView.bounds.size.height/2);
+    _distanceLabel.center = CGPointMake(_topView.bounds.size.width/2, _topView.bounds.size.height/2-_distanceLabel.bounds.size.height/3);
+    
+    if (!_gpsLable) {
+        _gpsLable = [[UILabel alloc] init];
+        _gpsLable.text = @"GPS";
+        _gpsLable.textColor = [UIColor greenColor];
+        _gpsLable.font = [UIFont systemFontOfSize:14];
+        [_gpsLable sizeToFit];
+        [_topView addSubview:_gpsLable];
+    }
+    _gpsLable.center = CGPointMake(_topView.bounds.size.width-_gpsLable.bounds.size.width/2, _distanceLabel.frame.origin.y+ _gpsLable.bounds.size.height/2);
 
     if (!_distanceUnitLabel) {
         _distanceUnitLabel = [[UILabel alloc] init];
@@ -184,13 +175,13 @@
     
 }
 
-- (void)p_setCenterViewLayout {
+- (void)p_setCenterViewLayout {//0.35
     
     if (!_centerView) {
-        _centerView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_topView.frame), self.bounds.size.width-30, self.bounds.size.height*0.25)];
+        _centerView = [[UIView alloc] initWithFrame:CGRectMake(kTopCenterViewMargin, CGRectGetMaxY(_topView.frame), self.bounds.size.width-kTopCenterViewMargin*2, self.bounds.size.height*0.35)];
         [self addSubview:_centerView];
     }
-    _centerView.frame = CGRectMake(15, CGRectGetMaxY(_topView.frame), self.bounds.size.width-30, self.bounds.size.height*0.25);
+    _centerView.frame = CGRectMake(kTopCenterViewMargin, CGRectGetMaxY(_topView.frame), self.bounds.size.width-kTopCenterViewMargin*2, self.bounds.size.height*0.35);
     
     if (!_speedUnitLabel) {
         _speedUnitLabel = [[UILabel alloc] init];
@@ -272,45 +263,31 @@
 - (void)p_setBottomViewLayout {
     
     if (!_bottomView) {
-        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_centerView.frame), self.bounds.size.width-30, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame))];
+        _bottomView = [[UIView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(_centerView.frame), self.bounds.size.width, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame))];
         [self addSubview:_bottomView];
     }
-    _bottomView.frame = CGRectMake(15, CGRectGetMaxY(_centerView.frame), self.bounds.size.width-30, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame));
+    _bottomView.frame =CGRectMake(0, CGRectGetMaxY(_centerView.frame), self.bounds.size.width, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame));
     
-    if (!_photoButton) {
-        _photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_photoButton setTintColor:[UIColor whiteColor]];
-        [_photoButton setTitle:@"  记录" forState:UIControlStateNormal];
-        [_photoButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
-        [_photoButton addTarget:self action:@selector(photoButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-        [_photoButton sizeToFit];
-        [_bottomView addSubview:_photoButton];
-    }
-    _photoButton.center = CGPointMake(_photoButton.bounds.size.width/2, _bottomView.bounds.size.height/2);
+//    if (!_photoButton) {
+//        _photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
+//        [_photoButton setTintColor:[UIColor whiteColor]];
+//        [_photoButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
+//        [_photoButton addTarget:self action:@selector(photoButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+//        [_photoButton sizeToFit];
+//        [_bottomView addSubview:_photoButton];
+//    }
+//    _photoButton.center = CGPointMake(_bottomView.bounds.size.width-5-_photoButton.frame.size.width/2, _bottomView.bounds.size.height/2);
     
     if (!_retractButton) {
         _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_retractButton setTintColor:[UIColor whiteColor]];
-        [_retractButton setTitle:@"  收起" forState:UIControlStateNormal];
-        [_retractButton setImage:[UIImage imageNamed:@"menu_icon_bulb.png"] forState:UIControlStateNormal];
+        [_retractButton setImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
         [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_retractButton sizeToFit];
         [_bottomView addSubview:_retractButton];
     }
-    _retractButton.center = CGPointMake(_bottomView.bounds.size.width-_retractButton.bounds.size.width/2, _bottomView.bounds.size.height/2);
+    _retractButton.frame = CGRectMake(0, _bottomView.bounds.size.height-15, _bottomView.frame.size.width, 15);
     
-    
-    if (_divedLineLayer) {
-        [_divedLineLayer removeFromSuperlayer];
-    }
-    _divedLineLayer = [CAShapeLayer layer];
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(_retractButton.frame.origin.x - 15, 10)];
-    [path addLineToPoint:CGPointMake(_retractButton.frame.origin.x - 15, _bottomView.bounds.size.height-10)];
-    _divedLineLayer.lineWidth = 1;
-    _divedLineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
-    _divedLineLayer.path = path.CGPath;
-    [_bottomView.layer addSublayer:_divedLineLayer];
 }
 
 #pragma mark - Event

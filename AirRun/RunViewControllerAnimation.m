@@ -14,7 +14,7 @@
     
     POPSpringAnimation *slideOutAnimation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
     slideOutAnimation.toValue = [NSValue valueWithCGPoint:point];
-    slideOutAnimation.springBounciness = 0;
+    slideOutAnimation.springBounciness = 0.0f;
     slideOutAnimation.springSpeed = 3;
     if (completeBlock) {
         slideOutAnimation.completionBlock = completeBlock;
