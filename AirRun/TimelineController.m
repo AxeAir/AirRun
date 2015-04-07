@@ -10,12 +10,14 @@
 #import "UConstants.h"
 #import "TimelineTableViewCell.h"
 #import <BlurImageProcessor/ALDBlurImageProcessor.h>
+#import "RunningRecordEntity.h"
 
 @interface TimelineController ()
 
 @property (nonatomic, strong) UIImageView *headerbackgroundImageView;
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UIView *headerShadow;
+@property (nonatomic, strong) NSArray *dataSource;
 
 @end
 
@@ -28,23 +30,30 @@
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
+         _dataSource = arraydata;
+        [self.tableView reloadData];
+    } withErrorBlock:^{
+        
+    }];
 }
+
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
-    return 5;
+    return [_dataSource count];
 }
 
 
@@ -52,13 +61,12 @@
     static NSString *identifer = @"timelineCell";
     TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     
-    RunningRecord *model = [[RunningRecord alloc] init];
-    model.weather = @"dd";
-    model.heart = @"跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录";
-    [model setObject:@[@"ddd"] forKey:@"heartImages"];
+    RunningRecordEntity *record = [_dataSource objectAtIndex:indexPath.row];
+    record.weather = @"dd";
+    record.heart = @"跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录";
     
     if (cell == nil) {
-        cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer runningRecord:model];
+        cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer runningRecord:record];
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     return cell;

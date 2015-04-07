@@ -60,4 +60,13 @@
     }];
 }
 
++ (void)findAllWithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
+{
+    [[AirLocalPersistence shareLocalPersistenceInstance] findAllObjects:[RunningRecordEntity class] WithCompleteBlocks:^(NSArray *arraydata) {
+        completeBlock(arraydata);
+    } withErrorBlock:^{
+        errorBlock();
+    }];
+}
+
 @end

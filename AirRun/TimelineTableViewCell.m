@@ -11,7 +11,7 @@
 
 @interface TimelineTableViewCell()
 
-@property (nonatomic, strong) RunningRecord *runningRecord;
+@property (nonatomic, strong) RunningRecordEntity *runningRecord;
 
 @property (nonatomic, strong) UIView *mainView;
 
@@ -39,7 +39,7 @@
 
 @implementation TimelineTableViewCell
 
-- (instancetype)initWithRunningRecord:(RunningRecord *)aRunningrecord
+- (instancetype)initWithRunningRecord:(RunningRecordEntity *)aRunningrecord
 {
     self = [self init];
     if (self) {
@@ -51,7 +51,7 @@
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString *)reuseIdentifier
-                runningRecord:(RunningRecord *)aRunningrecord
+                runningRecord:(RunningRecordEntity *)aRunningrecord
 {
     self = [self initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
@@ -81,7 +81,7 @@
     [_mapImageView setImage:[UIImage imageNamed:@"map.jpg"]];
     
     
-    if (_runningRecord.heart ==nil && [_runningRecord objectForKey:@"heartImages"]==nil) {
+    if (_runningRecord.heart ==nil && _runningRecord.heartimages==nil) {
         
         _footerView = [self createFooterView:MaxY(_mapImageView)];
         
@@ -167,7 +167,7 @@
 //    [_mainView addSubview:_footerView];
 //    
 //    [_mainView setFrame:CGRectMake(0, 0, 100, MaxY(_footerView))];
-    [self setFrame:CGRectMake(0, 0, 100, MaxY(_footerView)+10)];
+    [self setFrame:CGRectMake(0, 0, 100, MaxY(_footerView)+20)];
 }
 
 
@@ -189,7 +189,7 @@
 
 - (UIView *)createHeartView:(CGFloat)top
 {
-    UIView *heart = [[UIView alloc] initWithFrame:CGRectMake(10, top, Main_Screen_Width-40, 200)];
+    UIView *heart = [[UIView alloc] initWithFrame:CGRectMake(30, top, Main_Screen_Width-80, 200)];
     
     UILabel *runningRecord = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, WIDTH(heart), 20)];
     runningRecord.text = @"跑步记录";
@@ -214,11 +214,21 @@
     }
     [heart addSubview:_heartLabel];
     
-    if ([_runningRecord objectForKey:@"heartImages"]!=nil) {
+    if (_runningRecord.heartimages!=nil) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
-        NSArray *date = [_runningRecord objectForKey:@"heartImages"];
+        
+        NSArray *date = [_runningRecord getImages];
+        
+        NSInteger imagewidth = (Main_Screen_Width-80-40)/5;
+        
+        NSInteger index= 0;
         for (NSObject *o in date) {
-            
+            UIImageView *view = [[UIImageView alloc] initWithImage:(UIImage*)o];
+            [view setFrame:CGRectMake((imagewidth+10)*index, 12.5, imagewidth, imagewidth)];
+            [[view layer] setCornerRadius:5];
+            [[view layer] setMasksToBounds:YES];
+            [_heartImageView addSubview:view];
+            index ++;
         }
     }
     else
@@ -227,7 +237,7 @@
     }
     
     [heart addSubview:_heartImageView];
-    [heart setFrame:CGRectMake(10, top, Main_Screen_Width-40, MaxY(_heartImageView))];
+    [heart setFrame:CGRectMake(30, top, Main_Screen_Width-80, MaxY(_heartImageView))];
     
     return heart;
 }

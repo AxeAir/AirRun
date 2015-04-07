@@ -35,7 +35,6 @@
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
     

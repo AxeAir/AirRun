@@ -7,16 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RunningRecord.h"
+#import "RunningRecordEntity.h"
 
 @interface TimelineTableViewCell : UITableViewCell
 
 
-- (instancetype)initWithRunningRecord:(RunningRecord *)aRunningrecord;
+- (instancetype)initWithRunningRecord:(RunningRecordEntity *)aRunningrecord;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString *)reuseIdentifier
-                runningRecord:(RunningRecord *)aRunningrecord;
+                runningRecord:(RunningRecordEntity *)aRunningrecord;
 
 //- (void)configWithRunningecord:(RunningRecordModel *)aRunningrecord;
 @end

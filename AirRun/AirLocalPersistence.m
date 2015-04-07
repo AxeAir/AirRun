@@ -58,9 +58,9 @@
     }];
 }
 
-- (void)findObject:(NSManagedObject *)object WithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
+- (void)findAllObjects:(Class )cla WithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
 {
-    NSArray *objects = [[object class] MR_findAll];
+    NSArray *objects = [cla MR_findAll];
     completeBlock(objects);
 }
 

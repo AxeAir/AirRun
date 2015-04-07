@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  远端持久化模型
+ */
 @interface AirServerPersistence : NSObject
 
 + (instancetype)shareServerPersistenceInstance;

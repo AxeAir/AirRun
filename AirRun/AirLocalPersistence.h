@@ -11,6 +11,9 @@
 #import <CoreData+MagicalRecord.h>
 #import "BlockMacro.h"
 
+/**
+ *  本地持久化模型
+ */
 @interface AirLocalPersistence : NSObject
 
 /**
@@ -26,7 +29,7 @@
 
 - (void)updateObject:(NSManagedObject *)object withCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 
-- (void)findObject:(NSManagedObject *)object WithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
+- (void)findAllObjects:(Class )cla WithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 
 
 @end
