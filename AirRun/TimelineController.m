@@ -27,6 +27,7 @@
     self.tableView.tableHeaderView = [self tableHeaderView];
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -38,12 +39,12 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 5;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 1;
+    return 5;
 }
 
 
@@ -53,10 +54,8 @@
     
     RunningRecord *model = [[RunningRecord alloc] init];
     model.weather = @"dd";
-//    model.distance = 10000;
-//    model.averagespeed = 12.1;
-//    model.time = 1222;
-    
+    model.heart = @"跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录";
+    [model setObject:@[@"ddd"] forKey:@"heartImages"];
     
     if (cell == nil) {
         cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer runningRecord:model];
@@ -73,7 +72,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 20.0;
+    return 0.0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section

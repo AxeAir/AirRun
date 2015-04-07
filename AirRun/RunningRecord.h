@@ -20,8 +20,10 @@
 @property (nonatomic, strong) NSNumber  *pm25;
 @property (nonatomic, strong) NSNumber  *averagespeed;
 @property (nonatomic, strong) NSString  *finishtime;
-@property (nonatomic, strong) AVFile  *mapshot;
+@property (nonatomic, strong) AVFile    *mapshot;
+@property (nonatomic, strong) NSString  *heart;
 
 - (void)saveWithImages:(NSArray *)images;
+
 
 @end
