@@ -1,9 +1,9 @@
 //
 //  RunningRecordEntity.m
-//  AirRun
+//  Pods
 //
 //  Created by ChenHao on 4/7/15.
-//  Copyright (c) 2015 AEXAIR. All rights reserved.
+//
 //
 
 #import "RunningRecordEntity.h"
@@ -14,5 +14,12 @@
 @dynamic path;
 @dynamic time;
 @dynamic kcar;
+@dynamic distance;
+@dynamic weather;
+@dynamic pm25;
+@dynamic averagespeed;
+@dynamic finishtime;
+@dynamic mapshot;
+@dynamic heart;
 
 @end
