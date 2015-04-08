@@ -673,7 +673,9 @@ const char *OUTPOSITION = "OutPosition";
         [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
         
         RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
-        imgM.image = [NSString stringWithFormat:@"%@.jpg",[kImageFolder stringByAppendingPathComponent:[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]]];
+        NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]];
+        imgM.image = [kImageFolder stringByAppendingPathComponent:imageName];
+        //imgM.image = @"ddd";
         [DocumentHelper saveImage:image ToFolderName:kImageFolder WithImageName:imgM.image.lastPathComponent];
         imgM.longitude = @(_currentLocation.coordinate.longitude);
         imgM.latitude = @(_currentLocation.coordinate.latitude);

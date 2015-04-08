@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1514" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="RunningImageEntity" representedClassName="RunningImageEntity" syncable="YES">
-        <attribute name="image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="isheart" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
@@ -24,7 +24,7 @@
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RunningImageEntity" positionX="-54" positionY="63" width="128" height="118"/>
+        <element name="RunningImageEntity" positionX="-54" positionY="63" width="128" height="120"/>
         <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="255"/>
     </elements>
 </model>

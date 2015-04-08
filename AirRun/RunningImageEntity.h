@@ -20,7 +20,7 @@
 @property (nonatomic, retain) NSNumber * isheart;
 @property (nonatomic, retain) NSString * recordid;
 
-
+- (instancetype)init;
 
 - (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 

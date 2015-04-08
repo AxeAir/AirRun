@@ -70,6 +70,11 @@ static const char *INDEX = "index";
         };
         editImageView.closeBlock = ^(EditImageView *editImageView) {
             [this p_loadMapViewAnnotation];
+            
+            //为地图截图
+            [this.display mapViewShotWithComplete:^(MKMapSnapshot *snapshot) {
+                this.parameters.mapshot = [ImageHeler compressImage:snapshot.image];
+            }];
         };
         
     };
@@ -91,11 +96,6 @@ static const char *INDEX = "index";
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    //为地图截图
-    [_display mapViewShotWithComplete:^(MKMapSnapshot *snapshot) {
-        _parameters.mapshot = [ImageHeler compressImage:snapshot.image];
-    }];
 }
 
 - (instancetype)initWithParameters:(RunningRecordEntity *)parameters WithPoints:(NSArray *)pints WithImages:(NSArray *)images
@@ -241,23 +241,28 @@ static const char *INDEX = "index";
     _parameters.heart = _inputcard.textview.text;
     _parameters.finishtime = [[NSDate alloc] init];
 
-//    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
-//    record.heart = _inputcard.textview.text;
-//    record.finishtime = [[NSDate alloc] init];
-//    record.time = @1000;
-//    record.distance = @10000;
-//    record.averagespeed = @2.8;
-//    record.city = @"李家沱";
+    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
+    record.heart = _inputcard.textview.text;
+    record.finishtime = [[NSDate alloc] init];
+    record.time = @1000;
+    record.distance = @10000;
+    record.averagespeed = @2.8;
+    _parameters.city = @"李家沱";
 
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [_parameters setImages:_ImageArray];
     }
     
-    for (RunningImageEntity *imgEntity in _imgMs) {
-        imgEntity.recordid = _parameters.identifer;
-    }
+//    for (RunningImageEntity *imgEntity in _imgMs) {
+//        imgEntity.recordid = _parameters.identifer;
+//        [imgEntity savewithCompleteBlock:^{
+//            NSLog(@"complete");
+//        } withErrorBlock:^{
+//            NSLog(@"error");
+//        }];
+//    }
     
-    [_parameters savewithCompleteBlock:^{
+    [record savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");
     } withErrorBlock:^{
         
