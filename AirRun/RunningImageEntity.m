@@ -33,4 +33,9 @@
     }];
 }
 
+
+- (void)deleteEntity
+{
+    [self MR_deleteEntity];
+}
 @end

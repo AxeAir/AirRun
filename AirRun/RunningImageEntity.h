@@ -23,4 +23,6 @@
 
 
 - (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
+
+- (void)deleteEntity;
 @end

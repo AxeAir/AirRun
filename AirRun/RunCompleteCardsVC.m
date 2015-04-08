@@ -249,7 +249,6 @@ static const char *INDEX = "index";
 //    record.averagespeed = @2.8;
 //    record.city = @"李家沱";
 
-    
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [_parameters setImages:_ImageArray];
     }
@@ -314,6 +313,36 @@ static const char *INDEX = "index";
     [self presentViewController:pickerImage animated:YES completion:^{
         
     }];
+}
+
+
+#pragma mark UIPicker
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"])
+    {
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
+//        NSData *data;
+//        data = UIImageJPEGRepresentation(image, 0.8);
+//        //图片保存的路径
+//        //这里将图片放在沙盒的documents文件夹中
+//        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//        //文件管理器
+//        NSFileManager *fileManager = [NSFileManager defaultManager];
+//        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
+//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
+//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
+        //得到选择后沙盒中图片的完整路径
+        //NSString *imgPath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:nil];
+        [_ImageArray addObject:image];
+        [_popview addSmallPictures:_ImageArray];
+    }
 }
 
 @end

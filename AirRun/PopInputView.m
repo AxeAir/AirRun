@@ -108,7 +108,8 @@
         _addimageButton = [[UIButton alloc] init];
         [_bottomView addSubview:_addimageButton];
     }
-    [_addimageButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [_addimageButton setImage:[UIImage imageNamed:@"ImageAdd"] forState:UIControlStateNormal];
+    [_addimageButton setTitle:@"添加照片" forState:UIControlStateNormal];
     [_addimageButton setFrame:CGRectMake(WIDTH(_headerView)-35, 5, 30, 30)];
     [_addimageButton addTarget:self action:@selector(addImage:) forControlEvents:UIControlEventTouchUpInside];
    

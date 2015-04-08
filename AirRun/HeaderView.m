@@ -55,7 +55,7 @@ static SelectAvatar Ablock;
     }
     
     _UserIntroduce = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_AvatarView)+10, MaxY(_UsernameLabel)+2, 200, 20)];
-    _UserIntroduce.text = @"大家好  我是Yeti";
+    _UserIntroduce.text = [currentuser objectForKey:@"introduction"];
     [_UserIntroduce setFont:[UIFont systemFontOfSize:14]];
     [_UserIntroduce setTextColor:[UIColor whiteColor]];
     [self addSubview:_UserIntroduce];
