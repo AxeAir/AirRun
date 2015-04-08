@@ -27,9 +27,13 @@
 - (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
 {
     [[AirLocalPersistence shareLocalPersistenceInstance] createObject:self withCompleteBlock:^{
-        completeBlock();
+        if (completeBlock) {
+            completeBlock();
+        }
     } withErrorBlock:^{
-        errorBlock();
+        if (errorBlock) {
+            errorBlock();
+        }
     }];
 }
 
