@@ -180,10 +180,17 @@
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM月dd日 HH:mm"];
     
-    [detailTime setText:@"MM月dd日 HH:mm"];
+    [detailTime setText:[formatter stringFromDate:_runningRecord.finishtime]];
     [detailTime setTextColor:RGBCOLOR(138, 138, 138)];
     [detailTime setFont:[UIFont systemFontOfSize:14]];
     [footer addSubview:detailTime];
+    
+    
+    
+    UIView *location = [self createLocationView];
+    [location setFrame:CGRectMake(Main_Screen_Width-75-30, 10, 75, 20)];
+    [footer addSubview:location];
+    
     return footer;
 }
 
@@ -214,7 +221,7 @@
     }
     [heart addSubview:_heartLabel];
     
-    if (_runningRecord.heartimages!=nil) {
+    if ([[_runningRecord getImages] count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
         
         NSArray *date = [_runningRecord getImages];
@@ -240,6 +247,14 @@
     [heart setFrame:CGRectMake(30, top, Main_Screen_Width-80, MaxY(_heartImageView))];
     
     return heart;
+}
+
+- (UIView *)createLocationView
+{
+    UIView *location = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 75, 20)];
+    [location setBackgroundColor:RGBCOLOR(237, 237, 237)];
+    
+    return location;
 }
 
 

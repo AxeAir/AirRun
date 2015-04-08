@@ -17,7 +17,7 @@ static NSString *const kImageFolder = @"Image";
 + (NSString *)DocumentPath:(NSString *)filename;
 
 + (NSString *)saveImage:(UIImage *)image ToSandBoxWithFileName:(NSString *)name;
-+ (void)saveImage:(UIImage *)image ToFolderName:(NSString *)folderName WithImageName:(NSString *)imgName;
++ (NSString *)saveImage:(UIImage *)image ToFolderName:(NSString *)folderName WithImageName:(NSString *)imgName;
 
 + (BOOL)checkFileExist:(NSString *)fileName;
 + (BOOL)checkFile:(NSString *)fileName AtFolder:(NSString *)folderName;

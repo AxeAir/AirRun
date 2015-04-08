@@ -236,18 +236,23 @@ static const char *INDEX = "index";
 - (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
 {
     RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
+    record.heart = _inputcard.textview.text;
+    record.finishtime = [[NSDate alloc] init];
+    record.time = @1000;
+    record.distance = @10000;
+    record.averagespeed = @2.8;
     
-    if (_ImageArray !=nil) {
+    if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [record setImages:_ImageArray];
     }
-    
     [record savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");
     } withErrorBlock:^{
         
     }];
-    
 }
+
+
 
 
 #pragma mark - QBImagePickerControllerDelegate
