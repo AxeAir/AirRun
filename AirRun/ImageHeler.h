@@ -15,4 +15,14 @@
 
 + (UIImage *)fullResolutionImageFromALAsset:(ALAsset *)asset;
 
+/**
+ *@param image 压缩图片是原来的1/4
+ */
++ (NSData *)compressImage:(UIImage *)image;
+
+/**
+ *@param 把图片缩小到新的大小
+ */
++ (UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
+
 @end

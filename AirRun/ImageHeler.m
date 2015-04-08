@@ -21,4 +21,53 @@
                                  orientation:(UIImageOrientation)assetRep.orientation];
     return img;
 }
+
++ (NSData *)compressImage:(UIImage *)image {
+    CGSize imagesize=image.size;
+    
+    while (true) {
+        if(imagesize.width>800)
+        {
+            imagesize.width=imagesize.width/4;
+            imagesize.height=imagesize.height/4;
+        }
+        else
+        {
+            break;
+        }
+    }
+    while (true) {
+        if(imagesize.height>1100)
+        {
+            imagesize.width=imagesize.width/4;
+            imagesize.height=imagesize.height/4;
+        }
+        else
+        {
+            break;
+        }
+    }
+    
+    image=[self imageWithImage:image scaledToSize:imagesize];
+    
+    NSData *data;
+    data = UIImageJPEGRepresentation(image, 0.5);
+    
+    return data;
+    
+}
+
++ (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize{
+    // Create a graphics image context
+    UIGraphicsBeginImageContext(newSize);
+    // Tell the old image to draw in this new context, with the desired
+    // new size
+    [image drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+    // Get the new image from the context
+    UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+    // End the context
+    UIGraphicsEndImageContext();
+    // Return the new image.
+    return newImage;
+}
 @end

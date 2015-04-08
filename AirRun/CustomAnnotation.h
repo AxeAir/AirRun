@@ -19,7 +19,8 @@
 @interface CustomAnnotation : NSObject <MKAnnotation>
 
 @property (readwrite, nonatomic) CLLocationCoordinate2D coordinate;
-@property (strong, nonatomic) NSArray *imageArray;
+//@property (strong, nonatomic) NSArray *imageArray;
+@property (strong, nonatomic) UIImage *image;
 @property (weak, nonatomic) id<CustomeAnnotationDelegate> delegate;
 
 + (MKAnnotationView *)creatAnnotationForMapView:(MKMapView *)map Annotation:(id<MKAnnotation>)annotation;

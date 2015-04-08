@@ -154,7 +154,8 @@
 - (void)addimage:(UIImage *)image AnontationWithLocation:(CLLocation *)location {
     
     CustomAnnotation *customAnnotation = [[CustomAnnotation alloc] init];
-    customAnnotation.imageArray = @[image];
+//    customAnnotation.imageArray = @[image];
+    customAnnotation.image = image;
     customAnnotation.coordinate = location.coordinate;
     customAnnotation.delegate = self;
     [self.mapView addAnnotation:customAnnotation];

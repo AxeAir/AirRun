@@ -18,6 +18,8 @@
 #import "RunningImageEntity.h"
 #import "CustomAnnotation.h"
 #import "EditImageView.h"
+#import "DocumentHelper.h"
+#import "ImageHeler.h"
 
 static const char *INDEX = "index";
 
@@ -31,7 +33,7 @@ static const char *INDEX = "index";
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
 @property (nonatomic, strong) RunningRecordEntity *parameters;
 @property (nonatomic, strong) NSArray *path;
-@property (nonatomic, strong) NSMutableArray *imgMs;//跑步中的图片(model)
+@property (nonatomic, strong) NSMutableArray *imgMs;//跑步中的图片(entity)
 @property (nonatomic, strong) NSMutableArray *images;//跑步中的图片(image)
 @property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
 @end
@@ -59,7 +61,7 @@ static const char *INDEX = "index";
     __weak RunCompleteCardsVC *this = self;
     _display.mapDelegate.imgAnnotationBlock = ^(CustomAnnotation *annotation){
         
-        UIImage *img = annotation.imageArray[0];
+        UIImage *img = annotation.image;
         NSInteger index = [objc_getAssociatedObject(img, INDEX) integerValue];
         EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view];
         editImageView.currentIndex = index;
@@ -92,7 +94,7 @@ static const char *INDEX = "index";
     
     //为地图截图
     [_display mapViewShotWithComplete:^(MKMapSnapshot *snapshot) {
-        _parameters.mapshot = [AVFile fileWithData:UIImageJPEGRepresentation(snapshot.image, 0.5)];
+        _parameters.mapshot = [ImageHeler compressImage:snapshot.image];
     }];
 }
 
@@ -117,7 +119,8 @@ static const char *INDEX = "index";
     [_display.mapDelegate clearAnnotation];
     for (RunningImageEntity *imgM in _imgMs) {
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[imgM.latitude doubleValue] longitude:[imgM.longitude doubleValue]];
-        UIImage *img = [UIImage imageWithData:imgM.image];
+        UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgM.image.lastPathComponent AtFolder:kImageFolder]];
+        
         [_images addObject:img];
         NSInteger index =[_imgMs indexOfObject:imgM];
         objc_setAssociatedObject(img, INDEX, @(index), OBJC_ASSOCIATION_ASSIGN);//将下标关联
@@ -235,17 +238,19 @@ static const char *INDEX = "index";
 
 - (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
 {
-    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
-    record.heart = _inputcard.textview.text;
-    record.finishtime = [[NSDate alloc] init];
-    record.time = @1000;
-    record.distance = @10000;
-    record.averagespeed = @2.8;
+    
+    _parameters.heart = _inputcard.textview.text;
+    _parameters.finishtime = [[NSDate alloc] init];
     
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
-        [record setImages:_ImageArray];
+        [_parameters setImages:_ImageArray];
     }
-    [record savewithCompleteBlock:^{
+    
+    for (RunningImageEntity *imgEntity in _imgMs) {
+        imgEntity.recordid = _parameters.identifer;
+    }
+    
+    [_parameters savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");
     } withErrorBlock:^{
         

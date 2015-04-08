@@ -14,7 +14,7 @@
 
 @property (nonatomic, retain) NSNumber * latitude;
 @property (nonatomic, retain) NSNumber * longitude;
-@property (nonatomic, retain) NSData * image;
+@property (nonatomic, retain) NSString * image;
 @property (nonatomic, retain) NSNumber * isheart;
 @property (nonatomic, retain) NSString * recordid;
 

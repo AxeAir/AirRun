@@ -7,6 +7,7 @@
 //
 
 #import "RunningImageEntity.h"
+#import <CoreData+MagicalRecord.h>
 
 
 @implementation RunningImageEntity
@@ -16,5 +17,10 @@
 @dynamic image;
 @dynamic isheart;
 @dynamic recordid;
+
+- (instancetype)init
+{
+    return [RunningImageEntity MR_createEntity];
+}
 
 @end

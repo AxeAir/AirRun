@@ -21,6 +21,7 @@ static CGFloat kPointHeight = 14.0;
 @interface CustomAnnotationView ()
 
 @property (strong, nonatomic) UIButton *bgButton;
+@property (strong, nonatomic) UIImageView *imageView;
 
 @end
 
@@ -49,9 +50,12 @@ static CGFloat kPointHeight = 14.0;
     CustomAnnotation *customAnnotation = (CustomAnnotation *)self.annotation;
     if (customAnnotation) {
         
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, customAnnotation.image.size.width/50, customAnnotation.image.size.height/50)];
+        _imageView.image = customAnnotation.image;
         //计算自身的frame大小
-        CGFloat selfWidth = customAnnotation.imageArray.count * kImageViewWidth + (customAnnotation.imageArray.count - 1) *kSpanMargin + kLeftMargin + kRightMargin;
-        CGFloat selfHeight = kTopMargin + kImageViewHeight + kBottomMargin + kPointHeight;
+//        CGFloat selfWidth = customAnnotation.imageArray.count * kImageViewWidth + (customAnnotation.imageArray.count - 1) *kSpanMargin + kLeftMargin + kRightMargin;
+        CGFloat selfWidth = kLeftMargin + _imageView.bounds.size.width + kRightMargin;
+        CGFloat selfHeight = kTopMargin + _imageView.bounds.size.height + kBottomMargin + kPointHeight;
         self.frame = CGRectMake(0, 0, selfWidth, selfHeight);
         
         //移动整个view的位置，让箭头指向点
@@ -74,15 +78,17 @@ static CGFloat kPointHeight = 14.0;
     [self addSubview:self.bgButton];
     
     //装配图片
-    CustomAnnotation *customAnnotation = (CustomAnnotation *)self.annotation;
-    for (int i = 0; i < customAnnotation.imageArray.count; i++) {
-        CGFloat imageX = kLeftMargin + i*kImageViewWidth + i*kSpanMargin;
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, kTopMargin, kImageViewWidth, kImageViewHeight)];
-        imageView.backgroundColor = [UIColor blackColor];
-        imageView.contentMode = UIViewContentModeScaleAspectFit;
-        imageView.image = customAnnotation.imageArray[i];
-        [self addSubview:imageView];
-    }
+//    CustomAnnotation *customAnnotation = (CustomAnnotation *)self.annotation;
+    _imageView.center = CGPointMake(kLeftMargin+_imageView.bounds.size.width/2, kTopMargin+_imageView.bounds.size.height/2);
+    [self addSubview:_imageView];
+//    for (int i = 0; i < customAnnotation.imageArray.count; i++) {
+//        CGFloat imageX = kLeftMargin + i*kImageViewWidth + i*kSpanMargin;
+//        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(imageX, kTopMargin, kImageViewWidth, kImageViewHeight)];
+//        imageView.backgroundColor = [UIColor blackColor];
+//        imageView.contentMode = UIViewContentModeScaleAspectFit;
+//        imageView.image = customAnnotation.imageArray[i];
+//        [self addSubview:imageView];
+//    }
     
 }
 
@@ -94,7 +100,7 @@ static CGFloat kPointHeight = 14.0;
     
     CustomAnnotation *customAnnotation = (CustomAnnotation *)self.annotation;
     if (customAnnotation) {
-        [[UIColor grayColor] setFill];
+        [[UIColor whiteColor] setFill];
 
         /**
          *  画三角形

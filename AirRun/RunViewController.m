@@ -26,6 +26,8 @@
 #import <objc/runtime.h>
 #import "ReadyView.h"
 #import "RunGuideViewController.h"
+#import "DocumentHelper.h"
+#import "DateHelper.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -294,6 +296,7 @@ const char *OUTPOSITION = "OutPosition";
     _runSimpleCardView.photoButtonBlock = ^(UIButton *button){
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
         imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = this;
         [this presentViewController:imagePicker animated:YES completion:nil];
     };
@@ -362,7 +365,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)photoButtonTouch:(UIBarButtonItem *)sender {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
@@ -410,6 +414,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)completeButtonTouch:(UIButton *)sender {
     
     RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
+    [record generateIdentifer];
     record.path = [self p_convertPointsToJsonString];
     record.time = @(_runcardView.time);
     record.kcar = @(_runcardView.kcal);
@@ -668,8 +673,8 @@ const char *OUTPOSITION = "OutPosition";
         [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
         
         RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
-        NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
-        imgM.image = [AVFile fileWithData:imgData];
+        imgM.image = [NSString stringWithFormat:@"%@.jpg",[kImageFolder stringByAppendingPathComponent:[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]]];
+        [DocumentHelper saveImage:image ToFolderName:kImageFolder WithImageName:imgM.image.lastPathComponent];
         imgM.longitude = @(_currentLocation.coordinate.longitude);
         imgM.latitude = @(_currentLocation.coordinate.latitude);
         imgM.isheart = @0;
