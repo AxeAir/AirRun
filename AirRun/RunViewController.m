@@ -17,13 +17,15 @@
 #import <POP.h>
 #import "RunViewControllerAnimation.h"
 #import "RunPauseView.h"
-#import "RunningRecord.h"
+#import "RunningRecordEntity.h"
+#import "RunningImageEntity.h"
 #import "RunCompleteCardsVC.h"
 #import <AVFoundation/AVFoundation.h>
 #import "CountView.h"
-#import "RunningImage.h"
 #import "DocumentHelper.h"
 #import <objc/runtime.h>
+#import "ReadyView.h"
+#import "RunGuideViewController.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -44,8 +46,11 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) CountView *countView;
 
 @property (strong, nonatomic) UIBarButtonItem *photoButton;
+@property (strong, nonatomic) UIBarButtonItem *gpsButton;
+@property (strong, nonatomic) ReadyView *readyView;
 
 @property (strong, nonatomic) MKMapView *mapView;
+@property (strong, nonatomic) UIView *mapMaskView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) NSMutableArray *points;
@@ -81,17 +86,8 @@ const char *OUTPOSITION = "OutPosition";
     _points = [[NSMutableArray alloc] init];
     _imageArray = [[NSMutableArray alloc] init];
     
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
-    self.navigationItem.leftBarButtonItem = menuButton;
     
-    _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
-    self.navigationItem.rightBarButtonItem = _photoButton;
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg.png"]
-                       forBarPosition:UIBarPositionAny
-                           barMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
+    [self p_setNavgation];
     [self p_setMapView];
     [self p_setLocationManager];
     [self p_setLayout];
@@ -123,6 +119,35 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 #pragma mark - Layout
+
+- (void)p_setNavgation {
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
+    self.navigationItem.leftBarButtonItem = menuButton;
+    
+    _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
+    
+    _gpsButton = [[UIBarButtonItem alloc] initWithTitle:@"GPS" style:UIBarButtonItemStylePlain target:self action:nil];
+    [_gpsButton setTintColor:[UIColor redColor]];
+    
+    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    titleLable.text = @"24 ℃\nPM 45";
+    titleLable.textColor = [UIColor whiteColor];
+    titleLable.font = [UIFont systemFontOfSize:12];
+    titleLable.numberOfLines = 2;
+    self.navigationItem.titleView = titleLable;
+    
+    UIBarButtonItem *guideButton = [[UIBarButtonItem alloc] initWithTitle:@"跑步指导" style:UIBarButtonItemStylePlain target:self action:@selector(guideButtonTouch:)];
+    self.navigationItem.rightBarButtonItem = guideButton;
+    
+//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg.png"]
+                                                 forBarPosition:UIBarPositionAny
+                                                     barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+
+    
+    
+}
 - (void)p_setMapView {
     
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64)];
@@ -132,6 +157,12 @@ const char *OUTPOSITION = "OutPosition";
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.showsUserLocation = YES;
     [self.view addSubview:_mapView];
+    
+    _mapMaskView = [[UIView alloc] initWithFrame:_mapView.frame];
+    _mapMaskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskTapGesture:)];
+    [_mapMaskView addGestureRecognizer:tapGesture];
+    [self.view addSubview:_mapMaskView];
     
 }
 
@@ -154,6 +185,11 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)p_setLayout {
+    
+    _readyView = [[ReadyView alloc] initWithText:@"适合户外跑步"];
+    _readyView.frame = CGRectMake(0, 64, self.view.bounds.size.width, 25);
+    _readyView.backgroundColor = [UIColor greenColor];
+    [self.view addSubview:_readyView];
     
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_startButton setTitle:@"开始" forState:UIControlStateNormal];
@@ -255,11 +291,24 @@ const char *OUTPOSITION = "OutPosition";
         }];
 
     };
+    _runSimpleCardView.photoButtonBlock = ^(UIButton *button){
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.delegate = this;
+        [this presentViewController:imagePicker animated:YES completion:nil];
+    };
     [self.view addSubview:_runSimpleCardView];
     
     
 }
 #pragma mark - Event
+#pragma mark Gesture Event
+
+- (void)mapMaskTapGesture:(UITapGestureRecognizer *)tapGesture {
+    UIView *view = tapGesture.view;
+    [view removeFromSuperview];
+}
+
 #pragma mark Timer Event
 
 - (void)runTimerEvent:(NSTimer *)timer {
@@ -268,6 +317,12 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 #pragma mark Button Event
+
+- (void)guideButtonTouch:(UIBarButtonItem *)sender {
+    RunGuideViewController *vc = [[RunGuideViewController alloc] init];
+    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:vc animated:YES completion:nil];
+}
 
 - (void)pauseButtonTouch:(UIButton *)sender {
     
@@ -354,19 +409,20 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
-    RunningRecord *record = [[RunningRecord alloc] init];
+    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
     record.path = [self p_convertPointsToJsonString];
     record.time = @(_runcardView.time);
     record.kcar = @(_runcardView.kcal);
     record.distance = @(_runcardView.distance);
-//    @property (nonatomic, strong) NSString  *weather;
-//    @property (nonatomic, strong) NSNumber  *pm25;
+//    @property (nonatomic, retain) NSString * weather;
+//    @property (nonatomic, retain) NSNumber * pm25;
     record.averagespeed = @(_runcardView.speed);
-    
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    dateFormatter.dateFormat = @"yyyy-MM-dd HH:mm:ss";
-    record.finishtime = [dateFormatter stringFromDate:[NSDate date]];
-//    @property (nonatomic, strong) AVFile  *mapshot;
+    record.finishtime = [NSDate date];
+//    @property (nonatomic, retain) NSData * mapshot;
+//    @property (nonatomic, retain) NSString * heart;
+//    @property (nonatomic, retain) NSString * objectId;
+//    @property (nonatomic, retain) NSData * heartimages;
+
     
     RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:record WithPoints:_points WithImages:_imageArray];
     [self.navigationController pushViewController:vc animated:YES];
@@ -380,15 +436,24 @@ const char *OUTPOSITION = "OutPosition";
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
         //逻辑
+        self.navigationItem.rightBarButtonItem = _photoButton;
+        self.navigationItem.leftBarButtonItem = _gpsButton;
+        [_mapMaskView removeFromSuperview];
         [self p_audioPlay:@"start"];
         _runState = RunViewControllerRunStateRunning;
         [_runTimer setFireDate:[NSDate distantPast]];
         [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
 
-        
         [UIView animateWithDuration:0.3 animations:^{
-            _runcardView.frame = CGRectMake(0, 64, self.view.bounds.size.width, RuncardViewHieght);
+            _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
+        } completion:^(BOOL finished) {
+            [_readyView removeFromSuperview];
+            [UIView animateWithDuration:0.3 animations:^{
+                _runcardView.frame = CGRectMake(0, 64, self.view.bounds.size.width, RuncardViewHieght);
+            }];
         }];
+        
+        
         
         [RunViewControllerAnimation view:_startButton
                    SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+10+_startButton.bounds.size.height/2)
@@ -421,6 +486,30 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 #pragma mark Private Function
+
+- (void)p_setGPS:(CGFloat)gps {
+    
+    if (gps < 0)
+    {
+        //no single
+        [_gpsButton setTintColor:[UIColor grayColor]];
+    }
+    else if (gps > 163)
+    {
+        //poor single
+        [_gpsButton setTintColor:[UIColor redColor]];
+    }
+    else if (gps > 48)
+    {
+        //average single
+        [_gpsButton setTintColor:[UIColor orangeColor]];
+    }
+    else
+    {
+        // Full Signal
+        [_gpsButton setTintColor:[UIColor greenColor]];
+    }
+}
 
 - (void)p_audioPlay:(NSString *)name {
     
@@ -534,11 +623,12 @@ const char *OUTPOSITION = "OutPosition";
         _runcardView.distance += distance;
         _runcardView.speed = _runcardView.distance/_runcardView.time;
         _runcardView.kcal += [self p_getCalorie:2.0/3600.0 speed:_runcardView.currentSpeed*3.6];
-        _runcardView.gps = newLocation.horizontalAccuracy;
+        
         
         _runSimpleCardView.distance = _runcardView.distance;
         _runSimpleCardView.speed = _runcardView.speed;
         
+        [self p_setGPS:newLocation.horizontalAccuracy];
         //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
         if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
             _runCardLastKmDistance = _runcardView.distance;
@@ -577,12 +667,12 @@ const char *OUTPOSITION = "OutPosition";
         UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
         [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
         
-        RunningImage *imgM = [[RunningImage alloc] init];
+        RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
         NSData *imgData = UIImageJPEGRepresentation(image, 0.5);
         imgM.image = [AVFile fileWithData:imgData];
-        imgM.longitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.longitude];
-        imgM.latitude = [NSString stringWithFormat:@"%lf",_currentLocation.coordinate.latitude];
-        
+        imgM.longitude = @(_currentLocation.coordinate.longitude);
+        imgM.latitude = @(_currentLocation.coordinate.latitude);
+        imgM.isheart = @0;
         [_imageArray addObject:imgM];
         
     }

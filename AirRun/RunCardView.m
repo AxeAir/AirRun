@@ -139,15 +139,15 @@ const static NSInteger kTopCenterViewMargin = 30;
     }
     _distanceLabel.center = CGPointMake(_topView.bounds.size.width/2, _topView.bounds.size.height/2-_distanceLabel.bounds.size.height/3);
     
-    if (!_gpsLable) {
-        _gpsLable = [[UILabel alloc] init];
-        _gpsLable.text = @"GPS";
-        _gpsLable.textColor = [UIColor greenColor];
-        _gpsLable.font = [UIFont systemFontOfSize:14];
-        [_gpsLable sizeToFit];
-        [_topView addSubview:_gpsLable];
-    }
-    _gpsLable.center = CGPointMake(_topView.bounds.size.width-_gpsLable.bounds.size.width/2, _distanceLabel.frame.origin.y+ _gpsLable.bounds.size.height/2);
+//    if (!_gpsLable) {
+//        _gpsLable = [[UILabel alloc] init];
+//        _gpsLable.text = @"GPS";
+//        _gpsLable.textColor = [UIColor greenColor];
+//        _gpsLable.font = [UIFont systemFontOfSize:14];
+//        [_gpsLable sizeToFit];
+//        [_topView addSubview:_gpsLable];
+//    }
+//    _gpsLable.center = CGPointMake(_topView.bounds.size.width-_gpsLable.bounds.size.width/2, _distanceLabel.frame.origin.y+ _gpsLable.bounds.size.height/2);
 
     if (!_distanceUnitLabel) {
         _distanceUnitLabel = [[UILabel alloc] init];

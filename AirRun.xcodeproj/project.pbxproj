@@ -16,6 +16,8 @@
 		96474D5C1ACED5F000DECE02 /* RegisterAndLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D5B1ACED5F000DECE02 /* RegisterAndLoginViewController.m */; };
 		96474D611ACED60300DECE02 /* SignInView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D5E1ACED60300DECE02 /* SignInView.m */; };
 		96474D621ACED60300DECE02 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D601ACED60300DECE02 /* SignUpView.m */; };
+		9673DD531AD4F516006E64B7 /* RunGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD521AD4F516006E64B7 /* RunGuideViewController.m */; };
+		9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD561AD4F52F006E64B7 /* GuideView.m */; };
 		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
@@ -29,6 +31,9 @@
 		96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F51ACCED270090CCD8 /* GradientPolylineOverlay.m */; };
 		96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */; };
 		96F398FC1AD2CFAD0090CCD8 /* EditImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398FB1AD2CFAD0090CCD8 /* EditImageView.m */; };
+		96F399011AD4C5ED0090CCD8 /* RunningImageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398FE1AD4C5ED0090CCD8 /* RunningImageEntity.m */; };
+		96F399021AD4C5ED0090CCD8 /* RunningRecordEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F399001AD4C5ED0090CCD8 /* RunningRecordEntity.m */; };
+		96F399051AD4E13B0090CCD8 /* ReadyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F399041AD4E13B0090CCD8 /* ReadyView.m */; };
 		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
 		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
 		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
@@ -63,8 +68,6 @@
 		E55BCC891AD3BC1B00F9B5F2 /* AirLocalPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */; };
 		E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */; };
 		E55BCC931AD3E74E00F9B5F2 /* AexAir.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */; };
-		E55BCCA71AD4543700F9B5F2 /* RunningRecordEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCA61AD4543700F9B5F2 /* RunningRecordEntity.m */; };
-		E55BCCAA1AD4543800F9B5F2 /* RunningImageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCA91AD4543800F9B5F2 /* RunningImageEntity.m */; };
 		E55BCCAD1AD4595A00F9B5F2 /* BlockMacro.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCCAC1AD4595A00F9B5F2 /* BlockMacro.m */; };
 		E5668F971ACA5D6D009A0D61 /* RECommonFunctions.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F921ACA5D6D009A0D61 /* RECommonFunctions.m */; };
 		E5668F981ACA5D6D009A0D61 /* RESideMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F941ACA5D6D009A0D61 /* RESideMenu.m */; };
@@ -143,6 +146,10 @@
 		96474D5E1ACED60300DECE02 /* SignInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInView.m; sourceTree = "<group>"; };
 		96474D5F1ACED60300DECE02 /* SignUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignUpView.h; sourceTree = "<group>"; };
 		96474D601ACED60300DECE02 /* SignUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignUpView.m; sourceTree = "<group>"; };
+		9673DD511AD4F516006E64B7 /* RunGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunGuideViewController.h; sourceTree = "<group>"; };
+		9673DD521AD4F516006E64B7 /* RunGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunGuideViewController.m; sourceTree = "<group>"; };
+		9673DD551AD4F52F006E64B7 /* GuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideView.h; sourceTree = "<group>"; };
+		9673DD561AD4F52F006E64B7 /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
 		96982B401ACF7EE000040A50 /* ValidateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateHelper.h; sourceTree = "<group>"; };
 		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
 		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
@@ -165,6 +172,12 @@
 		96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradientPolylineRenderer.m; sourceTree = "<group>"; };
 		96F398FA1AD2CFAD0090CCD8 /* EditImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditImageView.h; sourceTree = "<group>"; };
 		96F398FB1AD2CFAD0090CCD8 /* EditImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditImageView.m; sourceTree = "<group>"; };
+		96F398FD1AD4C5ED0090CCD8 /* RunningImageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningImageEntity.h; sourceTree = "<group>"; };
+		96F398FE1AD4C5ED0090CCD8 /* RunningImageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningImageEntity.m; sourceTree = "<group>"; };
+		96F398FF1AD4C5ED0090CCD8 /* RunningRecordEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunningRecordEntity.h; sourceTree = "<group>"; };
+		96F399001AD4C5ED0090CCD8 /* RunningRecordEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningRecordEntity.m; sourceTree = "<group>"; };
+		96F399031AD4E13B0090CCD8 /* ReadyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReadyView.h; sourceTree = "<group>"; };
+		96F399041AD4E13B0090CCD8 /* ReadyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReadyView.m; sourceTree = "<group>"; };
 		96F596A81ACC518B00F56BEA /* WGS84TOGCJ02.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WGS84TOGCJ02.h; sourceTree = "<group>"; };
 		96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WGS84TOGCJ02.m; sourceTree = "<group>"; };
 		96F596AD1ACC51B800F56BEA /* RunCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCardView.h; sourceTree = "<group>"; };
@@ -233,10 +246,6 @@
 		E55BCC8A1AD3BC3900F9B5F2 /* AirServerPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirServerPersistence.h; sourceTree = "<group>"; };
 		E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirServerPersistence.m; sourceTree = "<group>"; };
 		E55BCC921AD3E74E00F9B5F2 /* AexAir.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AexAir.xcdatamodel; sourceTree = "<group>"; };
-		E55BCCA51AD4543700F9B5F2 /* RunningRecordEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RunningRecordEntity.h; path = ../RunningRecordEntity.h; sourceTree = "<group>"; };
-		E55BCCA61AD4543700F9B5F2 /* RunningRecordEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RunningRecordEntity.m; path = ../RunningRecordEntity.m; sourceTree = "<group>"; };
-		E55BCCA81AD4543800F9B5F2 /* RunningImageEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RunningImageEntity.h; path = ../RunningImageEntity.h; sourceTree = "<group>"; };
-		E55BCCA91AD4543800F9B5F2 /* RunningImageEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RunningImageEntity.m; path = ../RunningImageEntity.m; sourceTree = "<group>"; };
 		E55BCCAB1AD4595A00F9B5F2 /* BlockMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockMacro.h; sourceTree = "<group>"; };
 		E55BCCAC1AD4595A00F9B5F2 /* BlockMacro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockMacro.m; sourceTree = "<group>"; };
 		E5668F911ACA5D6D009A0D61 /* RECommonFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RECommonFunctions.h; sourceTree = "<group>"; };
@@ -368,6 +377,25 @@
 			name = View;
 			sourceTree = "<group>";
 		};
+		9673DD501AD4F4EE006E64B7 /* RunGuide */ = {
+			isa = PBXGroup;
+			children = (
+				9673DD541AD4F51A006E64B7 /* View */,
+				9673DD511AD4F516006E64B7 /* RunGuideViewController.h */,
+				9673DD521AD4F516006E64B7 /* RunGuideViewController.m */,
+			);
+			name = RunGuide;
+			sourceTree = "<group>";
+		};
+		9673DD541AD4F51A006E64B7 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9673DD551AD4F52F006E64B7 /* GuideView.h */,
+				9673DD561AD4F52F006E64B7 /* GuideView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		96982B621AD16CF300040A50 /* audio */ = {
 			isa = PBXGroup;
 			children = (
@@ -416,6 +444,8 @@
 				96F398F71ACCED270090CCD8 /* GradientPolylineRenderer.m */,
 				96F596AD1ACC51B800F56BEA /* RunCardView.h */,
 				96F596AE1ACC51B800F56BEA /* RunCardView.m */,
+				96F399031AD4E13B0090CCD8 /* ReadyView.h */,
+				96F399041AD4E13B0090CCD8 /* ReadyView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -590,11 +620,11 @@
 		E55BCC8D1AD3E63100F9B5F2 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
+				96F398FD1AD4C5ED0090CCD8 /* RunningImageEntity.h */,
+				96F398FE1AD4C5ED0090CCD8 /* RunningImageEntity.m */,
+				96F398FF1AD4C5ED0090CCD8 /* RunningRecordEntity.h */,
+				96F399001AD4C5ED0090CCD8 /* RunningRecordEntity.m */,
 				E55BCC911AD3E74E00F9B5F2 /* AexAir.xcdatamodeld */,
-				E55BCCA81AD4543800F9B5F2 /* RunningImageEntity.h */,
-				E55BCCA91AD4543800F9B5F2 /* RunningImageEntity.m */,
-				E55BCCA51AD4543700F9B5F2 /* RunningRecordEntity.h */,
-				E55BCCA61AD4543700F9B5F2 /* RunningRecordEntity.m */,
 			);
 			name = Entity;
 			sourceTree = "<group>";
@@ -602,6 +632,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				9673DD501AD4F4EE006E64B7 /* RunGuide */,
 				E5FAC7EF1AD118E800A2C7DD /* Profile */,
 				E5FAC7E11AD0103200A2C7DD /* TimeLine */,
 				96474D581ACED5CA00DECE02 /* RegisterAndLogIn */,
@@ -1052,7 +1083,7 @@
 				96F398FC1AD2CFAD0090CCD8 /* EditImageView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
-				E55BCCAA1AD4543800F9B5F2 /* RunningImageEntity.m in Sources */,
+				96F399011AD4C5ED0090CCD8 /* RunningImageEntity.m in Sources */,
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
@@ -1071,6 +1102,7 @@
 				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
 				E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */,
+				9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */,
 				96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */,
 				96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
@@ -1083,7 +1115,6 @@
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
 				E52D16D61ACE4F3300DBFA04 /* SettingViewController.m in Sources */,
 				E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */,
-				E55BCCA71AD4543700F9B5F2 /* RunningRecordEntity.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
 				96474D621ACED60300DECE02 /* SignUpView.m in Sources */,
@@ -1092,6 +1123,8 @@
 				E52D16F21ACE6C1D00DBFA04 /* QBAssetsCollectionViewLayout.m in Sources */,
 				E52D16F51ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m in Sources */,
 				E52D16ED1ACE6C1D00DBFA04 /* QBAssetsCollectionFooterView.m in Sources */,
+				96F399021AD4C5ED0090CCD8 /* RunningRecordEntity.m in Sources */,
+				96F399051AD4E13B0090CCD8 /* ReadyView.m in Sources */,
 				E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */,
 				E52D16EE1ACE6C1D00DBFA04 /* QBAssetsCollectionOverlayView.m in Sources */,
 				E5FAC7EC1AD0E9BE00A2C7DD /* RunningImage.m in Sources */,
@@ -1100,6 +1133,7 @@
 				E52D16F81ACE780300DBFA04 /* ImageHeler.m in Sources */,
 				E52BAC4E1AD2B4A000EC051C /* NSDate+change.m in Sources */,
 				E5AC95CF1ACD80FB00A6F133 /* UIView+CHQuartz.m in Sources */,
+				9673DD531AD4F516006E64B7 /* RunGuideViewController.m in Sources */,
 				E52D16EC1ACE6C1D00DBFA04 /* QBAssetsCollectionCheckmarkView.m in Sources */,
 				E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,

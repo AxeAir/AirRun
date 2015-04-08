@@ -15,7 +15,7 @@
 #import "QBImagePickerController.h"
 #import "ImageHeler.h"
 #import "MapViewDelegate.h"
-#import "RunningImage.h"
+#import "RunningImageEntity.h"
 #import "CustomAnnotation.h"
 #import "EditImageView.h"
 
@@ -115,9 +115,9 @@ static const char *INDEX = "index";
 - (void)p_loadMapViewAnnotation {
     _images = [[NSMutableArray alloc] init];
     [_display.mapDelegate clearAnnotation];
-    for (RunningImage *imgM in _imgMs) {
+    for (RunningImageEntity *imgM in _imgMs) {
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[imgM.latitude doubleValue] longitude:[imgM.longitude doubleValue]];
-        UIImage *img = [UIImage imageWithData:[imgM.image getData]];
+        UIImage *img = [UIImage imageWithData:imgM.image];
         [_images addObject:img];
         NSInteger index =[_imgMs indexOfObject:imgM];
         objc_setAssociatedObject(img, INDEX, @(index), OBJC_ASSOCIATION_ASSIGN);//将下标关联
