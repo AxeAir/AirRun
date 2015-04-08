@@ -27,11 +27,11 @@
     return filePath;
 }
 
-+ (void)saveImage:(UIImage *)image ToFolderName:(NSString *)folderName WithImageName:(NSString *)imgName {
++ (NSString *)saveImage:(UIImage *)image ToFolderName:(NSString *)folderName WithImageName:(NSString *)imgName {
     
-    NSString *path = [self DocumentPath:folderName];
-    path = [path stringByAppendingString:imgName];
+    NSString *path = [NSString stringWithFormat:@"%@/%@",[self DocumentPath:folderName],imgName];
     [UIImagePNGRepresentation(image)writeToFile:path atomically:YES];
+    return path;
     
 }
 

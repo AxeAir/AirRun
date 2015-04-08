@@ -62,8 +62,6 @@
     TimelineTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     
     RunningRecordEntity *record = [_dataSource objectAtIndex:indexPath.row];
-    record.weather = @"dd";
-    record.heart = @"跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录跑步记录";
     
     if (cell == nil) {
         cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer runningRecord:record];

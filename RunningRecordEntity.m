@@ -7,6 +7,7 @@
 //
 
 #import "RunningRecordEntity.h"
+#import "DocumentHelper.h"
 
 
 @implementation RunningRecordEntity
@@ -32,21 +33,36 @@
 
 - (void)generateIdentifer
 {
-    NSInteger timestamp = (long)[[NSDate alloc] timeIntervalSince1970];
+    NSInteger timestamp = (long)[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
     self.identifer = [NSString stringWithFormat:@"%@%ld",[[AVUser currentUser] objectId],timestamp];
 }
 
 
 - (void)setImages:(NSArray *)images
 {
-    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:images];
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    NSInteger index = 0;
+    NSInteger timestamp = (long)[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
+    for (UIImage *image in images) {
+        
+        NSString *path = [DocumentHelper saveImage:image ToFolderName:@"Image" WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
+        [temp addObject:path];
+        index++;
+    }
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:temp];
     self.heartimages = data;
 }
 
 - (NSArray *)getImages
 {
     if (self.heartimages!=nil) {
-        return [NSKeyedUnarchiver unarchiveObjectWithData:self.heartimages];
+        [NSKeyedUnarchiver unarchiveObjectWithData:self.heartimages];
+        
+        NSMutableArray *temp =[[NSMutableArray alloc] init];
+        for (NSString *path in [NSKeyedUnarchiver unarchiveObjectWithData:self.heartimages]) {
+            [temp addObject:[UIImage imageWithContentsOfFile:path]];
+        }
+        return temp;
     }
     return nil;
 }
