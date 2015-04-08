@@ -241,6 +241,7 @@ static const char *INDEX = "index";
     record.time = @1000;
     record.distance = @10000;
     record.averagespeed = @2.8;
+    record.city = @"李家沱";
     
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [record setImages:_ImageArray];

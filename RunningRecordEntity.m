@@ -22,6 +22,7 @@
 @dynamic finishtime;
 @dynamic mapshot;
 @dynamic heart;
+@dynamic city;
 @dynamic objectId;
 @dynamic identifer;
 @dynamic heartimages;
@@ -60,7 +61,9 @@
         
         NSMutableArray *temp =[[NSMutableArray alloc] init];
         for (NSString *path in [NSKeyedUnarchiver unarchiveObjectWithData:self.heartimages]) {
-            [temp addObject:[UIImage imageWithContentsOfFile:path]];
+            
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@",[DocumentHelper documentsPath],path];
+            [temp addObject:[UIImage imageWithContentsOfFile:filePath]];
         }
         return temp;
     }
