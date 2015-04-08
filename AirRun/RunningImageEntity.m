@@ -23,4 +23,14 @@
     return [RunningImageEntity MR_createEntity];
 }
 
+
+- (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
+{
+    [[AirLocalPersistence shareLocalPersistenceInstance] createObject:self withCompleteBlock:^{
+        completeBlock();
+    } withErrorBlock:^{
+        errorBlock();
+    }];
+}
+
 @end

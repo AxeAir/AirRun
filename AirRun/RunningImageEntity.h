@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-
+#import "BlockMacro.h"
+#import <CoreData+MagicalRecord.h>
+#import "AirLocalPersistence.h"
 
 @interface RunningImageEntity : NSManagedObject
 
@@ -18,4 +20,7 @@
 @property (nonatomic, retain) NSNumber * isheart;
 @property (nonatomic, retain) NSString * recordid;
 
+
+
+- (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 @end
