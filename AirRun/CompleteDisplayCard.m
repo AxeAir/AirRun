@@ -128,9 +128,9 @@
     [view addSubview:km];
     
     
-    UIImageView *water = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH(self)/2+30,  15, 20, 20)];
+    UIImageView *water = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH(self)/2+30,  15, 30, 30)];
     
-    [water setImage:[UIImage imageNamed:@"setting"]];
+    [water setImage:[UIImage imageNamed:@"cal"]];
     [view addSubview:water];
     
     UILabel *calLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, 0, 0, 0)];
@@ -180,7 +180,7 @@
     
     UIImageView *water = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH(self)/2+30,  15, 20, 20)];
     
-    [water setImage:[UIImage imageNamed:@"setting"]];
+    [water setImage:[UIImage imageNamed:@"cal"]];
     [view addSubview:water];
     
     UILabel *calLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, 0, 0, 0)];

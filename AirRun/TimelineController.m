@@ -30,17 +30,20 @@
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    
     [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
-         _dataSource = arraydata;
+        _dataSource = arraydata;
         [self.tableView reloadData];
     } withErrorBlock:^{
         
     }];
+   
 }
 
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

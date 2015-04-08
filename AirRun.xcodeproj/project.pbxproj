@@ -102,6 +102,7 @@
 		E5AC95C91ACD6B2400A6F133 /* PM25Model.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95C81ACD6B2400A6F133 /* PM25Model.m */; };
 		E5AC95CB1ACD75E800A6F133 /* perm_group_location.png in Resources */ = {isa = PBXBuildFile; fileRef = E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */; };
 		E5AC95CF1ACD80FB00A6F133 /* UIView+CHQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */; };
+		E5B980031AD57EF8009771BF /* cal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E5B980021AD57EF8009771BF /* cal@2x.png */; };
 		E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */; };
 		E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */; };
 		E5FAC7E91AD02EDF00A2C7DD /* header1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */; };
@@ -301,6 +302,7 @@
 		E5AC95CA1ACD75E800A6F133 /* perm_group_location.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = perm_group_location.png; sourceTree = "<group>"; };
 		E5AC95CD1ACD80FB00A6F133 /* UIView+CHQuartz.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+CHQuartz.h"; sourceTree = "<group>"; };
 		E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+CHQuartz.m"; sourceTree = "<group>"; };
+		E5B980021AD57EF8009771BF /* cal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cal@2x.png"; sourceTree = "<group>"; };
 		E5FAC7E21AD0106C00A2C7DD /* TimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineController.h; sourceTree = "<group>"; };
 		E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineController.m; sourceTree = "<group>"; };
 		E5FAC7E51AD0169B00A2C7DD /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
@@ -658,6 +660,7 @@
 		E5668F8E1ACA5D2B009A0D61 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E5B980021AD57EF8009771BF /* cal@2x.png */,
 				96982B621AD16CF300040A50 /* audio */,
 				E5FAC7E81AD02EDF00A2C7DD /* header1.jpg */,
 				E58E41381ACECB6400839947 /* seabg@2x.png */,
@@ -960,6 +963,7 @@
 				E5668F9F1ACA61CB009A0D61 /* bg@2x.png in Resources */,
 				E5668FA11ACA628C009A0D61 /* bg1@2x.png in Resources */,
 				E591399E1ACBE63D00F9D048 /* biaoqing@2x.png in Resources */,
+				E5B980031AD57EF8009771BF /* cal@2x.png in Resources */,
 				96982B6A1AD16D2900040A50 /* start.m4a in Resources */,
 				E58E41391ACECB6400839947 /* seabg@2x.png in Resources */,
 				E52D16FD1ACE90C100DBFA04 /* trash@2x.png in Resources */,

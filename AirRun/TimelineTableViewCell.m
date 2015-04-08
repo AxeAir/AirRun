@@ -63,14 +63,24 @@
 
 - (void)commonInit
 {
+    
     _mainView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 200)];
+    
+    
+    [[_mainView layer] setShadowOffset:CGSizeMake(0, 1)]; //为阴影偏移量,默认为(左右,上下)
+    [[_mainView layer] setShadowRadius:1]; //为阴影四角圆角半径,默认值为
+    [[_mainView layer] setShadowOpacity:0.5]; //为阴影透明度(取值为[0,1])
+    [[_mainView layer] setShadowColor:[UIColor grayColor].CGColor]; //为阴影颜色
+    
     
     [_mainView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [[_mainView layer] setCornerRadius:4];
-    [[_mainView layer] setMasksToBounds:YES];
+    //[[_mainView layer] setMasksToBounds:YES];
     [self.contentView addSubview:_mainView];
+    
+    
     if (_headerView ==nil) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
+        _headerView = [self createHeaderView];
         [_mainView addSubview:_headerView];
     }
     
@@ -106,6 +116,20 @@
     [self setFrame:CGRectMake(0, 0, 100, MaxY(_footerView)+20)];
 }
 
+
+
+- (UIView *)createHeaderView
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
+    //[headerView setBackgroundColor:[UIColor redColor]];
+    UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
+    [kcal setText:[NSString stringWithFormat:@"%d Kcal   ≈   %d 个冰淇淋",100,100]];
+    [kcal setTextColor:RGBCOLOR(255, 164, 74)];
+    
+    [headerView addSubview:kcal];
+    
+    return headerView;
+}
 
 - (UIView *)createDataView
 {
@@ -212,10 +236,12 @@
     }
     [heart addSubview:_heartLabel];
     
-    if ([[_runningRecord getImages] count]!=0) {
+    
+    NSArray *date = [_runningRecord getImages];
+    if ([date count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
         
-        NSArray *date = [_runningRecord getImages];
+        //NSArray *date = [_runningRecord getImages];
         
         NSInteger imagewidth = (Main_Screen_Width-80-40)/5;
         
@@ -251,8 +277,8 @@
     UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(locationImageView)+3, 3, 100, 14)];
     
     cityLabel.text = _runningRecord.city;
-    [cityLabel setTextColor:RGBCOLOR(237, 237, 237)];
     [cityLabel setFont:[UIFont systemFontOfSize:12]];
+    [cityLabel setTextColor:RGBCOLOR(143, 143, 143)];
     [location addSubview:cityLabel];
     return location;
 }
