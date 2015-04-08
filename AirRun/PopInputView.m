@@ -81,8 +81,8 @@
         _closeButton = [[UIButton alloc] init];
         [_headerView addSubview:_closeButton];
     }
-    [_closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
-    [_closeButton setFrame:CGRectMake(5, 5, 30, 30)];
+    [_closeButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [_closeButton setFrame:CGRectMake(10, 7, 26, 26)];
     [_closeButton addTarget:self action:@selector(disimiss) forControlEvents:UIControlEventTouchUpInside];
     
     //header okButton
@@ -90,8 +90,8 @@
         _okButton = [[UIButton alloc] init];
         [_headerView addSubview:_okButton];
     }
-    [_okButton setImage:[UIImage imageNamed:@"ic_menu_mark"] forState:UIControlStateNormal];
-    [_okButton setFrame:CGRectMake(WIDTH(_headerView)-35, 5, 30, 30)];
+    [_okButton setImage:[UIImage imageNamed:@"finish"] forState:UIControlStateNormal];
+    [_okButton setFrame:CGRectMake(WIDTH(_headerView)-33, 7, 26, 26)];
     [_okButton addTarget:self action:@selector(ok:) forControlEvents:UIControlEventTouchUpInside];
     
     if (_textView == nil) {
@@ -108,9 +108,13 @@
         _addimageButton = [[UIButton alloc] init];
         [_bottomView addSubview:_addimageButton];
     }
-    [_addimageButton setImage:[UIImage imageNamed:@"ImageAdd"] forState:UIControlStateNormal];
+    
+    [_addimageButton setImage: [UIImage imageNamed:@"ImageAdd"] forState:UIControlStateNormal];
     [_addimageButton setTitle:@"添加照片" forState:UIControlStateNormal];
-    [_addimageButton setFrame:CGRectMake(WIDTH(_headerView)-35, 5, 30, 30)];
+    [_addimageButton setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 20)];
+    [_addimageButton setFrame:CGRectMake(WIDTH(_headerView)-85, 10, 80, 20)];
+    [_addimageButton setTitleColor:RGBCOLOR(117, 117, 117) forState:UIControlStateNormal];
+    [[_addimageButton titleLabel] setFont:[UIFont systemFontOfSize:12]];
     [_addimageButton addTarget:self action:@selector(addImage:) forControlEvents:UIControlEventTouchUpInside];
    
 }

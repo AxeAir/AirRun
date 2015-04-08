@@ -157,9 +157,9 @@
     
     UIView *view = [[UIView alloc] init];
     
-    UIImageView *flag = [[UIImageView alloc] initWithFrame:CGRectMake(30, 15, 20, 20)];
+    UIImageView *flag = [[UIImageView alloc] initWithFrame:CGRectMake(30, 15, 32, 32)];
     
-    [flag setImage:[UIImage imageNamed:@"setting"]];
+    [flag setImage:[UIImage imageNamed:@"sharespeed2"]];
     [view addSubview:flag];
     
     UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+5, 0, 0, 0)];
