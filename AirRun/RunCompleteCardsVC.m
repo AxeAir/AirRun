@@ -238,9 +238,17 @@ static const char *INDEX = "index";
 
 - (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
 {
-    
     _parameters.heart = _inputcard.textview.text;
     _parameters.finishtime = [[NSDate alloc] init];
+
+//    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
+//    record.heart = _inputcard.textview.text;
+//    record.finishtime = [[NSDate alloc] init];
+//    record.time = @1000;
+//    record.distance = @10000;
+//    record.averagespeed = @2.8;
+//    record.city = @"李家沱";
+
     
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [_parameters setImages:_ImageArray];

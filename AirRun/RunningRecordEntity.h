@@ -29,6 +29,7 @@
 @property (nonatomic, retain) NSString * heart;
 @property (nonatomic, retain) NSString * objectId;
 @property (nonatomic, retain) NSString * identifer;
+@property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSData * heartimages;
 
 - (instancetype)init;

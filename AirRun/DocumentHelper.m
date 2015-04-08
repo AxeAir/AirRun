@@ -31,7 +31,7 @@
     
     NSString *path = [NSString stringWithFormat:@"%@/%@",[self DocumentPath:folderName],imgName];
     [UIImagePNGRepresentation(image)writeToFile:path atomically:YES];
-    return path;
+    return [NSString stringWithFormat:@"%@/%@",folderName,imgName];
     
 }
 

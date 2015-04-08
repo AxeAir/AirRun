@@ -63,14 +63,24 @@
 
 - (void)commonInit
 {
+    
     _mainView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 200)];
+    
+    
+    [[_mainView layer] setShadowOffset:CGSizeMake(0, 1)]; //为阴影偏移量,默认为(左右,上下)
+    [[_mainView layer] setShadowRadius:1]; //为阴影四角圆角半径,默认值为
+    [[_mainView layer] setShadowOpacity:0.5]; //为阴影透明度(取值为[0,1])
+    [[_mainView layer] setShadowColor:[UIColor grayColor].CGColor]; //为阴影颜色
+    
     
     [_mainView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [[_mainView layer] setCornerRadius:4];
-    [[_mainView layer] setMasksToBounds:YES];
+    //[[_mainView layer] setMasksToBounds:YES];
     [self.contentView addSubview:_mainView];
+    
+    
     if (_headerView ==nil) {
-        _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
+        _headerView = [self createHeaderView];
         [_mainView addSubview:_headerView];
     }
     
@@ -79,6 +89,8 @@
         [_mainView addSubview:_mapImageView];
     }
     [_mapImageView setImage:[UIImage imageNamed:@"map.jpg"]];
+    
+    [_mapImageView addSubview:[self createDataView]];
     
     
     if (_runningRecord.heart ==nil && _runningRecord.heartimages==nil) {
@@ -101,73 +113,76 @@
         [self setFrame:CGRectMake(0, 0, WIDTH(_mainView), MaxY(_footerView))];
     }
     
-    
-    
-    
-//    if (_distanceIconImageView == nil) {
-//        _distanceIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20, MaxY(_mapImageView)+20, 20, 20)];
-//        [_distanceIconImageView setImage:[UIImage imageNamed:@"setting"]];
-//        [_mainView addSubview:_distanceIconImageView];
-//    }
-//    
-//    if (_distanceLabel == nil) {
-//        _distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_distanceIconImageView)+10, MaxY(_mapImageView)+20, 100, 20)];
-//        [_mainView addSubview:_distanceLabel];
-//    }
-//    [_distanceLabel setText:[NSString stringWithFormat:@"%ld",_runningRecord.distance]];
-//    
-//    
-//    if (_speedIconImageView == nil) {
-//        _speedIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+Main_Screen_Width/3, MaxY(_mapImageView)+20, 20, 20)];
-//        [_speedIconImageView setImage:[UIImage imageNamed:@"setting"]];
-//        [_mainView addSubview:_speedIconImageView];
-//    }
-//    
-//    if (_speedLabel == nil) {
-//        _speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_speedIconImageView)+10, MaxY(_mapImageView)+20, 100, 20)];
-//        [_mainView addSubview:_speedLabel];
-//    }
-//    [_speedLabel setText:[NSString stringWithFormat:@"%.2lf",_runningRecord.averagespeed]];
-//    
-//    if (_timeIconImageView == nil) {
-//        _timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+Main_Screen_Width/3*2, MaxY(_mapImageView)+20, 20, 20)];
-//        [_timeIconImageView setImage:[UIImage imageNamed:@"setting"]];
-//        [_mainView addSubview:_timeIconImageView];
-//    }
-//    
-//    if (_timeLabel == nil) {
-//        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+10, MaxY(_mapImageView)+20, 100, 20)];
-//        [_mainView addSubview:_timeLabel];
-//    }
-//    [_timeLabel setText:[NSString stringWithFormat:@"%ld",_runningRecord.time]];
-//    
-//    
-//    if (_heartLabel == nil) {
-//        _heartLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, MaxY(_mapImageView)+100+10, Main_Screen_Width-30, 50)];
-//        [_mainView addSubview:_heartLabel];
-//        [_heartLabel setNumberOfLines:0];
-//    }
-//    
-//    [_heartLabel setText:@"如果你无法简洁的表达你的想法，那只说明你还不够了解它。如果你无法简洁的表达你的想法，那只说明你还不够了解它。"];
-//    [_heartLabel sizeToFit];
-//    
-//    
-//    if (_heartView == nil) {
-//        _heartView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), Main_Screen_Width, 50)];
-//    }
-//    
-//    UIImageView *h1 = [[UIImageView alloc] initWithFrame:CGRectMake(15, 2.5, 45, 45)];
-//    [h1 setImage:[UIImage imageNamed:@"header1.jpg"]];
-//    [_heartView addSubview:h1];
-//    [_mainView addSubview:_heartView];
-//    
-//    
-//    _footerView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartView), Main_Screen_Width, 40)];
-//    
-//    [_mainView addSubview:_footerView];
-//    
-//    [_mainView setFrame:CGRectMake(0, 0, 100, MaxY(_footerView))];
     [self setFrame:CGRectMake(0, 0, 100, MaxY(_footerView)+20)];
+}
+
+
+
+- (UIView *)createHeaderView
+{
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
+    //[headerView setBackgroundColor:[UIColor redColor]];
+    UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
+    [kcal setText:[NSString stringWithFormat:@"%d Kcal   ≈   %d 个冰淇淋",100,100]];
+    [kcal setTextColor:RGBCOLOR(255, 164, 74)];
+    
+    [headerView addSubview:kcal];
+    
+    return headerView;
+}
+
+- (UIView *)createDataView
+{
+    UIView *dataview = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT(_mapImageView)-36, WIDTH(_mapImageView), 36)];
+    
+    UIView *bgMask = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dataview.frame.size.width, dataview.frame.size.height)];
+    [bgMask setBackgroundColor:RGBACOLOR(107, 107, 107, 0.6)];
+    [dataview addSubview:bgMask];
+        if (_distanceIconImageView == nil) {
+            _distanceIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20,8, 20, 20)];
+            [_distanceIconImageView setImage:[UIImage imageNamed:@"setting"]];
+            [dataview addSubview:_distanceIconImageView];
+        }
+    
+        if (_distanceLabel == nil) {
+            _distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_distanceIconImageView)+10, 8, 100, 20)];
+            [_distanceLabel setTextColor:RGBCOLOR(207, 207, 207)];
+            [dataview addSubview:_distanceLabel];
+        }
+        [_distanceLabel setText:[NSString stringWithFormat:@"%ld",[_runningRecord.distance integerValue]]];
+    
+    
+        if (_speedIconImageView == nil) {
+            _speedIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3, 8, 20, 20)];
+            [_speedIconImageView setImage:[UIImage imageNamed:@"setting"]];
+            [dataview addSubview:_speedIconImageView];
+        }
+    
+        if (_speedLabel == nil) {
+            _speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_speedIconImageView)+10, 8, 100, 20)];
+            [_speedLabel setTextColor:RGBCOLOR(207, 207, 207)];
+            [dataview addSubview:_speedLabel];
+        }
+        [_speedLabel setText:[NSString stringWithFormat:@"%.2lf",[_runningRecord.averagespeed floatValue]]];
+    
+        if (_timeIconImageView == nil) {
+            _timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3*2, 8, 20, 20)];
+            [_timeIconImageView setImage:[UIImage imageNamed:@"setting"]];
+            [dataview addSubview:_timeIconImageView];
+        }
+    
+        if (_timeLabel == nil) {
+            _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+10, 8, 100, 20)];
+            [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
+            [dataview addSubview:_timeLabel];
+        }
+        [_timeLabel setText:[NSString stringWithFormat:@"%ld",[_runningRecord.time integerValue]]];
+        
+    
+    
+    
+    
+    return dataview;
 }
 
 
@@ -221,10 +236,12 @@
     }
     [heart addSubview:_heartLabel];
     
-    if ([[_runningRecord getImages] count]!=0) {
+    
+    NSArray *date = [_runningRecord getImages];
+    if ([date count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
         
-        NSArray *date = [_runningRecord getImages];
+        //NSArray *date = [_runningRecord getImages];
         
         NSInteger imagewidth = (Main_Screen_Width-80-40)/5;
         
@@ -254,6 +271,15 @@
     UIView *location = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 75, 20)];
     [location setBackgroundColor:RGBCOLOR(237, 237, 237)];
     
+    UIImageView *locationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, 14, 14)];
+    [location addSubview:locationImageView];
+    
+    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(locationImageView)+3, 3, 100, 14)];
+    
+    cityLabel.text = _runningRecord.city;
+    [cityLabel setFont:[UIFont systemFontOfSize:12]];
+    [cityLabel setTextColor:RGBCOLOR(143, 143, 143)];
+    [location addSubview:cityLabel];
     return location;
 }
 
