@@ -51,7 +51,7 @@
     [self drawGradientPolyLineWithPoints:path];
     
     //地图适应
-    [self p_zoomToFitMapAnnotations:path];
+    [self zoomToFitMapPoints:path];
     
     //画起点和终点
     CLLocation *startPoint = path.firstObject;
@@ -161,9 +161,8 @@
     [self.mapView addAnnotation:customAnnotation];
     
 }
-#pragma mark - Private Function
 
--(void)p_zoomToFitMapAnnotations:(NSArray *)path {
+-(void)zoomToFitMapPoints:(NSArray *)path {
     if(path.count == 0)
         return;
     

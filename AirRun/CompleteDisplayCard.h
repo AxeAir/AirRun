@@ -21,15 +21,15 @@ typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
 
 @interface CompleteDisplayCard : BaseCardView
 @property (nonatomic, strong) MapViewDelegate *mapDelegate;
-
 @property (nonatomic, weak) id<CompleteDisplayCardDelegate> delegate;
 - (void)adjust:(NSString *)heart;
 - (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock;
 
 @end
 
-@protocol CompleteDisplayCardDelegate
 
+@protocol CompleteDisplayCardDelegate <NSObject>
 - (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type;
+- (void)completeDisplayCard:(CompleteDisplayCard *)card FoucsButtouTouch:(UIButton *)button;
 
 @end

@@ -13,6 +13,7 @@
 @property (strong, nonatomic) UIButton *closeButton;
 @property (strong, nonatomic) UILabel *titleLable;
 @property (strong, nonatomic) UITextView *textView;
+@property (strong, nonatomic) UIScrollView *scrollView;
 
 @end
 
@@ -47,6 +48,9 @@
     self.clipsToBounds = YES;
     self.backgroundColor = [UIColor whiteColor];
     
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
+    [self addSubview:_scrollView];
+    
     _closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_closeButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
     [_closeButton sizeToFit];
@@ -58,26 +62,39 @@
     _titleLable.text = @"我们不建议您在这样的情况下跑步";
     _titleLable.font = [UIFont systemFontOfSize:18];
     [_titleLable sizeToFit];
-    [self addSubview:_titleLable];
+    [_scrollView addSubview:_titleLable];
     _titleLable.center = CGPointMake(self.bounds.size.width/2, 30+_titleLable.bounds.size.height/2);
     
     _topImage = [[UIImageView alloc] initWithFrame:CGRectMake(45, CGRectGetMaxY(_titleLable.frame) + 20, self.bounds.size.width-90, 100)];
     _topImage.backgroundColor = [UIColor purpleColor];
-    [self addSubview:_topImage];
+    [_scrollView addSubview:_topImage];
     
     _textView = [[UITextView alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(_topImage.frame)+20, self.bounds.size.width-60, self.bounds.size.height/2)];
+    _textView.backgroundColor = [UIColor greenColor];
     _textView.text = @"老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平";
-    [self addSubview:_textView];
+    [_scrollView addSubview:_textView];
+    
+    if (CGRectGetMaxY(_textView.frame) > _scrollView.frame.size.height) {
+        _scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(_textView.frame)+10);
+    } else {
+        _scrollView.contentSize = CGSizeZero;
+    }
     
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     _closeButton.center = CGPointMake(self.bounds.size.width-5-_closeButton.bounds.size.width/2, 5+_closeButton.bounds.size.height/2);
-    
+    _scrollView.frame = self.bounds;
     _titleLable.center = CGPointMake(self.bounds.size.width/2, 30+_titleLable.bounds.size.height/2);
     _topImage.frame = CGRectMake(45, CGRectGetMaxY(_titleLable.frame) + 20, self.bounds.size.width-90, 100);
     _textView.frame = CGRectMake(30, CGRectGetMaxY(_topImage.frame)+20, self.bounds.size.width-60, self.bounds.size.height/2);
+    
+    if (CGRectGetMaxY(_textView.frame) > _scrollView.frame.size.height) {
+        _scrollView.contentSize = CGSizeMake(0, CGRectGetMaxY(_textView.frame)+10);
+    } else {
+        _scrollView.contentSize = CGSizeZero;
+    }
 }
 
 #pragma mark - Event
