@@ -66,7 +66,9 @@ static const char *INDEX = "index";
         EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view];
         editImageView.currentIndex = index;
         editImageView.deleteBlock = ^(UIImage *image,NSInteger idx){
-            [this.imgMs removeObjectAtIndex:idx];
+            RunningImageEntity *imgEntity = this.imgMs[idx];
+            [imgEntity deleteEntity];
+            [this.imgMs removeObject:imgEntity];
         };
         editImageView.closeBlock = ^(EditImageView *editImageView) {
             [this p_loadMapViewAnnotation];
