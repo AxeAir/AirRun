@@ -14,7 +14,6 @@
 
 @property (nonatomic, strong) UIImageView *AvatarView;
 @property (nonatomic, strong) UILabel *UsernameLabel;
-@property (nonatomic, strong) UILabel *UserIntroduce;
 
 @property (nonatomic, copy) SelectAvatar selectBlock;
 
@@ -30,7 +29,7 @@
     AVUser *currentuser = [AVUser currentUser];
 
     _AvatarView  = [[UIImageView alloc] init];
-    [_AvatarView setFrame:CGRectMake(20, 20, 60, 60)];
+    [_AvatarView setFrame:CGRectMake(30, 36, 60, 60)];
     [[_AvatarView layer] setCornerRadius:30];
     [[_AvatarView layer] setMasksToBounds:YES];
     [_AvatarView setUserInteractionEnabled:YES];
@@ -43,7 +42,7 @@
     
     [self addSubview:_AvatarView];
     
-    _UsernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_AvatarView)+10, 25, 200, 30)];
+    _UsernameLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_AvatarView)+10, 50, 200, 30)];
     
     [_UsernameLabel setFont:[UIFont boldSystemFontOfSize:20]];
     [_UsernameLabel setTextColor:[UIColor whiteColor]];
@@ -53,11 +52,6 @@
         _UsernameLabel.text =[currentuser objectForKey:@"nickName"] ;
     }
     
-    _UserIntroduce = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_AvatarView)+10, MaxY(_UsernameLabel)+2, 200, 20)];
-    _UserIntroduce.text = [currentuser objectForKey:@"introduction"];
-    [_UserIntroduce setFont:[UIFont systemFontOfSize:14]];
-    [_UserIntroduce setTextColor:[UIColor whiteColor]];
-    [self addSubview:_UserIntroduce];
     
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectavatar)];

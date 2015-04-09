@@ -126,7 +126,6 @@ const char *OUTPOSITION = "OutPosition";
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
-    [[self.navigationController navigationBar] setBarTintColor:[UIColor whiteColor]];
     
     _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
     

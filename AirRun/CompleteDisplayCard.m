@@ -108,8 +108,8 @@
 {
     
     UIView *view = [[UIView alloc] init];
-    UIImageView *flag = [[UIImageView alloc] initWithFrame:CGRectMake(30, 15, 20, 20)];
-    [flag setImage:[UIImage imageNamed:@"setting"]];
+    UIImageView *flag = [[UIImageView alloc] initWithFrame:CGRectMake(30, 15, 30, 30)];
+    [flag setImage:[UIImage imageNamed:@"distance"]];
     [view addSubview:flag];
     
     UILabel *distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+5, 0, 0, 0)];
@@ -157,7 +157,7 @@
     
     UIView *view = [[UIView alloc] init];
     
-    UIImageView *flag = [[UIImageView alloc] initWithFrame:CGRectMake(30, 15, 32, 32)];
+    UIImageView *flag = [[UIImageView alloc] initWithFrame:CGRectMake(30, 15, 30, 30)];
     
     [flag setImage:[UIImage imageNamed:@"sharespeed2"]];
     [view addSubview:flag];
@@ -172,15 +172,15 @@
     
     UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+2, MaxY(distanceLabel), WIDTH(distanceLabel), 14)];
     [km setFont:[UIFont boldSystemFontOfSize:12]];
-    [km setText:@"距离Km"];
+    [km setText:@"速度Km"];
     [km setTextAlignment:NSTextAlignmentCenter];
     [km setTextColor:[UIColor whiteColor]];
     [view addSubview:km];
     
     
-    UIImageView *water = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH(self)/2+30,  15, 20, 20)];
+    UIImageView *water = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH(self)/2+30,  15, 30, 30)];
     
-    [water setImage:[UIImage imageNamed:@"cal"]];
+    [water setImage:[UIImage imageNamed:@"clock"]];
     [view addSubview:water];
     
     UILabel *calLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, 0, 0, 0)];
@@ -214,12 +214,6 @@
         [_heartLabel setTextColor:[UIColor whiteColor]];
         [_heartLabel sizeToFit];
         [self addSubview:_heartLabel];
-        
-        UILabel *signname = [[UILabel alloc] initWithFrame:CGRectMake(40, MaxY(_heartLabel)+5, 100, 20)];
-        [signname setFont:[UIFont systemFontOfSize:12]];
-        [signname setTextColor:[UIColor whiteColor]];
-        [signname setText:@"--Yeti"];
-        [self addSubview:signname];
         
     }
     else

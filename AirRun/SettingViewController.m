@@ -9,6 +9,7 @@
 #import "SettingViewController.h"
 #import "UConstants.h"
 #import "ProfileViewController.h"
+#import "RESideMenu.h"
 
 @interface SettingViewController ()
 
@@ -22,6 +23,10 @@
     [self setTitle:@"设置"];
     [[self.navigationController navigationBar] setBarTintColor:RGBCOLOR(85, 150, 204)];
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
+    self.navigationItem.leftBarButtonItem = menuButton;
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    
 }
 
 - (instancetype)init
@@ -123,6 +128,11 @@
         default:
             break;
     }
+}
+
+
+- (void)menuButtonTouch:(UIButton *)sender {
+    [self.sideMenuViewController presentLeftMenuViewController];
 }
 
 
