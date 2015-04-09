@@ -75,7 +75,6 @@
     
     [_mainView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [[_mainView layer] setCornerRadius:4];
-    //[[_mainView layer] setMasksToBounds:YES];
     [self.contentView addSubview:_mainView];
     
     

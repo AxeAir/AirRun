@@ -31,6 +31,8 @@
 @property (nonatomic, retain) NSString * identifer;
 @property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSData * heartimages;
+@property (nonatomic, retain) NSNumber *dirty;
+@property (nonatomic, retain) NSDate *updateat;
 
 - (instancetype)init;
 
@@ -48,4 +50,5 @@
 
 + (void)findAllWithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 ;
+
 @end

@@ -15,11 +15,11 @@
 
 @interface TimelineController ()
 
-@property (nonatomic, strong) UIImageView *headerbackgroundImageView;
-@property (nonatomic, strong) UIImageView *headerImageView;
-@property (nonatomic, strong) UIView *headerShadow;
-@property (nonatomic, strong) NSArray *dataSource;
-@property (nonatomic, strong) UIButton *navButton;
+@property (nonatomic, strong) UIImageView  *headerbackgroundImageView;
+@property (nonatomic, strong) UIImageView  *headerImageView;
+@property (nonatomic, strong) NSArray      *dataSource;
+@property (nonatomic, strong) UIButton     *navButton;
+@property (nonatomic, strong) UILabel      *nameLabel;
 
 @end
 
@@ -50,16 +50,6 @@
    
 }
 
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -84,6 +74,7 @@
     return cell;
 }
 
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     TimelineTableViewCell *cell = (TimelineTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
@@ -106,38 +97,38 @@
     
     _headerbackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
     
-    ALDBlurImageProcessor *blurImageProcessor = [[ALDBlurImageProcessor alloc] initWithImage: [UIImage imageNamed:@"header1.jpg"]];
+    AVFile *avatarData = [[AVUser currentUser] objectForKey:@"avatar"];
+    NSData *resumeData = [avatarData getData];
+    
+    ALDBlurImageProcessor *blurImageProcessor = [[ALDBlurImageProcessor alloc] initWithImage: [UIImage imageWithData:resumeData]];
 
-    [blurImageProcessor asyncBlurWithRadius:50 iterations:7 successBlock:^(UIImage *blurredImage) {
+    [blurImageProcessor asyncBlurWithRadius:50 iterations:20 successBlock:^(UIImage *blurredImage) {
         [_headerbackgroundImageView setImage:blurredImage];
     } errorBlock:^(NSNumber *errorCode) {
         
     }];
     [header addSubview:_headerbackgroundImageView];
     
-    _headerShadow= [[UIView alloc] initWithFrame: CGRectMake((Main_Screen_Width-80)/2, 50, 80, 80)];
-    
-    // setup shadow layer and corner
-    _headerShadow.layer.shadowColor = [UIColor redColor].CGColor;
-    _headerShadow.layer.shadowOffset = CGSizeMake(0, 1);
-    _headerShadow.layer.shadowOpacity = 1;
-    _headerShadow.layer.shadowRadius = 9.0;
-    _headerShadow.layer.cornerRadius = 4.0;
-    _headerShadow.clipsToBounds = NO;
-    
-    // combine the views
-    [header addSubview: _headerShadow];
-    
-    _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 80, 80)];
-    [_headerImageView setImage:[UIImage imageNamed:@"header1.jpg"]];
+    _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake((Main_Screen_Width-80)/2, 50, 80, 80)];
+    [_headerImageView setImage:[UIImage imageWithData:resumeData]];
     [[_headerImageView layer] setMasksToBounds:YES];
     [[_headerImageView layer] setCornerRadius:40.0];
     [[_headerImageView layer] setShadowOffset:CGSizeMake(10, 10)];
     [[_headerImageView layer] setShadowColor:[UIColor redColor].CGColor];
     [[_headerImageView layer] setShadowRadius:20];
     [[_headerImageView layer] setShadowOpacity:1];
+    [[_headerImageView layer] setBorderWidth:2];
+    [[_headerImageView layer] setBorderColor:[UIColor grayColor].CGColor];
     
-    [_headerShadow addSubview:_headerImageView];
+    [header addSubview: _headerImageView];
+    _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, MaxY(_headerImageView)+10, Main_Screen_Width, 20)];
+    [_nameLabel setTextAlignment:NSTextAlignmentCenter];
+    [_nameLabel setTextColor:[UIColor whiteColor]];
+    [_nameLabel setText:[[AVUser currentUser] objectForKey:@"nickName"]];
+    [header addSubview:_nameLabel];
+    
+    
+    
     
     
     return header;
@@ -169,7 +160,6 @@
         currentFrame.size.height = 200+(-1)*offsetY;
         NSLog(@"height:%f", currentFrame.size.height);
         _headerbackgroundImageView.frame = currentFrame;
-        
         CGRect currentButton = _navButton.frame;
         currentButton.origin.y = offsetY+25;
         _navButton.frame = currentButton;

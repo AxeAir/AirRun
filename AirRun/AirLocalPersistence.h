@@ -10,6 +10,8 @@
 #import <CoreData/CoreData.h>
 #import <CoreData+MagicalRecord.h>
 #import "BlockMacro.h"
+#import "RunningRecordEntity.h"
+#import "RunningRecord.h"
 
 /**
  *  本地持久化模型
@@ -31,5 +33,22 @@
 
 - (void)findAllObjects:(Class )cla WithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 
+/**
+ *  获取待更新数据
+ *
+ *  @return
+ */
+- (NSArray *)findDirtyRecord;
+
+- (id)getObject:(Class)entity withAttribute:(NSString *)attrobute withValue:(id)value;
+
+
+
+
+#pragma maek Server Persistence
+
+- (void)createRecord:(RunningRecord *)recordOnServer
+   withCompleteBlock:(CompleteBlock)completeBlock
+      withErrorBlock:(ErrorBlock)errorBlock;;
 
 @end

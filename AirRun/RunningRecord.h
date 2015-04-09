@@ -19,13 +19,9 @@
 @property (nonatomic, strong) NSString  *weather;//天气，整型
 @property (nonatomic, strong) NSNumber  *pm25;//pm25 整型
 @property (nonatomic, strong) NSNumber  *averagespeed; //平局速度，float
-@property (nonatomic, strong) NSString  *finishtime;
+@property (nonatomic, strong) NSDate    *finishtime;
 @property (nonatomic, strong) AVFile    *mapshot;
 @property (nonatomic, strong) NSString  *heart;
-
-
-
-- (void)saveWithImages:(NSArray *)images heartImages:(NSArray *)heartImages;
-
+@property (nonatomic, strong) NSString  *city;
 
 @end

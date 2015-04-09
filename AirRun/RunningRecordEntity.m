@@ -26,6 +26,8 @@
 @dynamic objectId;
 @dynamic identifer;
 @dynamic heartimages;
+@dynamic updateat;
+@dynamic dirty;
 
 - (instancetype)init
 {
@@ -87,5 +89,6 @@
         errorBlock();
     }];
 }
+
 
 @end

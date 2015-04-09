@@ -65,4 +65,45 @@
 }
 
 
+- (NSArray *)findDirtyRecord
+{
+    return [RunningRecordEntity MR_findByAttribute:@"dirty" withValue:[NSNumber numberWithInteger:1]];
+}
+
+- (id)getObject:(Class)entity withAttribute:(NSString *)attrobute withValue:(id)value
+{
+    return [entity MR_findFirstByAttribute:attrobute withValue:value];
+}
+
+- (void)createRecord:(RunningRecord *)recordOnServer
+   withCompleteBlock:(CompleteBlock)completeBlock
+      withErrorBlock:(ErrorBlock)errorBlock;
+{
+    RunningRecordEntity *entity = [RunningRecordEntity MR_createEntity];
+    entity.path = recordOnServer.path;
+    entity.time = recordOnServer.time;
+    entity.kcar = recordOnServer.kcar;
+    entity.distance = recordOnServer.distance;
+    entity.weather = recordOnServer.weather;
+    entity.pm25 = recordOnServer.pm25;
+    entity.averagespeed = recordOnServer.averagespeed;
+    entity.finishtime = recordOnServer.finishtime;
+ 
+    entity.heart = recordOnServer.heart;
+    entity.objectId = recordOnServer.objectId;
+    //entity.identifer = recordOnServer.identifer;
+    entity.city = recordOnServer.city;
+    //entity.heartimages ;
+    //entity.dirty = recordOnServer.;
+    entity.updateat = recordOnServer.updatedAt;
+    
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (error) {
+            errorBlock();
+        } else if (success) {
+            completeBlock();
+        }
+    }];
+}
+
 @end

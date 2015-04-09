@@ -16,17 +16,17 @@
 
 
 @property (nonatomic, strong) UIView *titleView;
-//@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) MKMapView *mapView;
 
 
 @property (nonatomic, strong) UIPageControl* pagecontrol;
 
-@property (nonatomic, strong) UIView *speedAndTime;
-@property (nonatomic, strong) UIView *distanceAndCarl;
+@property (nonatomic, strong) UIView   *speedAndTime;
+@property (nonatomic, strong) UIView   *distanceAndCarl;
 
-@property (nonatomic, strong) UILabel *heartLabel;
+@property (nonatomic, strong) UILabel  *heartLabel;
 @property (nonatomic, strong) UIButton *shareButton;
+@property (nonatomic, strong) UIButton *completeButton;
 
 
 @property (nonatomic, strong) NSString *heart;//新的体会
@@ -238,9 +238,21 @@
     [_shareButton addTarget:self action:@selector(shareButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_shareButton];
     
+    
+    if (_completeButton ==nil) {
+        _completeButton = [[UIButton alloc] init];
+    }
+    [_completeButton setFrame:CGRectMake(0, 0, 140, 30)];
+    _completeButton.center = CGPointMake(WIDTH(self)/2, MaxY(_shareButton)+35);
+    
+    [_completeButton setTitle:@"暂不分享" forState:UIControlStateNormal];
+    [[_completeButton titleLabel] setFont:[UIFont boldSystemFontOfSize:16]];
+    [_completeButton addTarget:self action:@selector(completeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_completeButton];
+    
 
-    if (MaxY(_shareButton)+20>Main_Screen_Height+1) {
-        [self setFrame:CGRectMake(10, 10, WIDTH(self), MaxY(_shareButton)+10)];
+    if (MaxY(_completeButton)+20>Main_Screen_Height+1) {
+        [self setFrame:CGRectMake(10, 10, WIDTH(self), MaxY(_completeButton)+10)];
     }
     else
     {
@@ -267,10 +279,6 @@
 
 }
 
-//- (void)scrollViewDidScroll:(UIScrollView *)sender {
-//    int page = _scrollView.contentOffset.x / WIDTH(self);
-//    _pagecontrol.currentPage = page;
-//}
 
 - (void)drawRect:(CGRect)rect
 {
@@ -289,6 +297,12 @@
 - (void)shareButtonTouch:(id)sender
 {
     [_delegate completeDisplayCard:self didSelectButton:CompleteDisplayCardButtonTypeShare];
+}
+
+
+- (void)completeButtonTouch:(id)sender
+{
+    [_delegate completeDisplayCard:self didSelectButton:CompleteDisplayCardButtonTypeComplete];
 }
 
 
