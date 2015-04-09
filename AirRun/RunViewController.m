@@ -123,7 +123,8 @@ const char *OUTPOSITION = "OutPosition";
 #pragma mark - Layout
 
 - (void)p_setNavgation {
-    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithTitle:@"cehua" style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
+    
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
     _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
@@ -140,14 +141,8 @@ const char *OUTPOSITION = "OutPosition";
     
     UIBarButtonItem *guideButton = [[UIBarButtonItem alloc] initWithTitle:@"跑步指导" style:UIBarButtonItemStylePlain target:self action:@selector(guideButtonTouch:)];
     self.navigationItem.rightBarButtonItem = guideButton;
-    
-//    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg.png"]
-                                                 forBarPosition:UIBarPositionAny
-                                                     barMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 
-    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbg"] forBarMetrics:UIBarMetricsDefault];
     
 }
 - (void)p_setMapView {

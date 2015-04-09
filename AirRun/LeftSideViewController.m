@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,50, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,50, self.view.frame.size.width-80, self.view.frame.size.height) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -54,27 +54,28 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     switch (indexPath.row) {
         case 0:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]]
-                                                         animated:YES];
+                                                         animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
             [self.sideMenuViewController setContentViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
-                                                         animated:YES];
+                                                         animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 3:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
-                                                         animated:YES];
+                                                         animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             
             break;
         case 4:
         {
             RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
-            [self.sideMenuViewController setContentViewController:runVC animated:YES];
+            [self.sideMenuViewController setContentViewController:runVC animated:NO];
             [self.sideMenuViewController hideMenuViewController];
         }
             break;
@@ -88,16 +89,21 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    if(indexPath.section == 0)
+        return 28.0;
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectionIndex
 {
+    if (sectionIndex == 0) {
+        return 1;
+    }
     return 5;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -105,7 +111,7 @@
     if (section == 0) {
         return 100.0;
     }
-    return 10.0;
+    return 0.0;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -144,26 +150,42 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         cell.backgroundColor = [UIColor clearColor];
-        cell.textLabel.textColor = [UIColor whiteColor];
         UIView *selectbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        [selectbg setBackgroundColor:[UIColor colorWithHue:1 saturation:1 brightness:1 alpha:0.2]];
+        [selectbg setBackgroundColor:RGBACOLOR(200, 200, 200, 0.2)];
         [cell setSelectedBackgroundView:selectbg];
     }
+    if (indexPath.section == 0) {
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(35, 4, 100, 20)];
+        [title setTextColor:[UIColor whiteColor]];
+        [title setFont:[UIFont systemFontOfSize:12]];
+        [title setTextColor:[UIColor grayColor]];
+        title.text = [[AVUser currentUser] objectForKey:@"introduction"];
+        [cell addSubview:title];
+        UIView *topline = [[UIView alloc] initWithFrame:CGRectMake(30, 1, WIDTH(cell)-30, 1)];
+        [topline setBackgroundColor:RGBACOLOR(100, 100, 100, 0.4)];
+        [cell.contentView addSubview:topline];
+        
+        UIView *bottomline = [[UIView alloc] initWithFrame:CGRectMake(30, 27, WIDTH(cell)-30, 1)];
+        [bottomline setBackgroundColor:RGBACOLOR(100, 100, 100, 0.4)];
+        [cell.contentView addSubview:bottomline];
+    }
     
-    NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"GoGoGo"];
-    NSArray *images = @[@"setting", @"setting", @"setting", @"setting" , @"setting"];
-    
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(50, 12, 30, 30)];
-    [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];
-    
-    [cell addSubview:image];
-    
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(image)+10, 12, 100, 30)];
-    [title setTextColor:[UIColor whiteColor]];
-    [title setText:titles[indexPath.row]];
-    [cell addSubview:title];
-    //cell.textLabel.text = titles[indexPath.row];
-    //cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
+    if (indexPath.section == 1) {
+        NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"GoGoGo"];
+        NSArray *images = @[@"runner", @"timeline", @"setting", @"setting" , @"setting"];
+        
+        UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
+        [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];
+        
+        [cell addSubview:image];
+        
+        UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(image)+10, 11, 100, 22)];
+        [title setTextColor:[UIColor whiteColor]];
+        [title setText:titles[indexPath.row]];
+        [title setFont:[UIFont systemFontOfSize:16]];
+        [cell addSubview:title];
+        [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    }
     
     return cell;
 }

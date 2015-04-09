@@ -16,9 +16,7 @@
 #import "RunningImage.h"
 #import <AVOSCloudSNS.h>
 #import <CoreData+MagicalRecord.h>
-
-#import "RunningRecordEntity.h"
-#import "AirLocalPersistence.h"
+#import "RegisterAndLoginViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -35,11 +33,22 @@
     
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
+    
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
     
+    UINavigationController *navigationController = nil;
     
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]];
+    if ([AVUser currentUser]==nil) {
+         navigationController = [[UINavigationController alloc] initWithRootViewController:[[RegisterAndLoginViewController alloc] init]];
+    }
+    else
+    {
+         navigationController = [[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]];
+    }
+    
     LeftSideViewController *leftMenuViewController = [[LeftSideViewController alloc] init];
     
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController

@@ -11,6 +11,7 @@
 #import "TimelineTableViewCell.h"
 #import <BlurImageProcessor/ALDBlurImageProcessor.h>
 #import "RunningRecordEntity.h"
+#import "RESideMenu.h"
 
 @interface TimelineController ()
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) UIImageView *headerImageView;
 @property (nonatomic, strong) UIView *headerShadow;
 @property (nonatomic, strong) NSArray *dataSource;
+@property (nonatomic, strong) UIButton *navButton;
 
 @end
 
@@ -30,6 +32,15 @@
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    
+    _navButton = [[UIButton alloc] init];
+    [_navButton setImage:[UIImage imageNamed:@"navicon"] forState:UIControlStateNormal];
+    [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
+    [_navButton addTarget:self action:@selector(menuButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_navButton];
+    
+    
     [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
         _dataSource = arraydata;
         [self.tableView reloadData];
@@ -149,12 +160,20 @@
 {
     CGFloat offsetY = scrollView.contentOffset.y;
     NSLog(@"%f",offsetY);
+    
+    [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
+    
     if(offsetY < 0) {
         CGRect currentFrame = _headerbackgroundImageView.frame;
         currentFrame.origin.y = offsetY;
         currentFrame.size.height = 200+(-1)*offsetY;
         NSLog(@"height:%f", currentFrame.size.height);
         _headerbackgroundImageView.frame = currentFrame;
+        
+        CGRect currentButton = _navButton.frame;
+        currentButton.origin.y = offsetY+25;
+        _navButton.frame = currentButton;
+        
     }
     
     CGFloat sectionHeaderHeight = 20;
@@ -165,5 +184,11 @@
     }
     
 }
+
+
+- (void)menuButtonTouch:(UIButton *)sender {
+    [self.sideMenuViewController presentLeftMenuViewController];
+}
+
 
 @end
