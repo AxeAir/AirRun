@@ -16,18 +16,17 @@
 @property (nonatomic, strong) UILabel *UsernameLabel;
 @property (nonatomic, strong) UILabel *UserIntroduce;
 
+@property (nonatomic, copy) SelectAvatar selectBlock;
+
 @end
 
-static SelectAvatar Ablock;
 
 
 @implementation HeaderView
 
 - (void)configUserwithBloak:(SelectAvatar)block
 {
-    Ablock = block;
-    
-    
+    _selectBlock = block;
     AVUser *currentuser = [AVUser currentUser];
 
     _AvatarView  = [[UIImageView alloc] init];
@@ -69,7 +68,7 @@ static SelectAvatar Ablock;
 - (void)selectavatar
 {
     NSLog(@"点击头像事件触发");
-    Ablock();
+    _selectBlock();
 }
 
 @end

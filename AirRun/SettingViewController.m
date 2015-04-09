@@ -35,11 +35,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if(section == 0)
-    {
-        return 1;
-    }
-    if (section == 1) {
+    if (section == 0) {
         return 3;
     }
     return 3;
@@ -47,7 +43,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 2;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,11 +62,8 @@
     [cell.contentView addSubview:title];
     
     switch (indexPath.section) {
+            
         case 0:
-            
-            break;
-            
-        case 1:
             if (indexPath.row == 0) {
                 title.text = @"语音提示";
                 UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
@@ -89,7 +82,7 @@
             
             break;
             
-        case 2:
+        case 1:
             if (indexPath.row == 0) {
                 title.text = @"意见反馈";
                 UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];

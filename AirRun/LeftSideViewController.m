@@ -28,7 +28,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.tableView = ({
-        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,50, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStylePlain];
+        UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0,50, self.view.frame.size.width-100, self.view.frame.size.height) style:UITableViewStylePlain];
         tableView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
         tableView.delegate = self;
         tableView.dataSource = self;
@@ -57,24 +57,24 @@
     switch (indexPath.row) {
         case 0:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]]
-                                                         animated:YES];
+                                                         animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
             [self.sideMenuViewController setContentViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
-                                                         animated:YES];
+                                                         animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 3:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
-                                                         animated:YES];
+                                                         animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             
             break;
         case 4:
         {
             RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
-            [self.sideMenuViewController setContentViewController:runVC animated:YES];
+            [self.sideMenuViewController setContentViewController:runVC animated:NO];
             [self.sideMenuViewController hideMenuViewController];
         }
             break;
@@ -88,7 +88,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 54;
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -103,7 +103,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 100.0;
+        return 120.0;
     }
     return 10.0;
 }
@@ -146,23 +146,24 @@
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor whiteColor];
         UIView *selectbg = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-        [selectbg setBackgroundColor:[UIColor colorWithHue:1 saturation:1 brightness:1 alpha:0.2]];
+        [selectbg setBackgroundColor:RGBACOLOR(200, 200, 200, 0.2)];
         [cell setSelectedBackgroundView:selectbg];
     }
     
     NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"GoGoGo"];
     NSArray *images = @[@"setting", @"setting", @"setting", @"setting" , @"setting"];
     
-    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(50, 12, 30, 30)];
+    UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
     [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];
     
     [cell addSubview:image];
     
-    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(image)+10, 12, 100, 30)];
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(image)+10, 11, 100, 22)];
     [title setTextColor:[UIColor whiteColor]];
     [title setText:titles[indexPath.row]];
+    [title setFont:[UIFont systemFontOfSize:16]];
     [cell addSubview:title];
-    //cell.textLabel.text = titles[indexPath.row];
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
     //cell.imageView.image = [UIImage imageNamed:images[indexPath.row]];
     
     return cell;
