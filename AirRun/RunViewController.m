@@ -28,6 +28,7 @@
 #import "RunGuideViewController.h"
 #import "DocumentHelper.h"
 #import "DateHelper.h"
+#import "WeatherManager.h"
 
 typedef enum : NSUInteger {
     RunViewControllerRunStateStop,
@@ -47,6 +48,9 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) CountView *countView;
 
+@property (strong, nonatomic) NSString *temperature;
+@property (strong, nonatomic) NSString *pm;
+
 @property (strong, nonatomic) UIBarButtonItem *photoButton;
 @property (strong, nonatomic) UIBarButtonItem *gpsButton;
 @property (strong, nonatomic) ReadyView *readyView;
@@ -58,6 +62,7 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) NSMutableArray *points;
 @property (strong, nonatomic) NSMutableArray *imageArray;
 @property (strong, nonatomic) CLLocation *currentLocation;
+@property (strong, nonatomic) NSString *currentLocationName;
 
 @property (assign, nonatomic) RunViewControllerRunState runState;
 
@@ -87,7 +92,8 @@ const char *OUTPOSITION = "OutPosition";
     _runState = RunViewControllerRunStateStop;
     _points = [[NSMutableArray alloc] init];
     _imageArray = [[NSMutableArray alloc] init];
-    
+    _temperature = @"";
+    _pm = @"";
     
     [self p_setNavgation];
     [self p_setMapView];
@@ -124,6 +130,9 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setNavgation {
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1111111"] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
@@ -132,18 +141,20 @@ const char *OUTPOSITION = "OutPosition";
     _gpsButton = [[UIBarButtonItem alloc] initWithTitle:@"GPS" style:UIBarButtonItemStylePlain target:self action:nil];
     [_gpsButton setTintColor:[UIColor redColor]];
     
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    titleLable.text = @"24 ℃\nPM 45";
-    titleLable.textColor = [UIColor whiteColor];
-    titleLable.font = [UIFont systemFontOfSize:12];
-    titleLable.numberOfLines = 2;
-    self.navigationItem.titleView = titleLable;
-    
     UIBarButtonItem *guideButton = [[UIBarButtonItem alloc] initWithTitle:@"跑步指导" style:UIBarButtonItemStylePlain target:self action:@selector(guideButtonTouch:)];
     self.navigationItem.rightBarButtonItem = guideButton;
 
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbg"] forBarMetrics:UIBarMetricsDefault];
     
+}
+
+- (void)p_setTitle {
+    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
+    titleLable.text = [NSString stringWithFormat:@"%@ ℃\nPM %@",_temperature,_pm];
+    titleLable.textColor = [UIColor whiteColor];
+    titleLable.font = [UIFont systemFontOfSize:12];
+    titleLable.numberOfLines = 2;
+    self.navigationItem.titleView = titleLable;
 }
 - (void)p_setMapView {
     
@@ -414,14 +425,12 @@ const char *OUTPOSITION = "OutPosition";
     record.time = @(_runcardView.time);
     record.kcar = @(_runcardView.kcal);
     record.distance = @(_runcardView.distance);
-//    @property (nonatomic, retain) NSString * weather;
-//    @property (nonatomic, retain) NSNumber * pm25;
+    record.city = _currentLocationName;
+    record.weather = _temperature;
+    record.pm25 = @([_pm integerValue]);
     record.averagespeed = @(_runcardView.speed);
     record.finishtime = [NSDate date];
-//    @property (nonatomic, retain) NSData * mapshot;
-//    @property (nonatomic, retain) NSString * heart;
-//    @property (nonatomic, retain) NSString * objectId;
-//    @property (nonatomic, retain) NSData * heartimages;
+
 
     
     RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:record WithPoints:_points WithImages:_imageArray];
@@ -486,6 +495,53 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 #pragma mark Private Function
+
+- (void)p_getLocationNameWithLocation:(CLLocation *)location {
+    
+    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    [geocoder reverseGeocodeLocation:_locationManager.location
+                   completionHandler:^(NSArray *placemarks, NSError *error) {
+                       NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
+                       
+                       if (error){
+                           NSLog(@"Geocode failed with error: %@", error);
+                           return;
+                           
+                       }
+                       
+                       NSLog(@"placemarks=%@",[placemarks objectAtIndex:0]);
+                       CLPlacemark *placemark = [placemarks objectAtIndex:0];
+                       
+                       //                       NSLog(@"placemark.ISOcountryCode =%@",placemark.ISOcountryCode);
+                       //                       NSLog(@"placemark.country =%@",placemark.country);
+                       //                       NSLog(@"placemark.postalCode =%@",placemark.postalCode);
+                       //                       NSLog(@"placemark.administrativeArea =%@",placemark.administrativeArea);
+                       //                       NSLog(@"placemark.locality =%@",placemark.locality);
+                       //                       NSLog(@"placemark.subLocality =%@",placemark.subLocality);
+                       //                       NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
+                       _currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subAdministrativeArea];
+                       
+                       NSString *cityName;
+                       if ([placemark.locality isEqualToString:@""]) {//为直辖市
+                           cityName = placemark.administrativeArea;
+                       } else {
+                           cityName = placemark.subLocality;
+                       }
+                       
+                       WeatherManager *weatherManager = [[WeatherManager alloc] init];
+                       [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
+                           _pm = pm25.PM25;
+                           [self p_setTitle];
+                       } failure:nil];
+                       
+                       [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
+                           _temperature = responseObject.temperature;
+                           [self p_setTitle];
+                       } failure:nil];
+                       
+                   }];
+    
+}
 
 - (void)p_setGPS:(CGFloat)gps {
     
@@ -611,6 +667,10 @@ const char *OUTPOSITION = "OutPosition";
                                                       course:newLocation.course
                                                        speed:newLocation.speed
                                                    timestamp:newLocation.timestamp];
+    }
+    
+    if ([_currentLocationName isEqualToString:@""] || !_currentLocationName) {
+        [self p_getLocationNameWithLocation:newLocation];
     }
     
     if (_runState == RunViewControllerRunStateRunning) {//是在跑步过程中

@@ -73,7 +73,7 @@
     
     if (!_photoButton) {
         _photoButton = [UIButton buttonWithType: UIButtonTypeSystem];
-        [_photoButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+        [_photoButton setImage:[UIImage imageNamed:@"camera.png"] forState:UIControlStateNormal];
         [_photoButton setTintColor:[UIColor whiteColor]];
         [_photoButton sizeToFit];
         [self addSubview:_photoButton];

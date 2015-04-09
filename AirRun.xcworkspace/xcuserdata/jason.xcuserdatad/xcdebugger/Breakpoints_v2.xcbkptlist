@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450194153.131223"
+            timestampString = "450271379.107859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "-mapMaskTapGesture:"
+            startingLineNumber = "346"
+            endingLineNumber = "346"
+            landmarkName = "-pauseButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -154,13 +154,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450200378.890059"
+            timestampString = "450271379.107859"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "672"
-            endingLineNumber = "672"
-            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
-            landmarkType = "5">
+            startingLineNumber = "756"
+            endingLineNumber = "756"
+            landmarkName = "@implementation RunViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

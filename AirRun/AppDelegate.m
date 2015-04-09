@@ -17,6 +17,7 @@
 #import <AVOSCloudSNS.h>
 #import <CoreData+MagicalRecord.h>
 #import "RegisterAndLoginViewController.h"
+#import "SettingViewController.h"
 @interface AppDelegate ()
 
 @end
@@ -26,6 +27,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
  
+//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"seabg"] forBarMetrics:UIBarMetricsDefault];
+//    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
+//    [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
+    
     [AVOSCloud setApplicationId:@"8idak6ebtenkwv4pv2caugmbuws9flvwse7k2275cm4s2vz7"
                       clientKey:@"140a1m8lrhg0s0lyzasvsrg3ou5zfrd13nqkdg13zytwytk5"];
     [RunningRecord registerSubclass];
