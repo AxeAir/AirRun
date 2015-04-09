@@ -281,7 +281,7 @@ const static NSInteger kTopCenterViewMargin = 30;
     if (!_retractButton) {
         _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
         [_retractButton setTintColor:[UIColor whiteColor]];
-        [_retractButton setImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
+        [_retractButton setImage:[UIImage imageNamed:@"narrowup.png"] forState:UIControlStateNormal];
         [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_retractButton sizeToFit];
         [_bottomView addSubview:_retractButton];

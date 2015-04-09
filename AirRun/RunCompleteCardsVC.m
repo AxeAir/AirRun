@@ -271,7 +271,9 @@ static const char *INDEX = "index";
     }];
 }
 
-
+- (void)completeDisplayCard:(CompleteDisplayCard *)card FoucsButtouTouch:(UIButton *)button {
+    [card.mapDelegate zoomToFitMapPoints:_path];
+}
 
 
 #pragma mark - QBImagePickerControllerDelegate

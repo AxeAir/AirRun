@@ -146,12 +146,12 @@
     
     if (!_retractButton) {
         _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_retractButton setImage:[UIImage imageNamed:@"down.png"] forState:UIControlStateNormal];
+        [_retractButton setImage:[UIImage imageNamed:@"narrowup.png"] forState:UIControlStateNormal];
         _retractButton.tintColor = [UIColor whiteColor];
         [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_retractButton];
     }
-    _retractButton.frame = CGRectMake(0, self.bounds.size.height-10, self.bounds.size.width, 10);
+    _retractButton.frame = CGRectMake(0, self.bounds.size.height-15, self.bounds.size.width, 15);
     
     CAShapeLayer *lineLayer = [CAShapeLayer layer];
     UIBezierPath *path = [UIBezierPath bezierPath];

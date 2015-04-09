@@ -130,8 +130,9 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setNavgation {
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1111111"] forBarPosition:UIBarPositionAny barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1111111"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
@@ -144,7 +145,7 @@ const char *OUTPOSITION = "OutPosition";
     UIBarButtonItem *guideButton = [[UIBarButtonItem alloc] initWithTitle:@"跑步指导" style:UIBarButtonItemStylePlain target:self action:@selector(guideButtonTouch:)];
     self.navigationItem.rightBarButtonItem = guideButton;
 
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbg"] forBarMetrics:UIBarMetricsDefault];
+    [self p_setTitle];
     
 }
 
@@ -158,7 +159,7 @@ const char *OUTPOSITION = "OutPosition";
 }
 - (void)p_setMapView {
     
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64)];
+    self.mapView = [[MKMapView alloc] initWithFrame:self.view.bounds];
     _mapViewDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     
     self.mapView.delegate = _mapViewDelegate;
@@ -195,7 +196,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_setLayout {
     
     _readyView = [[ReadyView alloc] initWithText:@"适合户外跑步"];
-    _readyView.frame = CGRectMake(0, 64, self.view.bounds.size.width, 25);
+    _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, 25);
     _readyView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:_readyView];
     
@@ -263,11 +264,10 @@ const char *OUTPOSITION = "OutPosition";
               AnimationWthiCompleteBlock:nil];
         
         [this.navigationController setNavigationBarHidden:YES animated:YES];
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
             this.runcardView.frame = CGRectMake(0, -RuncardViewHieght, this.view.bounds.size.width, RuncardViewHieght);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                
                 this.runSimpleCardView.frame = CGRectMake(0, 0, this.view.bounds.size.width, RunSimpleCardViewHeight);
             }];
             
@@ -292,9 +292,9 @@ const char *OUTPOSITION = "OutPosition";
             this.runSimpleCardView.frame = CGRectMake(0, -RunSimpleCardViewHeight, this.view.bounds.size.width, RunSimpleCardViewHeight);
         } completion:^(BOOL finished) {
             [this.navigationController setNavigationBarHidden:NO animated:YES];
-            [UIView animateWithDuration:0.5 animations:^{
+            [UIView animateWithDuration:UINavigationControllerHideShowBarDuration animations:^{
 //                this.navigationController.navigationBar.frame = CGRectMake(0, 0, this.view.bounds.size.width, 64);
-                this.runcardView.frame = CGRectMake(0, 64, this.view.bounds.size.width, RuncardViewHieght);
+                this.runcardView.frame = CGRectMake(0, 63, this.view.bounds.size.width, RuncardViewHieght);
             }];
         }];
 
@@ -342,7 +342,7 @@ const char *OUTPOSITION = "OutPosition";
             self.runcardView.frame = CGRectMake(0, -RuncardViewHieght, self.view.bounds.size.width, RuncardViewHieght);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                self.pauseView.frame = CGRectMake(0, 64, self.view.bounds.size.width, PauseViewHeight);
+                self.pauseView.frame = CGRectMake(0, 63, self.view.bounds.size.width, PauseViewHeight);
             }];
         }];
 
@@ -458,7 +458,7 @@ const char *OUTPOSITION = "OutPosition";
         } completion:^(BOOL finished) {
             [_readyView removeFromSuperview];
             [UIView animateWithDuration:0.3 animations:^{
-                _runcardView.frame = CGRectMake(0, 64, self.view.bounds.size.width, RuncardViewHieght);
+                _runcardView.frame = CGRectMake(0, 63, self.view.bounds.size.width, RuncardViewHieght);
             }];
         }];
         
@@ -532,12 +532,12 @@ const char *OUTPOSITION = "OutPosition";
                        [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
                            _pm = pm25.PM25;
                            [self p_setTitle];
-                       } failure:nil];
+                       } failure:^(NSError *error) {}];
                        
                        [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
                            _temperature = responseObject.temperature;
                            [self p_setTitle];
-                       } failure:nil];
+                       } failure:^(NSError *error) {}];
                        
                    }];
     
@@ -670,7 +670,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     if ([_currentLocationName isEqualToString:@""] || !_currentLocationName) {
-        [self p_getLocationNameWithLocation:newLocation];
+//        [self p_getLocationNameWithLocation:newLocation];
     }
     
     if (_runState == RunViewControllerRunStateRunning) {//是在跑步过程中
@@ -743,6 +743,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - UINavigationControllerDelegate
 
 /*
 #pragma mark - Navigation

@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIView *titleView;
 //@property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) MKMapView *mapView;
+@property (strong, nonatomic) UIButton *fouseButton;
 
 
 @property (nonatomic, strong) UIPageControl* pagecontrol;
@@ -82,6 +83,13 @@
     
     _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, MaxY(_titleView), WIDTH(self), 300)];
     [self addSubview:_mapView];
+    
+    _fouseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_fouseButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+    [_fouseButton sizeToFit];
+    _fouseButton.center = CGPointMake(WIDTH(self)-5-WIDTH(_fouseButton)/2, MaxY(_mapView)-5-HEIGHT(_fouseButton)/2);
+    [_fouseButton addTarget:self action:@selector(fouchsButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:_fouseButton];
     
     _mapDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     _mapView.delegate = _mapDelegate;
@@ -289,6 +297,14 @@
 - (void)shareButtonTouch:(id)sender
 {
     [_delegate completeDisplayCard:self didSelectButton:CompleteDisplayCardButtonTypeShare];
+}
+
+- (void)fouchsButtonTouch:(UIButton *)sender {
+    
+    if ([_delegate respondsToSelector:@selector(completeDisplayCard:FoucsButtouTouch:)]) {
+        [_delegate completeDisplayCard:self FoucsButtouTouch:sender];
+    }
+    
 }
 
 
