@@ -19,10 +19,15 @@
 @property (nonatomic, retain) NSString * image;
 @property (nonatomic, retain) NSNumber * isheart;
 @property (nonatomic, retain) NSString * recordid;
+@property (nonatomic, retain) NSString * type;
+@property (nonatomic, retain) NSString * objectId;
+@property (nonatomic, retain) NSNumber * dirty;
+@property (nonatomic, retain) NSDate   * updateat;
 
 - (instancetype)init;
 
 - (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 
 - (void)deleteEntity;
+
 @end

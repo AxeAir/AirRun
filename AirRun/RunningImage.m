@@ -12,6 +12,7 @@
 @dynamic latitude;
 @dynamic longitude;
 @dynamic image;
+@dynamic type;
 
 + (NSString *)parseClassName {
     return @"RunningImage";

@@ -70,6 +70,11 @@
     return [RunningRecordEntity MR_findByAttribute:@"dirty" withValue:[NSNumber numberWithInteger:1]];
 }
 
+- (NSArray *)findDirtyImage
+{
+    return [RunningImageEntity MR_findByAttribute:@"dirty" withValue:[NSNumber numberWithInteger:1]];
+}
+
 - (id)getObject:(Class)entity withAttribute:(NSString *)attrobute withValue:(id)value
 {
     return [entity MR_findFirstByAttribute:attrobute withValue:value];
@@ -94,7 +99,7 @@
     //entity.identifer = recordOnServer.identifer;
     entity.city = recordOnServer.city;
     //entity.heartimages ;
-    //entity.dirty = recordOnServer.;
+    entity.dirty = @0;
     entity.updateat = recordOnServer.updatedAt;
     
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {

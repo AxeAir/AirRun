@@ -12,6 +12,7 @@
 #import "BlockMacro.h"
 #import "RunningRecordEntity.h"
 #import "RunningRecord.h"
+#import "RunningImageEntity.h"
 
 /**
  *  本地持久化模型
@@ -39,6 +40,10 @@
  *  @return
  */
 - (NSArray *)findDirtyRecord;
+
+
+
+- (NSArray *)findDirtyImage;
 
 - (id)getObject:(Class)entity withAttribute:(NSString *)attrobute withValue:(id)value;
 

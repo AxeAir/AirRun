@@ -229,7 +229,7 @@
     [heart addSubview:_heartLabel];
     
     
-    NSArray *date = [_runningRecord getImages];
+    NSArray *date = nil;
     if ([date count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
 

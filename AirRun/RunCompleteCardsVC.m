@@ -262,8 +262,24 @@ static const char *INDEX = "index";
     _parameters.city = @"李家沱";
 
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
-        [_parameters setImages:_ImageArray];
+        
+        NSInteger index = 0;
+        NSInteger timestamp = (long)[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
+        for (UIImage *heartImage in _ImageArray) {
+            
+            RunningImageEntity *image = [[RunningImageEntity alloc] init];
+            UIImage *save = [ImageHeler compressImage:heartImage LessThanKB:200];
+            image.type = @"heart";
+            image.dirty = @1;
+            image.image = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
+            [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
+            index++;
+            
+        }
     }
+    
+    
+
     
     [_parameters savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");

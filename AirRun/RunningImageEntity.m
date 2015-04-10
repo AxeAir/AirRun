@@ -17,6 +17,10 @@
 @dynamic image;
 @dynamic isheart;
 @dynamic recordid;
+@dynamic type;
+@dynamic dirty;
+@dynamic updateat;
+@dynamic objectId;
 
 - (instancetype)init
 {
