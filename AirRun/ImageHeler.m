@@ -22,7 +22,7 @@
     return img;
 }
 
-+ (NSData *)compressImage:(UIImage *)image {
++ (UIImage *)compressImage:(UIImage *)image {
     CGSize imagesize=image.size;
     
     while (true) {
@@ -49,12 +49,18 @@
     }
     
     image=[self imageWithImage:image scaledToSize:imagesize];
+    return image;
     
-    NSData *data;
-    data = UIImageJPEGRepresentation(image, 0.5);
-    
-    return data;
-    
+}
+
++ (UIImage *)compressImage:(UIImage *)image LessThanKB:(NSInteger)kb {
+    UIImage *newImage;
+    NSInteger kbs = [self getImageMemerySize:image];
+    while (kbs > kb) {
+        newImage = [self compressImage:image];
+        kbs = [self getImageMemerySize:newImage];
+    }
+    return newImage;
 }
 
 + (UIImage*)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize{
@@ -69,5 +75,10 @@
     UIGraphicsEndImageContext();
     // Return the new image.
     return newImage;
+}
+
++ (CGFloat)getImageMemerySize:(UIImage *)image {
+    size_t imageSize = CGImageGetBytesPerRow(image.CGImage) * CGImageGetHeight(image.CGImage);
+    return imageSize/10240.0;
 }
 @end

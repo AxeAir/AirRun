@@ -50,7 +50,7 @@ static CGFloat kPointHeight = 14.0;
     CustomAnnotation *customAnnotation = (CustomAnnotation *)self.annotation;
     if (customAnnotation) {
         
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, customAnnotation.image.size.width/50, customAnnotation.image.size.height/50)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60*customAnnotation.image.size.height/customAnnotation.image.size.width)];
         _imageView.image = customAnnotation.image;
         //计算自身的frame大小
 //        CGFloat selfWidth = customAnnotation.imageArray.count * kImageViewWidth + (customAnnotation.imageArray.count - 1) *kSpanMargin + kLeftMargin + kRightMargin;

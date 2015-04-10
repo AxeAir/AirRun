@@ -27,6 +27,7 @@
 #import "ReadyView.h"
 #import "RunGuideViewController.h"
 #import "DocumentHelper.h"
+#import "ImageHeler.h"
 #import "DateHelper.h"
 #import "WeatherManager.h"
 
@@ -130,7 +131,7 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setNavgation {
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1111111"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg11111-2"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     
     
@@ -729,9 +730,9 @@ const char *OUTPOSITION = "OutPosition";
         
         RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
         NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]];
-        imgM.image = [kImageFolder stringByAppendingPathComponent:imageName];
-        //imgM.image = @"ddd";
-        [DocumentHelper saveImage:image ToFolderName:kImageFolder WithImageName:imgM.image.lastPathComponent];
+        imgM.image = [kPathImageFolder stringByAppendingPathComponent:imageName];
+        UIImage *newImage = [ImageHeler compressImage:image LessThanKB:400];
+        [DocumentHelper saveImage:newImage ToFolderName:kPathImageFolder WithImageName:imgM.image.lastPathComponent];
         imgM.longitude = @(_currentLocation.coordinate.longitude);
         imgM.latitude = @(_currentLocation.coordinate.latitude);
         imgM.isheart = @0;
