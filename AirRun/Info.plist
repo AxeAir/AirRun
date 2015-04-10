@@ -5,6 +5,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1104472903</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>tencent1104472903</string>
+		</dict>
+		<dict>
 			<key>CFBundleURLName</key>
 			<string>sinaweibosso.151240750</string>
 			<key>CFBundleURLSchemes</key>

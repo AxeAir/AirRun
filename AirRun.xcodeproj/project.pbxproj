@@ -878,7 +878,7 @@
 				TargetAttributes = {
 					E50BE0411AC8854A0030863D = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = SZ6E4TG6HK;
+						DevelopmentTeam = F86ABKXNGB;
 					};
 					E50BE05A1AC8854A0030863D = {
 						CreatedOnToolsVersion = 6.2;
@@ -1232,6 +1232,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Debra Dean (EDRHYG5CZ7)";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1240,6 +1241,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "660f5d77-29f3-47fa-ac74-a66481c82b1e";
 			};
 			name = Debug;
 		};
@@ -1257,6 +1259,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

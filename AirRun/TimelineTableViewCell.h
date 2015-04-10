@@ -11,12 +11,10 @@
 
 @interface TimelineTableViewCell : UITableViewCell
 
-
 - (instancetype)initWithRunningRecord:(RunningRecordEntity *)aRunningrecord;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString *)reuseIdentifier
                 runningRecord:(RunningRecordEntity *)aRunningrecord;
 
-//- (void)configWithRunningecord:(RunningRecordModel *)aRunningrecord;
 @end
