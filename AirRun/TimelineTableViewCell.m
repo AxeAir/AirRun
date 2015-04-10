@@ -139,7 +139,7 @@
     [dataview addSubview:bgMask];
         if (_distanceIconImageView == nil) {
             _distanceIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20,8, 20, 20)];
-            [_distanceIconImageView setImage:[UIImage imageNamed:@"setting"]];
+            [_distanceIconImageView setImage:[UIImage imageNamed:@"distancetiny"]];
             [dataview addSubview:_distanceIconImageView];
         }
     
@@ -148,12 +148,12 @@
             [_distanceLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_distanceLabel];
         }
-        [_distanceLabel setText:[NSString stringWithFormat:@"%ld",[_runningRecord.distance integerValue]]];
+        [_distanceLabel setText:[NSString stringWithFormat:@"%.2f km",[_runningRecord.distance integerValue]/1000.0]];
     
     
         if (_speedIconImageView == nil) {
             _speedIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3, 8, 20, 20)];
-            [_speedIconImageView setImage:[UIImage imageNamed:@"setting"]];
+            [_speedIconImageView setImage:[UIImage imageNamed:@"speedtiny"]];
             [dataview addSubview:_speedIconImageView];
         }
     
@@ -162,11 +162,11 @@
             [_speedLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_speedLabel];
         }
-        [_speedLabel setText:[NSString stringWithFormat:@"%.2lf",[_runningRecord.averagespeed floatValue]]];
+        [_speedLabel setText:[NSString stringWithFormat:@"%.2lf km/h",[_runningRecord.averagespeed floatValue]]];
     
         if (_timeIconImageView == nil) {
             _timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3*2, 8, 20, 20)];
-            [_timeIconImageView setImage:[UIImage imageNamed:@"setting"]];
+            [_timeIconImageView setImage:[UIImage imageNamed:@"timetiny"]];
             [dataview addSubview:_timeIconImageView];
         }
     
@@ -176,11 +176,6 @@
             [dataview addSubview:_timeLabel];
         }
         [_timeLabel setText:[NSString stringWithFormat:@"%ld",[_runningRecord.time integerValue]]];
-        
-    
-    
-    
-    
     return dataview;
 }
 
@@ -198,8 +193,6 @@
     [detailTime setTextColor:RGBCOLOR(138, 138, 138)];
     [detailTime setFont:[UIFont systemFontOfSize:14]];
     [footer addSubview:detailTime];
-    
-    
     
     UIView *location = [self createLocationView];
     [location setFrame:CGRectMake(Main_Screen_Width-75-30, 10, 75, 20)];
@@ -239,11 +232,8 @@
     NSArray *date = [_runningRecord getImages];
     if ([date count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
-        
-        //NSArray *date = [_runningRecord getImages];
-        
+
         NSInteger imagewidth = (Main_Screen_Width-80-40)/5;
-        
         NSInteger index= 0;
         for (NSObject *o in date) {
             UIImageView *view = [[UIImageView alloc] initWithImage:(UIImage*)o];
