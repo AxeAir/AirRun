@@ -32,14 +32,14 @@
                       clientKey:@"140a1m8lrhg0s0lyzasvsrg3ou5zfrd13nqkdg13zytwytk5"];
     [RunningRecord registerSubclass];
     [RunningImage registerSubclass];
-    
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
-    
     
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    [DocumentHelper creatFolderAtDocument:kImageFolder];//创建图片文件夹
+    [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
+    [DocumentHelper creatFolderAtDocument:kPathImageFolder];
+    [DocumentHelper creatFolderAtDocument:kHeartImage];
     
     UINavigationController *navigationController = nil;
     

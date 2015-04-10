@@ -18,11 +18,22 @@
 /**
  *@param image 压缩图片是原来的1/4
  */
-+ (NSData *)compressImage:(UIImage *)image;
++ (UIImage *)compressImage:(UIImage *)image;
 
 /**
  *@param 把图片缩小到新的大小
  */
 + (UIImage *)imageWithImage:(UIImage*)image scaledToSize:(CGSize)newSize;
 
+/**
+ *  得到图片的内存大小
+ *
+ *  @param image 图片
+ *
+ *  @return 图片内存大小KB单位
+ */
++ (CGFloat)getImageMemerySize:(UIImage *)image;
+
+
++ (UIImage *)compressImage:(UIImage *)image LessThanKB:(NSInteger)kb;
 @end

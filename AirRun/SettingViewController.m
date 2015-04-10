@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "RESideMenu.h"
 #import <AVOSCloud.h>
+#import "AboutUsViewController.h"
 
 @interface SettingViewController ()
 @property (nonatomic, strong) AVUser *user;
@@ -142,7 +143,8 @@
         {
             
             if (indexPath.row == 2) {
-                
+                AboutUsViewController *vc = [[AboutUsViewController alloc] init];
+                [self.navigationController pushViewController:vc animated:YES];
             }
         }
             break;

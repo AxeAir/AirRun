@@ -24,8 +24,8 @@
 @property (nonatomic, retain) NSString * weather;
 @property (nonatomic, retain) NSNumber * pm25;
 @property (nonatomic, retain) NSNumber * averagespeed;
-@property (nonatomic, retain) NSDate   * finishtime;
-@property (nonatomic, retain) NSData   * mapshot;
+@property (nonatomic, retain) NSDate * finishtime;
+@property (nonatomic, retain) NSString * mapshot;
 @property (nonatomic, retain) NSString * heart;
 @property (nonatomic, retain) NSString * objectId;
 @property (nonatomic, retain) NSString * identifer;

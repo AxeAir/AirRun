@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-static NSString *const kImageFolder = @"Image";
+static NSString *const kMapImageFolder = @"MapImage";
+static NSString *const kPathImageFolder = @"PathImage";
+static NSString *const kHeartImage = @"HeartImage";
 
 @interface DocumentHelper : NSObject
 /**
