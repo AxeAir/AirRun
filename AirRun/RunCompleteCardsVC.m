@@ -20,6 +20,9 @@
 #import "EditImageView.h"
 #import "DocumentHelper.h"
 #import "ImageHeler.h"
+#import "TimelineController.h"
+#import "RESideMenu.h"
+#import "ShareView.h"
 
 static const char *INDEX = "index";
 
@@ -36,6 +39,7 @@ static const char *INDEX = "index";
 @property (nonatomic, strong) NSMutableArray *imgMs;//跑步中的图片(entity)
 @property (nonatomic, strong) NSMutableArray *images;//跑步中的图片(image)
 @property (nonatomic, strong) NSMutableArray *ImageArray;//心得添加的图片
+
 @end
 
 @implementation RunCompleteCardsVC
@@ -247,31 +251,39 @@ static const char *INDEX = "index";
     _parameters.heart = _inputcard.textview.text;
     _parameters.finishtime = [[NSDate alloc] init];
 
-    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
-    record.heart = _inputcard.textview.text;
-    record.finishtime = [[NSDate alloc] init];
-    record.time = @1000;
-    record.distance = @10000;
-    record.averagespeed = @2.8;
+
+//    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
+//    record.heart = _inputcard.textview.text;
+//    record.finishtime = [[NSDate alloc] init];
+//    record.time = @1000;
+//    record.distance = @10000;
+//    record.averagespeed = @2.8;
+    _parameters.dirty = @1;
+    _parameters.city = @"李家沱";
 
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [_parameters setImages:_ImageArray];
     }
     
-//    for (RunningImageEntity *imgEntity in _imgMs) {
-//        imgEntity.recordid = _parameters.identifer;
-//        [imgEntity savewithCompleteBlock:^{
-//            NSLog(@"complete");
-//        } withErrorBlock:^{
-//            NSLog(@"error");
-//        }];
-//    }
-    
-    [record savewithCompleteBlock:^{
+    [_parameters savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");
     } withErrorBlock:^{
         
     }];
+    
+    if (type == CompleteDisplayCardButtonTypeShare) {
+        ShareView *share = [[ShareView alloc] init];
+        
+        [share showInView:self.view];
+    
+        
+    }
+    else if(type == CompleteDisplayCardButtonTypeComplete)
+    {
+        [self.sideMenuViewController setContentViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
+                                                     animated:NO];
+        [self.sideMenuViewController hideMenuViewController];
+    }
 }
 
 - (void)completeDisplayCard:(CompleteDisplayCard *)card FoucsButtouTouch:(UIButton *)button {

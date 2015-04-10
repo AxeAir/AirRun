@@ -9,6 +9,9 @@
 #import "RunningImage.h"
 
 @implementation RunningImage
+@dynamic latitude;
+@dynamic longitude;
+@dynamic image;
 
 + (NSString *)parseClassName {
     return @"RunningImage";

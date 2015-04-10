@@ -10,8 +10,10 @@
 #import "UConstants.h"
 #import "ProfileViewController.h"
 #import "RESideMenu.h"
+#import <AVOSCloud.h>
 
 @interface SettingViewController ()
+@property (nonatomic, strong) AVUser *user;
 
 @end
 
@@ -26,6 +28,7 @@
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    _user = [AVUser currentUser];
     
 }
 
@@ -60,12 +63,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
     }
     
-    
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, HEIGHT(cell))];
-    
     [title setFont:[UIFont systemFontOfSize:14]];
     [cell.contentView addSubview:title];
-    
+    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     switch (indexPath.section) {
             
         case 0:
@@ -73,7 +75,17 @@
                 title.text = @"语音提示";
                 UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
                 [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
+                [cell setAccessoryType:UITableViewCellAccessoryNone];
                 [cell.contentView addSubview:line];
+                
+                UISwitch *switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(Main_Screen_Width-65, 7, 60, 30)];
+                [switchButton addTarget:self action:@selector(switchVoiceButton:) forControlEvents:UIControlEventValueChanged];
+                
+                if ([_user objectForKey:@"voiceNotification"] == nil || [[_user objectForKey:@"voiceNotification"] isEqualToString:@"on"]) {
+                    switchButton.on=YES;
+                }
+            
+                [cell addSubview:switchButton];
             }
             if (indexPath.row == 1) {
                 title.text = @"锻炼提醒";
@@ -110,7 +122,7 @@
             break;
     }
     
-    [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+    
     return cell;
 }
 
@@ -121,10 +133,19 @@
     switch (indexPath.section) {
         case 0:
         {
-            ProfileViewController *profile = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
-            [self.navigationController pushViewController:profile animated:YES];
+            if (indexPath.row ==2) {
+                [[PersistenceManager shareManager] sync];
+            }
         }
         break;
+        case 1:
+        {
+            
+            if (indexPath.row == 2) {
+                
+            }
+        }
+            break;
         default:
             break;
     }
@@ -133,6 +154,26 @@
 
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
+}
+
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_user saveInBackground];
+}
+
+
+- (void)switchVoiceButton:(id)sender
+{
+    UISwitch *switchButton = (UISwitch *)sender;
+    if (switchButton.on) {
+        [_user setObject:@"on" forKey:@"voiceNotification"];
+    }
+    else
+    {
+        [_user setObject:@"off" forKey:@"voiceNotification"];
+    }
+    
 }
 
 

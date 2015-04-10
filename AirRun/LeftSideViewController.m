@@ -171,8 +171,8 @@
     }
     
     if (indexPath.section == 1) {
-        NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"GoGoGo"];
-        NSArray *images = @[@"runner", @"timeline", @"setting", @"setting" , @"setting"];
+        NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"支持与反馈"];
+        NSArray *images = @[@"runner", @"timeline", @"setting", @"setting",@"setting"];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
         [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];

@@ -10,6 +10,7 @@
     <entity name="RunningRecordEntity" representedClassName="RunningRecordEntity" syncable="YES">
         <attribute name="averagespeed" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dirty" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="finishtime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="heart" optional="YES" attributeType="String" syncable="YES"/>
@@ -21,10 +22,11 @@
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pm25" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="time" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="updateat" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="RunningImageEntity" positionX="-54" positionY="63" width="128" height="120"/>
-        <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="255"/>
+        <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="285"/>
     </elements>
 </model>

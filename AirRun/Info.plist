@@ -5,6 +5,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>tencent1104472903</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>tencent1104472903</string>
+		</dict>
+		<dict>
 			<key>CFBundleURLName</key>
 			<string>sinaweibosso.151240750</string>
 			<key>CFBundleURLSchemes</key>
@@ -34,9 +42,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>空气跑想要你的位置</string>
+	<string>轻跑需要知道您的位置以便为您获取空气和天气状况</string>
 	<key>NSLocationUsageDescription</key>
-	<string>空气跑需要你的位置</string>
+	<string>轻跑需要知道您的位置以便为您获取空气和天气状况</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

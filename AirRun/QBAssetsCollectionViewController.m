@@ -323,14 +323,14 @@
             }
 
             case QBImagePickerControllerFilterTypePhotos:{
-                NSString *format = (self.numberOfPhotos == 1) ? @"format_photo" : @"format_photos";
+                NSString *format = (self.numberOfPhotos == 1) ? @"format_photo" : @"";
                 footerView.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(format, @"QBImagePickerController", nil),
                                              self.numberOfPhotos];
                 break;
             }
                 
             case QBImagePickerControllerFilterTypeVideos:{
-                NSString *format = (self.numberOfVideos == 1) ? @"format_video" : @"format_videos";
+                NSString *format = (self.numberOfVideos == 1) ? @"format_video" : @"";
                 footerView.textLabel.text = [NSString stringWithFormat:NSLocalizedStringFromTable(format, @"QBImagePickerController", nil),
                                              self.numberOfVideos];
                 break;

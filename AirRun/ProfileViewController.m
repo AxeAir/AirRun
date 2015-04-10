@@ -17,9 +17,9 @@
 #import "NSDate+change.h"
 @interface ProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
-@property (nonatomic, strong) UIPickerView *genderPickerView;
+@property (nonatomic, strong) UIPickerView            *genderPickerView;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
-@property (nonatomic, strong) UIImageView *avatarImageView;
+@property (nonatomic, strong) UIImageView             *avatarImageView;
 
 @end
 
@@ -33,11 +33,9 @@
     
     self.title = @"个人设置";
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
+    self.navigationItem.leftBarButtonItem = menuButton;
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -412,6 +410,10 @@
     [actionsheet setTag:900001];
     [actionsheet showInView:self.view];
 
+}
+
+- (void)menuButtonTouch:(UIButton *)sender {
+    [self.sideMenuViewController presentLeftMenuViewController];
 }
 
 

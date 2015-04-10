@@ -13,7 +13,8 @@
 @class MapViewDelegate;
 
 typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
-        CompleteDisplayCardButtonTypeShare
+    CompleteDisplayCardButtonTypeShare,
+    CompleteDisplayCardButtonTypeComplete
 };
 
 @protocol CompleteDisplayCardDelegate;

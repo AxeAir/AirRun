@@ -135,13 +135,14 @@ typedef enum : NSUInteger {
     [self.view addSubview:_weibo];
     
     _wechat = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_wechat setTitle:@"微信" forState:UIControlStateNormal];
+    [_wechat setTitle:@"QQ" forState:UIControlStateNormal];
     [_wechat setTintColor:[UIColor whiteColor]];
     [_wechat setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
     _wechat.titleLabel.font = [UIFont systemFontOfSize:12];
     [_wechat sizeToFit];
     _wechat.center = CGPointMake(self.view.bounds.size.width/2 + 20 + _wechat.bounds.size.width/2, self.view.bounds.size.height-10-_wechat.bounds.size.height/2);
     _wechat.alpha = 0;
+    [_wechat addTarget:self action:@selector(qqlogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_wechat];
     
 }
@@ -383,7 +384,49 @@ typedef enum : NSUInteger {
     
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         //you code here
+        
+        if (error) {
+            NSLog(@"微博登陆失败");
+        }
+        else if(object){
+            NSLog(@"微博登陆成功");
+            
+            [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
+                NSLog(@"%@",user);
+                
+            }];
+            
+            
+        }
+        NSLog(@"%@",error);
+        
     } toPlatform:AVOSCloudSNSSinaWeibo];
 }
 
+- (void)qqlogin
+{
+    [AVOSCloudSNS setupPlatform:AVOSCloudSNSQQ withAppKey:@"1104472903" andAppSecret:@"9QpaWYoZhHRbMfRm" andRedirectURI:nil];
+    
+    [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
+        //you code here
+        
+        if (error) {
+            NSLog(@"QQ快速登陆失败");
+        }
+        else if(object){
+            NSLog(@"QQ快速登陆成功");
+            
+            NSLog(@"%@",object);
+            [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformQQ block:^(AVUser *user, NSError *error) {
+                NSLog(@"%@",user);
+                
+            }];
+            
+            
+        }
+        NSLog(@"%@",error);
+        
+    } toPlatform:AVOSCloudSNSQQ];
+
+}
 @end

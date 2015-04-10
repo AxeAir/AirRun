@@ -20,4 +20,21 @@
     });
     return shareServerPersistenceInstance;
 }
+
+
+- (void)createObject:(AVObject *)object withCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
+{
+    [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error) {
+            errorBlock();
+        }
+        else if (succeeded)
+        {
+            completeBlock();
+        }
+    }];
+}
+
+
+
 @end

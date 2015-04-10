@@ -18,8 +18,7 @@
 #import <CoreData+MagicalRecord.h>
 #import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
-#import "ImageHeler.h"
-
+#import "UConstants.h"
 @interface AppDelegate ()
 
 @end
@@ -28,10 +27,6 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
- 
-//    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"seabg"] forBarMetrics:UIBarMetricsDefault];
-//    [[UINavigationBar appearance] setShadowImage:[UIImage new]];
-//    [[UINavigationBar appearance] setBarTintColor:[UIColor clearColor]];
     
     [AVOSCloud setApplicationId:@"8idak6ebtenkwv4pv2caugmbuws9flvwse7k2275cm4s2vz7"
                       clientKey:@"140a1m8lrhg0s0lyzasvsrg3ou5zfrd13nqkdg13zytwytk5"];
@@ -73,6 +68,25 @@
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
+    
+    
+    if (FSystenVersion>=8) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
+                                                | UIUserNotificationTypeBadge
+                                                | UIUserNotificationTypeSound
+                                                                                 categories:nil];
+        [application registerUserNotificationSettings:settings];
+        [application registerForRemoteNotifications];
+    }
+    else
+    {
+        // Register for push notifications
+        [application registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeBadge |
+         UIRemoteNotificationTypeAlert |
+         UIRemoteNotificationTypeSound];
+    }
+    
     return YES;
 
     
@@ -105,4 +119,15 @@
     return [AVOSCloudSNS handleOpenURL:url];
 }
 
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    AVInstallation *currentInstallation = [AVInstallation currentInstallation];
+    NSLog(@"%@",deviceToken);
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
+{
+    NSLog(@"%@",error);
+}
 @end

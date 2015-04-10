@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersistenceManager.h"
 
 @interface SettingViewController : UITableViewController
 
