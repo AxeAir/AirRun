@@ -54,6 +54,11 @@
 
 - (void)createRecord:(RunningRecord *)recordOnServer
    withCompleteBlock:(CompleteBlock)completeBlock
-      withErrorBlock:(ErrorBlock)errorBlock;;
+      withErrorBlock:(ErrorBlock)errorBlock;
+
+
+- (void)createImage:(RunningImage *)imageObServer
+  withCompleteBlock:(CompleteBlock)completeBlock
+     withErrorBlock:(ErrorBlock)errorBlock;
 
 @end

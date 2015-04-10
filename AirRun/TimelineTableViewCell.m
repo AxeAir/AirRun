@@ -184,7 +184,11 @@
 {
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, top, Main_Screen_Width, 40)];
     
-    UILabel *detailTime = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, 200, 40)];
+    UIImageView *clockImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 13, 14, 14)];
+    [clockImageView setImage:[UIImage imageNamed:@"timetiny"]];
+    [footer addSubview:clockImageView];
+    
+    UILabel *detailTime = [[UILabel alloc] initWithFrame:CGRectMake(30, 0, 200, 40)];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"MM月dd日 HH:mm"];
@@ -195,6 +199,8 @@
     [footer addSubview:detailTime];
     
     UIView *location = [self createLocationView];
+    
+    
     [location setFrame:CGRectMake(Main_Screen_Width-75-30, 10, 75, 20)];
     [footer addSubview:location];
     
@@ -261,6 +267,7 @@
     [location setBackgroundColor:RGBCOLOR(237, 237, 237)];
     
     UIImageView *locationImageView = [[UIImageView alloc] initWithFrame:CGRectMake(3, 3, 14, 14)];
+    [locationImageView setImage:[UIImage imageNamed:@"location"]];
     [location addSubview:locationImageView];
     
     UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(locationImageView)+3, 3, 100, 14)];

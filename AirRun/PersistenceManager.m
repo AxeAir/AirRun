@@ -53,8 +53,6 @@
                 
             }
             
-            
-            
         }
         
         
@@ -70,7 +68,6 @@
 {
     NSArray *dirtyRecord = [[AirLocalPersistence shareLocalPersistenceInstance] findDirtyRecord];
     //找到所有的待更新数据
-    
     
     for (RunningRecordEntity *record in dirtyRecord) {
         
@@ -132,10 +129,6 @@
             {
                 NSLog(@"ddddd");
             }
-            
-            
-            
-            
         }
         
         [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
@@ -190,6 +183,7 @@
                     imageEntiy.objectId = newrecord.objectId;
                     imageEntiy.updateat = newrecord.createdAt;
                     imageEntiy.dirty = @0;
+                    imageEntiy.type = newrecord.type;
                     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
                         if (error) {
                             NSLog(@"%@",error);

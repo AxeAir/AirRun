@@ -111,4 +111,29 @@
     }];
 }
 
+
+- (void)createImage:(RunningImage *)imageObServer
+  withCompleteBlock:(CompleteBlock)completeBlock
+     withErrorBlock:(ErrorBlock)errorBlock
+{
+    RunningImageEntity *entity = [RunningImageEntity MR_createEntity];
+    entity.recordid = imageObServer.identifer;
+    entity.longitude = imageObServer.longitude;
+    entity.latitude = imageObServer.latitude;
+    entity.type = imageObServer.type;
+    entity.dirty = @0;
+    entity.updateat = imageObServer.updatedAt;
+    
+    AVFile *file = imageObServer.image;
+    entity.image = file.url;
+    
+    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+        if (error) {
+            errorBlock();
+        } else if (success) {
+            completeBlock();
+        }
+    }];
+}
+
 @end
