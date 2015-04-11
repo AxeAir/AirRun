@@ -38,7 +38,7 @@
 		96F399011AD4C5ED0090CCD8 /* RunningImageEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F398FE1AD4C5ED0090CCD8 /* RunningImageEntity.m */; };
 		96F399021AD4C5ED0090CCD8 /* RunningRecordEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F399001AD4C5ED0090CCD8 /* RunningRecordEntity.m */; };
 		96F399051AD4E13B0090CCD8 /* ReadyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F399041AD4E13B0090CCD8 /* ReadyView.m */; };
-		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; };
+		96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596A91ACC518B00F56BEA /* WGS84TOGCJ02.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596AE1ACC51B800F56BEA /* RunCardView.m */; };
 		96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B11ACC51D600F56BEA /* MapViewDelegate.m */; };
 		96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B41ACC51E300F56BEA /* RunViewController.m */; };

@@ -13,9 +13,6 @@ static CGFloat kBottomMargin = 6.0;
 static CGFloat kLeftMargin = 6.0;
 static CGFloat kRightMargin = 6.0;
 static CGFloat kTopMargin = 6.0;
-static CGFloat kSpanMargin = 6.0f;
-static CGFloat kImageViewWidth = 35.0;
-static CGFloat kImageViewHeight = 50.0;
 static CGFloat kPointHeight = 14.0;
 
 @interface CustomAnnotationView ()
