@@ -50,6 +50,7 @@
                                                                             attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                                          NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         _emailField.borderStyle = UITextBorderStyleNone;
+        [_emailField setKeyboardType:UIKeyboardTypeEmailAddress];
         [_emailView addSubview:_emailField];
     }
     _emailField.frame = CGRectMake(CGRectGetMaxX(_emailImageView.frame)+15, _emailView.bounds.size.height/2-15, _emailView.bounds.size.width-CGRectGetMaxX(_emailImageView.frame)-15, 30);
@@ -84,6 +85,8 @@
                                                                                attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                                             NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         _passwordField.borderStyle = UITextBorderStyleNone;
+        _passwordField.secureTextEntry = YES;
+        [_passwordField setKeyboardType:UIKeyboardTypeEmailAddress];
         [_passwordView addSubview:_passwordField];
     }
     _passwordField.frame = CGRectMake(CGRectGetMaxX(_passwordImageView.frame)+15, _passwordView.bounds.size.height/2-15, _passwordView.bounds.size.width-CGRectGetMaxX(_passwordImageView.frame)-15, 30);

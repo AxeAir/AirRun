@@ -62,7 +62,7 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
-            [self.sideMenuViewController setContentViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
+            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]]
                                                          animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;

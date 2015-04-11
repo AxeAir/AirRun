@@ -53,6 +53,11 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBarHidden = NO;
+}
+
 - (void)p_getData {
    
     NSData *arrayData = [_record.path dataUsingEncoding:NSUTF8StringEncoding];
