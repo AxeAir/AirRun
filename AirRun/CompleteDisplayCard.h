@@ -27,7 +27,6 @@ typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
 - (instancetype)initWithFrame:(CGRect)frame withEntity:(RunningRecordEntity *)entity;
 
 - (void)adjust:(NSString *)heart;
-- (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock;
 
 @end
 

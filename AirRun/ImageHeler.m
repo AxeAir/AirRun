@@ -54,7 +54,7 @@
 }
 
 + (UIImage *)compressImage:(UIImage *)image LessThanKB:(NSInteger)kb {
-    UIImage *newImage;
+    UIImage *newImage = image;
     NSInteger kbs = [self getImageMemerySize:image];
     while (kbs > kb) {
         newImage = [self compressImage:image];

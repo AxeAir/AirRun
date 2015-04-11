@@ -10,6 +10,8 @@
 		628F663BFB502D4B71C8F3D9 /* libPods-AirRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */; };
 		961547BF1AD7B6E100D3CA5B /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547BE1AD7B6E100D3CA5B /* AboutUsViewController.m */; };
 		961547C31AD7B6F500D3CA5B /* PersonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547C21AD7B6F500D3CA5B /* PersonView.m */; };
+		961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */; };
+		961547C91AD8313A00D3CA5B /* RecordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */; };
 		96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D0B1ACDB62200DECE02 /* RunPauseView.m */; };
 		96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D0D1ACDB62200DECE02 /* RunSimpleCardView.m */; };
 		96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D111ACDB64500DECE02 /* RunViewControllerAnimation.m */; };
@@ -124,6 +126,9 @@
 		961547BE1AD7B6E100D3CA5B /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
 		961547C11AD7B6F500D3CA5B /* PersonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonView.h; sourceTree = "<group>"; };
 		961547C21AD7B6F500D3CA5B /* PersonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonView.m; sourceTree = "<group>"; };
+		961547C51AD8313A00D3CA5B /* RecordDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordDetailViewController.h; sourceTree = "<group>"; };
+		961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordDetailViewController.m; sourceTree = "<group>"; };
+		961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordDetailViewController.xib; sourceTree = "<group>"; };
 		96474D0A1ACDB62200DECE02 /* RunPauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunPauseView.h; sourceTree = "<group>"; };
 		96474D0B1ACDB62200DECE02 /* RunPauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunPauseView.m; sourceTree = "<group>"; };
 		96474D0C1ACDB62200DECE02 /* RunSimpleCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSimpleCardView.h; sourceTree = "<group>"; };
@@ -357,6 +362,16 @@
 				961547C21AD7B6F500D3CA5B /* PersonView.m */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		961547C41AD8311C00D3CA5B /* RecordDetail */ = {
+			isa = PBXGroup;
+			children = (
+				961547C51AD8313A00D3CA5B /* RecordDetailViewController.h */,
+				961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */,
+				961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */,
+			);
+			name = RecordDetail;
 			sourceTree = "<group>";
 		};
 		96474D581ACED5CA00DECE02 /* RegisterAndLogIn */ = {
@@ -635,6 +650,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				961547C41AD8311C00D3CA5B /* RecordDetail */,
 				961547BC1AD7B6C700D3CA5B /* AboutUs */,
 				9673DD501AD4F4EE006E64B7 /* RunGuide */,
 				E5FAC7EF1AD118E800A2C7DD /* Profile */,
@@ -941,6 +957,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				961547C91AD8313A00D3CA5B /* RecordDetailViewController.xib in Resources */,
 				E50BE0511AC8854A0030863D /* Main.storyboard in Resources */,
 				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
@@ -1065,6 +1082,7 @@
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
 				96F399011AD4C5ED0090CCD8 /* RunningImageEntity.m in Sources */,
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
+				961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
 				E52BAC491AD2761C00EC051C /* EditSignViewController.m in Sources */,

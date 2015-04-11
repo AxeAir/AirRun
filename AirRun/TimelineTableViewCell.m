@@ -8,6 +8,7 @@
 
 #import "TimelineTableViewCell.h"
 #import "UConstants.h"
+#import "DocumentHelper.h"
 
 @interface TimelineTableViewCell()
 
@@ -85,10 +86,16 @@
     
     if (_mapImageView == nil) {
         _mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, MaxY(_headerView), WIDTH(_mainView)-20, 150)];
+        _mapImageView.userInteractionEnabled = YES;
         [_mainView addSubview:_mapImageView];
     }
-    [_mapImageView setImage:[UIImage imageNamed:@"map.jpg"]];
+    NSString *imageName = [NSString stringWithFormat:@"%@.jpg",_runningRecord.identifer];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
+    [_mapImageView setImage:image];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disSelctMap:)];
+    [_mapImageView addGestureRecognizer:tap];
+
     [_mapImageView addSubview:[self createDataView]];
     
     
@@ -148,6 +155,7 @@
             [_distanceLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_distanceLabel];
         }
+
         [_distanceLabel setText:[NSString stringWithFormat:@"%.2f km",[_runningRecord.distance integerValue]/1000.0]];
     
     
@@ -175,7 +183,9 @@
             [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_timeLabel];
         }
-        [_timeLabel setText:[NSString stringWithFormat:@"%ld",[_runningRecord.time integerValue]]];
+
+        [_timeLabel setText:[NSString stringWithFormat:@"%ld",(long)[_runningRecord.time integerValue]]];
+
     return dataview;
 }
 
@@ -286,5 +296,10 @@
     // Configure the view for the selected state
 }
 
+
+- (void)disSelctMap:(id)sender
+{
+    [_delegate TimelineTableViewCellDidSelcct:_runningRecord];
+}
 
 @end

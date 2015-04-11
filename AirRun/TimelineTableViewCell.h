@@ -9,6 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "RunningRecordEntity.h"
 
+typedef void (^didMapSelect)(RunningRecordEntity *record);
+@protocol TimelineTableViewCellDelegate;
+
 @interface TimelineTableViewCell : UITableViewCell
 
 - (instancetype)initWithRunningRecord:(RunningRecordEntity *)aRunningrecord;
@@ -16,5 +19,14 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style
               reuseIdentifier:(NSString *)reuseIdentifier
                 runningRecord:(RunningRecordEntity *)aRunningrecord;
+
+@property (nonatomic, weak) id<TimelineTableViewCellDelegate> delegate;
+
+@end
+
+
+@protocol TimelineTableViewCellDelegate <NSObject>
+
+- (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record;
 
 @end

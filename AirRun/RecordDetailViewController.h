@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+@class RunningRecordEntity;
 @interface RecordDetailViewController : UIViewController
+
+@property (strong, nonatomic) RunningRecordEntity *record;
 
 @end

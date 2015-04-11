@@ -19,4 +19,41 @@
     return [dateformatter stringFromDate:[NSDate date]];
 }
 
++ (NSString *)converSecondsToTimeString:(NSInteger)seconds {
+    
+    NSInteger tempSeconds = seconds;
+    
+    NSString *hourStr = @"";
+    NSInteger hour = seconds/(60*60);
+    tempSeconds %= (60 * 60);
+    if (hour > 0) {
+        
+        if (hour >= 10) {
+            hourStr = [NSString stringWithFormat:@"%ld:",(long)hour];
+        } else {
+            hourStr = [NSString stringWithFormat:@"0%ld:",(long)hour];
+        }
+        
+    }
+    
+    NSString *minuteStr = @"";
+    NSInteger minute = tempSeconds/60;
+    tempSeconds %= 60;
+    if (minute < 10) {
+        minuteStr = [NSString stringWithFormat:@"0%ld:",(long)minute];
+    } else {
+        minuteStr = [NSString stringWithFormat:@"%ld:",(long)minute];
+    }
+    
+    NSString *secondsStr = @"";
+    if (tempSeconds < 10) {
+        secondsStr = [NSString stringWithFormat:@"0%ld",(long)tempSeconds];
+    } else {
+        secondsStr = [NSString stringWithFormat:@"%ld",(long)tempSeconds];
+    }
+    
+    return [NSString stringWithFormat:@"%@%@%@",hourStr,minuteStr,secondsStr];
+    
+}
+
 @end

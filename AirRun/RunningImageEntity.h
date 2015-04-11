@@ -30,4 +30,6 @@
 
 - (void)deleteEntity;
 
++ (NSArray *)getEntitiesWithArrtribut:(NSString *)attribute WithValue:(id)value;
+
 @end

@@ -287,20 +287,6 @@
     
 }
 
-- (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock {
-    
-    MKMapSnapshotOptions *options = [[MKMapSnapshotOptions alloc] init];
-    options.region = self.mapView.region;
-    options.scale = [UIScreen mainScreen].scale;
-    options.size = self.mapView.frame.size;
-    
-    MKMapSnapshotter *snapshotter = [[MKMapSnapshotter alloc] initWithOptions:options];
-    [snapshotter startWithCompletionHandler:^(MKMapSnapshot *snapshot, NSError *error) {
-        completeBlock(snapshot);
-    }];
-
-}
-
 
 - (void)drawRect:(CGRect)rect
 {
