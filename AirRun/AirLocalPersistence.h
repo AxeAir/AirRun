@@ -12,6 +12,7 @@
 #import "BlockMacro.h"
 #import "RunningRecordEntity.h"
 #import "RunningRecord.h"
+#import "RunningImageEntity.h"
 
 /**
  *  本地持久化模型
@@ -40,6 +41,10 @@
  */
 - (NSArray *)findDirtyRecord;
 
+
+
+- (NSArray *)findDirtyImage;
+
 - (id)getObject:(Class)entity withAttribute:(NSString *)attrobute withValue:(id)value;
 
 
@@ -49,6 +54,11 @@
 
 - (void)createRecord:(RunningRecord *)recordOnServer
    withCompleteBlock:(CompleteBlock)completeBlock
-      withErrorBlock:(ErrorBlock)errorBlock;;
+      withErrorBlock:(ErrorBlock)errorBlock;
+
+
+- (void)createImage:(RunningImage *)imageObServer
+  withCompleteBlock:(CompleteBlock)completeBlock
+     withErrorBlock:(ErrorBlock)errorBlock;
 
 @end

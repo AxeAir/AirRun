@@ -15,6 +15,7 @@
 #import <AVOSCloudSNS.h>
 #import "RESideMenu.h"
 #import "RunViewController.h"
+#import <AFURLSessionManager.h>
 
 typedef enum : NSUInteger {
     RegisterAndLoginViewControllerStateSignUp,
@@ -244,6 +245,8 @@ typedef enum : NSUInteger {
         
         [AVUser logInWithUsernameInBackground:email password:password block:^(AVUser *user, NSError *error) {
             if (user != nil) {
+                [[NSNotificationCenter defaultCenter]
+                 postNotificationName:@"updateAratar" object:nil];
                 RunViewController *run = [[RunViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                 [self.sideMenuViewController hideMenuViewController];
@@ -408,25 +411,60 @@ typedef enum : NSUInteger {
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSQQ withAppKey:@"1104472903" andAppSecret:@"9QpaWYoZhHRbMfRm" andRedirectURI:nil];
     
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-        //you code here
         
         if (error) {
             NSLog(@"QQ快速登陆失败");
         }
         else if(object){
             NSLog(@"QQ快速登陆成功");
-            
             NSLog(@"%@",object);
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformQQ block:^(AVUser *user, NSError *error) {
                 NSLog(@"%@",user);
+                //
+                if ([user objectForKey:@"firstSSO"]) {
+                    
+                    
+                    
+                }
+                //第一次登陆 ，获取登陆信息
+                else{
+                    NSString     *avatar = [object objectForKey:@"avatar"];
+                    NSDictionary *rawuser = [object objectForKey:@"raw-user"];
+                    NSString     *city = [rawuser objectForKey:@"city"];
+                    NSString     *gender = [rawuser objectForKey:@"gender"];
+                    NSString     *nickname = [rawuser objectForKey:@"nickname"];
+                    
+                    [user setObject:gender forKey:@"gender"];
+                    [user setObject:nickname forKey:@"nickName"];
+                    [user setObject:@"ok" forKey:@"firstSSO"];
+                    
                 
+                    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                            
+                        if (succeeded) {
+                                
+                            [[NSNotificationCenter defaultCenter]
+                                 
+                                postNotificationName:@"updateAratar" object:nil];
+                            RunViewController *run = [[RunViewController alloc] init];
+                            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                            [self.sideMenuViewController hideMenuViewController];
+                            }
+                            
+                        }];
+                
+                   
+                }
+
             }];
-            
-            
         }
         NSLog(@"%@",error);
         
     } toPlatform:AVOSCloudSNSQQ];
 
 }
+
+
+
+
 @end

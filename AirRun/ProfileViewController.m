@@ -15,6 +15,7 @@
 #import "RESideMenu.h"
 #import "RegisterAndLoginViewController.h"
 #import "NSDate+change.h"
+#import "ImageHeler.h"
 @interface ProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIPickerView            *genderPickerView;
@@ -373,15 +374,23 @@
         //NSString *imgPath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
         //关闭相册界面
         [picker dismissViewControllerAnimated:YES completion:nil];
+        
+        
+        image = [ImageHeler imageWithImage:image scaledToSize:CGSizeMake(200, 200)];
         _avatarImageView.image = image;
         
+        AVFile *currentAvatar = [[AVUser currentUser] objectForKey:@"avatar"];
+        
         NSData *imageData = UIImagePNGRepresentation(image);
-        AVFile *imageFile = [AVFile fileWithName:@"image.png" data:imageData];
+        AVFile *imageFile = [AVFile fileWithName:@"avatar.png" data:imageData];
         [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             NSLog(@"上传成功");
-                AVUser *user = [AVUser currentUser];
-                [user setObject:imageFile forKey:@"avatar"];
-                [user save];
+            AVUser *user = [AVUser currentUser];
+            [user setObject:imageFile forKey:@"avatar"];
+            [user save];
+            [currentAvatar deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                NSLog(@"%@",error);
+            }];
         } progressBlock:^(NSInteger percentDone) {
             NSLog(@"%ld",percentDone);
         }];

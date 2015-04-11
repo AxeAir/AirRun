@@ -51,6 +51,11 @@
    
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
+}
+
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -102,13 +107,8 @@
     AVFile *avatarData = [[AVUser currentUser] objectForKey:@"avatar"];
     NSData *resumeData = [avatarData getData];
     
-    ALDBlurImageProcessor *blurImageProcessor = [[ALDBlurImageProcessor alloc] initWithImage: [UIImage imageWithData:resumeData]];
+    [_headerbackgroundImageView setImage:[UIImage imageWithData:resumeData]];
 
-    [blurImageProcessor asyncBlurWithRadius:50 iterations:20 successBlock:^(UIImage *blurredImage) {
-        [_headerbackgroundImageView setImage:blurredImage];
-    } errorBlock:^(NSNumber *errorCode) {
-        
-    }];
     [header addSubview:_headerbackgroundImageView];
     
     _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake((Main_Screen_Width-80)/2, 50, 80, 80)];
@@ -128,7 +128,7 @@
     [_nameLabel setTextColor:[UIColor whiteColor]];
     [_nameLabel setText:[[AVUser currentUser] objectForKey:@"nickName"]];
     [header addSubview:_nameLabel];
-    
+
     return header;
 }
 

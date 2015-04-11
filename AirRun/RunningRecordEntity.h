@@ -24,15 +24,16 @@
 @property (nonatomic, retain) NSString * weather;
 @property (nonatomic, retain) NSNumber * pm25;
 @property (nonatomic, retain) NSNumber * averagespeed;
-@property (nonatomic, retain) NSDate * finishtime;
+@property (nonatomic, retain) NSDate   * finishtime;
 @property (nonatomic, retain) NSString * mapshot;
 @property (nonatomic, retain) NSString * heart;
 @property (nonatomic, retain) NSString * objectId;
 @property (nonatomic, retain) NSString * identifer;
 @property (nonatomic, retain) NSString * city;
-@property (nonatomic, retain) NSData   * heartimages;
 @property (nonatomic, retain) NSNumber * dirty;
 @property (nonatomic, retain) NSDate   * updateat;
+
+@property (nonatomic, retain) NSDictionary *heartimages;
 
 - (instancetype)init;
 
@@ -41,10 +42,6 @@
  */
 - (void)generateIdentifer;
 
-
-- (void)setImages:(NSArray *)images;
-
-- (NSArray *)getImages;
 
 - (void)savewithCompleteBlock:(CompleteBlock)completeBlock
                withErrorBlock:(ErrorBlock)errorBlock;

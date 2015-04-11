@@ -19,12 +19,14 @@
 
 @end
 
-
-
 @implementation HeaderView
 
 - (void)configUserwithBloak:(SelectAvatar)block
 {
+    
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(updateAvatar) name:@"updateAratar" object:nil];
+    
     _selectBlock = block;
     AVUser *currentuser = [AVUser currentUser];
 
@@ -52,8 +54,6 @@
         _UsernameLabel.text =[currentuser objectForKey:@"nickName"] ;
     }
     
-    
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(selectavatar)];
     [_AvatarView addGestureRecognizer:tap];
     
@@ -65,4 +65,13 @@
     _selectBlock();
 }
 
+
+- (void)updateAvatar
+{
+    AVUser *currentuser = [AVUser currentUser];
+    AVFile *avatarData = [currentuser objectForKey:@"avatar"];
+    NSData *resumeData = [avatarData getData];
+    [_AvatarView setImage:[UIImage imageWithData:resumeData]];
+    _UsernameLabel.text =[currentuser objectForKey:@"nickName"] ;
+}
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "PersistenceManager.h"
+#import "DocumentHelper.h"
 
 @implementation PersistenceManager
 
@@ -24,7 +25,8 @@
 - (void)sync
 {
     [self dowaload];
-    [self upload];
+    [self uploadRecord];
+    [self uploadImage];
 }
 
 
@@ -51,8 +53,6 @@
                 
             }
             
-            
-            
         }
         
         
@@ -64,12 +64,10 @@
     
 }
 
-- (void)upload
+- (void)uploadRecord
 {
     NSArray *dirtyRecord = [[AirLocalPersistence shareLocalPersistenceInstance] findDirtyRecord];
-    NSLog(@"%@",dirtyRecord);
     //找到所有的待更新数据
-    
     
     for (RunningRecordEntity *record in dirtyRecord) {
         
@@ -131,10 +129,6 @@
             {
                 NSLog(@"ddddd");
             }
-            
-            
-            
-            
         }
         
         [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
@@ -151,6 +145,100 @@
     
     
 }
+
+
+- (void)uploadImage
+{
+    NSArray *imagesRecord = [[AirLocalPersistence shareLocalPersistenceInstance] findDirtyImage];
+    //找到所有的待更新数据
+    
+    
+    for (RunningImageEntity *imageEntiy in imagesRecord) {
+        
+        //如果是本地未上传的数据
+        if (imageEntiy.objectId ==nil) {
+            RunningImage *newrecord = [RunningImage object];
+            
+            AVACL *acl = [AVACL ACL];
+            [acl setReadAccess:YES forUser:[AVUser currentUser]]; //此处设置的是所有人的可读权限
+            [acl setWriteAccess:YES forUser:[AVUser currentUser]]; //而这里设置了文件创建者的写权限
+            
+            newrecord.identifer = imageEntiy.recordid;
+            newrecord.latitude = imageEntiy.latitude;//跑步时间  整型  单位为s
+            newrecord.longitude = imageEntiy.longitude;//卡路里，float类型
+            newrecord.type = imageEntiy.type;
+            
+#warning 判断文件是否存在
+            
+            UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.image]]];
+            
+            AVFile *avfile = [AVFile fileWithName:imageEntiy.image data:UIImagePNGRepresentation(imagefile)];
+            
+            newrecord.image = avfile;//距离，整型，单位为米
+          
+            //newrecord.ACL = acl;
+            [newrecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                
+                if (succeeded) {
+                    imageEntiy.objectId = newrecord.objectId;
+                    imageEntiy.updateat = newrecord.createdAt;
+                    imageEntiy.dirty = @0;
+                    imageEntiy.type = newrecord.type;
+                    [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+                        if (error) {
+                            NSLog(@"%@",error);
+                        } else if (success) {
+                            NSLog(@"本地上传成功");
+                        }
+                    }];
+                }
+                else if (error)
+                {
+                    NSLog(@"%@",error);
+                }
+            }];
+            
+        }
+        //远端存在本条数据
+        else
+        {
+            AVQuery *query = [RunningImage query];
+            RunningImage *existrecord = (RunningImage *)[query getObjectWithId:imageEntiy.objectId];
+            
+            //比较最后更新时间
+            NSComparisonResult result = [imageEntiy.updateat compare:existrecord.updatedAt];
+            
+            if (result == NSOrderedSame) {
+                NSLog(@"本地与远端数据一致");
+                imageEntiy.dirty = @0;
+            }
+            //本地早于远端,采用远端的数据
+            else if(result == NSOrderedAscending)
+            {
+                NSLog(@"ddd");
+            }
+            //本地晚于远端,采用本地的数据
+            else if(result == NSOrderedDescending)
+            {
+                NSLog(@"ddddd");
+            }
+        }
+        
+        [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (error) {
+                
+            } else if (success) {
+                NSLog(@"本地数据修改成功");
+            }
+        }];
+        
+        
+        
+    }
+    
+    
+}
+
 
 
 @end
