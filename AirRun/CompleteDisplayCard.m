@@ -85,7 +85,8 @@
     [self addSubview:_mapView];
     
     _fouseButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [_fouseButton setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+    [_fouseButton setImage:[UIImage imageNamed:@"focus"] forState:UIControlStateNormal];
+    [_fouseButton setTintColor:[UIColor blackColor]];
     [_fouseButton sizeToFit];
     _fouseButton.center = CGPointMake(WIDTH(self)-5-WIDTH(_fouseButton)/2, MaxY(_mapView)-5-HEIGHT(_fouseButton)/2);
     [_fouseButton addTarget:self action:@selector(fouchsButtonTouch:) forControlEvents:UIControlEventTouchUpInside];

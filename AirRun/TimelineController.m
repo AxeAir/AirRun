@@ -54,6 +54,7 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
+    self.navigationController.navigationBarHidden = YES;
 }
 
 #pragma mark - Table view data source
@@ -139,7 +140,7 @@
     RecordDetailViewController *vc = [[RecordDetailViewController alloc] init];
     vc.record = record;
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:vc animated:YES completion:nil];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 

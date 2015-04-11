@@ -350,6 +350,7 @@ typedef enum : NSUInteger {
 - (void)keyboardShow:(NSNotification *)notification {
     
     NSLog(@"%@",notification);
+    NSLog(@"view frame:%@",NSStringFromCGRect(self.view.frame));
     
     NSDictionary *userInfo = notification.userInfo;
     CGFloat animationDuration = [userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
@@ -364,7 +365,7 @@ typedef enum : NSUInteger {
     
     if (deltaY > 0) {
         [UIView animateWithDuration:animationDuration animations:^{
-            self.view.transform = CGAffineTransformTranslate(self.view.transform, 0, -deltaY);
+            self.view.transform = CGAffineTransformMakeTranslation(0, -deltaY);
         }];
     }
     
