@@ -59,6 +59,7 @@ static NSString *const kHeartImage = @"HeartImage";
  */
 + (BOOL)checkFileExist:(NSString *)fileName;
 + (BOOL)checkFile:(NSString *)fileName AtFolder:(NSString *)folderName;
++ (BOOL)checkPathExist:(NSString *)filepPath;
 
 /**
  *  判断两张图片是否同一样

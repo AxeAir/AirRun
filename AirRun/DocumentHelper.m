@@ -53,6 +53,11 @@
     return [[NSFileManager defaultManager] fileExistsAtPath:[self documentsFile:fileName AtFolder:folderName]];
 }
 
++ (BOOL)checkPathExist:(NSString *)filePath
+{
+    return [[NSFileManager defaultManager] fileExistsAtPath:filePath];
+}
+
 + (BOOL)image:(UIImage *)image_1 isEqualImage:(UIImage *)image_2 {
     
     NSData *imageData1 = UIImagePNGRepresentation(image_1);
