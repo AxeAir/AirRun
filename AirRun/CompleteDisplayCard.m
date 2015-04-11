@@ -33,7 +33,7 @@
 @property (nonatomic, strong) NSString *heart;//新的体会
 
 
-@property (nonatomic, strong) RunningImageEntity *runningentity;
+@property (nonatomic, strong) RunningRecordEntity *runningentity;
 
 
 @end
@@ -113,12 +113,12 @@
     _pagecontrol.alpha = 0;
     [self addSubview:_pagecontrol];
     
-    _distanceAndCarl = [self creatDistance:@"3.45" andCarl:@"4000"];
+    _distanceAndCarl = [self creatDistance:[NSString stringWithFormat:@"%.2f",[_runningentity.distance floatValue]] andCarl:[NSString stringWithFormat:@"%ld",[_runningentity.kcar integerValue]]];
     [_distanceAndCarl setFrame:CGRectMake(0, MaxY(_pagecontrol)+10, WIDTH(self), 50)];
     
     [self addSubview:_distanceAndCarl];
     
-     _speedAndTime = [self creatSpeed:@"44.3" andTime:@"19:23"];
+     _speedAndTime = [self creatSpeed:[NSString stringWithFormat:@"%.2f",[_runningentity.averagespeed floatValue]] andTime:[self formatTime:[_runningentity.time integerValue]]];
     [_speedAndTime setFrame:CGRectMake(0, MaxY(_distanceAndCarl)+15, WIDTH(self), 50)];
     
     [self addSubview:_speedAndTime];
@@ -142,10 +142,10 @@
     [view addSubview:distanceLabel];
     
     
-    UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+2, MaxY(distanceLabel), WIDTH(distanceLabel), 14)];
+    UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+5, MaxY(distanceLabel), 100, 14)];
     [km setFont:[UIFont boldSystemFontOfSize:12]];
     [km setText:@"距离Km"];
-    [km setTextAlignment:NSTextAlignmentCenter];
+    [km setTextAlignment:NSTextAlignmentLeft];
     [km setTextColor:[UIColor whiteColor]];
     [view addSubview:km];
     
@@ -163,10 +163,10 @@
     [view addSubview:calLabel];
     
     
-    UILabel *ca = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+2, MaxY(calLabel), WIDTH(calLabel), 14)];
+    UILabel *ca = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, MaxY(calLabel), 100, 14)];
     [ca setFont:[UIFont boldSystemFontOfSize:12]];
     [ca setText:@"卡路里Kcal"];
-    [ca setTextAlignment:NSTextAlignmentCenter];
+    [ca setTextAlignment:NSTextAlignmentLeft];
     [ca setTextColor:[UIColor whiteColor]];
     [view addSubview:ca];
     
@@ -192,10 +192,10 @@
     [view addSubview:distanceLabel];
     
     
-    UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+2, MaxY(distanceLabel), WIDTH(distanceLabel), 14)];
+    UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+5, MaxY(distanceLabel), 100, 14)];
     [km setFont:[UIFont boldSystemFontOfSize:12]];
     [km setText:@"速度Km"];
-    [km setTextAlignment:NSTextAlignmentCenter];
+    [km setTextAlignment:NSTextAlignmentLeft];
     [km setTextColor:[UIColor whiteColor]];
     [view addSubview:km];
     
@@ -213,10 +213,10 @@
     [view addSubview:calLabel];
     
     
-    UILabel *ca = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+2, MaxY(calLabel), WIDTH(calLabel), 14)];
+    UILabel *ca = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, MaxY(calLabel), 100, 14)];
     [ca setFont:[UIFont boldSystemFontOfSize:12]];
-    [ca setText:@"卡路里Kcal"];
-    [ca setTextAlignment:NSTextAlignmentCenter];
+    [ca setText:@"时间"];
+    [ca setTextAlignment:NSTextAlignmentLeft];
     [ca setTextColor:[UIColor whiteColor]];
     [view addSubview:ca];
     
@@ -321,6 +321,17 @@
     [_delegate completeDisplayCard:self didSelectButton:CompleteDisplayCardButtonTypeComplete];
 }
 
-
+#pragma mark function
+- (NSString *)formatTime:(NSInteger)seconds
+{
+    if (seconds > 3600) {
+        
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%0.2ld:%0.2ld",seconds/60,seconds%60];
+    }
+    return nil;
+}
 
 @end

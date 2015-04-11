@@ -27,7 +27,7 @@
 /**
  *  心得输入框
  */
-@property (nonatomic, strong) UILabel *textview;
+@property (nonatomic, strong) UITextField *textview;
 
 /**
  *  当前表情的选择
