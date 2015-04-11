@@ -43,33 +43,6 @@ const static NSInteger kTopCenterViewMargin = 30;
 
 #pragma mark - Set Method
 
-- (void)setGps:(CGFloat)gps {
-    
-    _gps = gps;
-    
-    if (gps < 0)
-    {
-        //no single
-        _gpsLable.textColor = [UIColor grayColor];
-    }
-    else if (gps > 163)
-    {
-        //poor single
-        _gpsLable.textColor = [UIColor redColor];
-    }
-    else if (gps > 48)
-    {
-        //average single
-        _gpsLable.textColor = [UIColor orangeColor];
-    }
-    else
-    {
-        // Full Signal
-        _gpsLable.textColor = [UIColor greenColor];
-    }
-    
-}
-
 - (void)setSpeed:(CGFloat)speed {
     
     _speed = speed;
@@ -267,16 +240,6 @@ const static NSInteger kTopCenterViewMargin = 30;
         [self addSubview:_bottomView];
     }
     _bottomView.frame =CGRectMake(0, CGRectGetMaxY(_centerView.frame), self.bounds.size.width, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame));
-    
-//    if (!_photoButton) {
-//        _photoButton = [UIButton buttonWithType:UIButtonTypeSystem];
-//        [_photoButton setTintColor:[UIColor whiteColor]];
-//        [_photoButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
-//        [_photoButton addTarget:self action:@selector(photoButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-//        [_photoButton sizeToFit];
-//        [_bottomView addSubview:_photoButton];
-//    }
-//    _photoButton.center = CGPointMake(_bottomView.bounds.size.width-5-_photoButton.frame.size.width/2, _bottomView.bounds.size.height/2);
     
     if (!_retractButton) {
         _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];

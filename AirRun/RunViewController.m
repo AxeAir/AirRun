@@ -30,12 +30,7 @@
 #import "ImageHeler.h"
 #import "DateHelper.h"
 #import "WeatherManager.h"
-
-typedef enum : NSUInteger {
-    RunViewControllerRunStateStop,
-    RunViewControllerRunStateRunning,
-    RunViewControllerRunStatePause,
-} RunViewControllerRunState;
+#import "RunManager.h"
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 70;
@@ -49,9 +44,6 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) CountView *countView;
 
-@property (strong, nonatomic) NSString *temperature;
-@property (strong, nonatomic) NSString *pm;
-
 @property (strong, nonatomic) UIBarButtonItem *photoButton;
 @property (strong, nonatomic) UIBarButtonItem *gpsButton;
 @property (strong, nonatomic) ReadyView *readyView;
@@ -60,12 +52,7 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) UIView *mapMaskView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
 @property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) NSMutableArray *points;
-@property (strong, nonatomic) NSMutableArray *imageArray;
 @property (strong, nonatomic) CLLocation *currentLocation;
-@property (strong, nonatomic) NSString *currentLocationName;
-
-@property (assign, nonatomic) RunViewControllerRunState runState;
 
 @property (strong, nonatomic) UIButton *startButton;
 @property (strong, nonatomic) UIButton *pauseButton;
@@ -75,10 +62,10 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) RunPauseView *pauseView;
 @property (strong, nonatomic) RunCardView *runcardView;
 @property (strong, nonatomic) RunSimpleCardView *runSimpleCardView;
-@property (assign, nonatomic) CGPoint runCardViewLastPoint;
 @property (assign, nonatomic) CGFloat runCardLastKmDistance;
 
 @property (strong, nonatomic) NSTimer *runTimer;
+@property (strong, nonatomic) RunManager *runManager;
 
 @end
 
@@ -90,11 +77,7 @@ const char *OUTPOSITION = "OutPosition";
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    _runState = RunViewControllerRunStateStop;
-    _points = [[NSMutableArray alloc] init];
-    _imageArray = [[NSMutableArray alloc] init];
-    _temperature = @"";
-    _pm = @"";
+    _runManager = [RunManager shareInstance];
     
     NSError *sessionError = nil;
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:&sessionError];
@@ -112,9 +95,15 @@ const char *OUTPOSITION = "OutPosition";
     [super viewDidAppear:animated];
     
     _runTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runTimerEvent:) userInfo:nil repeats:YES];
-    if (_runState != RunViewControllerRunStateRunning) {
+    if (_runManager.runState != RunStateRunning) {
         [_runTimer setFireDate:[NSDate distantFuture]];
     }
+    
+    [_runManager addObserver:self forKeyPath:@"distance" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [_runManager addObserver:self forKeyPath:@"time" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [_runManager addObserver:self forKeyPath:@"speed" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [_runManager addObserver:self forKeyPath:@"kcal" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -122,6 +111,12 @@ const char *OUTPOSITION = "OutPosition";
     
     [_runTimer invalidate];
     _runTimer = nil;
+    
+    [_runManager removeObserver:self forKeyPath:@"distance"];
+    [_runManager removeObserver:self forKeyPath:@"time"];
+    [_runManager removeObserver:self forKeyPath:@"speed"];
+    [_runManager removeObserver:self forKeyPath:@"kcal"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -154,7 +149,7 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setTitle {
     UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    titleLable.text = [NSString stringWithFormat:@"%@ ℃\nPM %@",_temperature,_pm];
+    titleLable.text = [NSString stringWithFormat:@"%@ ℃\nPM %@",_runManager.temperature,_runManager.pm];
     titleLable.textColor = [UIColor whiteColor];
     titleLable.font = [UIFont systemFontOfSize:12];
     titleLable.numberOfLines = 2;
@@ -324,8 +319,7 @@ const char *OUTPOSITION = "OutPosition";
 #pragma mark Timer Event
 
 - (void)runTimerEvent:(NSTimer *)timer {
-    _runcardView.time += 1;
-    _runSimpleCardView.time = _runcardView.time;
+    _runManager.time += 1;
 }
 
 #pragma mark Button Event
@@ -422,23 +416,9 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
-    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
-    [record generateIdentifer];
-    record.path = [self p_convertPointsToJsonString];
-    record.time = @(_runcardView.time);
-    record.kcar = @(_runcardView.kcal);
-    record.distance = @(_runcardView.distance);
-    record.city = _currentLocationName;
-    record.weather = _temperature;
-    record.pm25 = @([_pm integerValue]);
-    record.averagespeed = @(_runcardView.speed);
-    record.finishtime = [NSDate date];
+    _runManager.runState = RunStateStop;
     
-    for (RunningImageEntity *imgEntity in _imageArray) {
-        imgEntity.recordid = record.identifer;
-    }
-    
-    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:record WithPoints:_points WithImages:_imageArray];
+    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
     [self.navigationController pushViewController:vc animated:YES];
     
 }
@@ -454,9 +434,9 @@ const char *OUTPOSITION = "OutPosition";
         self.navigationItem.leftBarButtonItem = _gpsButton;
         [_mapMaskView removeFromSuperview];
         [self p_audioPlay:@"start"];
-        _runState = RunViewControllerRunStateRunning;
+        _runManager.runState = RunStateRunning;
         [_runTimer setFireDate:[NSDate distantPast]];
-        [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_points.firstObject];
+        [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_runManager.points.firstObject];
 
         [UIView animateWithDuration:0.3 animations:^{
             _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
@@ -524,7 +504,7 @@ const char *OUTPOSITION = "OutPosition";
                        //                       NSLog(@"placemark.locality =%@",placemark.locality);
                        //                       NSLog(@"placemark.subLocality =%@",placemark.subLocality);
                        //                       NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
-                       _currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subAdministrativeArea];
+                       _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subAdministrativeArea];
                        
                        NSString *cityName;
                        if ([placemark.locality isEqualToString:@""]) {//为直辖市
@@ -535,12 +515,12 @@ const char *OUTPOSITION = "OutPosition";
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
                        [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
-                           _pm = pm25.PM25;
+                           _runManager.pm = pm25.PM25;
                            [self p_setTitle];
                        } failure:^(NSError *error) {}];
                        
                        [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
-                           _temperature = responseObject.temperature;
+                           _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
                        } failure:^(NSError *error) {}];
                        
@@ -581,43 +561,16 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 
-- (NSString *)p_convertPointsToJsonString {
-    
-    NSMutableArray *pointDicArray = [[NSMutableArray alloc] init];
-    for (CLLocation *location in self.points) {
-        
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
-        
-        //键:值
-        NSDictionary *pointDic = @{@"latitude":[NSNumber numberWithDouble:location.coordinate.latitude],
-                                   @"longitude":[NSNumber numberWithDouble:location.coordinate.longitude],
-                                   @"altitude":[NSNumber numberWithDouble:location.altitude],
-                                   @"hAccuracy":[NSNumber numberWithDouble:location.horizontalAccuracy],
-                                   @"vAccuracy":[NSNumber numberWithDouble:location.verticalAccuracy],
-                                   @"course":[NSNumber numberWithDouble:location.course],
-                                   @"speed":[NSNumber numberWithDouble:location.speed],
-                                   @"timestamp":[dateFormatter stringFromDate:location.timestamp]
-                                   };
-        [pointDicArray addObject:pointDic];
-        
-    }
-    
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:pointDicArray options:NSJSONWritingPrettyPrinted error:&error];
-    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-}
-
 - (void)p_continue {
     
-    _runState = RunViewControllerRunStateRunning;
+    _runManager.runState = RunStateRunning;
     [_runTimer setFireDate:[NSDate distantPast]];
     
 }
 
 - (void)p_pause {
     
-    _runState = RunViewControllerRunStatePause;
+    _runManager.runState = RunStatePause;
     [_runTimer setFireDate:[NSDate distantFuture]];
     
     _pauseView.time = _runcardView.time;
@@ -674,24 +627,20 @@ const char *OUTPOSITION = "OutPosition";
                                                    timestamp:newLocation.timestamp];
     }
     
-    if ([_currentLocationName isEqualToString:@""] || !_currentLocationName) {
+    if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
 //        [self p_getLocationNameWithLocation:newLocation];
     }
     
-    if (_runState == RunViewControllerRunStateRunning) {//是在跑步过程中
+    if (_runManager.runState == RunStateRunning) {//是在跑步过程中
         
         CLLocationDistance distance = [newLocation distanceFromLocation:_currentLocation];
         if (distance < 5.0) {
             return;
         }
-        _runcardView.currentSpeed = newLocation.speed;
-        _runcardView.distance += distance;
-        _runcardView.speed = _runcardView.distance/_runcardView.time;
-        _runcardView.kcal += [self p_getCalorie:2.0/3600.0 speed:_runcardView.currentSpeed*3.6];
-        
-        
-        _runSimpleCardView.distance = _runcardView.distance;
-        _runSimpleCardView.speed = _runcardView.speed;
+        _runManager.currentSpeed = newLocation.speed;
+        _runManager.distance += distance;
+        _runManager.speed = _runcardView.distance/_runcardView.time;
+        _runManager.kcal += [self p_getCalorie:2.0/3600.0 speed:_runManager.currentSpeed*3.6];
         
         [self p_setGPS:newLocation.horizontalAccuracy];
         //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
@@ -709,14 +658,14 @@ const char *OUTPOSITION = "OutPosition";
     
     self.currentLocation = newLocation;
     
-    if (self.runState == RunViewControllerRunStateStop) {
-        self.points = [[NSMutableArray alloc] initWithArray:@[newLocation,newLocation]];
+    if (_runManager.runState == RunStateStop) {
+        _runManager.points = [[NSMutableArray alloc] initWithArray:@[newLocation,newLocation]];
         
     } else {
-        [self.points addObject:newLocation];
+        [_runManager.points addObject:newLocation];
     }
     
-    [_mapViewDelegate drawGradientPolyLineWithPoints:self.points];
+    [_mapViewDelegate drawGradientPolyLineWithPoints:_runManager.points];
     
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
@@ -739,8 +688,9 @@ const char *OUTPOSITION = "OutPosition";
         [DocumentHelper saveImage:newImage ToFolderName:kPathImageFolder WithImageName:imgM.image.lastPathComponent];
         imgM.longitude = @(_currentLocation.coordinate.longitude);
         imgM.latitude = @(_currentLocation.coordinate.latitude);
-        imgM.isheart = @0;
-        [_imageArray addObject:imgM];
+        imgM.type = @"路线图片";
+        
+        [_runManager.imageArray addObject:imgM];
         
     }
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -749,7 +699,30 @@ const char *OUTPOSITION = "OutPosition";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-#pragma mark - UINavigationControllerDelegate
+#pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    
+    id newValue = change[@"new"];
+    
+    if ([keyPath isEqualToString:@"distance"]) {
+        _runcardView.distance = [newValue floatValue];
+        _runSimpleCardView.distance = [newValue floatValue];
+    }
+    
+    if ([keyPath isEqualToString:@"time"]) {
+        _runcardView.time = [newValue integerValue];
+        _runSimpleCardView.time = [newValue integerValue];
+    }
+    
+    if ([keyPath isEqualToString:@"speed"]) {
+        _runcardView.speed = [newValue floatValue];
+        _runSimpleCardView.speed = [newValue floatValue];
+    }
+    
+    if ([keyPath isEqualToString:@"kcal"]) {
+        _runcardView.kcal = [newValue floatValue];
+    }
+}
 
 /*
 #pragma mark - Navigation
