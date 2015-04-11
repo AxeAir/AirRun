@@ -23,7 +23,6 @@ typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
 @property (nonatomic, strong) MapViewDelegate *mapDelegate;
 @property (nonatomic, weak) id<CompleteDisplayCardDelegate> delegate;
 - (void)adjust:(NSString *)heart;
-- (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock;
 
 @end
 

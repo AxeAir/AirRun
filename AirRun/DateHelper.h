@@ -12,4 +12,5 @@
 
 + (NSString *)getFormatterDate:(NSString *)formatter;
 
++ (NSString *)converSecondsToTimeString:(NSInteger)seconds;
 @end

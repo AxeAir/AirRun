@@ -107,8 +107,6 @@ const char *OUTPOSITION = "OutPosition";
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    
-    
     _runTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(runTimerEvent:) userInfo:nil repeats:YES];
     if (_runState != RunViewControllerRunStateRunning) {
         [_runTimer setFireDate:[NSDate distantFuture]];
@@ -431,8 +429,10 @@ const char *OUTPOSITION = "OutPosition";
     record.pm25 = @([_pm integerValue]);
     record.averagespeed = @(_runcardView.speed);
     record.finishtime = [NSDate date];
-
-
+    
+    for (RunningImageEntity *imgEntity in _imageArray) {
+        imgEntity.recordid = record.identifer;
+    }
     
     RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:record WithPoints:_points WithImages:_imageArray];
     [self.navigationController pushViewController:vc animated:YES];

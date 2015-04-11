@@ -42,4 +42,8 @@
 {
     [self MR_deleteEntity];
 }
+
++ (NSArray *)getEntitiesWithArrtribut:(NSString *)attribute WithValue:(id)value {
+   return [RunningImageEntity MR_findByAttribute:attribute withValue:value];
+}
 @end

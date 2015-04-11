@@ -12,8 +12,9 @@
 #import <BlurImageProcessor/ALDBlurImageProcessor.h>
 #import "RunningRecordEntity.h"
 #import "RESideMenu.h"
+#import "RecordDetailViewController.h"
 
-@interface TimelineController ()
+@interface TimelineController () <TimelineTableViewCellDelegate>
 
 @property (nonatomic, strong) UIImageView  *headerbackgroundImageView;
 @property (nonatomic, strong) UIImageView  *headerImageView;
@@ -28,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.tableHeaderView = [self tableHeaderView];
+    //self.tableView.tableHeaderView = [self tableHeaderView];
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -71,6 +72,7 @@
         cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer runningRecord:record];
     }
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    cell.delegate = self;
     return cell;
 }
 
@@ -127,14 +129,19 @@
     [_nameLabel setText:[[AVUser currentUser] objectForKey:@"nickName"]];
     [header addSubview:_nameLabel];
     
-    
-    
-    
-    
     return header;
 }
 
+#pragma mark - Delegate
 
+- (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record {
+    
+    RecordDetailViewController *vc = [[RecordDetailViewController alloc] init];
+    vc.record = record;
+    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:vc animated:YES completion:nil];
+    
+}
 
 #pragma mark KVC
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{

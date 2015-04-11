@@ -25,5 +25,6 @@ typedef void(^imgAnnotationTapBlock)(CustomAnnotation *annotation);
 - (void)drawPath:(NSArray *)path;
 - (void)addimage:(UIImage *)image AnontationWithLocation:(CLLocation *)location;
 - (void)zoomToFitMapPoints:(NSArray *)path;
+- (UIImage *)captureMapView;
 
 @end

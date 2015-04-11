@@ -76,15 +76,6 @@ static const char *INDEX = "index";
         };
         editImageView.closeBlock = ^(EditImageView *editImageView) {
             [this p_loadMapViewAnnotation];
-            
-            //为地图截图
-            [this.display mapViewShotWithComplete:^(MKMapSnapshot *snapshot) {
-//                this.parameters.mapshot = [ImageHeler compressImage:snapshot.image];
-                
-                UIImage *mapShot = [ImageHeler compressImage:snapshot.image LessThanKB:200];
-                this.parameters.mapshot = [kMapImageFolder stringByAppendingPathComponent:this.parameters.identifer];
-                [DocumentHelper saveImage:mapShot ToFolderName:kMapImageFolder WithImageName:this.parameters.identifer];
-            }];
         };
         
     };
@@ -127,6 +118,7 @@ static const char *INDEX = "index";
 - (void)p_loadMapViewAnnotation {
     _images = [[NSMutableArray alloc] init];
     [_display.mapDelegate clearAnnotation];
+    
     for (RunningImageEntity *imgM in _imgMs) {
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[imgM.latitude doubleValue] longitude:[imgM.longitude doubleValue]];
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgM.image.lastPathComponent AtFolder:kPathImageFolder]];
@@ -248,10 +240,15 @@ static const char *INDEX = "index";
 
 - (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
 {
+    
+    [card.mapDelegate zoomToFitMapPoints:_path];
+    UIImage *mapShot = [ImageHeler compressImage:[_display.mapDelegate captureMapView] LessThanKB:200];
+    NSString *mapImageName = [NSString stringWithFormat:@"%@.jpg",_parameters.identifer];
+    self.parameters.mapshot = [kMapImageFolder stringByAppendingPathComponent:mapImageName];
+    [DocumentHelper saveImage:mapShot ToFolderName:kMapImageFolder WithImageName:mapImageName];
+    
     _parameters.heart = _inputcard.textview.text;
     _parameters.finishtime = [[NSDate alloc] init];
-
-
 //    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
 //    record.heart = _inputcard.textview.text;
 //    record.finishtime = [[NSDate alloc] init];
@@ -259,7 +256,7 @@ static const char *INDEX = "index";
 //    record.distance = @10000;
 //    record.averagespeed = @2.8;
     _parameters.dirty = @1;
-    _parameters.city = @"李家沱";
+//    _parameters.city = @"李家沱";
 
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         [_parameters setImages:_ImageArray];

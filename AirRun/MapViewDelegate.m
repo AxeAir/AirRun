@@ -193,6 +193,16 @@
     [_mapView setRegion:region animated:YES];
 }
 
+- (UIImage *)captureMapView {
+    CGRect rect =_mapView.bounds;
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [_mapView.layer renderInContext:context];
+    UIImage *mapImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return mapImage;
+}
+
 #pragma mark - MapDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
