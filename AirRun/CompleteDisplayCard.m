@@ -325,7 +325,7 @@
 - (NSString *)formatTime:(NSInteger)seconds
 {
     if (seconds > 3600) {
-        
+        return [NSString stringWithFormat:@"%0.2ld:%0.2ld:%0.2ld",seconds/3600,seconds/60,seconds%60];
     }
     else
     {
