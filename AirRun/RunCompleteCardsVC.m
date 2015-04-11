@@ -58,7 +58,7 @@ static const char *INDEX = "index";
     _inputcard.delegate = self;
     [_scrollview addSubview:_inputcard];
     
-    _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800)];
+    _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800) withEntity:_parameters];
     _display.delegate = self;
     [_display.mapDelegate drawPath:_path];
     [self p_loadMapViewAnnotation];
@@ -250,14 +250,6 @@ static const char *INDEX = "index";
 {
     _parameters.heart = _inputcard.textview.text;
     _parameters.finishtime = [[NSDate alloc] init];
-
-
-//    RunningRecordEntity *record = [[RunningRecordEntity alloc] init];
-//    record.heart = _inputcard.textview.text;
-//    record.finishtime = [[NSDate alloc] init];
-//    record.time = @1000;
-//    record.distance = @10000;
-//    record.averagespeed = @2.8;
     _parameters.dirty = @1;
     _parameters.city = @"李家沱";
 

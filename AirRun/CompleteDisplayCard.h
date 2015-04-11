@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseCardView.h"
+#import "RunningRecordEntity.h"
 
 @class MKMapSnapshot;
 @class MapViewDelegate;
@@ -22,6 +23,9 @@ typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
 @interface CompleteDisplayCard : BaseCardView
 @property (nonatomic, strong) MapViewDelegate *mapDelegate;
 @property (nonatomic, weak) id<CompleteDisplayCardDelegate> delegate;
+
+- (instancetype)initWithFrame:(CGRect)frame withEntity:(RunningRecordEntity *)entity;
+
 - (void)adjust:(NSString *)heart;
 - (void)mapViewShotWithComplete:(void(^)(MKMapSnapshot *snapshot))completeBlock;
 

@@ -162,7 +162,7 @@
 
 #endif
 
-#define CardBgColor [UIColor colorWithRed:22/255.0 green:113.0/255.0 blue:204.0/255.0 alpha:0.8]
+#define CardBgColor [UIColor colorWithRed:85/255.0 green:150/255.0 blue:204/255.0 alpha:1]
 
 
 #define Today_Extension_Group @"group.xxTeam.SportMan.SportManTodayExtension"

@@ -9,9 +9,9 @@
 #import "TimelineController.h"
 #import "UConstants.h"
 #import "TimelineTableViewCell.h"
-#import <BlurImageProcessor/ALDBlurImageProcessor.h>
 #import "RunningRecordEntity.h"
 #import "RESideMenu.h"
+#import <GPUImage.h>
 
 @interface TimelineController ()
 
@@ -105,8 +105,21 @@
     AVFile *avatarData = [[AVUser currentUser] objectForKey:@"avatar"];
     NSData *resumeData = [avatarData getData];
     
-    [_headerbackgroundImageView setImage:[UIImage imageWithData:resumeData]];
-
+    
+    
+    UIImage *inputImage = [UIImage imageWithData:resumeData];
+    
+    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:inputImage];
+    GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
+    
+    [stillImageFilter setBlurRadiusInPixels:4];
+    [stillImageSource addTarget:stillImageFilter];
+    [stillImageFilter useNextFrameForImageCapture];
+    [stillImageSource processImage];
+    
+    UIImage *currentFilteredVideoFrame = [stillImageFilter imageFromCurrentFramebuffer];
+    
+    [_headerbackgroundImageView setImage:currentFilteredVideoFrame];
     [header addSubview:_headerbackgroundImageView];
     
     _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake((Main_Screen_Width-80)/2, 50, 80, 80)];
@@ -118,7 +131,7 @@
     [[_headerImageView layer] setShadowRadius:20];
     [[_headerImageView layer] setShadowOpacity:1];
     [[_headerImageView layer] setBorderWidth:2];
-    [[_headerImageView layer] setBorderColor:[UIColor grayColor].CGColor];
+    [[_headerImageView layer] setBorderColor:[UIColor whiteColor].CGColor];
     
     [header addSubview: _headerImageView];
     _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, MaxY(_headerImageView)+10, Main_Screen_Width, 20)];

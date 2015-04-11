@@ -33,9 +33,23 @@
 @property (nonatomic, strong) NSString *heart;//新的体会
 
 
+@property (nonatomic, strong) RunningImageEntity *runningentity;
+
+
 @end
 
 @implementation CompleteDisplayCard
+
+
+- (instancetype)initWithFrame:(CGRect)frame withEntity:(RunningRecordEntity *)entity
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _runningentity = entity;
+        [self commomInit];
+    }
+    return self;
+}
 
 
 - (instancetype)initWithFrame:(CGRect)frame

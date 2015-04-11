@@ -108,7 +108,6 @@
     } completion:^(BOOL finished) {
         
     }];
-
 }
 
 - (void)dismiss
@@ -127,6 +126,13 @@
     _maskBackgroundView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [_maskBackgroundView setBackgroundColor:[UIColor colorWithWhite:0 alpha:0.4]];
     [_maskBackgroundView setAlpha:0];
+}
+
+
+
+- (void)drawRect:(CGRect)rect
+{
+    
 }
 
 
