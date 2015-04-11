@@ -54,6 +54,9 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
+}
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
 }
 

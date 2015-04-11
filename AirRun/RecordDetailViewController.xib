@@ -103,7 +103,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6y-gH4">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calgray" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6y-gH4">
                                     <rect key="frame" x="67" y="10" width="40" height="40"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="bRq-6y-gH4" secondAttribute="height" multiplier="1:1" id="6SC-3t-Iz3"/>
@@ -203,7 +203,7 @@
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uB6-UR-gOZ">
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="distancetiny" translatesAutoresizingMaskIntoConstraints="NO" id="uB6-UR-gOZ">
                                     <rect key="frame" x="321" y="37" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="uB6-UR-gOZ" secondAttribute="height" multiplier="1:1" id="NQP-zM-BRM"/>
@@ -278,6 +278,8 @@
         </view>
     </objects>
     <resources>
+        <image name="calgray" width="32" height="32"/>
+        <image name="distancetiny" width="32" height="32"/>
         <image name="speedtiny" width="32" height="32"/>
         <image name="timetiny" width="32" height="32"/>
     </resources>
