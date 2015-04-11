@@ -9,7 +9,7 @@
 #import "CompleteInputCard.h"
 #import "UConstants.h"
 #import "DateHelper.h"
-@interface CompleteInputCard()
+@interface CompleteInputCard()<UITextFieldDelegate>
 
 @property (nonatomic, strong) UIButton *closeButton;
 @property (nonatomic, strong) NSMutableArray *buttonArray;
@@ -30,55 +30,71 @@
 
 - (void)commomInit
 {
-    //time
-    UILabel *dayLabel = [[UILabel alloc] init];
-    [dayLabel setFrame:CGRectMake(20, 10, 0, 0)];
-    [dayLabel setText:[DateHelper getFormatterDate:@"dd"]];
-    [dayLabel setFont:[UIFont systemFontOfSize:25]];
-    [dayLabel setTextColor:[UIColor whiteColor]];
-    [dayLabel sizeToFit];
-    [self addSubview:dayLabel];
+//    //time
+//    UILabel *dayLabel = [[UILabel alloc] init];
+//    [dayLabel setFrame:CGRectMake(20, 10, 0, 0)];
+//    [dayLabel setText:[DateHelper getFormatterDate:@"dd"]];
+//    [dayLabel setFont:[UIFont systemFontOfSize:25]];
+//    [dayLabel setTextColor:[UIColor whiteColor]];
+//    [dayLabel sizeToFit];
+//    [self addSubview:dayLabel];
+//    
+//    UILabel *weekLabel = [[UILabel alloc] init];
+//    [weekLabel setFrame:CGRectMake(MaxX(dayLabel)+5, 10, 0, 0)];
+//    [weekLabel setText:[[DateHelper getFormatterDate:@"EEEE"] stringByReplacingOccurrencesOfString:@"星期" withString:@"周"]];
+//    [weekLabel setFont:[UIFont systemFontOfSize:12]];
+//    [weekLabel setTextColor:[UIColor whiteColor]];
+//    [weekLabel sizeToFit];
+//    [self addSubview:weekLabel];
+//    
+//    UILabel *monthLabel = [[UILabel alloc] init];
+//    [monthLabel setFrame:CGRectMake(MaxX(dayLabel)+5, MaxY(weekLabel), 0, 0)];
+//    [monthLabel setText:[NSString stringWithFormat:@"%@月",[DateHelper getFormatterDate:@"MM"]]];
+//    [monthLabel setFont:[UIFont systemFontOfSize:12]];
+//    [monthLabel setTextColor:[UIColor whiteColor]];
+//    [monthLabel sizeToFit];
+//    [self addSubview:monthLabel];
     
-    UILabel *weekLabel = [[UILabel alloc] init];
-    [weekLabel setFrame:CGRectMake(MaxX(dayLabel)+5, 10, 0, 0)];
-    [weekLabel setText:[[DateHelper getFormatterDate:@"EEEE"] stringByReplacingOccurrencesOfString:@"星期" withString:@"周"]];
-    [weekLabel setFont:[UIFont systemFontOfSize:12]];
-    [weekLabel setTextColor:[UIColor whiteColor]];
-    [weekLabel sizeToFit];
-    [self addSubview:weekLabel];
+    UILabel *feelLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, WIDTH(self), 20)];
+    [feelLabel setText:@"本次运动的感觉如何"];
+    [feelLabel setTextAlignment:NSTextAlignmentCenter];
+    [feelLabel setTextColor:RGBCOLOR(170, 170, 170)];
+    [feelLabel setFont:[UIFont systemFontOfSize:14]];
+    [self addSubview:feelLabel];
     
-    UILabel *monthLabel = [[UILabel alloc] init];
-    [monthLabel setFrame:CGRectMake(MaxX(dayLabel)+5, MaxY(weekLabel), 0, 0)];
-    [monthLabel setText:[NSString stringWithFormat:@"%@月",[DateHelper getFormatterDate:@"MM"]]];
-    [monthLabel setFont:[UIFont systemFontOfSize:12]];
-    [monthLabel setTextColor:[UIColor whiteColor]];
-    [monthLabel sizeToFit];
-    [self addSubview:monthLabel];
+    NSInteger wid = WIDTH(self)/3;
     
-    
-    NSInteger wid = WIDTH(self)/5;
+    NSArray *imageon =@[@"relax",@"soso",@"tired"];
+    NSArray *imagetitles =@[@"轻松",@"正常",@"好累"];
+    NSArray *imagecolor = @[RGBCOLOR(7, 247, 155),RGBCOLOR(102, 242, 255),RGBCOLOR(255, 153, 85)];
     
     _buttonArray = [[NSMutableArray alloc] init];
-    for (int i=0; i<5; i++) {
+    for (int i=0; i<3; i++) {
         NSInteger offset = i*wid;
-        UIButton *biaoqing = [[UIButton alloc] initWithFrame:CGRectMake((wid-25)/2+offset, MaxY(dayLabel)+10, 25, 25)];
-        [biaoqing setImage:[UIImage imageNamed:@"biaoqing"] forState:UIControlStateNormal];
+        UIButton *biaoqing = [[UIButton alloc] initWithFrame:CGRectMake((wid-80)/2+offset, MaxY(feelLabel)+10, 80, 30)];
+        [biaoqing setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@off",[imageon objectAtIndex:i]]] forState:UIControlStateNormal];
         
-        [biaoqing setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateSelected];
+        [biaoqing setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@on",[imageon objectAtIndex:i]]] forState:UIControlStateSelected];
+        
+        [biaoqing setContentEdgeInsets:UIEdgeInsetsMake(0, 8, 0, 0)];
+        [[biaoqing titleLabel] setFont:[UIFont systemFontOfSize:14]];
+        
+        [biaoqing setTitle:[imagetitles objectAtIndex:i] forState:UIControlStateNormal];
+        
+        
+        [biaoqing setTitleColor:[imagecolor objectAtIndex:i] forState:UIControlStateSelected];
         biaoqing.tag = 20000+i;
         [_buttonArray addObject:biaoqing];
         [biaoqing addTarget:self action:@selector(didSelectFace:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:biaoqing];
     }
     
-    _textview = [[UILabel alloc] initWithFrame:CGRectMake(20, MaxY(dayLabel)+50, WIDTH(self)-40, 40)];
+    _textview = [[UITextField alloc] initWithFrame:CGRectMake(20, MaxY(feelLabel)+50, WIDTH(self)-40, 40)];
     [_textview setBackgroundColor:[UIColor whiteColor]];
     [[_textview layer] setCornerRadius:2];
-    [_textview setText:@"说点什么嘛?"];
+    [_textview setPlaceholder:@"说点什么嘛?"];
+    [_textview setDelegate:self];
     [_textview setFont:[UIFont systemFontOfSize:14]];
-    [_textview setUserInteractionEnabled:YES];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapText:)];
-    [_textview addGestureRecognizer:tap];
     
     [self addSubview:_textview];
     
@@ -98,12 +114,6 @@
 {
     [_delegate didClickDownButton];
 }
-
-- (void)didTapText:(id)sender
-{
-    [_delegate didTouchLabel];
-}
-
 
 - (void)didSelectFace:(id)sender
 {
@@ -133,4 +143,11 @@
     textField.leftView = leftview;
 }
 
+
+
+#pragma mark delegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [_delegate didTouchLabel];
+}
 @end
