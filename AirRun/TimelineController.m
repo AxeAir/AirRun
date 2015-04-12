@@ -30,7 +30,6 @@
     [super viewDidLoad];
     
     self.tableView.tableHeaderView = [self tableHeaderView];
-    [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
     [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
@@ -51,12 +50,16 @@
    
 }
 
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
+
     self.navigationController.navigationBarHidden = YES;
 }
 

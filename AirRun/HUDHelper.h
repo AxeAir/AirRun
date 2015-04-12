@@ -12,9 +12,13 @@
 
 @interface HUDHelper : NSObject
 
-+ (void)showHUD:(NSString *)text andView:(UIView *)view andHUD:(MBProgressHUD *)hud;
++ (void)showHUD:(NSString *)text
+        andView:(UIView *)view
+         andHUD:(MBProgressHUD *)hud;
 
-+ (void)showHUDWithoutMask:(NSString *)text andView:(UIView *)view andHUD:(MBProgressHUD *)hud;
++ (void)showHUDWithoutMask:(NSString *)text
+                   andView:(UIView *)view
+                    andHUD:(MBProgressHUD *)hud;
 
 #pragma mark only delay
 + (void)showComplete:(NSString *)text
