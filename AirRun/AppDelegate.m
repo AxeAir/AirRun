@@ -21,6 +21,7 @@
 #import "UConstants.h"
 #import "ZWIntroductionViewController.h"
 #import "RunManager.h"
+#import "WeatherManager.h"
 
 @interface AppDelegate ()
 

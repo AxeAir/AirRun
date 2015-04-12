@@ -13,12 +13,12 @@
 #pragma mark Mantle property
 + (NSDictionary *)JSONKeyPathsByPropertyKey {
     return @{
-             @"cityName":@"result[0].city",
-             @"PM25":@"result[0].PM25",
-             @"AQI":@"result[0].AQI",
-             @"quality":@"result[0].quality",
-             @"CO":@"result[0].CO",
-             @"NO2":@"result[0].NO2",
+             @"cityName":@"result.city",
+             @"PM25":@"result.PM25",
+             @"AQI":@"result.AQI",
+             @"quality":@"result.quality",
+             @"CO":@"result.CO",
+             @"NO2":@"result.NO2",
              
              };
 }

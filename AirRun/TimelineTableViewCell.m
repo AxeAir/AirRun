@@ -98,10 +98,8 @@
     
     
     NSArray *heartImages = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
-    
-    
-    
-    if (_runningRecord.heart ==nil && _runningRecord.heartimages==nil) {
+
+    if (_runningRecord.heart ==nil && [heartImages count]==0) {
         
         _footerView = [self createFooterView:MaxY(_mapImageView)];
         
@@ -247,14 +245,15 @@
     [heart addSubview:_heartLabel];
     
     
-    NSArray *date = nil;
+    NSArray *date = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
     if ([date count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
 
         NSInteger imagewidth = (Main_Screen_Width-80-40)/5;
         NSInteger index= 0;
-        for (NSObject *o in date) {
-            UIImageView *view = [[UIImageView alloc] initWithImage:(UIImage*)o];
+        for (RunningImageEntity *o in date) {
+            UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:[DocumentHelper DocumentPath:o.image]]];
+            
             [view setFrame:CGRectMake((imagewidth+10)*index, 12.5, imagewidth, imagewidth)];
             [[view layer] setCornerRadius:5];
             [[view layer] setMasksToBounds:YES];

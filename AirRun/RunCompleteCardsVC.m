@@ -264,6 +264,7 @@ static const char *INDEX = "index";
             UIImage *save = [ImageHeler compressImage:heartImage LessThanKB:200];
             image.type = @"heart";
             image.dirty = @1;
+            image.recordid = _parameters.identifer;
             image.image = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
             [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
             index++;
