@@ -108,6 +108,7 @@
     
     _mapDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     _mapView.delegate = _mapDelegate;
+    [_mapDelegate addMaksGrayWorldOverlay];
     
     _pagecontrol = [[UIPageControl alloc] initWithFrame:CGRectMake(0, MaxY(_mapView), WIDTH(self), 20)];
     _pagecontrol.numberOfPages =3;

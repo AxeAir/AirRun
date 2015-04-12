@@ -78,6 +78,7 @@ static NSString *const kHeartImage = @"HeartImage";
  */
 + (void)creatFolderAtDocument:(NSString *)folerName;
 
-
++ (void)removeFile:(NSString *)fileName;
++ (void)removeFile:(NSString *)fileName InFoler:(NSString *)floderName;
 
 @end

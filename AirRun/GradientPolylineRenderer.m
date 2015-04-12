@@ -61,7 +61,9 @@
     colorArray = [[NSMutableArray alloc] init];
     
     for (int i =0 ; i<count; i++) {
-        colorArray[i] = RGBCOLOR(200, 255 - fabs(velocity[i])*50, 0);
+//        colorArray[i] = RGBCOLOR(200, 255 - fabs(velocity[i])*50, 0);
+        colorArray[i] = RGBCOLOR(255,255-fabs(velocity[i])*36,0);
+//        colorArray[i] = RGBCOLOR(0, 179, 255);
 //        colorArray[i] = [UIColor randomColor];
     }
     

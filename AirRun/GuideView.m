@@ -72,6 +72,7 @@
     _textView = [[UITextView alloc] initWithFrame:CGRectMake(30, CGRectGetMaxY(_topImage.frame)+20, self.bounds.size.width-60, self.bounds.size.height/2)];
     _textView.backgroundColor = [UIColor greenColor];
     _textView.text = @"老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平 老天搞不定,我自己摆平";
+    _textView.editable = NO;
     [_scrollView addSubview:_textView];
     
     if (CGRectGetMaxY(_textView.frame) > _scrollView.frame.size.height) {
