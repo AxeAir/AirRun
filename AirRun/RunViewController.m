@@ -156,7 +156,7 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setTitle {
     UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    titleLable.text = [NSString stringWithFormat:@"%@ ℃\nPM %@",_runManager.temperature,_runManager.pm];
+    titleLable.text = [NSString stringWithFormat:@"%@\nPM %@",_runManager.temperature,_runManager.pm];
     titleLable.textColor = [UIColor whiteColor];
     titleLable.font = [UIFont systemFontOfSize:12];
     titleLable.numberOfLines = 2;
@@ -306,8 +306,8 @@ const char *OUTPOSITION = "OutPosition";
     };
     _runSimpleCardView.photoButtonBlock = ^(UIButton *button){
         UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.delegate = this;
         [this presentViewController:imagePicker animated:YES completion:nil];
     };
@@ -375,8 +375,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)photoButtonTouch:(UIBarButtonItem *)sender {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
@@ -527,14 +527,14 @@ const char *OUTPOSITION = "OutPosition";
                        //                       NSLog(@"placemark.ISOcountryCode =%@",placemark.ISOcountryCode);
                        //                       NSLog(@"placemark.country =%@",placemark.country);
                        //                       NSLog(@"placemark.postalCode =%@",placemark.postalCode);
-                       //                       NSLog(@"placemark.administrativeArea =%@",placemark.administrativeArea);
-                       //                       NSLog(@"placemark.locality =%@",placemark.locality);
-                       //                       NSLog(@"placemark.subLocality =%@",placemark.subLocality);
-                       //                       NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
+                                              NSLog(@"placemark.administrativeArea =%@",placemark.administrativeArea);
+                                              NSLog(@"placemark.locality =%@",placemark.locality);
+                                              NSLog(@"placemark.subLocality =%@",placemark.subLocality);
+                                              NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
                        _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subAdministrativeArea];
                        
                        NSString *cityName;
-                       if ([placemark.locality isEqualToString:@""]) {//为直辖市
+                       if ([placemark.subThoroughfare isEqualToString:@""] || !placemark.subThoroughfare) {//为直辖市
                            cityName = placemark.administrativeArea;
                        } else {
                            cityName = placemark.subLocality;
@@ -542,7 +542,7 @@ const char *OUTPOSITION = "OutPosition";
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
                        [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
-                           _runManager.pm = pm25.PM25;
+                           _runManager.pm = pm25.AQI;
                            [self p_setTitle];
                        } failure:^(NSError *error) {}];
                        
@@ -655,7 +655,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
-//        [self p_getLocationNameWithLocation:newLocation];
+        [self p_getLocationNameWithLocation:newLocation];
     }
     
     if (_runManager.runState == RunStateRunning) {//是在跑步过程中

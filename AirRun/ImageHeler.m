@@ -28,8 +28,8 @@
     while (true) {
         if(imagesize.width>800)
         {
-            imagesize.width=imagesize.width/4;
-            imagesize.height=imagesize.height/4;
+            imagesize.width=imagesize.width/2;
+            imagesize.height=imagesize.height/2;
         }
         else
         {
@@ -39,8 +39,8 @@
     while (true) {
         if(imagesize.height>1100)
         {
-            imagesize.width=imagesize.width/4;
-            imagesize.height=imagesize.height/4;
+            imagesize.width=imagesize.width/2;
+            imagesize.height=imagesize.height/2;
         }
         else
         {

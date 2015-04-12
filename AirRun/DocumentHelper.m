@@ -87,4 +87,16 @@
     return [folderPath stringByAppendingPathComponent:file];
 }
 
++ (void)removeFile:(NSString *)fileName {
+    
+    NSString *filePath = [DocumentHelper DocumentPath:fileName];
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+    
+}
+
++ (void)removeFile:(NSString *)fileName InFoler:(NSString *)floderName {
+    NSString *filePath = [DocumentHelper documentsFile:fileName AtFolder:floderName];
+    [[NSFileManager defaultManager] removeItemAtPath:filePath error:nil];
+}
+
 @end

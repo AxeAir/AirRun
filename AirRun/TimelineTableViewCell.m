@@ -88,8 +88,12 @@
         _mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, MaxY(_headerView), WIDTH(_mainView)-20, 150)];
         _mapImageView.userInteractionEnabled = YES;
         [_mainView addSubview:_mapImageView];
+        [_mapImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
+        _mapImageView.contentMode =  UIViewContentModeScaleAspectFill;
+        _mapImageView.clipsToBounds = YES;
     }
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg",_runningRecord.identifer];
+    
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
     [_mapImageView setImage:image];
     

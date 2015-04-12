@@ -45,6 +45,13 @@
     [_mapView removeAnnotations:_mapView.annotations];
 }
 
+- (void)addMaksGrayWorldOverlay {
+    CLLocationCoordinate2D worldCoords[6] = {{90, 0}, {90, 180}, {-90,180}, {-90,0}, {-90,-180}, {90,-180}};
+    MKPolygon *polygonOverlay = [MKPolygon polygonWithCoordinates:worldCoords count:6];
+    [_mapView addOverlay:polygonOverlay];
+    
+}
+
 - (void)drawPath:(NSArray *)path IsStart:(BOOL)start IsTerminate:(BOOL)terminate {
     
     //画路线
@@ -218,7 +225,7 @@
         MKPolylineRenderer *renderer = nil;
         renderer = [[MKPolylineRenderer alloc] initWithPolyline:overlay];
         renderer.strokeColor = [[UIColor blackColor] colorWithAlphaComponent:0.3];
-        renderer.lineWidth = 9;
+        renderer.lineWidth = 8;
         return renderer;
     }
     
@@ -231,6 +238,12 @@
     if ([overlay isKindOfClass:[ImageOverLay class]]) {
         ImageOverLayRenderer *imageRenderer = [[ImageOverLayRenderer alloc] initWithOverlay:overlay];
         return imageRenderer;
+    }
+    
+    if ([overlay isKindOfClass:[MKPolygon class]]) {
+        MKPolygonRenderer *polygonRenderer = [[MKPolygonRenderer alloc] initWithPolygon:overlay];
+        polygonRenderer.fillColor = [UIColor colorWithWhite:0 alpha:0.5];;
+        return polygonRenderer;
     }
     return nil;
 }

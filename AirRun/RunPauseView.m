@@ -52,7 +52,7 @@ const static NSInteger Margin = 5;
     _time = time;
     _timeLable.text = [self p_getTimeStringWithSeconds:_time];
     [_timeLable sizeToFit];
-   _timeLable.center = CGPointMake(self.bounds.size.width/2, self.bounds.size.height/2-_timeLable.bounds.size.height/2);
+   _timeLable.center = CGPointMake(self.bounds.size.width/3+5, self.bounds.size.height/2-_timeLable.bounds.size.height/2);
     
 }
 

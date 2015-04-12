@@ -73,6 +73,8 @@ static const char *INDEX = "index";
             RunningImageEntity *imgEntity = this.imgMs[idx];
             [imgEntity deleteEntity];
             [this.imgMs removeObject:imgEntity];
+            NSString *fileName = [imgEntity.image lastPathComponent];
+            [DocumentHelper removeFile:fileName InFoler:kPathImageFolder];
         };
         editImageView.closeBlock = ^(EditImageView *editImageView) {
             [this p_loadMapViewAnnotation];
@@ -242,7 +244,8 @@ static const char *INDEX = "index";
 {
     
     [card.mapDelegate zoomToFitMapPoints:_path];
-    UIImage *mapShot = [ImageHeler compressImage:[_display.mapDelegate captureMapView] LessThanKB:200];
+//    UIImage *mapShot = [ImageHeler compressImage:[_display.mapDelegate captureMapView] LessThanKB:200];
+    UIImage *mapShot = [_display.mapDelegate captureMapView];
     NSString *mapImageName = [NSString stringWithFormat:@"%@.jpg",_parameters.identifer];
     self.parameters.mapshot = [kMapImageFolder stringByAppendingPathComponent:mapImageName];
     [DocumentHelper saveImage:mapShot ToFolderName:kMapImageFolder WithImageName:mapImageName];
