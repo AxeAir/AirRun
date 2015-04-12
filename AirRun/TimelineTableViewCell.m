@@ -103,7 +103,7 @@
     
     NSArray *heartImages = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
 
-    if (_runningRecord.heart ==nil && [heartImages count]==0) {
+    if (([_runningRecord.heart isEqualToString:@""]|| _runningRecord.heart ==nil) && [heartImages count]==0) {
         
         _footerView = [self createFooterView:MaxY(_mapImageView)];
         
@@ -232,7 +232,7 @@
     [runningRecord setTextAlignment:NSTextAlignmentCenter];
     [heart addSubview:runningRecord];
     
-    if(_runningRecord.heart !=nil)
+    if(_runningRecord.heart !=nil && ![_runningRecord.heart isEqualToString:@""])
     {
         _heartLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, MaxY(runningRecord)+5, WIDTH(heart), 20)];
         _heartLabel.text = _runningRecord.heart;

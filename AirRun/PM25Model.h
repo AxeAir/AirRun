@@ -12,12 +12,12 @@
 @interface PM25Model : MTLModel<MTLJSONSerializing>
 
 
-@property (nonatomic, strong) NSString *cityName;
-@property (nonatomic, strong) NSString *PM25;
-@property (nonatomic, strong) NSString *AQI;
-@property (nonatomic, strong) NSString *quality;
-@property (nonatomic, strong) NSString *CO;
-@property (nonatomic, strong) NSString *NO2;
+@property (nonatomic, strong) NSArray *cityName;
+@property (nonatomic, strong) NSArray *PM25;
+@property (nonatomic, strong) NSArray *AQI;
+@property (nonatomic, strong) NSArray *quality;
+@property (nonatomic, strong) NSArray *CO;
+@property (nonatomic, strong) NSArray *NO2;
 
 
 
