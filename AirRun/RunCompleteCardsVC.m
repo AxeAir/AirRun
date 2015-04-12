@@ -61,7 +61,7 @@ static const char *INDEX = "index";
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800) withEntity:_parameters];
     _display.delegate = self;
-    [_display.mapDelegate drawPath:_path];
+    [_display.mapDelegate drawPath:_path IsStart:YES IsTerminate:YES];
     [self p_loadMapViewAnnotation];
     __weak RunCompleteCardsVC *this = self;
     _display.mapDelegate.imgAnnotationBlock = ^(CustomAnnotation *annotation){
@@ -270,10 +270,6 @@ static const char *INDEX = "index";
             
         }
     }
-    
-    
-
-    
     [_parameters savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");
     } withErrorBlock:^{

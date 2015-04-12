@@ -64,16 +64,13 @@
 
 - (void)commonInit
 {
-    
+    //主页面
     _mainView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 200)];
-    
-    
+
     [[_mainView layer] setShadowOffset:CGSizeMake(0, 1)]; //为阴影偏移量,默认为(左右,上下)
     [[_mainView layer] setShadowRadius:1]; //为阴影四角圆角半径,默认值为
     [[_mainView layer] setShadowOpacity:0.5]; //为阴影透明度(取值为[0,1])
     [[_mainView layer] setShadowColor:[UIColor grayColor].CGColor]; //为阴影颜色
-    
-    
     [_mainView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [[_mainView layer] setCornerRadius:4];
     [self.contentView addSubview:_mainView];
@@ -84,19 +81,24 @@
         [_mainView addSubview:_headerView];
     }
     
+    //地图截图
     if (_mapImageView == nil) {
         _mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, MaxY(_headerView), WIDTH(_mainView)-20, 150)];
         _mapImageView.userInteractionEnabled = YES;
         [_mainView addSubview:_mapImageView];
     }
+    
+    
     NSString *imageName = [NSString stringWithFormat:@"%@.jpg",_runningRecord.identifer];
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
     [_mapImageView setImage:image];
-    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disSelctMap:)];
     [_mapImageView addGestureRecognizer:tap];
-
     [_mapImageView addSubview:[self createDataView]];
+    
+    
+    NSArray *heartImages = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
+    
     
     
     if (_runningRecord.heart ==nil && _runningRecord.heartimages==nil) {

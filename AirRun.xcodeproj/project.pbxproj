@@ -22,6 +22,7 @@
 		96474D621ACED60300DECE02 /* SignUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D601ACED60300DECE02 /* SignUpView.m */; };
 		9673DD531AD4F516006E64B7 /* RunGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD521AD4F516006E64B7 /* RunGuideViewController.m */; };
 		9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD561AD4F52F006E64B7 /* GuideView.m */; };
+		967D3D651AD960D800A55B42 /* RunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 967D3D641AD960D800A55B42 /* RunManager.m */; };
 		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
@@ -151,6 +152,8 @@
 		9673DD521AD4F516006E64B7 /* RunGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunGuideViewController.m; sourceTree = "<group>"; };
 		9673DD551AD4F52F006E64B7 /* GuideView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GuideView.h; sourceTree = "<group>"; };
 		9673DD561AD4F52F006E64B7 /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
+		967D3D631AD960D800A55B42 /* RunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunManager.h; sourceTree = "<group>"; };
+		967D3D641AD960D800A55B42 /* RunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunManager.m; sourceTree = "<group>"; };
 		96982B401ACF7EE000040A50 /* ValidateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateHelper.h; sourceTree = "<group>"; };
 		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
 		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
@@ -796,6 +799,8 @@
 				E5668FC51ACBC739009A0D61 /* WeatherManager.m */,
 				E5B9A2BC1AD6B58D005BB981 /* PersistenceManager.h */,
 				E5B9A2BD1AD6B58D005BB981 /* PersistenceManager.m */,
+				967D3D631AD960D800A55B42 /* RunManager.h */,
+				967D3D641AD960D800A55B42 /* RunManager.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -1111,6 +1116,7 @@
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
+				967D3D651AD960D800A55B42 /* RunManager.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
 				E52BAC491AD2761C00EC051C /* EditSignViewController.m in Sources */,
 				96982B611AD16CE600040A50 /* CountView.m in Sources */,
@@ -1306,7 +1312,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Debra Dean (EDRHYG5CZ7)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1315,7 +1321,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "660f5d77-29f3-47fa-ac74-a66481c82b1e";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1325,6 +1331,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
