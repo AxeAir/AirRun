@@ -39,7 +39,7 @@ const static NSInteger PauseViewHeight = 50;
 const char *INPOSITION = "InPosition";
 const char *OUTPOSITION = "OutPosition";
 
-@interface RunViewController () <CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface RunViewController () <CLLocationManagerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate>
 
 @property (strong, nonatomic) AVAudioPlayer *audioPlayer;
 @property (strong, nonatomic) CountView *countView;
@@ -88,6 +88,13 @@ const char *OUTPOSITION = "OutPosition";
     [self p_setLocationManager];
     [self p_setLayout];
     [self p_setStartRunLayout];
+    
+    if ([_runManager checkUserDefaultIsAvailable]) {
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"轻跑检测到您有未完成的跑步是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
+        [alertView show];
+        
+    }
     
 }
 
@@ -429,45 +436,65 @@ const char *OUTPOSITION = "OutPosition";
     
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
-        //逻辑
-        self.navigationItem.rightBarButtonItem = _photoButton;
-        self.navigationItem.leftBarButtonItem = _gpsButton;
-        [_mapMaskView removeFromSuperview];
-        [self p_audioPlay:@"start"];
-        _runManager.runState = RunStateRunning;
-        [_runTimer setFireDate:[NSDate distantPast]];
-        [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:_runManager.points.firstObject];
-
-        [UIView animateWithDuration:0.3 animations:^{
-            _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
-        } completion:^(BOOL finished) {
-            [_readyView removeFromSuperview];
+        
+        //倒计时页面
+        _countView = [[CountView alloc] initWithCount:5];
+        _countView.frame = self.view.bounds;
+        _countView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        [self.view addSubview:_countView];
+        [_countView startCountWithCompleteBlock:^(CountView *countView) {
+            [_countView removeFromSuperview];
+            
+            //逻辑
+            self.navigationItem.rightBarButtonItem = _photoButton;
+            self.navigationItem.leftBarButtonItem = _gpsButton;
+            [_mapMaskView removeFromSuperview];
+            [self p_audioPlay:@"start"];
+            _runManager.runState = RunStateRunning;
+            [_runTimer setFireDate:[NSDate distantPast]];
+            [_mapViewDelegate addImage:[UIImage imageNamed:@"startFlag"] AtLocation:_runManager.points.firstObject];
+            
             [UIView animateWithDuration:0.3 animations:^{
-                _runcardView.frame = CGRectMake(0, 63, self.view.bounds.size.width, RuncardViewHieght);
+                _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
+            } completion:^(BOOL finished) {
+                [_readyView removeFromSuperview];
+                [UIView animateWithDuration:0.3 animations:^{
+                    _runcardView.frame = CGRectMake(0, 63, self.view.bounds.size.width, RuncardViewHieght);
+                }];
             }];
+            
+            
+            
+            [RunViewControllerAnimation view:_startButton
+                       SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+10+_startButton.bounds.size.height/2)
+                  AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                      
+                      //暂停按钮滑入
+                      [RunViewControllerAnimation view:_pauseButton
+                                  SlideInToCenterPoint: CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
+                            AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
+                                [RunViewControllerAnimation scalAnimationWithView:_pauseButton WithCompleteBlock:nil];
+                            }];
+                      
+                  }];
+            
         }];
         
-        
-        
-        [RunViewControllerAnimation view:_startButton
-                   SlideOutToCenterPoint:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+10+_startButton.bounds.size.height/2)
-              AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
-                  
-                  //暂停按钮滑入
-                  [RunViewControllerAnimation view:_pauseButton
-                              SlideInToCenterPoint: CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-10-_startButton.bounds.size.height/2)
-                        AnimationWthiCompleteBlock:^(POPAnimation *anim, BOOL finished){
-                            [RunViewControllerAnimation scalAnimationWithView:_pauseButton WithCompleteBlock:nil];
-                        }];
-                  
-              }];
-
     }];
     
 }
 
 #pragma mark - Function
+#pragma mark Private Function
 
+- (void)p_addImageEntityToMap:(RunningImageEntity *)imgEntity {
+    
+    CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
+    NSString *imageName = [imgEntity.image lastPathComponent];
+    UIImage *image = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kPathImageFolder]];
+    [_mapViewDelegate addimage:image AnontationWithLocation:loc];
+    
+}
 
 - (void)p_addShowdowWithView:(UIView *)view {
     
@@ -479,7 +506,7 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 
-#pragma mark Private Function
+
 
 - (void)p_getLocationNameWithLocation:(CLLocation *)location {
     
@@ -722,6 +749,27 @@ const char *OUTPOSITION = "OutPosition";
     if ([keyPath isEqualToString:@"kcal"]) {
         _runcardView.kcal = [newValue floatValue];
     }
+}
+
+#pragma mark - UIAlertViewDelegate 
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 1) {
+        [self startButtonTouch:_startButton];
+        
+        [_runManager readFromUserDefault];
+        _runManager.points = _runManager.pointsBackUp;
+        _currentLocation = _runManager.points.lastObject;
+        
+        [_mapViewDelegate drawPath:_runManager.points IsStart:NO IsTerminate:NO];
+        for (RunningImageEntity *imgEntity in _runManager.imageArray) {
+            [self p_addImageEntityToMap:imgEntity];
+        }
+    } else if (buttonIndex == 0) {
+        
+    }
+    
 }
 
 /*

@@ -11,8 +11,10 @@
 #import "RunningRecordEntity.h"
 #import "RunningImageEntity.h"
 
-@implementation RunManager
 
+
+@implementation RunManager
+static  NSString *const kRunMangerKey = @"RunManager";
 #pragma mark - Set Method
 
 - (void)setSpeed:(CGFloat)speed {
@@ -103,7 +105,124 @@
     return record;
 }
 
+- (void)saveToUserDefault {
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *runManagerDic = @{
+                                    @"runState":@(_runState),
+                                    @"distance":@(_distance),
+                                    @"time":@(_time),
+                                    @"speed":@(_speed),
+                                    @"currentSpeed":@(_currentSpeed),
+                                    @"kcal":@(_kcal),
+                                    @"currentLocationName":_currentLocationName,
+                                    @"temperature":_temperature,
+                                    @"pm":_pm,
+                                    @"points":[self p_convertPointsToJsonString],
+                                    @"imageArray":[self p_convertImageToString]
+                                    };
+    
+    [userDefaults setObject:runManagerDic forKey:kRunMangerKey];
+    [userDefaults synchronize];
+}
+
+- (void)readFromUserDefault {
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    NSDictionary *runManagerDic = [userDefaults objectForKey:kRunMangerKey];
+    [userDefaults removeObjectForKey:kRunMangerKey];
+    [userDefaults synchronize];
+    
+    _runState = [runManagerDic[@"runState"] integerValue];
+    _distance = [runManagerDic[@"distance"] floatValue];
+    _time = [runManagerDic[@"time"] integerValue];
+    _speed = [runManagerDic[@"speed"] floatValue];
+    _currentSpeed = [runManagerDic[@"currentSpeed"] floatValue];
+    _kcal = [runManagerDic[@"kcal"] floatValue];
+    _currentLocationName = runManagerDic[@"currentLocationName"];
+    _temperature = runManagerDic[@"temperature"];
+    _pm = runManagerDic[@"pm"];
+    _pointsBackUp = [[RunManager convertJsonStringToPath:runManagerDic[@"points"]] mutableCopy];
+    _imageArray = [[RunManager convertJsonStringToImages:runManagerDic[@"imageArray"]] mutableCopy];
+}
+
+- (void)removeUserDefault {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRunMangerKey];
+}
+
+- (BOOL)checkUserDefaultIsAvailable {
+    
+    NSDictionary *dic = [[NSUserDefaults standardUserDefaults] objectForKey:kRunMangerKey];
+    if (dic) {
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
++ (NSArray *)convertJsonStringToImages:(NSString *)json {
+    
+    NSData *arrayData = [json dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *dicArray = [NSJSONSerialization JSONObjectWithData:arrayData options:NSJSONReadingMutableContainers error:nil];
+    NSMutableArray *imagesArray = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *dic in dicArray) {
+        RunningImageEntity *imgEntity = [[RunningImageEntity alloc] init];
+        imgEntity.latitude = dic[@"latitude"];
+        imgEntity.longitude = dic[@"longitude"];
+        imgEntity.image = dic[@"image"];
+        imgEntity.type = dic[@"type"];
+        [imagesArray addObject:imgEntity];
+    }
+    
+    return imagesArray;
+}
+
++ (NSArray *)convertJsonStringToPath:(NSString *)json {
+    
+    NSData *arrayData = [json dataUsingEncoding:NSUTF8StringEncoding];
+    NSArray *dicArray = [NSJSONSerialization JSONObjectWithData:arrayData options:NSJSONReadingMutableContainers error:nil];
+    NSMutableArray *path = [[NSMutableArray alloc] init];
+    
+    for (NSDictionary *dic in dicArray) {
+        CLLocationCoordinate2D coordinate2D = CLLocationCoordinate2DMake([dic[@"latitude"] doubleValue], [dic[@"longitude"] doubleValue]);
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        formatter.dateFormat = @"yyyy-MM-dd HH:mm:ss zzz";
+        CLLocation *loc = [[CLLocation alloc] initWithCoordinate:coordinate2D
+                                                        altitude:[dic[@"altitude"] doubleValue]
+                                              horizontalAccuracy:[dic[@"hAccuracy"] doubleValue]
+                                                verticalAccuracy:[dic[@"vAccuracy"] doubleValue]
+                                                          course:[dic[@"course"] doubleValue]
+                                                           speed:[dic[@"speed"] doubleValue]
+                                                       timestamp:[formatter dateFromString:dic[@"timestamp"]]];
+        [path addObject:loc];
+    }
+    
+    return path;
+}
+
+
 #pragma mark Private
+
+- (NSString *)p_convertImageToString {
+    
+    NSMutableArray *imgDicArray = [[NSMutableArray alloc] init];
+    
+    for (RunningImageEntity *imgEntity in _imageArray) {
+        NSDictionary *entityDic = @{
+                                    @"latitude":imgEntity.latitude,
+                                    @"longitude":imgEntity.longitude,
+                                    @"image":imgEntity.image,
+                                    @"type":imgEntity.type
+                                    };
+        [imgDicArray addObject:entityDic];
+    }
+    
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:imgDicArray options:NSJSONWritingPrettyPrinted error:&error];
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
 
 - (NSString *)p_convertPointsToJsonString {
     
@@ -114,13 +233,13 @@
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss zzz"];
         
         //键:值
-        NSDictionary *pointDic = @{@"latitude":[NSNumber numberWithDouble:location.coordinate.latitude],
-                                   @"longitude":[NSNumber numberWithDouble:location.coordinate.longitude],
-                                   @"altitude":[NSNumber numberWithDouble:location.altitude],
-                                   @"hAccuracy":[NSNumber numberWithDouble:location.horizontalAccuracy],
-                                   @"vAccuracy":[NSNumber numberWithDouble:location.verticalAccuracy],
-                                   @"course":[NSNumber numberWithDouble:location.course],
-                                   @"speed":[NSNumber numberWithDouble:location.speed],
+        NSDictionary *pointDic = @{@"latitude":@(location.coordinate.latitude),
+                                   @"longitude":@(location.coordinate.longitude),
+                                   @"altitude":@(location.altitude),
+                                   @"hAccuracy":@(location.horizontalAccuracy),
+                                   @"vAccuracy":@(location.verticalAccuracy),
+                                   @"course":@(location.course),
+                                   @"speed":@(location.speed),
                                    @"timestamp":[dateFormatter stringFromDate:location.timestamp]
                                    };
         [pointDicArray addObject:pointDic];

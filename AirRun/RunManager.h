@@ -32,8 +32,16 @@ typedef enum : NSUInteger {
 
 @property (strong, nonatomic) NSMutableArray *points;//保存点
 @property (strong, nonatomic) NSMutableArray *imageArray;//保存imageEntity
+@property (strong, nonatomic) NSMutableArray *pointsBackUp;
 
 + (RunManager *)shareInstance;
 - (RunningRecordEntity *)generateRecordEntity;
+- (void)saveToUserDefault;
+- (void)readFromUserDefault;
+- (void)removeUserDefault;
+- (BOOL)checkUserDefaultIsAvailable;
+
++ (NSArray *)convertJsonStringToPath:(NSString *)json;
++ (NSArray *)convertJsonStringToImages:(NSString *)json;
 
 @end

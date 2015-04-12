@@ -23,7 +23,7 @@
         _coordinate = coordinate;
         MKMapPoint centerPoint = MKMapPointForCoordinate(self.coordinate);
         _image = image;
-        _boundingMapRect = MKMapRectMake(centerPoint.x-40, centerPoint.y-40, 80, 80);
+        _boundingMapRect = MKMapRectMake(centerPoint.x-120, centerPoint.y-120, 240, 240);
         
     }
     return self;

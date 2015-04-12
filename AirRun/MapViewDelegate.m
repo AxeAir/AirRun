@@ -45,7 +45,7 @@
     [_mapView removeAnnotations:_mapView.annotations];
 }
 
-- (void)drawPath:(NSArray *)path {
+- (void)drawPath:(NSArray *)path IsStart:(BOOL)start IsTerminate:(BOOL)terminate {
     
     //画路线
     [self drawGradientPolyLineWithPoints:path];
@@ -56,8 +56,14 @@
     //画起点和终点
     CLLocation *startPoint = path.firstObject;
     CLLocation *endPoint = path.lastObject;
-    [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:startPoint];
-    [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:endPoint];
+    if (start) {
+        [self addImage:[UIImage imageNamed:@"startFlag"] AtLocation:startPoint];
+    }
+    
+    if (terminate) {
+        [self addImage:[UIImage imageNamed:@"terminalFlag"] AtLocation:endPoint];
+    }
+    
     
     //画公里节点
     NSInteger kmIndex = 0;

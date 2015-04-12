@@ -19,6 +19,8 @@
 #import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
 #import "UConstants.h"
+#import "RunManager.h"
+
 @interface AppDelegate ()
 
 @end
@@ -111,6 +113,12 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    RunManager *runManger = [RunManager shareInstance];
+    if (runManger.runState != RunStateStop) {
+        [runManger saveToUserDefault];
+    }
+    
     [MagicalRecord cleanUp];
     
 }

@@ -120,7 +120,7 @@
     _mapViewDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     _mapView.delegate = _mapViewDelegate;
     
-    [_mapViewDelegate drawPath:_path];
+    [_mapViewDelegate drawPath:_path IsStart:YES IsTerminate:YES];
     
     for (RunningImageEntity *imgEntity in _imgEntities) {
         
