@@ -77,8 +77,11 @@
     NSInteger i=0;
     for (NSDictionary *dic in shareButtons) {
         
-        UIImageView *icon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:[dic objectForKey:@"image"]]];
+        UIButton *icon = [[UIButton alloc] init];
+        [icon setImage:[UIImage imageNamed:[dic objectForKey:@"image"]] forState:UIControlStateNormal];
         [icon setFrame:CGRectMake((width+30)*i+30, 20, width, width)];
+        [icon setTag:1000+i];
+        [icon addTarget:self action:@selector(ShareButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_shareView addSubview:icon];
         
         UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake((width+30)*i+15, MaxY(icon)+5, width+30, 20)];
@@ -133,6 +136,15 @@
 - (void)drawRect:(CGRect)rect
 {
     
+}
+
+
+- (void)ShareButtonTouch:(id)sender
+{
+    UIButton *button = (UIButton *)sender;
+    if (button.tag == 1000) {
+        [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeiBo];
+    }
 }
 
 

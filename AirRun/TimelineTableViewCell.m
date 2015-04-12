@@ -129,7 +129,7 @@
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
     //[headerView setBackgroundColor:[UIColor redColor]];
     UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
-    [kcal setText:[NSString stringWithFormat:@"%d Kcal   ≈   %d 个冰淇淋",100,100]];
+    [kcal setText:[self calculateKcal:[_runningRecord.kcar integerValue]]];
     [kcal setTextColor:RGBCOLOR(255, 164, 74)];
     
     [headerView addSubview:kcal];
@@ -142,7 +142,7 @@
     UIView *dataview = [[UIView alloc] initWithFrame:CGRectMake(0, HEIGHT(_mapImageView)-36, WIDTH(_mapImageView), 36)];
     
     UIView *bgMask = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dataview.frame.size.width, dataview.frame.size.height)];
-    [bgMask setBackgroundColor:RGBACOLOR(107, 107, 107, 0.6)];
+    [bgMask setBackgroundColor:RGBACOLOR(107, 107, 107, 0.8)];
     [dataview addSubview:bgMask];
         if (_distanceIconImageView == nil) {
             _distanceIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20,8, 20, 20)];
@@ -151,7 +151,7 @@
         }
     
         if (_distanceLabel == nil) {
-            _distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_distanceIconImageView)+10, 8, 100, 20)];
+            _distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_distanceIconImageView)+5, 8, 100, 20)];
             [_distanceLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_distanceLabel];
         }
@@ -166,11 +166,11 @@
         }
     
         if (_speedLabel == nil) {
-            _speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_speedIconImageView)+10, 8, 100, 20)];
+            _speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_speedIconImageView)+5, 8, 100, 20)];
             [_speedLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_speedLabel];
         }
-        [_speedLabel setText:[NSString stringWithFormat:@"%.2lf km/h",[_runningRecord.averagespeed floatValue]]];
+        [_speedLabel setText:[NSString stringWithFormat:@"%.1lf km/h",[_runningRecord.averagespeed floatValue]]];
     
         if (_timeIconImageView == nil) {
             _timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3*2, 8, 20, 20)];
@@ -179,7 +179,7 @@
         }
     
         if (_timeLabel == nil) {
-            _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+10, 8, 100, 20)];
+            _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+5, 8, 100, 20)];
             [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
             [dataview addSubview:_timeLabel];
         }
@@ -293,13 +293,29 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
 }
 
 
 - (void)disSelctMap:(id)sender
 {
     [_delegate TimelineTableViewCellDidSelcct:_runningRecord];
+}
+
+- (NSString *)calculateKcal:(NSInteger)kcal
+{
+    
+    NSArray *kcals = @[
+                            @{@"name":@"冰淇淋",@"kcal":@64,@"dw":@"个"},
+                            @{@"name":@"蛋糕",@"kcal":@230,@"dw":@"块"},
+                            @{@"name":@"米饭",@"kcal":@174,@"dw":@"碗"},
+                            @{@"name":@"煎蛋",@"kcal":@100,@"dw":@"个"},
+                            @{@"name":@"肉丝",@"kcal":@300,@"dw":@"盆"},
+                            ];
+    
+    NSInteger index =  arc4random()%4;
+    NSDictionary *selectDic = [kcals objectAtIndex:index];
+    
+    return [NSString stringWithFormat:@"%ld Kcal   ≈   %.1f%@ %@",kcal,kcal/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
 }
 
 @end

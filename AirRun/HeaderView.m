@@ -39,7 +39,15 @@
     if (currentuser) {
         AVFile *avatarData = [currentuser objectForKey:@"avatar"];
         NSData *resumeData = [avatarData getData];
-        [_AvatarView setImage:[UIImage imageWithData:resumeData]];
+        
+        if (resumeData !=nil) {
+            [_AvatarView setImage:[UIImage imageWithData:resumeData]];
+        }
+        else
+        {
+            [_AvatarView setImage:[UIImage imageNamed:@"weiboshare"]];
+        }
+        
     }
     
     [self addSubview:_AvatarView];

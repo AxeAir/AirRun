@@ -16,6 +16,7 @@
 #import "TimelineController.h"
 #import <AVOSCloud.h>
 #import "ProfileViewController.h"
+#import "NavViewController.h"
 @interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
@@ -40,6 +41,7 @@
         tableView;
     });
     [self.view addSubview:self.tableView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,17 +64,17 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]]
+            [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]]
                                                          animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;
-        case 3:
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
+        case 2:
+            [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
                                                          animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             
             break;
-        case 4:
+        case 3:
         {
             RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
             [self.sideMenuViewController setContentViewController:runVC animated:NO];
@@ -104,7 +106,7 @@
     if (sectionIndex == 0) {
         return 1;
     }
-    return 5;
+    return 4;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -124,7 +126,7 @@
             if (currentUser != nil) {
                 // 允许用户使用应用
                 ProfileViewController *profile = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:profile] animated:YES];
+                [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:profile] animated:YES];
                 [self.sideMenuViewController hideMenuViewController];
                 
             } else {
@@ -171,8 +173,8 @@
     }
     
     if (indexPath.section == 1) {
-        NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"支持与反馈"];
-        NSArray *images = @[@"runner", @"timeline", @"setting", @"setting",@"setting"];
+        NSArray *titles = @[@"跑步", @"运动数据", @"设置",@"支持与反馈"];
+        NSArray *images = @[@"runner", @"timeline", @"setting",@"setting"];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
         [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];

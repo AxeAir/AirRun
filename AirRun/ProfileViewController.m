@@ -33,10 +33,15 @@
     [super viewDidLoad];
     
     self.title = @"个人设置";
+    
+   
+    
     self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    
+     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -424,6 +429,9 @@
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
 }
+
+
+
 
 
 @end
