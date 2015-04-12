@@ -41,9 +41,9 @@
  */
 - (NSArray *)findDirtyRecord;
 
-
-
 - (NSArray *)findDirtyImage;
+
+
 
 - (id)getObject:(Class)entity withAttribute:(NSString *)attrobute withValue:(id)value;
 
