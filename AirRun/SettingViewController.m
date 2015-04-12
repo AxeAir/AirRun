@@ -44,6 +44,18 @@
     return self;
 }
 
+/**
+ *  页面即将离开的时候保存数据
+ *
+ *  @param animated <#animated description#>
+ */
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_user saveInBackground];
+}
+
+
+#pragma mark UITableview Delegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
@@ -130,7 +142,6 @@
 }
 
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     switch (indexPath.section) {
@@ -143,6 +154,9 @@
         break;
         case 1:
         {
+            if (indexPath.row == 1) {
+                [self rate];
+            }
             
             if (indexPath.row == 2) {
                 AboutUsViewController *vc = [[AboutUsViewController alloc] init];
@@ -156,17 +170,12 @@
 }
 
 
-- (void)menuButtonTouch:(UIButton *)sender {
-    [self.sideMenuViewController presentLeftMenuViewController];
-}
 
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [_user saveInBackground];
-}
 
 
+
+#pragma mark Action
 - (void)switchVoiceButton:(id)sender
 {
     UISwitch *switchButton = (UISwitch *)sender;
@@ -180,5 +189,28 @@
     
 }
 
+- (void)menuButtonTouch:(UIButton *)sender {
+    [self.sideMenuViewController presentLeftMenuViewController];
+}
+
+
+
+//评价页面
+- (void)rate
+{
+    NSString * appstoreUrlString = @"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?mt=8&onlyLatestVersion=true&pageNumber=0&sortOrdering=1&type=Purple+Software&id=982511649";
+    
+    NSURL * url = [NSURL URLWithString:appstoreUrlString];
+    
+    if ([[UIApplication sharedApplication] canOpenURL:url])
+    {
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else
+    {
+        NSLog(@"can not open");
+    }
+
+}
 
 @end
