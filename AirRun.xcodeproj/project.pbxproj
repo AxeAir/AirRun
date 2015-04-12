@@ -52,6 +52,8 @@
 		E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0541AC8854A0030863D /* LaunchScreen.xib */; };
 		E50BE0621AC8854A0030863D /* AirRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0611AC8854A0030863D /* AirRunTests.m */; };
 		E50BE07B1AC887200030863D /* DemoTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE07A1AC887200030863D /* DemoTestsSpec.m */; };
+		E51E98831ADA5D2B0050AE69 /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E51E98821ADA5D2B0050AE69 /* ZWIntroductionViewController.m */; };
+		E51E98871ADA6D460050AE69 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E51E98861ADA6D460050AE69 /* NavViewController.m */; };
 		E52BAC431AD13E9000EC051C /* AirPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = E52BAC421AD13E9000EC051C /* AirPickerView.m */; };
 		E52BAC461AD1653900EC051C /* EditNickNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E52BAC451AD1653900EC051C /* EditNickNameViewController.m */; };
 		E52BAC491AD2761C00EC051C /* EditSignViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E52BAC481AD2761C00EC051C /* EditSignViewController.m */; };
@@ -209,6 +211,10 @@
 		E50BE06F1AC886000030863D /* KiwiUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0721AC886000030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50BE07A1AC887200030863D /* DemoTestsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTestsSpec.m; sourceTree = "<group>"; };
+		E51E98811ADA5D2B0050AE69 /* ZWIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionViewController.h; sourceTree = "<group>"; };
+		E51E98821ADA5D2B0050AE69 /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
+		E51E98851ADA6D460050AE69 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
+		E51E98861ADA6D460050AE69 /* NavViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavViewController.m; sourceTree = "<group>"; };
 		E52BAC411AD13E9000EC051C /* AirPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirPickerView.h; sourceTree = "<group>"; };
 		E52BAC421AD13E9000EC051C /* AirPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirPickerView.m; sourceTree = "<group>"; };
 		E52BAC441AD1653900EC051C /* EditNickNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditNickNameViewController.h; sourceTree = "<group>"; };
@@ -564,6 +570,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E51E98801ADA5D160050AE69 /* startup */ = {
+			isa = PBXGroup;
+			children = (
+				E51E98811ADA5D2B0050AE69 /* ZWIntroductionViewController.h */,
+				E51E98821ADA5D2B0050AE69 /* ZWIntroductionViewController.m */,
+			);
+			name = startup;
+			sourceTree = "<group>";
+		};
+		E51E98841ADA6D2D0050AE69 /* Nav */ = {
+			isa = PBXGroup;
+			children = (
+				E51E98851ADA6D460050AE69 /* NavViewController.h */,
+				E51E98861ADA6D460050AE69 /* NavViewController.m */,
+			);
+			name = Nav;
+			sourceTree = "<group>";
+		};
 		E52BAC401AD13E6700EC051C /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -656,6 +680,7 @@
 		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
+				E51E98841ADA6D2D0050AE69 /* Nav */,
 				961547C41AD8311C00D3CA5B /* RecordDetail */,
 				961547BC1AD7B6C700D3CA5B /* AboutUs */,
 				9673DD501AD4F4EE006E64B7 /* RunGuide */,
@@ -673,6 +698,7 @@
 		E5668F8D1ACA5D0A009A0D61 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				E51E98801ADA5D160050AE69 /* startup */,
 				E52D16D71ACE6C0900DBFA04 /* ImagePickerController */,
 				E5AC95CC1ACD80F400A6F133 /* Draw */,
 				E5668FB31ACBC119009A0D61 /* JuheAPI */,
@@ -1079,6 +1105,7 @@
 				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
+				E51E98871ADA6D460050AE69 /* NavViewController.m in Sources */,
 				96474D171ACDB65F00DECE02 /* ImageOverLay.m in Sources */,
 				E5AC95BD1ACD5AEE00A6F133 /* RunningRecord.m in Sources */,
 				E52D16F41ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m in Sources */,
@@ -1098,6 +1125,7 @@
 				E52BAC491AD2761C00EC051C /* EditSignViewController.m in Sources */,
 				96982B611AD16CE600040A50 /* CountView.m in Sources */,
 				961547BF1AD7B6E100D3CA5B /* AboutUsViewController.m in Sources */,
+				E51E98831ADA5D2B0050AE69 /* ZWIntroductionViewController.m in Sources */,
 				96982B4B1AD0198900040A50 /* CustomAnnotationView.m in Sources */,
 				E59139991ACBDDCF00F9D048 /* CompleteInputCard.m in Sources */,
 				E5FAC7F21AD1191E00A2C7DD /* ProfileViewController.m in Sources */,
@@ -1287,8 +1315,8 @@
 			baseConfigurationReference = 06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Debra Dean (EDRHYG5CZ7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1297,7 +1325,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcbf8e4-0647-48c9-8fb4-3785b2f43036";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1306,8 +1334,8 @@
 			baseConfigurationReference = 8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Debra Dean (EDRHYG5CZ7)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1316,7 +1344,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fcbf8e4-0647-48c9-8fb4-3785b2f43036";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

@@ -23,10 +23,11 @@
 #import "TimelineController.h"
 #import "RESideMenu.h"
 #import "ShareView.h"
+#import <AVOSCloudSNS.h>
 
 static const char *INDEX = "index";
 
-@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,CompleteDisplayCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface RunCompleteCardsVC ()<UIScrollViewDelegate, CompleteInputCardDelegate,CompleteDisplayCardDelegate,QBImagePickerControllerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,ShareViewDelegate>
 
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
@@ -272,10 +273,6 @@ static const char *INDEX = "index";
             
         }
     }
-    
-    
-
-    
     [_parameters savewithCompleteBlock:^{
         NSLog(@"数据本地持久化成功");
     } withErrorBlock:^{
@@ -284,7 +281,7 @@ static const char *INDEX = "index";
     
     if (type == CompleteDisplayCardButtonTypeShare) {
         ShareView *share = [[ShareView alloc] init];
-        
+        share.delegate = self;
         [share showInView:self.view];
     
         
@@ -377,6 +374,21 @@ static const char *INDEX = "index";
         [picker dismissViewControllerAnimated:YES completion:nil];
         [_ImageArray addObject:image];
         [_popview addSmallPictures:_ImageArray];
+    }
+}
+
+#pragma mark sharview;
+
+- (void)shareview:(ShareView *)shareview didSelectButton:(ShareViewButtonType)buttonType
+{
+    if (buttonType == ShareViewButtonTypeWeiBo) {
+        [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
+        [AVOSCloudSNS shareText:@"sfsdf" andLink:@"dsfsdf" andImage:nil toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            
+            NSLog(@"%@",error);
+        } andProgress:^(float percent) {
+            
+        }];
     }
 }
 

@@ -111,25 +111,48 @@
     AVFile *avatarData = [[AVUser currentUser] objectForKey:@"avatar"];
     NSData *resumeData = [avatarData getData];
     
+    if (resumeData!=nil) {
+        UIImage *inputImage = [UIImage imageWithData:resumeData];
+        GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:inputImage];
+        GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
+        
+        [stillImageFilter setBlurRadiusInPixels:4];
+        [stillImageSource addTarget:stillImageFilter];
+        [stillImageFilter useNextFrameForImageCapture];
+        [stillImageSource processImage];
+        
+        UIImage *currentFilteredVideoFrame = [stillImageFilter imageFromCurrentFramebuffer];
+        
+        [_headerbackgroundImageView setImage:currentFilteredVideoFrame];
+    }
+    else
+    {
+        UIImage *inputImage = [UIImage imageNamed:@"defaultTimeline"];
+        GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:inputImage];
+        GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
+        
+        [stillImageFilter setBlurRadiusInPixels:4];
+        [stillImageSource addTarget:stillImageFilter];
+        [stillImageFilter useNextFrameForImageCapture];
+        [stillImageSource processImage];
+        
+        UIImage *currentFilteredVideoFrame = [stillImageFilter imageFromCurrentFramebuffer];
+        
+        [_headerbackgroundImageView setImage:currentFilteredVideoFrame];
+        
+    }
     
-    
-    UIImage *inputImage = [UIImage imageWithData:resumeData];
-    
-    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:inputImage];
-    GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
-    
-    [stillImageFilter setBlurRadiusInPixels:4];
-    [stillImageSource addTarget:stillImageFilter];
-    [stillImageFilter useNextFrameForImageCapture];
-    [stillImageSource processImage];
-    
-    UIImage *currentFilteredVideoFrame = [stillImageFilter imageFromCurrentFramebuffer];
-    
-    [_headerbackgroundImageView setImage:currentFilteredVideoFrame];
     [header addSubview:_headerbackgroundImageView];
     
     _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake((Main_Screen_Width-80)/2, 50, 80, 80)];
-    [_headerImageView setImage:[UIImage imageWithData:resumeData]];
+    
+    if (resumeData!=nil) {
+        [_headerImageView setImage:[UIImage imageWithData:resumeData]];
+    }
+    else
+    {
+        [_headerImageView setImage:[UIImage imageNamed:@"weiboshare"]];
+    }
     [[_headerImageView layer] setMasksToBounds:YES];
     [[_headerImageView layer] setCornerRadius:40.0];
     [[_headerImageView layer] setShadowOffset:CGSizeMake(10, 10)];

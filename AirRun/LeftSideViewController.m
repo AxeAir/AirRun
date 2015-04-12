@@ -16,7 +16,9 @@
 #import "TimelineController.h"
 #import <AVOSCloud.h>
 #import "ProfileViewController.h"
-@interface LeftSideViewController ()
+#import "NavViewController.h"
+#import <MessageUI/MFMailComposeViewController.h>
+@interface LeftSideViewController ()<MFMailComposeViewControllerDelegate>
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) HeaderView *header;
@@ -40,6 +42,7 @@
         tableView;
     });
     [self.view addSubview:self.tableView];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -62,21 +65,22 @@
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]]
+            [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]]
                                                          animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             break;
-        case 3:
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
+        case 2:
+            [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
                                                          animated:NO];
             [self.sideMenuViewController hideMenuViewController];
             
             break;
-        case 4:
+        case 3:
         {
-            RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
-            [self.sideMenuViewController setContentViewController:runVC animated:NO];
-            [self.sideMenuViewController hideMenuViewController];
+//            RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
+//            [self.sideMenuViewController setContentViewController:runVC animated:NO];
+//            [self.sideMenuViewController hideMenuViewController];
+            [self sendMailInApp];
         }
             break;
         default:
@@ -104,7 +108,7 @@
     if (sectionIndex == 0) {
         return 1;
     }
-    return 5;
+    return 4;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -124,7 +128,7 @@
             if (currentUser != nil) {
                 // 允许用户使用应用
                 ProfileViewController *profile = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
-                [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:profile] animated:YES];
+                [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:profile] animated:YES];
                 [self.sideMenuViewController hideMenuViewController];
                 
             } else {
@@ -171,8 +175,8 @@
     }
     
     if (indexPath.section == 1) {
-        NSArray *titles = @[@"跑步", @"运动数据", @"运动记录", @"设置",@"支持与反馈"];
-        NSArray *images = @[@"runner", @"timeline", @"setting", @"setting",@"setting"];
+        NSArray *titles = @[@"跑步", @"运动数据", @"设置",@"支持与反馈"];
+        NSArray *images = @[@"runner", @"timeline", @"setting",@"setting"];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
         [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];
@@ -190,7 +194,66 @@
     return cell;
 }
 
+- (void)sendMailInApp
+{
+    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+    if (!mailClass) {
+        //[self alertWithMessage:@"当前系统版本不支持应用内发送邮件功能，您可以使用mailto方法代替"];
+        return;
+    }
+   
+    
+    if (![mailClass canSendMail]) {
+        //[self alertWithMessage:@"用户没有设置邮件账户"];
+        return;
+    }
+    [self displayMailPicker];
+}
 
+//调出邮件发送窗口
+- (void)displayMailPicker
+{
+    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
+    mailPicker.mailComposeDelegate = self;
+    
+    //设置主题
+    [mailPicker setSubject: @"关于轻跑"];
+    //添加收件人
+    NSArray *toRecipients = [NSArray arrayWithObject: @"info@mrchenhao.com"];
+    [mailPicker setToRecipients: toRecipients];
+    
+    NSString *emailBody = @"您好！<br/>我是";
+    [mailPicker setMessageBody:emailBody isHTML:YES];
+    [self presentViewController:mailPicker animated:YES completion:nil];
+}
+
+
+#pragma mark - 实现 MFMailComposeViewControllerDelegate
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
+{
+    //关闭邮件发送窗口
+    
+    NSString *msg;
+    switch (result) {
+        case MFMailComposeResultCancelled:
+            msg = @"用户取消编辑邮件";
+            break;
+        case MFMailComposeResultSaved:
+            msg = @"用户成功保存邮件";
+            break;
+        case MFMailComposeResultSent:
+            msg = @"用户点击发送，将邮件放到队列中，还没发送";
+            break;
+        case MFMailComposeResultFailed:
+            msg = @"用户试图保存或者发送邮件失败";
+            break;
+        default:
+            msg = @"";
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self alertWithMessage:msg];
+}
 
 
 @end

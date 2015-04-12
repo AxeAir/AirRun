@@ -19,9 +19,12 @@
 #import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
 #import "UConstants.h"
+#import "ZWIntroductionViewController.h"
 #import "RunManager.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic, strong) ZWIntroductionViewController *introductionView;
 
 @end
 
@@ -35,8 +38,6 @@
     [RunningRecord registerSubclass];
     [RunningImage registerSubclass];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
-    
-    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
@@ -87,6 +88,29 @@
          UIRemoteNotificationTypeAlert |
          UIRemoteNotificationTypeSound];
     }
+    
+    // Added Introduction View Controller
+    NSArray *coverImageNames = @[@"finish", @"finish", @"finish"];
+    NSArray *backgroundImageNames = @[@"seabg", @"seabg", @"seabg"];
+    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
+    
+    // Example 2
+    //    UIButton *enterButton = [UIButton new];
+    //    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
+    //    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
+    
+    //[self.window addSubview:self.introductionView.view];
+    
+    __weak AppDelegate *weakSelf = self;
+    self.introductionView.didSelectedEnter = ^() {
+        [weakSelf.introductionView.view removeFromSuperview];
+        weakSelf.introductionView = nil;
+        
+        // enter main view , write your code ...
+        //        ViewController *mainVC = [[ViewController alloc] init];
+        //        weakSelf.window.rootViewController = mainVC;
+        
+    };
     
     return YES;
 
