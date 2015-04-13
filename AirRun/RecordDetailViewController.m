@@ -139,6 +139,11 @@
 - (void)shareButtonTouch:(UIBarButtonItem *)button {
     
 }
+- (IBAction)foucsButtonTouch:(id)sender {
+    
+    
+    
+}
 /*
 #pragma mark - Navigation
 

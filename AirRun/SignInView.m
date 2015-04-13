@@ -39,7 +39,7 @@
     
     if (!_emailImageView) {
         _emailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _emailImageView.image = [UIImage imageNamed:@"setting.png"];
+        _emailImageView.image = [UIImage imageNamed:@"email"];
         [_emailView addSubview:_emailImageView];
     }
     _emailImageView.center = CGPointMake(15+_emailImageView.bounds.size.width/2, _emailView.bounds.size.height/2);
@@ -74,7 +74,7 @@
     
     if (!_passwordImageView) {
         _passwordImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _passwordImageView.image = [UIImage imageNamed:@"setting.png"];
+        _passwordImageView.image = [UIImage imageNamed:@"passwordlock"];
         [_passwordView addSubview:_passwordImageView];
     }
     _passwordImageView.center = CGPointMake(15+_passwordImageView.bounds.size.width/2, _passwordView.bounds.size.height/2);

@@ -83,6 +83,7 @@ const char *OUTPOSITION = "OutPosition";
     [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:&sessionError];
     [[AVAudioSession sharedInstance] setActive:YES error:&sessionError];
     
+    
     [self p_setNavgation];
     [self p_setMapView];
     [self p_setLocationManager];
@@ -137,7 +138,7 @@ const char *OUTPOSITION = "OutPosition";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg11111-2"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    
+    self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
@@ -542,7 +543,7 @@ const char *OUTPOSITION = "OutPosition";
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
                        [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
-                           _runManager.pm = pm25.AQI;
+                           _runManager.pm = pm25.AQI[0];
                            [self p_setTitle];
                        } failure:^(NSError *error) {}];
                        
@@ -655,7 +656,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
-        [self p_getLocationNameWithLocation:newLocation];
+//        [self p_getLocationNameWithLocation:newLocation];
     }
     
     if (_runManager.runState == RunStateRunning) {//是在跑步过程中
@@ -781,5 +782,6 @@ const char *OUTPOSITION = "OutPosition";
     // Pass the selected object to the new view controller.
 }
 */
+
 
 @end
