@@ -59,7 +59,7 @@
     [self addSubview:_pickerView];
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
-    [headerView setBackgroundColor:[UIColor redColor]];
+    [headerView setBackgroundColor:CardBgColor];
     [self addSubview:headerView];
     
     UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH(self)-50, 0, 50, 40)];

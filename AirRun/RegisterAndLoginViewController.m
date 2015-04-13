@@ -247,15 +247,19 @@ typedef enum : NSUInteger {
             return;
         }
         
+        MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+        [HUDHelper showHUD:@"登陆中" andView:self.view andHUD:hud];
         [AVUser logInWithUsernameInBackground:email password:password block:^(AVUser *user, NSError *error) {
             if (user != nil) {
+                [hud hide:YES];
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"updateAratar" object:nil];
                 RunViewController *run = [[RunViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                 [self.sideMenuViewController hideMenuViewController];
             } else {
-                
+                [HUDHelper showError:@"登陆失败" addView:self.view addHUD:hud delay:2];
+                NSLog(@"%@",error);
             }
         }];
         
@@ -288,8 +292,11 @@ typedef enum : NSUInteger {
         user.email = email;
         [user setObject:nickName forKey:@"nickName"];
         
+        MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+        [HUDHelper showHUD:@"注册中" andView:self.view andHUD:hud];
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
+                [hud hide:YES];
                 RunViewController *run = [[RunViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                 [self.sideMenuViewController hideMenuViewController];
@@ -324,9 +331,7 @@ typedef enum : NSUInteger {
             }];
             
         }];
-        
-        
-        
+
     } else if (_state == RegisterAndLoginViewControllerStateSignUp) {
         _state = RegisterAndLoginViewControllerStateSignIn;
         [_changeButton setTitle:@"马上注册" forState:UIControlStateNormal];
@@ -352,10 +357,6 @@ typedef enum : NSUInteger {
 #pragma mark Notification Event
 
 - (void)keyboardShow:(NSNotification *)notification {
-    
-    NSLog(@"%@",notification);
-    NSLog(@"view frame:%@",NSStringFromCGRect(self.view.frame));
-    
     NSDictionary *userInfo = notification.userInfo;
     CGFloat animationDuration = [userInfo[@"UIKeyboardAnimationDurationUserInfoKey"] floatValue];
     CGRect endFrame = [userInfo[@"UIKeyboardFrameEndUserInfoKey"] CGRectValue];
@@ -384,7 +385,6 @@ typedef enum : NSUInteger {
     }];
     
 }
-
 
 - (void)weiboLogin
 {

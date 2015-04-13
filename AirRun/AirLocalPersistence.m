@@ -60,7 +60,7 @@
 
 - (void)findAllObjects:(Class )cla WithCompleteBlocks:(FetchCompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
 {
-    NSArray *objects = [cla MR_findAll];
+    NSArray *objects = [cla MR_findAllSortedBy:@"finishtime" ascending:NO];
     completeBlock(objects);
 }
 
