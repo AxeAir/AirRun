@@ -17,6 +17,6 @@ typedef void(^deleteBlock)(UIImage *image,NSInteger idx);
 @property (copy, nonatomic) deleteBlock deleteBlock;
 @property (assign, nonatomic) NSInteger currentIndex;
 
-- (instancetype)initWithImages:(NSArray *)imgs InView:(UIView *)view;
+- (instancetype)initWithImages:(NSArray *)imgs InView:(UIView *)view Editeable:(BOOL)editable;
 
 @end
