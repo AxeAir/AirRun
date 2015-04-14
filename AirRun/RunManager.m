@@ -170,7 +170,7 @@ static  NSString *const kRunMangerKey = @"RunManager";
         RunningImageEntity *imgEntity = [[RunningImageEntity alloc] init];
         imgEntity.latitude = dic[@"latitude"];
         imgEntity.longitude = dic[@"longitude"];
-        imgEntity.image = dic[@"image"];
+        imgEntity.localpath = dic[@"image"];
         imgEntity.type = dic[@"type"];
         [imagesArray addObject:imgEntity];
     }
@@ -213,7 +213,7 @@ static  NSString *const kRunMangerKey = @"RunManager";
         NSDictionary *entityDic = @{
                                     @"latitude":imgEntity.latitude,
                                     @"longitude":imgEntity.longitude,
-                                    @"image":imgEntity.image,
+                                    @"image":imgEntity.localpath,
                                     @"type":imgEntity.type
                                     };
         [imgDicArray addObject:entityDic];

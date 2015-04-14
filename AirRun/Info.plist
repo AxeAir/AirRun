@@ -21,6 +21,14 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>wx54fac834bc555603</string>
+			</array>
+			<key>CFBundleURLName</key>
+			<string>weixin</string>
+		</dict>
+		<dict>
 			<key>CFBundleURLName</key>
 			<string>tencent1104472903</string>
 			<key>CFBundleURLSchemes</key>

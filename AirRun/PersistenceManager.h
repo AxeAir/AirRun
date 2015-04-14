@@ -11,12 +11,16 @@
 #import "RunningRecord.h"
 #import "RunningRecordEntity.h"
 
+typedef void (^syncComplete)(BOOL successed);
 
 @interface PersistenceManager : NSObject
 
 + (instancetype)shareManager;
 
 - (void)sync;
+
+
+
 
 
 @end

@@ -124,7 +124,7 @@
     
     for (RunningImageEntity *imgEntity in _imgEntities) {
         
-        NSString *imgName = [imgEntity.image lastPathComponent];
+        NSString *imgName = [imgEntity.localpath lastPathComponent];
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgName AtFolder:kPathImageFolder]];
         CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
         

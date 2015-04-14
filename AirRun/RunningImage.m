@@ -13,6 +13,9 @@
 @dynamic longitude;
 @dynamic image;
 @dynamic type;
+@dynamic identifer;
+@dynamic updateat;
+@dynamic localpath;
 
 + (NSString *)parseClassName {
     return @"RunningImage";

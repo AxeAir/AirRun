@@ -12,6 +12,7 @@
 #import "RESideMenu.h"
 #import <AVOSCloud.h>
 #import "AboutUsViewController.h"
+#import "NotificationTC.h"
 
 @interface SettingViewController ()
 @property (nonatomic, strong) AVUser *user;
@@ -147,6 +148,10 @@
     switch (indexPath.section) {
         case 0:
         {
+            if (indexPath.row == 1) {
+                NotificationTC * notification = [[NotificationTC alloc] initWithStyle:UITableViewStyleGrouped];
+                [self.navigationController pushViewController:notification animated:YES];
+            }
             if (indexPath.row ==2) {
                 [[PersistenceManager shareManager] sync];
             }

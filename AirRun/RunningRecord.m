@@ -9,6 +9,7 @@
 #import "RunningRecord.h"
 
 @implementation RunningRecord
+@dynamic identifer;
 @dynamic path;
 @dynamic time;//跑步时间  整型
 @dynamic kcar;//卡路里，float

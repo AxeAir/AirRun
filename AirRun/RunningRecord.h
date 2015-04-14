@@ -12,6 +12,7 @@
 
 @interface RunningRecord : AVObject<AVSubclassing>
 
+@property (nonatomic, strong) NSString  *identifer;
 @property (nonatomic, strong) NSString  *path;
 @property (nonatomic, strong) NSNumber  *time;//跑步时间  整型  单位为s
 @property (nonatomic, strong) NSNumber  *kcar;//卡路里，float类型

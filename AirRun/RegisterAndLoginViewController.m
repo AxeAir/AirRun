@@ -386,21 +386,22 @@ typedef enum : NSUInteger {
 {
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
     
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         //you code here
+        [HUDHelper showHUD:@"" andView:self.view andHUD:hud];
         
         if (error) {
+            [hud hide:YES];
             NSLog(@"微博登陆失败");
         }
         else if(object){
+            [hud hide:YES];
             NSLog(@"微博登陆成功");
             
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
                 NSLog(@"%@",user);
-                
             }];
-            
-            
         }
         NSLog(@"%@",error);
         
@@ -411,6 +412,8 @@ typedef enum : NSUInteger {
 {
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSQQ withAppKey:@"1104472903" andAppSecret:@"9QpaWYoZhHRbMfRm" andRedirectURI:nil];
     
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [HUDHelper showHUD:@"QQ登录中" andView:self.view andHUD:hud];
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         
         if (error) {
@@ -421,27 +424,25 @@ typedef enum : NSUInteger {
             NSLog(@"%@",object);
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformQQ block:^(AVUser *user, NSError *error) {
                 NSLog(@"%@",user);
+                [hud hide:YES];
                 //
-                if ([user objectForKey:@"firstSSO"]) {
-                    
-                    
+                if ([[user objectForKey:@"firstSSO"] isEqualToString:@"ok"]) {
                     
                 }
                 //第一次登陆 ，获取登陆信息
                 else{
                     NSString     *avatar = [object objectForKey:@"avatar"];
                     NSDictionary *rawuser = [object objectForKey:@"raw-user"];
-                    NSString     *city = [rawuser objectForKey:@"city"];
                     NSString     *gender = [rawuser objectForKey:@"gender"];
                     NSString     *nickname = [rawuser objectForKey:@"nickname"];
                     
                     [user setObject:gender forKey:@"gender"];
                     [user setObject:nickname forKey:@"nickName"];
                     [user setObject:@"ok" forKey:@"firstSSO"];
-                    
+                    [user setObject:avatar forKey:@"qqAvatar"];
                 
                     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            
+
                         if (succeeded) {
                                 
                             [[NSNotificationCenter defaultCenter]

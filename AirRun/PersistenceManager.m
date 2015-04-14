@@ -24,15 +24,16 @@
 
 - (void)sync
 {
-    [self dowaload];
+    [self dowaloadRecord];
+    [self dowaloadImage];
     [self uploadRecord];
     [self uploadImage];
 }
 
 
-- (void)dowaload
+- (void)dowaloadRecord
 {
-    AVQuery *query = [AVQuery queryWithClassName:@"RunningRecord"];
+    AVQuery *query = [RunningRecord query];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
         for (RunningRecord *recordOnserver in objects) {
@@ -54,11 +55,36 @@
             }
             
         }
+    }];
+    
+    
+}
+
+
+- (void)dowaloadImage
+{
+    AVQuery *query = [RunningImage query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
-        
-        
-        
-        
+        for (RunningImage *imageOnserver in objects) {
+            RunningImageEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:imageOnserver.objectId];
+            
+            //如果本地不存在,将服务端的record写入数据库
+            if (localEntity == nil) {
+                [[AirLocalPersistence shareLocalPersistenceInstance] createImage:imageOnserver withCompleteBlock:^{
+                    
+                } withErrorBlock:^{
+                    
+                }];
+            }
+            //本地已经存在数据
+            else
+            {
+                
+                
+            }
+            
+        }
     }];
     
     
@@ -88,6 +114,15 @@
             newrecord.averagespeed =record.averagespeed; //平局速度，float
             newrecord.finishtime = record.finishtime;
             newrecord.heart = record.heart;
+            newrecord.identifer = record.identifer;
+            newrecord.city = record.city;
+            
+            NSString *imageName = [NSString stringWithFormat:@"%@.jpg",record.identifer];
+            UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
+            
+            AVFile *mapFile = [AVFile fileWithData:UIImageJPEGRepresentation(image, 1)];
+            newrecord.mapshot = mapFile;
+            
             //newrecord.ACL = acl;
             [newrecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                
@@ -170,9 +205,9 @@
             
 #warning 判断文件是否存在
             
-            UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.image]]];
+            UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]];
             
-            AVFile *avfile = [AVFile fileWithName:imageEntiy.image data:UIImagePNGRepresentation(imagefile)];
+            AVFile *avfile = [AVFile fileWithName:imageEntiy.localpath data:UIImagePNGRepresentation(imagefile)];
             
             newrecord.image = avfile;//距离，整型，单位为米
           

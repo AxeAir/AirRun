@@ -23,6 +23,7 @@
 #import "RunManager.h"
 #import "WeatherManager.h"
 
+
 @interface AppDelegate ()
 
 @property (nonatomic, strong) ZWIntroductionViewController *introductionView;
@@ -39,6 +40,9 @@
     [RunningRecord registerSubclass];
     [RunningImage registerSubclass];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
+    
+    [WXApi registerApp:@"wx54fac834bc555603"];
+    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
@@ -149,7 +153,17 @@
 }
 
 -(BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url{
-    return [AVOSCloudSNS handleOpenURL:url];
+    
+    NSString *string =[url absoluteString];
+    if ([string hasPrefix:@"weixin"]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }else
+        return [AVOSCloudSNS handleOpenURL:url];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [WXApi handleOpenURL:url delegate:self];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
