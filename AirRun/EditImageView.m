@@ -12,6 +12,8 @@
 
 @property (weak, nonatomic) UIView *addView;
 
+@property (assign, nonatomic) BOOL editable;
+
 @property (strong, nonatomic) NSArray *imgs;
 @property (strong, nonatomic) NSMutableArray *imgViews;
 @property (strong, nonatomic) UIScrollView *scrollView;
@@ -30,12 +32,13 @@
     [_scrollView setContentOffset:CGPointMake(currentIndex*_scrollView.frame.size.width, 0)];
 }
 
-- (instancetype)initWithImages:(NSArray *)imgs InView:(UIView *)view {
+- (instancetype)initWithImages:(NSArray *)imgs InView:(UIView *)view Editeable:(BOOL)editable {
     
     self = [super init];
     if (self) {
         _imgs = imgs;
         _addView = view;
+        _editable = editable;
         [self p_commonInit];
     }
     return self;
@@ -58,6 +61,9 @@
     [self addSubview:_scrollView];
     [self p_addImgsToScrollView];
     
+    if (!_editable) {
+        return;
+    }
     _toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, self.frame.size.height-44, self.frame.size.width, 44)];
     _toolBar.barTintColor = [UIColor blackColor];
     [self addSubview:_toolBar];

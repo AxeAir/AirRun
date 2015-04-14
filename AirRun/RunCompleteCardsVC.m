@@ -69,7 +69,7 @@ static const char *INDEX = "index";
         
         UIImage *img = annotation.image;
         NSInteger index = [objc_getAssociatedObject(img, INDEX) integerValue];
-        EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view];
+        EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view Editeable:YES];
         editImageView.currentIndex = index;
         editImageView.deleteBlock = ^(UIImage *image,NSInteger idx){
             RunningImageEntity *imgEntity = this.imgMs[idx];

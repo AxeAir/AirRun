@@ -48,6 +48,7 @@
     [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
     [DocumentHelper creatFolderAtDocument:kPathImageFolder];
     [DocumentHelper creatFolderAtDocument:kHeartImage];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     UINavigationController *navigationController = nil;
     

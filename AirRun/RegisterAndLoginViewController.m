@@ -104,15 +104,19 @@ typedef enum : NSUInteger {
     _changeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_changeButton setTitle:@"已有账号" forState:UIControlStateNormal];
     [_changeButton setTintColor:[UIColor whiteColor]];
-    _changeButton.titleLabel.font = [UIFont systemFontOfSize:11];
+    _changeButton.titleLabel.font = [UIFont systemFontOfSize:15];
     [_changeButton sizeToFit];
-    _changeButton.center = CGPointMake(self.view.bounds.size.width-_changeButton.bounds.size.width/2-5, _changeButton.bounds.size.height/2+20);
+    _changeButton.center = CGPointMake(self.view.bounds.size.width-_changeButton.bounds.size.width/2-10, _changeButton.bounds.size.height/2+30);
     _changeButton.alpha = 0;
     [_changeButton addTarget:self action:@selector(changeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_changeButton];
     
     _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
-    _iconImageView.image = [UIImage imageNamed:@"setting.png"];
+    _iconImageView.image = [UIImage imageNamed:@"logotiny.png"];
+    _iconImageView.clipsToBounds = YES;
+    _iconImageView.layer.cornerRadius = _iconImageView.bounds.size.width/2;
+    _iconImageView.layer.borderWidth = 1;
+    _iconImageView.layer.borderColor = [UIColor blueColor].CGColor;
     _iconImageView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2-_iconImageView.bounds.size.height/2-20);
     [self.view addSubview:_iconImageView];
     
@@ -128,17 +132,17 @@ typedef enum : NSUInteger {
     [_weibo setTitle:@"微博" forState:UIControlStateNormal];
     [_weibo setTintColor:[UIColor whiteColor]];
     _weibo.titleLabel.font = [UIFont systemFontOfSize:12];
-    [_weibo setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+    [_weibo setImage:[UIImage imageNamed:@"weibologin"] forState:UIControlStateNormal];
     [_weibo sizeToFit];
     _weibo.center = CGPointMake(self.view.bounds.size.width/2-_weibo.bounds.size.width/2-20, self.view.bounds.size.height-10-_weibo.bounds.size.height/2);
     _weibo.alpha = 0;
     [_weibo addTarget:self action:@selector(weiboLogin) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_weibo];
     
-    _wechat = [UIButton buttonWithType:UIButtonTypeSystem];
+    _wechat = [UIButton buttonWithType:UIButtonTypeCustom];
     [_wechat setTitle:@"QQ" forState:UIControlStateNormal];
     [_wechat setTintColor:[UIColor whiteColor]];
-    [_wechat setImage:[UIImage imageNamed:@"setting.png"] forState:UIControlStateNormal];
+    [_wechat setImage:[UIImage imageNamed:@"qqlogin"] forState:UIControlStateNormal];
     _wechat.titleLabel.font = [UIFont systemFontOfSize:12];
     [_wechat sizeToFit];
     _wechat.center = CGPointMake(self.view.bounds.size.width/2 + 20 + _wechat.bounds.size.width/2, self.view.bounds.size.height-10-_wechat.bounds.size.height/2);

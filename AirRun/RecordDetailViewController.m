@@ -14,7 +14,11 @@
 #import "RunningImageEntity.h"
 #import "DocumentHelper.h"
 #import "DateHelper.h"
+#import "CustomAnnotation.h"
+#import "EditImageView.h"
+#import <objc/runtime.h>
 
+static const char *INDEX = "index";
 @interface RecordDetailViewController ()
 
 @property (weak, nonatomic) IBOutlet UIView *cardView;
@@ -36,6 +40,7 @@
 
 @property (strong, nonatomic) NSMutableArray *path;
 @property (strong, nonatomic) NSArray *imgEntities;
+@property (strong, nonatomic) NSMutableArray *images;
 
 @end
 
@@ -119,15 +124,27 @@
 - (void)p_setMapView {
     _mapViewDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
     _mapView.delegate = _mapViewDelegate;
+    __weak RecordDetailViewController *this = self;
+    _mapViewDelegate.imgAnnotationBlock = ^(CustomAnnotation *annotation){
+        
+        UIImage *img = annotation.image;
+        NSInteger index = [objc_getAssociatedObject(img, INDEX) integerValue];
+        EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view Editeable:NO];
+        editImageView.currentIndex = index;
+        
+    };
     
     [_mapViewDelegate drawPath:_path IsStart:YES IsTerminate:YES];
     
+    _images = [[NSMutableArray alloc] init];
     for (RunningImageEntity *imgEntity in _imgEntities) {
         
         NSString *imgName = [imgEntity.localpath lastPathComponent];
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgName AtFolder:kPathImageFolder]];
+        NSInteger idx = [_imgEntities indexOfObject:imgEntity];
+        objc_setAssociatedObject(img, INDEX, @(idx), OBJC_ASSOCIATION_ASSIGN);
         CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
-        
+        [_images addObject:img];
         [_mapViewDelegate addimage:img AnontationWithLocation:loc];
     }
 }
@@ -138,6 +155,9 @@
 #pragma mark Button event
 - (void)shareButtonTouch:(UIBarButtonItem *)button {
     
+}
+- (IBAction)foucsButtonTouch:(id)sender {
+    [_mapViewDelegate zoomToFitMapPoints:_path];
 }
 /*
 #pragma mark - Navigation

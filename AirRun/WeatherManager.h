@@ -26,7 +26,7 @@
  *  @param success  成功回调
  *  @param failure  失败回调
  */
-- (void)getPM25WithCityName:(NSString *)cityname success:(void (^)(PM25Model * pm25))success failure:(void (^)(NSError *error))failure;;
+- (void)getPM25WithCityName:(NSString *)cityname success:(void (^)(PM25Model * pm25))success failure:(void (^)(NSError *error))failure;
 
 
 /**

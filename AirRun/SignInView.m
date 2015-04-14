@@ -8,7 +8,7 @@
 
 #import "SignInView.h"
 
-@interface SignInView ()
+@interface SignInView () <UITextFieldDelegate>
 
 @property (strong, nonatomic) UIView *emailView;
 @property (strong, nonatomic) UIImageView *emailImageView;
@@ -39,7 +39,7 @@
     
     if (!_emailImageView) {
         _emailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _emailImageView.image = [UIImage imageNamed:@"setting.png"];
+        _emailImageView.image = [UIImage imageNamed:@"email"];
         [_emailView addSubview:_emailImageView];
     }
     _emailImageView.center = CGPointMake(15+_emailImageView.bounds.size.width/2, _emailView.bounds.size.height/2);
@@ -51,6 +51,7 @@
                                                                                          NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         _emailField.borderStyle = UITextBorderStyleNone;
         [_emailField setKeyboardType:UIKeyboardTypeEmailAddress];
+        _emailField.textColor = [UIColor whiteColor];
         [_emailView addSubview:_emailField];
     }
     _emailField.frame = CGRectMake(CGRectGetMaxX(_emailImageView.frame)+15, _emailView.bounds.size.height/2-15, _emailView.bounds.size.width-CGRectGetMaxX(_emailImageView.frame)-15, 30);
@@ -74,7 +75,7 @@
     
     if (!_passwordImageView) {
         _passwordImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _passwordImageView.image = [UIImage imageNamed:@"setting.png"];
+        _passwordImageView.image = [UIImage imageNamed:@"password"];
         [_passwordView addSubview:_passwordImageView];
     }
     _passwordImageView.center = CGPointMake(15+_passwordImageView.bounds.size.width/2, _passwordView.bounds.size.height/2);
@@ -86,11 +87,23 @@
                                                                                             NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         _passwordField.borderStyle = UITextBorderStyleNone;
         _passwordField.secureTextEntry = YES;
+        _passwordField.textColor = [UIColor whiteColor];
+        _passwordField.delegate = self;
         [_passwordField setKeyboardType:UIKeyboardTypeEmailAddress];
         [_passwordView addSubview:_passwordField];
     }
     _passwordField.frame = CGRectMake(CGRectGetMaxX(_passwordImageView.frame)+15, _passwordView.bounds.size.height/2-15, _passwordView.bounds.size.width-CGRectGetMaxX(_passwordImageView.frame)-15, 30);
     
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField.text length]>=6) {
+        _passwordImageView.image = [UIImage imageNamed:@"passwordlock"];
+    } else {
+        _passwordImageView.image = [UIImage imageNamed:@"password"];
+    }
 }
 
 /*

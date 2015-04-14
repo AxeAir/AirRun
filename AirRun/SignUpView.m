@@ -8,7 +8,7 @@
 
 #import "SignUpView.h"
 
-@interface SignUpView ()
+@interface SignUpView () <UITextFieldDelegate>
 
 @property (strong, nonatomic) UIView *nickNameView;
 @property (strong, nonatomic) UIImageView *nickNameImageView;
@@ -56,6 +56,7 @@
                                                                                attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                                             NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         [_nickNameField setKeyboardType:UIKeyboardTypeEmailAddress];
+        _nickNameField.textColor = [UIColor whiteColor];
         [_nickNameView addSubview:_nickNameField];
     }
     _nickNameField.frame = CGRectMake(CGRectGetMaxX(_nickNameImageView.frame)+15, _nickNameView.bounds.size.height/2-15, _nickNameView.bounds.size.width-CGRectGetMaxX(_nickNameImageView.frame)-15, 30);
@@ -78,7 +79,7 @@
     
     if (!_emailImageView) {
         _emailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _emailImageView.image = [UIImage imageNamed:@"setting.png"];
+        _emailImageView.image = [UIImage imageNamed:@"email"];
         [_emailView addSubview:_emailImageView];
     }
     _emailImageView.center = CGPointMake(15+_emailImageView.bounds.size.width/2, _emailView.bounds.size.height/2);
@@ -89,6 +90,7 @@
                                                                             attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                                          NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         _emailField.borderStyle = UITextBorderStyleNone;
+        _emailField.textColor = [UIColor whiteColor];
         [_emailField setKeyboardType:UIKeyboardTypeEmailAddress];
         [_emailView addSubview:_emailField];
     }
@@ -113,7 +115,7 @@
     
     if (!_passwordImageView) {
         _passwordImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _passwordImageView.image = [UIImage imageNamed:@"setting.png"];
+        _passwordImageView.image = [UIImage imageNamed:@"password"];
         [_passwordView addSubview:_passwordImageView];
     }
     _passwordImageView.center = CGPointMake(15+_passwordImageView.bounds.size.width/2, _passwordView.bounds.size.height/2);
@@ -124,20 +126,31 @@
                                                                                attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                                             NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         _passwordField.borderStyle = UITextBorderStyleNone;
+        _passwordField.textColor = [UIColor whiteColor];
         _passwordField.secureTextEntry = YES;
         [_passwordField setKeyboardType:UIKeyboardTypeEmailAddress];
         [_passwordView addSubview:_passwordField];
+        _passwordField.delegate = self;
     }
     _passwordField.frame = CGRectMake(CGRectGetMaxX(_passwordImageView.frame)+15, _passwordView.bounds.size.height/2-15, _passwordView.bounds.size.width-CGRectGetMaxX(_passwordImageView.frame)-15, 30);
     
 }
 
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if ([textField.text length]>=6) {
+        _passwordImageView.image = [UIImage imageNamed:@"passwordlock"];
+    } else {
+        _passwordImageView.image = [UIImage imageNamed:@"password"];
+    }
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void)drawRect:(CGRect)rect {
-    // Drawing code
+    // Drawing code  
 }
 */
 
