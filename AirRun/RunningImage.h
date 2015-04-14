@@ -17,4 +17,8 @@
 @property (nonatomic, strong) NSString *type;
 @property (nonatomic, strong) AVFile *image;
 
+@property (nonatomic, strong) NSString * localpath;
+
+@property (nonatomic, strong) NSDate   * updateat;
+
 @end

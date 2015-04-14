@@ -390,21 +390,58 @@ typedef enum : NSUInteger {
 {
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
     
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [HUDHelper showHUD:@"微博登陆中" andView:self.view andHUD:hud];
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
-        //you code here
-        
         if (error) {
+            [hud hide:YES];
+            NSLog(@"%@",error);
             NSLog(@"微博登陆失败");
         }
         else if(object){
+            [hud hide:YES];
+            NSLog(@"%@",object);
             NSLog(@"微博登陆成功");
             
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
                 NSLog(@"%@",user);
+                if ([[user objectForKey:@"firstSSO"] isEqualToString:@"ok"]) {
+                    [[NSNotificationCenter defaultCenter]
+                     
+                     postNotificationName:@"updateAratar" object:nil];
+                    RunViewController *run = [[RunViewController alloc] init];
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                    [self.sideMenuViewController hideMenuViewController];
+                }
+                //第一次登陆 ，获取登陆信息
+                else{
+                    NSString     *avatar = [object objectForKey:@"avatar"];
+                    NSDictionary *rawuser = [object objectForKey:@"raw-user"];
+                    NSString     *gender = [rawuser objectForKey:@"gender"];
+                    NSString     *nickname = [object objectForKey:@"username"];
+                    
+                    
+                    [user setObject:nickname forKey:@"nickName"];
+                    [user setObject:@"ok" forKey:@"firstSSO"];
+                    [user setObject:avatar forKey:@"weiboavatar"];
+                    
+                    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                        if (succeeded) {
+                            [[NSNotificationCenter defaultCenter]
+                             
+                             postNotificationName:@"updateAratar" object:nil];
+                            RunViewController *run = [[RunViewController alloc] init];
+                            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                            [self.sideMenuViewController hideMenuViewController];
+                        }
+                        
+                    }];
+                    
+                    
+                }
+                
                 
             }];
-            
-            
         }
         NSLog(@"%@",error);
         
@@ -415,6 +452,8 @@ typedef enum : NSUInteger {
 {
     [AVOSCloudSNS setupPlatform:AVOSCloudSNSQQ withAppKey:@"1104472903" andAppSecret:@"9QpaWYoZhHRbMfRm" andRedirectURI:nil];
     
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithView:self.view];
+    [HUDHelper showHUD:@"QQ登录中" andView:self.view andHUD:hud];
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         
         if (error) {
@@ -424,28 +463,30 @@ typedef enum : NSUInteger {
             NSLog(@"QQ快速登陆成功");
             NSLog(@"%@",object);
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformQQ block:^(AVUser *user, NSError *error) {
-                NSLog(@"%@",user);
+                [hud hide:YES];
                 //
-                if ([user objectForKey:@"firstSSO"]) {
-                    
-                    
-                    
+                if ([[user objectForKey:@"firstSSO"] isEqualToString:@"ok"]) {
+                    [[NSNotificationCenter defaultCenter]
+                     
+                     postNotificationName:@"updateAratar" object:nil];
+                    RunViewController *run = [[RunViewController alloc] init];
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                    [self.sideMenuViewController hideMenuViewController];
                 }
                 //第一次登陆 ，获取登陆信息
                 else{
                     NSString     *avatar = [object objectForKey:@"avatar"];
                     NSDictionary *rawuser = [object objectForKey:@"raw-user"];
-                    NSString     *city = [rawuser objectForKey:@"city"];
                     NSString     *gender = [rawuser objectForKey:@"gender"];
                     NSString     *nickname = [rawuser objectForKey:@"nickname"];
                     
                     [user setObject:gender forKey:@"gender"];
                     [user setObject:nickname forKey:@"nickName"];
                     [user setObject:@"ok" forKey:@"firstSSO"];
-                    
+                    [user setObject:avatar forKey:@"qqavatar"];
                 
                     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                            
+
                         if (succeeded) {
                                 
                             [[NSNotificationCenter defaultCenter]

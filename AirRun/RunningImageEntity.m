@@ -14,7 +14,8 @@
 
 @dynamic latitude;
 @dynamic longitude;
-@dynamic image;
+@dynamic localpath;
+@dynamic remotepath;
 @dynamic isheart;
 @dynamic recordid;
 @dynamic type;

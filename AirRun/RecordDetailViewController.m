@@ -144,7 +144,7 @@ static const char *INDEX = "index";
     _images = [[NSMutableArray alloc] init];
     for (RunningImageEntity *imgEntity in _imgEntities) {
         
-        NSString *imgName = [imgEntity.image lastPathComponent];
+        NSString *imgName = [imgEntity.localpath lastPathComponent];
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgName AtFolder:kPathImageFolder]];
         NSInteger idx = [_imgEntities indexOfObject:imgEntity];
         objc_setAssociatedObject(img, INDEX, @(idx), OBJC_ASSOCIATION_ASSIGN);

@@ -27,9 +27,6 @@
 
 @implementation ProfileViewController
 
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -82,27 +79,16 @@
         case 0:{
             [title setFrame:CGRectMake(18, 0, 100, 80)];
             [title setText:@"头像"];
-            
             cell.detailTextLabel.text =@"";
-            
-            if ([user objectForKey:@"avatar"]) {
-                
-                AVFile *avatarData = [user objectForKey:@"avatar"];
-                NSData *resumeData = [avatarData getData];
-                
-                if (_avatarImageView == nil) {
-                    _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(Main_Screen_Width-90, 10, 60, 60)];
-                    [[_avatarImageView layer] setCornerRadius:30];
-                    [[_avatarImageView layer] setMasksToBounds:YES];
-                    _avatarImageView.image = [UIImage imageWithData:resumeData];
-                    [cell addSubview:_avatarImageView];
-                }
-                else
-                {
-                    _avatarImageView.image = [UIImage imageWithData:resumeData];
-                }
-            
+            if (_avatarImageView == nil) {
+                _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(Main_Screen_Width-90, 10, 60, 60)];
+                [[_avatarImageView layer] setCornerRadius:30];
+                [[_avatarImageView layer] setMasksToBounds:YES];
+                    
+                [cell addSubview:_avatarImageView];
             }
+            [ImageHeler configAvatar:_avatarImageView];
+            
         }
             break;
         case 1:{
@@ -388,7 +374,6 @@
         NSData *imageData = UIImagePNGRepresentation(image);
         AVFile *imageFile = [AVFile fileWithName:@"avatar.png" data:imageData];
         
-        
         __block MBProgressHUD *HUD = [[MBProgressHUD alloc] initWithView:self.view];
         [self.view addSubview:HUD];
         HUD.labelText = @"正在加载";
@@ -449,9 +434,6 @@
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
 }
-
-
-
 
 
 @end

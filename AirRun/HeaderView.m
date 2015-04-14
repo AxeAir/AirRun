@@ -9,6 +9,7 @@
 #import "HeaderView.h"
 #import "UConstants.h"
 #import <AVOSCloud.h>
+#import "ImageHeler.h"
 
 @interface HeaderView()
 
@@ -36,19 +37,7 @@
     [[_AvatarView layer] setMasksToBounds:YES];
     [_AvatarView setUserInteractionEnabled:YES];
     
-    if (currentuser) {
-        AVFile *avatarData = [currentuser objectForKey:@"avatar"];
-        NSData *resumeData = [avatarData getData];
-        
-        if (resumeData !=nil) {
-            [_AvatarView setImage:[UIImage imageWithData:resumeData]];
-        }
-        else
-        {
-            [_AvatarView setImage:[UIImage imageNamed:@"weiboshare"]];
-        }
-        
-    }
+    [ImageHeler configAvatar:_AvatarView];
     
     [self addSubview:_AvatarView];
     
@@ -77,9 +66,12 @@
 - (void)updateAvatar
 {
     AVUser *currentuser = [AVUser currentUser];
-    AVFile *avatarData = [currentuser objectForKey:@"avatar"];
-    NSData *resumeData = [avatarData getData];
-    [_AvatarView setImage:[UIImage imageWithData:resumeData]];
+    [ImageHeler configAvatar:_AvatarView];
     _UsernameLabel.text =[currentuser objectForKey:@"nickName"] ;
 }
+
+
+
+
+
 @end

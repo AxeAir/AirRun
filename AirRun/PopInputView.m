@@ -46,6 +46,17 @@
     return self;
 }
 
+- (instancetype)sharePopView
+{
+    static PopInputView *shareInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        shareInstance = [[PopInputView alloc] init];
+        
+    });
+    return shareInstance;
+}
+
 - (instancetype)initWithSuperView:(UIView *)superview
 {
     self = [self init];

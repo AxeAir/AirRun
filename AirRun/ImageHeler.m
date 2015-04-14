@@ -7,7 +7,9 @@
 //
 
 #import "ImageHeler.h"
-
+#import <AVOSCloud.h>
+#import <UIImageView+AFNetworking.h>
+#import <GPUImage.h>
 
 
 @implementation ImageHeler
@@ -81,4 +83,79 @@
     size_t imageSize = CGImageGetBytesPerRow(image.CGImage) * CGImageGetHeight(image.CGImage);
     return imageSize/10240.0;
 }
+
+
++ (void)configAvatar:(UIImageView *)imageview
+{
+    AVUser *currentuser = [AVUser currentUser];
+    AVFile *avatarData = [currentuser objectForKey:@"avatar"];
+    NSData *resumeData = [avatarData getData];
+    
+    if (resumeData !=nil) {
+        [imageview setImage:[UIImage imageWithData:resumeData]];
+    }
+    else if([currentuser objectForKey:@"weiboavatar"]!=nil)
+    {
+        [imageview setImageWithURL:[NSURL URLWithString:[currentuser objectForKey:@"weiboavatar"]]];
+    }
+    else if([currentuser objectForKey:@"qqavatar"]!=nil){
+        [imageview setImageWithURL:[NSURL URLWithString:[currentuser objectForKey:@"qqavatar"]]];
+    }
+    else{
+        [imageview setImage:[UIImage imageNamed:@"weiboshare"]];
+    }
+    
+}
+
++ (void)configAvatarBackground:(UIImageView *)imageview
+{
+    AVUser *currentuser = [AVUser currentUser];
+    AVFile *avatarData = [currentuser objectForKey:@"avatar"];
+    NSData *resumeData = [avatarData getData];
+    
+    if (resumeData !=nil) {
+        [imageview setImage:[self blurImage:[UIImage imageWithData:resumeData]]];
+    }
+    else if([currentuser objectForKey:@"weiboavatar"]!=nil)
+    {
+        NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:[currentuser objectForKey:@"weiboavatar"]]
+                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                              timeoutInterval:60.0];
+        __block UIImageView *imageviewblock = imageview;
+        [imageview setImageWithURLRequest:theRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [imageviewblock setImage:[self blurImage:image]];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            
+        }];
+    }
+    else if([currentuser objectForKey:@"qqavatar"]!=nil){
+        NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:[currentuser objectForKey:@"qqavatar"]]
+                                                  cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                              timeoutInterval:60.0];
+        __block UIImageView *imageviewblock = imageview;
+        [imageview setImageWithURLRequest:theRequest placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [imageviewblock setImage:[self blurImage:image]];
+        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+            
+        }];
+    }
+    else{
+        [imageview setImage:[UIImage imageNamed:@"weiboshare"]];
+    }
+    
+    
+}
+
++ (UIImage *)blurImage:(UIImage *)image
+{
+    GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:image];
+    GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
+    [stillImageFilter setBlurRadiusInPixels:4];
+    [stillImageSource addTarget:stillImageFilter];
+    [stillImageFilter useNextFrameForImageCapture];
+    [stillImageSource processImage];
+    return [stillImageFilter imageFromCurrentFramebuffer];
+    
+}
+
 @end

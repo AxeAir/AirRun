@@ -492,7 +492,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_addImageEntityToMap:(RunningImageEntity *)imgEntity {
     
     CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
-    NSString *imageName = [imgEntity.image lastPathComponent];
+    NSString *imageName = [imgEntity.localpath lastPathComponent];
     UIImage *image = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kPathImageFolder]];
     [_mapViewDelegate addimage:image AnontationWithLocation:loc];
     
@@ -712,9 +712,9 @@ const char *OUTPOSITION = "OutPosition";
         
         RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
         NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]];
-        imgM.image = [kPathImageFolder stringByAppendingPathComponent:imageName];
+        imgM.localpath = [kPathImageFolder stringByAppendingPathComponent:imageName];
         UIImage *newImage = [ImageHeler compressImage:image LessThanKB:400];
-        [DocumentHelper saveImage:newImage ToFolderName:kPathImageFolder WithImageName:imgM.image.lastPathComponent];
+        [DocumentHelper saveImage:newImage ToFolderName:kPathImageFolder WithImageName:imgM.localpath.lastPathComponent];
         imgM.longitude = @(_currentLocation.coordinate.longitude);
         imgM.latitude = @(_currentLocation.coordinate.latitude);
         imgM.type = @"路线图片";

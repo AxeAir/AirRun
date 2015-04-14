@@ -7,6 +7,7 @@
 //
 
 #import "AirLocalPersistence.h"
+#import "DocumentHelper.h"
 
 @implementation AirLocalPersistence
 
@@ -93,12 +94,17 @@
     entity.pm25 = recordOnServer.pm25;
     entity.averagespeed = recordOnServer.averagespeed;
     entity.finishtime = recordOnServer.finishtime;
- 
+    
+    AVFile *mapshot = recordOnServer.mapshot;
+
+    UIImage *mapShot = [UIImage imageWithData:[mapshot getData]];
+    NSString *mapImageName = [NSString stringWithFormat:@"%@.jpg",recordOnServer.identifer];
+    [DocumentHelper saveImage:mapShot ToFolderName:kMapImageFolder WithImageName:mapImageName];
+    
     entity.heart = recordOnServer.heart;
     entity.objectId = recordOnServer.objectId;
-    //entity.identifer = recordOnServer.identifer;
+    entity.identifer = recordOnServer.identifer;
     entity.city = recordOnServer.city;
-    //entity.heartimages ;
     entity.dirty = @0;
     entity.updateat = recordOnServer.updatedAt;
     
@@ -125,7 +131,8 @@
     entity.updateat = imageObServer.updatedAt;
     
     AVFile *file = imageObServer.image;
-    entity.image = file.url;
+    entity.remotepath = file.url;
+    
     
     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
         if (error) {

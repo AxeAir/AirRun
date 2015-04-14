@@ -97,6 +97,7 @@
     UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
     [_mapImageView setImage:image];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disSelctMap:)];
+    
     [_mapImageView addGestureRecognizer:tap];
     [_mapImageView addSubview:[self createDataView]];
     
@@ -131,7 +132,6 @@
 - (UIView *)createHeaderView
 {
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
-    //[headerView setBackgroundColor:[UIColor redColor]];
     UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
     [kcal setText:[self calculateKcal:[_runningRecord.kcar integerValue]]];
     [kcal setTextColor:RGBCOLOR(255, 164, 74)];
@@ -225,11 +225,18 @@
 {
     UIView *heart = [[UIView alloc] initWithFrame:CGRectMake(30, top, Main_Screen_Width-80, 200)];
     
-    UILabel *runningRecord = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, WIDTH(heart), 20)];
+    UILabel *runningRecord = [[UILabel alloc] initWithFrame:CGRectMake((WIDTH(heart)-100)/2, 5, 100, 20)];
     runningRecord.text = @"跑步记录";
     [runningRecord setFont:[UIFont boldSystemFontOfSize:14]];
     [runningRecord setTextColor:RGBCOLOR(170, 170, 170)];
     [runningRecord setTextAlignment:NSTextAlignmentCenter];
+    [runningRecord setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
+    
+    
+    UIView *splitLine = [[UIView alloc] initWithFrame:CGRectMake(20, HEIGHT(runningRecord)/2+5, WIDTH(heart)-40, 1)];
+    [splitLine setBackgroundColor:RGBCOLOR(227, 227, 277)];
+    
+    [heart addSubview:splitLine];
     [heart addSubview:runningRecord];
     
     if(_runningRecord.heart !=nil && ![_runningRecord.heart isEqualToString:@""])
@@ -256,7 +263,19 @@
         NSInteger imagewidth = (Main_Screen_Width-80-40)/5;
         NSInteger index= 0;
         for (RunningImageEntity *o in date) {
-            UIImageView *view = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:[DocumentHelper DocumentPath:o.image]]];
+            
+            UIImageView *view = [[UIImageView alloc] init];
+            if (![o.localpath isEqualToString:@""] && o.localpath !=nil) {
+                [view setImage:[UIImage imageWithContentsOfFile:[DocumentHelper DocumentPath:o.localpath]]];
+            }
+            else
+            {
+                AVFile *file = [AVFile fileWithURL:o.remotepath];
+                [file getThumbnail:YES width:100 height:100 withBlock:^(UIImage *image, NSError *error) {
+                    [view setImage:image];
+                }];
+                
+            }
             
             [view setFrame:CGRectMake((imagewidth+10)*index, 12.5, imagewidth, imagewidth)];
             [[view layer] setCornerRadius:5];

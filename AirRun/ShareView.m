@@ -49,6 +49,7 @@
     [self addShareButtons];
     
     _cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, MaxY(_shareView), Main_Screen_Width, 50)];
+    [_cancelButton setBackgroundColor:[UIColor whiteColor]];
     [_cancelButton setTitle:@"取消" forState:UIControlStateNormal];
     [_cancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [_cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
@@ -144,6 +145,10 @@
     UIButton *button = (UIButton *)sender;
     if (button.tag == 1000) {
         [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeiBo];
+    }
+    else if (1001)
+    {
+        [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeChat];
     }
 }
 

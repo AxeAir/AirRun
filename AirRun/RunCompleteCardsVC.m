@@ -24,6 +24,7 @@
 #import "RESideMenu.h"
 #import "ShareView.h"
 #import <AVOSCloudSNS.h>
+#import "WXApi.h"
 
 static const char *INDEX = "index";
 
@@ -78,7 +79,7 @@ static const char *INDEX = "index";
             RunningImageEntity *imgEntity = this.imgMs[idx];
             [imgEntity deleteEntity];
             [this.imgMs removeObject:imgEntity];
-            NSString *fileName = [imgEntity.image lastPathComponent];
+            NSString *fileName = [imgEntity.localpath lastPathComponent];
             [DocumentHelper removeFile:fileName InFoler:kPathImageFolder];
         };
         editImageView.closeBlock = ^(EditImageView *editImageView) {
@@ -128,7 +129,7 @@ static const char *INDEX = "index";
     
     for (RunningImageEntity *imgM in _imgMs) {
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[imgM.latitude doubleValue] longitude:[imgM.longitude doubleValue]];
-        UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgM.image.lastPathComponent AtFolder:kPathImageFolder]];
+        UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgM.localpath.lastPathComponent AtFolder:kPathImageFolder]];
         
         [_images addObject:img];
         NSInteger index =[_imgMs indexOfObject:imgM];
@@ -272,10 +273,9 @@ static const char *INDEX = "index";
             image.type = @"heart";
             image.dirty = @1;
             image.recordid = _parameters.identifer;
-            image.image = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
+            image.localpath = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
             [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
             index++;
-            
         }
     }
     [_parameters savewithCompleteBlock:^{
@@ -411,6 +411,21 @@ static const char *INDEX = "index";
             
         }];
     }
+    
+    if(buttonType == ShareViewButtonTypeWeChat)
+    {
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.scene = WXSceneTimeline;
+        req.text = @"这里写你要分享的内容。";
+        req.bText = YES;
+        req.message = WXMediaMessage.message;
+        req.message.title = @"ddd";
+
+        [WXApi sendReq:req];
+       
+    }
+    
+    
 }
 
 @end

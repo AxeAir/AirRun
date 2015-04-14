@@ -36,4 +36,9 @@
 
 
 + (UIImage *)compressImage:(UIImage *)image LessThanKB:(NSInteger)kb;
+
+
++ (void)configAvatar:(UIImageView *)imageview;
+
++ (void)configAvatarBackground:(UIImageView *)imageview;
 @end

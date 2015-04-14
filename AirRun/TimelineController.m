@@ -13,6 +13,7 @@
 #import "RESideMenu.h"
 #import <GPUImage.h>
 #import "RecordDetailViewController.h"
+#import "ImageHeler.h"
 
 @interface TimelineController () <TimelineTableViewCellDelegate>
 
@@ -110,52 +111,14 @@
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
     
     _headerbackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
-    
-    AVFile *avatarData = [[AVUser currentUser] objectForKey:@"avatar"];
-    NSData *resumeData = [avatarData getData];
-    
-    if (resumeData!=nil) {
-        UIImage *inputImage = [UIImage imageWithData:resumeData];
-        GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:inputImage];
-        GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
-        
-        [stillImageFilter setBlurRadiusInPixels:4];
-        [stillImageSource addTarget:stillImageFilter];
-        [stillImageFilter useNextFrameForImageCapture];
-        [stillImageSource processImage];
-        
-        UIImage *currentFilteredVideoFrame = [stillImageFilter imageFromCurrentFramebuffer];
-        
-        [_headerbackgroundImageView setImage:currentFilteredVideoFrame];
-    }
-    else
-    {
-        UIImage *inputImage = [UIImage imageNamed:@"defaultTimeline"];
-        GPUImagePicture *stillImageSource = [[GPUImagePicture alloc] initWithImage:inputImage];
-        GPUImageiOSBlurFilter *stillImageFilter = [[GPUImageiOSBlurFilter alloc] init];
-        
-        [stillImageFilter setBlurRadiusInPixels:4];
-        [stillImageSource addTarget:stillImageFilter];
-        [stillImageFilter useNextFrameForImageCapture];
-        [stillImageSource processImage];
-        
-        UIImage *currentFilteredVideoFrame = [stillImageFilter imageFromCurrentFramebuffer];
-        
-        [_headerbackgroundImageView setImage:currentFilteredVideoFrame];
-        
-    }
+  
+    [ImageHeler configAvatarBackground:_headerbackgroundImageView];
     
     [header addSubview:_headerbackgroundImageView];
     
     _headerImageView = [[UIImageView alloc] initWithFrame:CGRectMake((Main_Screen_Width-80)/2, 50, 80, 80)];
     
-    if (resumeData!=nil) {
-        [_headerImageView setImage:[UIImage imageWithData:resumeData]];
-    }
-    else
-    {
-        [_headerImageView setImage:[UIImage imageNamed:@"weiboshare"]];
-    }
+    [ImageHeler configAvatar:_headerImageView];
     [[_headerImageView layer] setMasksToBounds:YES];
     [[_headerImageView layer] setCornerRadius:40.0];
     [[_headerImageView layer] setShadowOffset:CGSizeMake(10, 10)];
@@ -224,7 +187,6 @@
     }
     
 }
-
 
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];

@@ -13,6 +13,7 @@ typedef void (^ImportPhotosBlock)();
 
 @interface PopInputView : UIView
 
+- (instancetype)sharePopView;
 
 - (instancetype)initWithSuperView:(UIView *)superview;
 
