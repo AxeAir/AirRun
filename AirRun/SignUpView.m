@@ -44,7 +44,7 @@
     
     if (!_nickNameImageView) {
         _nickNameImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-        _nickNameImageView.image = [UIImage imageNamed:@"setting.png"];
+        _nickNameImageView.image = [UIImage imageNamed:@"nickname"];
         [_nickNameView addSubview:_nickNameImageView];
     }
     _nickNameImageView.center = CGPointMake(15+_nickNameImageView.bounds.size.width/2, _nickNameView.bounds.size.height/2);
@@ -138,12 +138,15 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([textField.text length]>=6) {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([textField.text length]>=5) {
         _passwordImageView.image = [UIImage imageNamed:@"passwordlock"];
     } else {
         _passwordImageView.image = [UIImage imageNamed:@"password"];
     }
+    
+    return YES;
 }
 
 /*

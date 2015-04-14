@@ -252,13 +252,24 @@
                                 <action selector="foucsButtonTouch:" destination="-1" eventType="touchUpInside" id="zgW-ob-egN"/>
                             </connections>
                         </button>
+                        <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXM-7g-Qs6">
+                            <rect key="frame" x="362" y="427" width="32" height="32"/>
+                            <state key="normal" image="setting">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="mapPhotoButton:" destination="-1" eventType="touchUpInside" id="Cp5-jh-nb6"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="yfX-Q8-n5u" firstAttribute="leading" secondItem="00h-pJ-b5p" secondAttribute="leading" id="2IP-1e-z5C"/>
                         <constraint firstItem="Hv1-7e-n5r" firstAttribute="top" secondItem="fLF-U6-OJr" secondAttribute="bottom" constant="15" id="2fW-Wh-YiP"/>
                         <constraint firstItem="buD-1b-OBr" firstAttribute="top" secondItem="ZxY-a2-Iv7" secondAttribute="bottom" id="32T-Ns-KFG"/>
+                        <constraint firstItem="fLF-U6-OJr" firstAttribute="top" secondItem="cXM-7g-Qs6" secondAttribute="bottom" constant="8" id="4Ce-IR-D65"/>
                         <constraint firstItem="Hv1-7e-n5r" firstAttribute="top" secondItem="buD-1b-OBr" secondAttribute="bottom" id="5uF-zS-zed"/>
+                        <constraint firstAttribute="trailing" secondItem="cXM-7g-Qs6" secondAttribute="trailing" constant="10" id="8fd-8z-2Rc"/>
                         <constraint firstItem="ZxY-a2-Iv7" firstAttribute="leading" secondItem="00h-pJ-b5p" secondAttribute="leading" id="9k3-ip-hmb"/>
                         <constraint firstItem="buD-1b-OBr" firstAttribute="leading" secondItem="00h-pJ-b5p" secondAttribute="leading" id="ARI-M3-Tij"/>
                         <constraint firstItem="7Pv-qq-G6f" firstAttribute="leading" secondItem="00h-pJ-b5p" secondAttribute="leading" constant="15" id="Cml-3O-FA9"/>
@@ -292,6 +303,7 @@
         <image name="camera" width="32" height="32"/>
         <image name="distancetiny" width="32" height="32"/>
         <image name="focus" width="32" height="32"/>
+        <image name="setting" width="32" height="32"/>
         <image name="speedtiny" width="32" height="32"/>
         <image name="timetiny" width="32" height="32"/>
     </resources>

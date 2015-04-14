@@ -33,6 +33,7 @@ static const char *INDEX = "index";
 @property (nonatomic, strong) UIScrollView *scrollview;
 @property (nonatomic, strong) CompleteInputCard *inputcard;
 @property (nonatomic, strong) CompleteDisplayCard *display;
+@property (nonatomic, strong) MapViewDelegate *mapDelegate;
 
 @property (nonatomic, strong) PopInputView *popview;//弹出层
 @property (nonatomic, getter=isUp) BOOL up;//记录当前状态
@@ -62,10 +63,13 @@ static const char *INDEX = "index";
     
     _display = [[CompleteDisplayCard alloc] initWithFrame:CGRectMake(10, MaxY(_inputcard)+10, Main_Screen_Width-20, 800) withEntity:_parameters];
     _display.delegate = self;
-    [_display.mapDelegate drawPath:_path IsStart:YES IsTerminate:YES];
+    _mapDelegate = [[MapViewDelegate alloc] initWithMapView:_display.mapView];
+    _display.mapView.delegate = _mapDelegate;
+    [_mapDelegate addMaksGrayWorldOverlay];
     [self p_loadMapViewAnnotation];
+    [_mapDelegate drawPath:_path IsStart:YES IsTerminate:YES];
     __weak RunCompleteCardsVC *this = self;
-    _display.mapDelegate.imgAnnotationBlock = ^(CustomAnnotation *annotation){
+    _mapDelegate.imgAnnotationBlock = ^(CustomAnnotation *annotation){
         
         UIImage *img = annotation.image;
         NSInteger index = [objc_getAssociatedObject(img, INDEX) integerValue];
@@ -121,7 +125,7 @@ static const char *INDEX = "index";
 
 - (void)p_loadMapViewAnnotation {
     _images = [[NSMutableArray alloc] init];
-    [_display.mapDelegate clearAnnotation];
+    [_mapDelegate deletePhotoAnnotation];
     
     for (RunningImageEntity *imgM in _imgMs) {
         CLLocation *location = [[CLLocation alloc] initWithLatitude:[imgM.latitude doubleValue] longitude:[imgM.longitude doubleValue]];
@@ -131,7 +135,7 @@ static const char *INDEX = "index";
         NSInteger index =[_imgMs indexOfObject:imgM];
         objc_setAssociatedObject(img, INDEX, @(index), OBJC_ASSOCIATION_ASSIGN);//将下标关联
         
-        [_display.mapDelegate addimage:img AnontationWithLocation:location];
+        [_mapDelegate addimage:img AnontationWithLocation:location];
     }
     
 }
@@ -245,9 +249,9 @@ static const char *INDEX = "index";
 - (void)completeDisplayCard:(CompleteDisplayCard *)card didSelectButton:(CompleteDisplayCardButtonType)type
 {
     
-    [card.mapDelegate zoomToFitMapPoints:_path];
+    [_mapDelegate zoomToFitMapPoints:_path];
 //    UIImage *mapShot = [ImageHeler compressImage:[_display.mapDelegate captureMapView] LessThanKB:200];
-    UIImage *mapShot = [_display.mapDelegate captureMapView];
+    UIImage *mapShot = [_mapDelegate captureMapView];
     NSString *mapImageName = [NSString stringWithFormat:@"%@.jpg",_parameters.identifer];
     self.parameters.mapshot = [kMapImageFolder stringByAppendingPathComponent:mapImageName];
     [DocumentHelper saveImage:mapShot ToFolderName:kMapImageFolder WithImageName:mapImageName];
@@ -296,7 +300,23 @@ static const char *INDEX = "index";
 }
 
 - (void)completeDisplayCard:(CompleteDisplayCard *)card FoucsButtouTouch:(UIButton *)button {
-    [card.mapDelegate zoomToFitMapPoints:_path];
+    [_mapDelegate zoomToFitMapPoints:_path];
+}
+
+- (void)completeDisplayCardaddImageAnnotation:(CompleteDisplayCard *)card {
+    [self p_loadMapViewAnnotation];
+}
+
+- (void)completeDisplayCard:(CompleteDisplayCard *)card imageButtouTouch:(UIButton *)button {
+    
+    if (button.tag == 10001) {
+        [_mapDelegate deletePhotoAnnotation];
+        button.tag = 10002;
+    } else {
+        [self p_loadMapViewAnnotation];
+        button.tag = 10001;
+    }
+    
 }
 
 

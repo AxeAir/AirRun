@@ -18,14 +18,22 @@ typedef void(^imgAnnotationTapBlock)(CustomAnnotation *annotation);
 
 - (instancetype)initWithMapView:(MKMapView *)mapView;
 
-- (void)clearAnnotation;
+
 - (void)addMaksGrayWorldOverlay;
+
 - (void)drawLineWithPoints:(NSArray *)points;
-- (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray;
-- (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location;
 - (void)drawPath:(NSArray *)path IsStart:(BOOL)start IsTerminate:(BOOL)terminate;
+- (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray;
+
+//- (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location;
+- (void)deletePhotoAnnotation;
+
+- (void)clearAnnotation;
 - (void)addimage:(UIImage *)image AnontationWithLocation:(CLLocation *)location;
+- (void)addPointAnnotationImage:(UIImage *)image AtLocation:(CLLocation *)location;
+
 - (void)zoomToFitMapPoints:(NSArray *)path;
+
 - (UIImage *)captureMapView;
 
 @end

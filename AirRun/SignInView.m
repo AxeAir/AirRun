@@ -98,12 +98,15 @@
 
 #pragma mark - UITextFieldDelegate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    if ([textField.text length]>=6) {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if ([textField.text length]>=5) {
         _passwordImageView.image = [UIImage imageNamed:@"passwordlock"];
     } else {
         _passwordImageView.image = [UIImage imageNamed:@"password"];
     }
+    
+    return YES;
 }
 
 /*

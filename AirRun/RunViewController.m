@@ -127,6 +127,7 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -136,14 +137,15 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setNavgation {
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"bg11111-2"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1111111"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
     UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
     self.navigationItem.leftBarButtonItem = menuButton;
     
-    _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
+    _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"camera.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
     
     _gpsButton = [[UIBarButtonItem alloc] initWithTitle:@"GPS" style:UIBarButtonItemStylePlain target:self action:nil];
     [_gpsButton setTintColor:[UIColor redColor]];
@@ -203,7 +205,6 @@ const char *OUTPOSITION = "OutPosition";
     
     _readyView = [[ReadyView alloc] initWithText:@"适合户外跑步"];
     _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, 25);
-    _readyView.backgroundColor = [UIColor greenColor];
     [self.view addSubview:_readyView];
     
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -376,8 +377,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)photoButtonTouch:(UIBarButtonItem *)sender {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
@@ -453,7 +454,7 @@ const char *OUTPOSITION = "OutPosition";
             [self p_audioPlay:@"start"];
             _runManager.runState = RunStateRunning;
             [_runTimer setFireDate:[NSDate distantPast]];
-            [_mapViewDelegate addImage:[UIImage imageNamed:@"startFlag"] AtLocation:_runManager.points.firstObject];
+            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"start"] AtLocation:_runManager.points.firstObject];
             
             [UIView animateWithDuration:0.3 animations:^{
                 _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
@@ -671,6 +672,7 @@ const char *OUTPOSITION = "OutPosition";
         _runManager.kcal += [self p_getCalorie:2.0/3600.0 speed:_runManager.currentSpeed*3.6];
         
         [self p_setGPS:newLocation.horizontalAccuracy];
+        
         //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
         if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
             _runCardLastKmDistance = _runcardView.distance;
@@ -679,8 +681,7 @@ const char *OUTPOSITION = "OutPosition";
             NSString *audioName = [NSString stringWithFormat:@"%ldkilo",(long)km];
             [self p_audioPlay:audioName];
             
-            [_mapViewDelegate addImage:[UIImage imageNamed:@"setting.png"] AtLocation:newLocation];
-            
+            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"1km"] AtLocation:newLocation];
         }
     }
     
