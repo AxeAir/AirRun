@@ -164,7 +164,11 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
-    return [WXApi handleOpenURL:url delegate:self];
+    NSString *string =[url absoluteString];
+    if ([string hasPrefix:@"weixin"]) {
+        return [WXApi handleOpenURL:url delegate:self];
+    }else
+        return [AVOSCloudSNS handleOpenURL:url];
 }
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {

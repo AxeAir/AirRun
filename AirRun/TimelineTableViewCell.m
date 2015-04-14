@@ -234,7 +234,7 @@
     
     
     UIView *splitLine = [[UIView alloc] initWithFrame:CGRectMake(20, HEIGHT(runningRecord)/2+5, WIDTH(heart)-40, 1)];
-    [splitLine setBackgroundColor:[UIColor grayColor]];
+    [splitLine setBackgroundColor:RGBCOLOR(227, 227, 277)];
     
     [heart addSubview:splitLine];
     [heart addSubview:runningRecord];
