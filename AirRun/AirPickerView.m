@@ -43,7 +43,16 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self commonDate];
+        [self commonDate:date];
+    }
+    return self;
+}
+
+- (instancetype)initWithTimePickerFrames:(CGRect)frame date:(NSDate *)date
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self commonTime:date];
     }
     return self;
 }
@@ -74,16 +83,43 @@
 }
 
 
-- (void)commonDate
+
+
+- (void)commonDate:(NSDate *)date
 {
     [self setBackgroundColor:[UIColor grayColor]];
     _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30,WIDTH(self) , HEIGHT(self)-40)];
     _datePicker.datePickerMode = UIDatePickerModeDate;
+    _datePicker.date = date;
+    [self addSubview:_datePicker];
+    
+    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
+    [headerView setBackgroundColor:CardBgColor];
+    [self addSubview:headerView];
+    
+    UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH(self)-50, 0, 50, 40)];
+    [okButton setTitle:@"确定" forState:UIControlStateNormal];
+    [okButton addTarget:self action:@selector(dateOkbutton:) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:okButton];
+    
+    UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 50, 40)];
+    [cancelButton setTitle:@"取消" forState:UIControlStateNormal];
+    [cancelButton addTarget:self action:@selector(dismiss) forControlEvents:UIControlEventTouchUpInside];
+    [headerView addSubview:cancelButton];
+}
+
+
+- (void)commonTime:(NSDate *)date
+{
+    [self setBackgroundColor:[UIColor grayColor]];
+    _datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 30,WIDTH(self) , HEIGHT(self)-40)];
+    _datePicker.datePickerMode = UIDatePickerModeTime;
+    _datePicker.date = date;
     
     [self addSubview:_datePicker];
     
     UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 40)];
-    [headerView setBackgroundColor:[UIColor redColor]];
+    [headerView setBackgroundColor:CardBgColor];
     [self addSubview:headerView];
     
     UIButton *okButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH(self)-50, 0, 50, 40)];
@@ -126,6 +162,27 @@
 - (void)showDateInView:(UIView *)superview completeBlock:(selectDateComplete)block
 {
     
+    _selectDateCompleteBlock = block;
+    _maskView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    [_maskView setBackgroundColor:[UIColor clearColor]];
+    [superview addSubview:_maskView];
+    
+    [superview addSubview:self];
+    CGRect finalFrame = self.frame;
+    CGRect startFrame = finalFrame;
+    startFrame.origin.y = Main_Screen_Height;
+    
+    [self setFrame:startFrame];
+    [UIView animateWithDuration:0.5 animations:^{
+        self.frame = finalFrame;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+}
+
+- (void)showTimeInView:(UIView *)superview completeBlock:(selectDateComplete)block
+{
     _selectDateCompleteBlock = block;
     _maskView = [[UIView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [_maskView setBackgroundColor:[UIColor clearColor]];

@@ -13,4 +13,8 @@
 + (NSString *)getFormatterDate:(NSString *)formatter;
 
 + (NSString *)converSecondsToTimeString:(NSInteger)seconds;
+
++ (NSDate *)convertHourandMinuterToDate:(NSString *)time;
+
++ (NSString *)convertDateToHourandMinuter:(NSDate *)date;
 @end

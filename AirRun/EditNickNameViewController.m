@@ -50,7 +50,7 @@
 {
     
     
-    _nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 150, Main_Screen_Width, 50)];
+    _nameTextField = [[UITextField alloc] initWithFrame:CGRectMake(0, 50, Main_Screen_Width, 50)];
     
     
     CGRect frame = [_nameTextField frame];  //为你定义的UITextField

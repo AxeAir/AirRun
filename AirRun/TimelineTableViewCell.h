@@ -14,11 +14,7 @@ typedef void (^didMapSelect)(RunningRecordEntity *record);
 
 @interface TimelineTableViewCell : UITableViewCell
 
-- (instancetype)initWithRunningRecord:(RunningRecordEntity *)aRunningrecord;
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style
-              reuseIdentifier:(NSString *)reuseIdentifier
-                runningRecord:(RunningRecordEntity *)aRunningrecord;
+- (void)config:(RunningRecordEntity *)runningRecord;
 
 @property (nonatomic, weak) id<TimelineTableViewCellDelegate> delegate;
 

@@ -129,6 +129,7 @@
     entity.type = imageObServer.type;
     entity.dirty = @0;
     entity.updateat = imageObServer.updatedAt;
+    entity.objectId = imageObServer.objectId;
     
     AVFile *file = imageObServer.image;
     entity.remotepath = file.url;

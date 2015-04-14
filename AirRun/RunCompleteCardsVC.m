@@ -217,7 +217,7 @@ static const char *INDEX = "index";
         QBImagePickerController *imagePickerController = [[QBImagePickerController alloc] init];
         imagePickerController.delegate = self;
         imagePickerController.allowsMultipleSelection = YES;
-        imagePickerController.maximumNumberOfSelection = 6;
+        imagePickerController.maximumNumberOfSelection = 5;
         imagePickerController.filterType = QBImagePickerControllerFilterTypePhotos;
         UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:imagePickerController];
         [self presentViewController:navigationController animated:YES completion:^{
@@ -337,9 +337,7 @@ static const char *INDEX = "index";
     UIImagePickerController *pickerImage = [[UIImagePickerController alloc] init];
     if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
         pickerImage.sourceType = UIImagePickerControllerSourceTypeCamera;
-        //pickerImage.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         pickerImage.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:pickerImage.sourceType];
-        
     }
     pickerImage.delegate = self;
     pickerImage.allowsEditing = NO;
@@ -357,6 +355,7 @@ static const char *INDEX = "index";
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"])
     {
+#warning 压缩图片
         //先把图片转成NSData
         UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
 //        NSData *data;

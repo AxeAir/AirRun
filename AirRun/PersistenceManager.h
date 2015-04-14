@@ -19,8 +19,7 @@ typedef void (^syncComplete)(BOOL successed);
 
 - (void)sync;
 
-
-
+- (void)syncWithComplete:(syncComplete)completeBlock;
 
 
 @end

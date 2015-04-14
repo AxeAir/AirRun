@@ -18,9 +18,14 @@ typedef void (^selectDateComplete)(NSDate *date);
 
 - (instancetype)initWithDatePickerFrames:(CGRect)frame date:(NSDate *)date;
 
+- (instancetype)initWithTimePickerFrames:(CGRect)frame date:(NSDate *)date;
+
 - (void)showInView:(UIView *)superview completeBlock:(selectComplete)block;
 
 - (void)showDateInView:(UIView *)superview completeBlock:(selectDateComplete)block;
+
+- (void)showTimeInView:(UIView *)superview completeBlock:(selectDateComplete)block;
+
 - (void)dismiss;
 
 

@@ -53,7 +53,20 @@
     }
     
     return [NSString stringWithFormat:@"%@%@%@",hourStr,minuteStr,secondsStr];
-    
+}
+
++ (NSDate *)convertHourandMinuterToDate:(NSString *)time
+{
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"HH:mm"];
+    return [dateformatter dateFromString:time];
+}
+
++ (NSString *)convertDateToHourandMinuter:(NSDate *)date
+{
+    NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
+    [dateformatter setDateFormat:@"HH:mm"];
+    return [dateformatter stringFromDate:date];
 }
 
 @end

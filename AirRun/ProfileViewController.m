@@ -22,6 +22,7 @@
 @property (nonatomic, strong) UIPickerView            *genderPickerView;
 @property (nonatomic, strong) UIImagePickerController *imagePickerController;
 @property (nonatomic, strong) UIImageView             *avatarImageView;
+@property (nonatomic, strong) AVUser *user;
 
 @end
 
@@ -39,11 +40,17 @@
     
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
      [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    _user = [AVUser currentUser];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_user saveEventually];
 }
 
 #pragma mark - Table view data source
@@ -180,7 +187,6 @@
                 cell.detailTextLabel.text = name;
                 AVUser *user = [AVUser currentUser];
                 [user setObject:name forKey:@"nickName"];
-                [user save];
                 
             } name:cell.detailTextLabel.text];
             [self.navigationController pushViewController:editVC animated:YES];
@@ -194,7 +200,6 @@
                 [cell.detailTextLabel setText:string];
                 AVUser *user = [AVUser currentUser];
                 [user setObject:string forKey:@"gender"];
-                [user save];
             }];
             
         }
@@ -236,15 +241,14 @@
             
         case 5:{
             
-            AirPickerView *air = [[AirPickerView alloc] initWithDatePickerFrames:CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300) date:nil];
-//            [air showInView:self.view completeBlock:^(NSInteger index, NSString *string) {
-//                
-//                
-//                [cell.detailTextLabel setText:[NSString stringWithFormat:@"%@ kg",string]];
-//                AVUser *user = [AVUser currentUser];
-//                [user setObject:string forKey:@"weight"];
-//                //[user save];
-//            }];
+            
+            NSString *bir = [_user objectForKey:@"birthday"];
+            
+            if (bir ==nil || [bir isEqualToString:@""]) {
+                    bir = @"1992-11-16";
+            }
+            
+            AirPickerView *air = [[AirPickerView alloc] initWithDatePickerFrames:CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300) date:[NSDate BirthDateWithBirthDateString:bir]];
             
             [air showDateInView:self.view completeBlock:^(NSDate *date) {
                 

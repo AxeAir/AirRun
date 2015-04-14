@@ -9,6 +9,12 @@
 #import "PersistenceManager.h"
 #import "DocumentHelper.h"
 
+@interface PersistenceManager()
+
+@property (nonatomic, copy) syncComplete block;
+
+@end
+
 @implementation PersistenceManager
 
 + (instancetype)shareManager
@@ -31,9 +37,26 @@
 }
 
 
+- (void)syncWithComplete:(syncComplete)completeBlock
+{
+    _block = completeBlock;
+    
+    dispatch_queue_t dispatchQueue = dispatch_queue_create("ted.queue.next", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t dispatchGroup = dispatch_group_create();
+    dispatch_group_async(dispatchGroup, dispatchQueue, ^(){
+        [self sync];
+    });
+    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
+        NSLog(@"end");
+        _block(YES);
+    });
+}
+
+
 - (void)dowaloadRecord
 {
     AVQuery *query = [RunningRecord query];
+    [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
         for (RunningRecord *recordOnserver in objects) {
@@ -64,6 +87,7 @@
 - (void)dowaloadImage
 {
     AVQuery *query = [RunningImage query];
+    [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         
         for (RunningImage *imageOnserver in objects) {
@@ -123,7 +147,7 @@
             AVFile *mapFile = [AVFile fileWithData:UIImageJPEGRepresentation(image, 1)];
             newrecord.mapshot = mapFile;
             
-            //newrecord.ACL = acl;
+            [newrecord setObject:[[AVUser currentUser] objectId] forKey:@"userID"];
             [newrecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                
                 if (succeeded) {
@@ -210,8 +234,7 @@
             AVFile *avfile = [AVFile fileWithName:imageEntiy.localpath data:UIImagePNGRepresentation(imagefile)];
             
             newrecord.image = avfile;//距离，整型，单位为米
-          
-            //newrecord.ACL = acl;
+            [newrecord setObject:[[AVUser currentUser] objectId] forKey:@"userID"];
             [newrecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 
                 if (succeeded) {

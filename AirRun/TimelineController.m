@@ -31,7 +31,7 @@
     [super viewDidLoad];
     
     self.tableView.tableHeaderView = [self tableHeaderView];
-    [self.tableView setBackgroundColor:RGBCOLOR(240, 240, 240)];
+    [self.tableView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     
@@ -82,9 +82,17 @@
     RunningRecordEntity *record = [_dataSource objectAtIndex:indexPath.row];
     
     if (cell == nil) {
-        cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer runningRecord:record];
+        cell = [[TimelineTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
     }
+    else{
+        for (UIView *v in cell.contentView.subviews) {
+            [v removeFromSuperview];
+        }
+    }
+    [cell config:record];
+    
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    [cell setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     cell.delegate = self;
     return cell;
 }
@@ -94,6 +102,11 @@
 {
     TimelineTableViewCell *cell = (TimelineTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -146,7 +159,6 @@
     vc.record = record;
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.navigationController pushViewController:vc animated:YES];
-    
 }
 
 #pragma mark KVC
