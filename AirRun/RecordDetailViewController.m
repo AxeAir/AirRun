@@ -50,7 +50,6 @@ static const char *INDEX = "index";
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
     [self p_getData];
     [self p_setNavgation];
     [self p_layout];
@@ -133,9 +132,15 @@ static const char *INDEX = "index";
         editImageView.currentIndex = index;
         
     };
-    
+    [_mapViewDelegate addMaksGrayWorldOverlay];
     [_mapViewDelegate drawPath:_path IsStart:YES IsTerminate:YES];
+    [self p_addPhotoAnnotation];
     
+}
+
+#pragma mark - Action
+
+- (void)p_addPhotoAnnotation {
     _images = [[NSMutableArray alloc] init];
     for (RunningImageEntity *imgEntity in _imgEntities) {
         
@@ -149,8 +154,6 @@ static const char *INDEX = "index";
     }
 }
 
-
-
 #pragma mark - Event
 #pragma mark Button event
 - (void)shareButtonTouch:(UIBarButtonItem *)button {
@@ -158,6 +161,17 @@ static const char *INDEX = "index";
 }
 - (IBAction)foucsButtonTouch:(id)sender {
     [_mapViewDelegate zoomToFitMapPoints:_path];
+}
+- (IBAction)mapPhotoButton:(id)sender {
+    UIButton *button = (UIButton *)sender;
+    if (button.tag == 10001) {
+        [_mapViewDelegate deletePhotoAnnotation];
+        button.tag = 10002;
+    } else {
+        [self p_addPhotoAnnotation];
+        button.tag = 10001;
+    }
+    
 }
 /*
 #pragma mark - Navigation

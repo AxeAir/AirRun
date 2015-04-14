@@ -33,9 +33,7 @@
 - (void)p_commonInit {
     
     _bgImage = [[UIImageView alloc] initWithFrame:self.bounds];
-    _bgImage.image = [UIImage imageNamed:@"bg1.png"];
-//    [_bgImage setContentScaleFactor:[[UIScreen mainScreen] scale]];
-//    _bgImage.contentMode =  UIViewContentModeScaleAspectFill;
+    _bgImage.image = [UIImage imageNamed:@"bg2.png"];
     _bgImage.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_bgImage];
     

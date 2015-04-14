@@ -13,6 +13,9 @@
 #import "ImageOverLayRenderer.h"
 #import "CustomAnnotation.h"
 #import "CustomAnnotationView.h"
+#import <objc/runtime.h>
+
+static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
 
 @interface MapViewDelegate () <CustomeAnnotationDelegate>
 
@@ -64,13 +67,11 @@
     CLLocation *startPoint = path.firstObject;
     CLLocation *endPoint = path.lastObject;
     if (start) {
-        [self addImage:[UIImage imageNamed:@"startFlag"] AtLocation:startPoint];
+        [self addPointAnnotationImage:[UIImage imageNamed:@"start"] AtLocation:startPoint];
     }
-    
     if (terminate) {
-        [self addImage:[UIImage imageNamed:@"terminalFlag"] AtLocation:endPoint];
+        [self addPointAnnotationImage:[UIImage imageNamed:@"terminalFlag"] AtLocation:endPoint];
     }
-    
     
     //画公里节点
     NSInteger kmIndex = 0;
@@ -79,15 +80,15 @@
         if ([location distanceFromLocation:lastKMLocation] >= 1000) {
             kmIndex++;
             lastKMLocation = location;
-            [self addImage:[UIImage imageNamed:@"setting.png"] AtLocation:location];
+            [self addPointAnnotationImage:[UIImage imageNamed:@"1km"] AtLocation:location];
         }
     }
+    
 }
 
 - (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location {
     
     _imageOverlay = [[ImageOverLay alloc] initWithCoordinate:location.coordinate WithImage:image];
-//    [self.mapView addOverlay:imageOverlay];
     [self.mapView insertOverlay:_imageOverlay aboveOverlay:self.gradientLineOverlay];
     
 }
@@ -175,6 +176,14 @@
     
 }
 
+- (void)addPointAnnotationImage:(UIImage *)image AtLocation:(CLLocation *)location {
+    
+    MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+    pointAnnotation.coordinate = location.coordinate;
+    objc_setAssociatedObject(pointAnnotation, POINTANNOTATIONIMAGE, image, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    [_mapView addAnnotation:pointAnnotation];
+}
+
 -(void)zoomToFitMapPoints:(NSArray *)path {
     if(path.count == 0)
         return;
@@ -216,6 +225,15 @@
     return mapImage;
 }
 
+- (void)deletePhotoAnnotation {
+    for (id annotation in _mapView.annotations) {
+        if ([annotation isKindOfClass:[CustomAnnotation class]]) {
+            [_mapView removeAnnotation:annotation];
+        }
+    }
+    
+}
+
 #pragma mark - MapDelegate
 
 - (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id<MKOverlay>)overlay {
@@ -252,12 +270,13 @@
     
     if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
         
-        MKPinAnnotationView *pinAnnotation = (MKPinAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"pinAnnotation"];
-        if (!pinAnnotation) {
-            pinAnnotation = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinAnnotation"];
-            pinAnnotation.animatesDrop = YES;
+        MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:@"pinAnnotation"];
+        if (!annotationView) {
+            annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pinAnnotation"];
         }
-        return pinAnnotation;
+        UIImage *image = objc_getAssociatedObject(annotation, POINTANNOTATIONIMAGE);
+        annotationView.image = image;
+        return annotationView;
         
     }
     

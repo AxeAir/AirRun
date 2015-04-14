@@ -16,9 +16,9 @@
 
 
 @property (nonatomic, strong) UIView *titleView;
-@property (nonatomic, strong) MKMapView *mapView;
-@property (strong, nonatomic) UIButton *fouseButton;
 
+@property (strong, nonatomic) UIButton *fouseButton;
+@property (strong, nonatomic) UIButton *mapImageButton;
 
 @property (nonatomic, strong) UIPageControl* pagecontrol;
 
@@ -98,7 +98,7 @@
     _mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, MaxY(_titleView), WIDTH(self), 300)];
     [self addSubview:_mapView];
     
-    _fouseButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _fouseButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_fouseButton setImage:[UIImage imageNamed:@"focus"] forState:UIControlStateNormal];
     [_fouseButton setTintColor:[UIColor blackColor]];
     [_fouseButton sizeToFit];
@@ -106,9 +106,15 @@
     [_fouseButton addTarget:self action:@selector(fouchsButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_fouseButton];
     
-    _mapDelegate = [[MapViewDelegate alloc] initWithMapView:_mapView];
-    _mapView.delegate = _mapDelegate;
-    [_mapDelegate addMaksGrayWorldOverlay];
+    _mapImageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [_mapImageButton setImage:[UIImage imageNamed:@"setting"] forState:UIControlStateNormal];
+    [_mapImageButton sizeToFit];
+    _mapImageButton.center = CGPointMake(WIDTH(self)-5-WIDTH(_mapImageButton)/2, Y(_fouseButton)-5-HEIGHT(_mapImageButton)/2);
+    [_mapImageButton addTarget:self action:@selector(mapImageButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
+    _mapImageButton.tag = 10001;//表示现在显示图片
+    [self addSubview:_mapImageButton];
+    
+    
     
     _pagecontrol = [[UIPageControl alloc] initWithFrame:CGRectMake(0, MaxY(_mapView), WIDTH(self), 20)];
     _pagecontrol.numberOfPages =3;
@@ -303,6 +309,14 @@
 }
 
 #pragma mark Action
+
+- (void)mapImageButtonTouch:(UIButton *)sender {
+    
+    if ([_delegate respondsToSelector:@selector(completeDisplayCard:imageButtouTouch:)]) {
+        [_delegate completeDisplayCard:self imageButtouTouch:sender];
+    }
+    
+}
 
 - (void)shareButtonTouch:(id)sender
 {
