@@ -50,6 +50,6 @@
 - (void)getWeatherWithIPAddress:(NSString *)ip success:(void (^)(NSDictionary * responseObject))success failure:(void (^)(NSError *error))failure;
 
 
-- (void )getRecommandInfoWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude city:(NSString *)cityName result:(void (^)(NSString *recommand))block;
+- (void )getRecommandInfoWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude result:(void (^)(NSString *recommand))block;
 
 @end

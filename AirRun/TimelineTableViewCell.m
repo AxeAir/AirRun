@@ -116,13 +116,13 @@
     [kcal sizeToFit];
     [_headerView addSubview:kcal];
     
-    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(MaxX(kcal), 10, 30, 30)];
-    [icon setImage:[UIImage imageNamed:[selectDic objectForKey:@"image"]]];
+    //UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(MaxX(kcal), 10, 30, 30)];
+    //[icon setImage:[UIImage imageNamed:[selectDic objectForKey:@"image"]]];
     UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(MaxX(_mainView) -50, 10, 30, 30)];
     [shareButton setImage:[UIImage imageNamed:@"dot"] forState:UIControlStateNormal];
     [shareButton addTarget:self action:@selector(TouchMore:) forControlEvents:UIControlEventTouchUpInside];
     [_headerView addSubview:shareButton];
-    [_headerView addSubview:icon];
+    //[_headerView addSubview:icon];
 }
 
 - (void)createMapImage

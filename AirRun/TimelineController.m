@@ -35,12 +35,18 @@
     [self.tableView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
-    
     _navButton = [[UIButton alloc] init];
     [_navButton setImage:[UIImage imageNamed:@"navicon"] forState:UIControlStateNormal];
     [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
     [_navButton addTarget:self action:@selector(menuButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_navButton];
+    
+    [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
+        _dataSource = [[NSMutableArray alloc] initWithArray:arraydata];
+        [self.tableView reloadData];
+    } withErrorBlock:^{
+        
+    }];
 
 }
 
@@ -58,15 +64,7 @@
     
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
-        _dataSource = [[NSMutableArray alloc] initWithArray:arraydata];
-        //[self.tableView reloadData];
-    } withErrorBlock:^{
-        
-    }];
-}
+
 
 #pragma mark - Table view data source
 

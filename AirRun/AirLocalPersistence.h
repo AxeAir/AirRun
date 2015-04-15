@@ -57,6 +57,9 @@
       withErrorBlock:(ErrorBlock)errorBlock;
 
 
+- (void)PersistenceRecord;
+
+
 - (void)createImage:(RunningImage *)imageObServer
   withCompleteBlock:(CompleteBlock)completeBlock
      withErrorBlock:(ErrorBlock)errorBlock;
