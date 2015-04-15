@@ -70,7 +70,7 @@
 		E52D16EE1ACE6C1D00DBFA04 /* QBAssetsCollectionOverlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16DD1ACE6C1D00DBFA04 /* QBAssetsCollectionOverlayView.m */; };
 		E52D16EF1ACE6C1D00DBFA04 /* QBAssetsCollectionVideoIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16DF1ACE6C1D00DBFA04 /* QBAssetsCollectionVideoIndicatorView.m */; };
 		E52D16F01ACE6C1D00DBFA04 /* QBAssetsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E11ACE6C1D00DBFA04 /* QBAssetsCollectionViewCell.m */; };
-		E52D16F11ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E31ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m */; };
+		E52D16F11ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E31ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		E52D16F21ACE6C1D00DBFA04 /* QBAssetsCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E51ACE6C1D00DBFA04 /* QBAssetsCollectionViewLayout.m */; };
 		E52D16F31ACE6C1D00DBFA04 /* QBImagePickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E71ACE6C1D00DBFA04 /* QBImagePickerController.m */; };
 		E52D16F41ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16E91ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m */; };
@@ -992,7 +992,7 @@
 		E50BE03A1AC8854A0030863D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = AEXAIR;
 				TargetAttributes = {
 					E50BE0411AC8854A0030863D = {
@@ -1358,7 +1358,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

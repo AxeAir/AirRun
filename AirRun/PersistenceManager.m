@@ -31,17 +31,12 @@
 - (void)sync
 {
     [self dowaloadRecordwithBlock:^(BOOL successed) {
-        
-    }];
-    [self dowaloadImagewithBlock:^(BOOL successed) {
-        
-    }];
-    
-    [self uploadRecordwithBlock:^(BOOL successed) {
-        
-    }];
-    [self uploadImagewithBlock:^(BOOL successed) {
-        
+        [self dowaloadImagewithBlock:^(BOOL successed) {
+            [self uploadRecordwithBlock:^(BOOL successed) {
+                [self uploadImagewithBlock:^(BOOL successed) {
+                }];
+            }];
+        }];
     }];
 }
 
@@ -67,7 +62,7 @@
     [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
-        
+        //下载失败
         if (error) {
             result(NO);
         }
