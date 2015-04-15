@@ -33,8 +33,8 @@
 #import "RunManager.h"
 
 const static NSInteger RuncardViewHieght = 150;
-const static NSInteger RunSimpleCardViewHeight = 70;
-const static NSInteger PauseViewHeight = 50;
+const static NSInteger RunSimpleCardViewHeight = 90;
+const static NSInteger PauseViewHeight = 60;
 
 const char *INPOSITION = "InPosition";
 const char *OUTPOSITION = "OutPosition";
@@ -112,6 +112,9 @@ const char *OUTPOSITION = "OutPosition";
     [_runManager addObserver:self forKeyPath:@"speed" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [_runManager addObserver:self forKeyPath:@"kcal" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:
+     UIApplicationWillEnterForegroundNotification object:nil];
+    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -137,7 +140,7 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setNavgation {
     
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1111111"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg127"] forBarPosition:UIBarPositionTopAttached barMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     self.navigationController.navigationBar.barStyle = UIStatusBarStyleLightContent;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
@@ -204,7 +207,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_setLayout {
     
     _readyView = [[ReadyView alloc] initWithText:@"适合户外跑步"];
-    _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, 25);
+    _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, 45);
     [self.view addSubview:_readyView];
     
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -262,7 +265,7 @@ const char *OUTPOSITION = "OutPosition";
     [_completeButton addTarget:self action:@selector(completeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     
     _runcardView = [[RunCardView alloc] initWithFrame:CGRectMake(0, -RuncardViewHieght, self.view.bounds.size.width, RuncardViewHieght)];
-    _runcardView.clipsToBounds = YES;
+//    _runcardView.clipsToBounds = YES;
     __weak RunViewController *this = self;
     _runcardView.retractTouchBlock = ^(UIButton * button) {
         
@@ -318,6 +321,12 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 #pragma mark - Event
+#pragma mark Notification Event
+
+- (void)appWillEnterBackground:(NSNotificationCenter *)notification {
+    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
+}
+
 #pragma mark Gesture Event
 
 - (void)mapMaskTapGesture:(UITapGestureRecognizer *)tapGesture {
@@ -413,7 +422,7 @@ const char *OUTPOSITION = "OutPosition";
             _pauseView.frame = CGRectMake(0, -PauseViewHeight, self.view.bounds.size.width, PauseViewHeight);
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                _runcardView.frame = CGRectMake(0, 64, self.view.bounds.size.width, RuncardViewHieght);
+                _runcardView.frame = CGRectMake(0, 63, self.view.bounds.size.width, RuncardViewHieght);
             }];
         }];
         

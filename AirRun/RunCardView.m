@@ -12,7 +12,7 @@ const static NSInteger kTopCenterViewMargin = 30;
 
 @interface RunCardView ()
 
-@property (strong, nonatomic) UIView *bgView;
+@property (strong, nonatomic) UIImageView *bgView;
 
 ///
 @property (strong, nonatomic) UIView *topView;
@@ -80,11 +80,11 @@ const static NSInteger kTopCenterViewMargin = 30;
 - (void)layoutSubviews {
     
     if (!_bgView) {
-        _bgView = [[UIView alloc] initWithFrame:self.bounds];
-        _bgView.backgroundColor = [UIColor colorWithRed:85/255.0 green:150/255.0 blue:204/255.0 alpha:0.9];
+        _bgView = [[UIImageView alloc] initWithFrame:self.bounds];
         [self addSubview:_bgView];
     }
     _bgView.frame = self.bounds;
+    _bgView.image = [UIImage imageNamed:@"runcardviewbg"];
     
     [self p_setTopViewLayout];
     
