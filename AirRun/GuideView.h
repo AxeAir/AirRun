@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @class GuideView;
+
 typedef void(^closeBlock)(GuideView *guideView);
+
 @interface GuideView : UIView
 
-@property (strong, nonatomic) NSString *title;
-@property (strong, nonatomic) UIImageView *topImage;
-@property (strong, nonatomic) NSString *content;
+@property (strong, nonatomic) UIImage *image;
 
 @property (copy, nonatomic) closeBlock closeBlock;
 

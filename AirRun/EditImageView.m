@@ -68,7 +68,7 @@
     _toolBar.barTintColor = [UIColor blackColor];
     [self addSubview:_toolBar];
     
-    _closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonTouch:)];
+    _closeButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"cancelwhite"] style:UIBarButtonItemStylePlain target:self action:@selector(closeButtonTouch:)];
     _closeButton.tintColor = [UIColor whiteColor];
     UIBarButtonItem *flexButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     _deleteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"delete"] style:UIBarButtonItemStylePlain target:self action:@selector(deleteButtonTouch:)];

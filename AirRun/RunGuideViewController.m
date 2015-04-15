@@ -33,39 +33,64 @@
 
 - (void)p_layout {
     
+    self.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
+    
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 20+30, self.view.bounds.size.width, self.view.bounds.size.height-(20+30)-60)];
     _scrollView.contentSize = CGSizeMake(4*_scrollView.frame.size.width, 0);
     _scrollView.pagingEnabled = YES;
     _scrollView.delegate = self;
+    _scrollView.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:_scrollView];
     
     GuideView *guideView1 = [[GuideView alloc] initWithFrame:CGRectMake(15, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
-    guideView1.title = @"ccc";
-    guideView1.content = @"你好";
+    guideView1.image = [UIImage imageNamed:@"warmup"];
     guideView1.closeBlock = ^(GuideView *view){
-        
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [UIView transitionWithView:self.view.superview
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            [self.view removeFromSuperview];
+                        } completion:nil];
     };
+    [self p_addShowdowToView:guideView1];
     [_scrollView addSubview:guideView1];
     
     GuideView *guideView2 = [[GuideView alloc] initWithFrame:CGRectMake(15+_scrollView.frame.size.width*1, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
     guideView2.closeBlock = ^(GuideView *view){
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [UIView transitionWithView:self.view.superview
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            [self.view removeFromSuperview];
+                        } completion:nil];
     };
+    [self p_addShowdowToView:guideView2];
     [_scrollView addSubview:guideView2];
     
     GuideView *guideView3 = [[GuideView alloc] initWithFrame:CGRectMake(15+_scrollView.frame.size.width*2, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
     guideView3.closeBlock = ^(GuideView *view){
         
-        [self dismissViewControllerAnimated:YES completion:nil];;
+        [UIView transitionWithView:self.view.superview
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            [self.view removeFromSuperview];
+                        } completion:nil];
     };
+    [self p_addShowdowToView:guideView3];
     [_scrollView addSubview:guideView3];
     
     GuideView *guideView4 = [[GuideView alloc] initWithFrame:CGRectMake(15+_scrollView.frame.size.width*3, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
     guideView4.closeBlock = ^(GuideView *view){
         
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [UIView transitionWithView:self.view.superview
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            [self.view removeFromSuperview];
+                        } completion:nil];
     };
+    [self p_addShowdowToView:guideView4];
     [_scrollView addSubview:guideView4];
     
     _pageControl = [[UIPageControl alloc] init];
@@ -75,6 +100,14 @@
     _pageControl.center = CGPointMake(self.view.bounds.size.width/2, CGRectGetMaxY(_scrollView.frame)+30+_pageControl.frame.size.height/2);
     [self.view addSubview:_pageControl];
     
+}
+
+- (void)p_addShowdowToView:(UIView *)view {
+    view.layer.masksToBounds = NO;
+    view.layer.cornerRadius = 8; // if you like rounded corners
+    view.layer.shadowOffset = CGSizeMake(5, 5);
+    view.layer.shadowRadius = 5;
+    view.layer.shadowOpacity = 0.7;
 }
 
 #pragma mark - UIScrollViewDelegate 

@@ -31,6 +31,7 @@
 #import "DateHelper.h"
 #import "WeatherManager.h"
 #import "RunManager.h"
+#import "SpeakHelper.h"
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
@@ -66,6 +67,8 @@ const char *OUTPOSITION = "OutPosition";
 
 @property (strong, nonatomic) NSTimer *runTimer;
 @property (strong, nonatomic) RunManager *runManager;
+@property (strong, nonatomic) UIAlertView *recoverAlert;
+@property (strong, nonatomic) UIAlertView *runConfirmAlert;
 
 @end
 
@@ -92,8 +95,8 @@ const char *OUTPOSITION = "OutPosition";
     
     if ([_runManager checkUserDefaultIsAvailable]) {
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"提示" message:@"轻跑检测到您有未完成的跑步是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
-        [alertView show];
+        _recoverAlert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"轻跑检测到您有未完成的跑步是否继续" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"继续", nil];
+        [_recoverAlert show];
         
     }
     
@@ -343,9 +346,19 @@ const char *OUTPOSITION = "OutPosition";
 #pragma mark Button Event
 
 - (void)guideButtonTouch:(UIBarButtonItem *)sender {
+    //加入view 甚至是navigationbar
+    UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
+    [currentWindow addSubview:_countView];
+    
     RunGuideViewController *vc = [[RunGuideViewController alloc] init];
-    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    [self presentViewController:vc animated:YES completion:nil];
+    vc.view.alpha = 0;
+    [currentWindow addSubview:vc.view];
+    
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         vc.view.alpha = 1;
+                     }];
+    
 }
 
 - (void)pauseButtonTouch:(UIButton *)sender {
@@ -436,15 +449,25 @@ const char *OUTPOSITION = "OutPosition";
     
     _runManager.runState = RunStateStop;
     
-    RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_runManager.distance <= 25) {
+        
+        _runConfirmAlert = [[UIAlertView alloc] initWithTitle:@"提示"
+                                                      message:@"您跑步的距离过段是否重新开始"
+                                                     delegate:self
+                                            cancelButtonTitle:@"继续"
+                                            otherButtonTitles:@"重新开始", nil];
+        [_runConfirmAlert show];
+        
+    } else {
+        RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
     
     //动画
-    
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
         
@@ -452,7 +475,10 @@ const char *OUTPOSITION = "OutPosition";
         _countView = [[CountView alloc] initWithCount:5];
         _countView.frame = self.view.bounds;
         _countView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
-        [self.view addSubview:_countView];
+        //加入view 甚至是navigationbar
+        UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
+        [currentWindow addSubview:_countView];
+        
         [_countView startCountWithCompleteBlock:^(CountView *countView) {
             [_countView removeFromSuperview];
             
@@ -460,7 +486,8 @@ const char *OUTPOSITION = "OutPosition";
             self.navigationItem.rightBarButtonItem = _photoButton;
             self.navigationItem.leftBarButtonItem = _gpsButton;
             [_mapMaskView removeFromSuperview];
-            [self p_audioPlay:@"start"];
+//            [self p_audioPlay:@"start"];
+//            [[SpeakHelper shareInstance] speakString:@"跑步开始"];
             _runManager.runState = RunStateRunning;
             [_runTimer setFireDate:[NSDate distantPast]];
             [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"start"] AtLocation:_runManager.points.firstObject];
@@ -687,8 +714,8 @@ const char *OUTPOSITION = "OutPosition";
             _runCardLastKmDistance = _runcardView.distance;
             
             NSInteger km = _runcardView.distance/1000;
-            NSString *audioName = [NSString stringWithFormat:@"%ldkilo",(long)km];
-            [self p_audioPlay:audioName];
+            NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
+            [[SpeakHelper shareInstance] speakString:words];
             
             [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"1km"] AtLocation:newLocation];
         }
@@ -766,20 +793,43 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
-    if (buttonIndex == 1) {
-        [self startButtonTouch:_startButton];
+    if (alertView == _recoverAlert) {
         
-        [_runManager readFromUserDefault];
-        _runManager.points = _runManager.pointsBackUp;
-        _currentLocation = _runManager.points.lastObject;
         
-        [_mapViewDelegate drawPath:_runManager.points IsStart:NO IsTerminate:NO];
-        for (RunningImageEntity *imgEntity in _runManager.imageArray) {
-            [self p_addImageEntityToMap:imgEntity];
+        
+        if (buttonIndex == 1) {
+            [self startButtonTouch:_startButton];
+            
+            [_runManager readFromUserDefault];
+            _runManager.points = _runManager.pointsBackUp;
+            _currentLocation = _runManager.points.lastObject;
+            
+            [_mapViewDelegate drawPath:_runManager.points IsStart:NO IsTerminate:NO];
+            for (RunningImageEntity *imgEntity in _runManager.imageArray) {
+                [self p_addImageEntityToMap:imgEntity];
+            }
+        } else if (buttonIndex == 0) {
+            [_runManager removeUserDefault];
         }
-    } else if (buttonIndex == 0) {
         
     }
+    
+    if (alertView == _runConfirmAlert) {
+        
+        if (buttonIndex == 1) { //重新开始
+            
+            [_runManager reback];
+            
+            [self p_setNavgation];
+            [self p_setMapView];
+            [self p_setLocationManager];
+            [self p_setLayout];
+            [self p_setStartRunLayout];
+            
+        }
+    }
+    
+    
     
 }
 

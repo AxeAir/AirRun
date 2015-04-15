@@ -36,8 +36,7 @@ static const char *INDEX = "index";
 @property (weak, nonatomic) IBOutlet UILabel *durationLable;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLable;
 
-@property (weak, nonatomic) IBOutlet UILabel *kcalLable;
-@property (weak, nonatomic) IBOutlet UILabel *numAppleLabel;
+
 
 @property (strong, nonatomic) NSMutableArray *path;
 @property (strong, nonatomic) NSArray *imgEntities;
@@ -120,7 +119,7 @@ static const char *INDEX = "index";
     _avgSpeedLable.text = [NSString stringWithFormat:@"%.1f",[_record.averagespeed floatValue]];
     _durationLable.text = [DateHelper converSecondsToTimeString:[_record.time integerValue]];
     _distanceLable.text = [NSString stringWithFormat:@"%.2f",[_record.distance floatValue]/1000];
-    _kcalLable.text = [NSString stringWithFormat:@"%.0f",[_record.kcar floatValue]/1000];
+    [_kcalAppleLabel sizeToFit];
 }
 
 - (void)p_setMapView {
