@@ -35,6 +35,7 @@ static const char *INDEX = "index";
 @property (weak, nonatomic) IBOutlet UILabel *avgSpeedLable;
 @property (weak, nonatomic) IBOutlet UILabel *durationLable;
 @property (weak, nonatomic) IBOutlet UILabel *distanceLable;
+@property (weak, nonatomic) IBOutlet UILabel *kcalAppleLabel;
 
 
 
@@ -119,6 +120,8 @@ static const char *INDEX = "index";
     _avgSpeedLable.text = [NSString stringWithFormat:@"%.1f",[_record.averagespeed floatValue]];
     _durationLable.text = [DateHelper converSecondsToTimeString:[_record.time integerValue]];
     _distanceLable.text = [NSString stringWithFormat:@"%.2f",[_record.distance floatValue]/1000];
+    
+    _kcalAppleLabel.text = _kaclText;
     [_kcalAppleLabel sizeToFit];
 }
 
@@ -174,9 +177,22 @@ static const char *INDEX = "index";
     
 }
 
+- (UIImage *)p_captureView {
+    CGRect rect =_cardView.bounds;
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [_cardView.layer renderInContext:context];
+    UIImage *cardImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return cardImage;
+}
+
 #pragma mark - Event
 #pragma mark Button event
 - (void)shareButtonTouch:(UIBarButtonItem *)button {
+    
+    UIImage *image = [self p_captureView];
+    
     
 }
 - (IBAction)foucsButtonTouch:(id)sender {

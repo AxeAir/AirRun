@@ -32,10 +32,12 @@
 #import "WeatherManager.h"
 #import "RunManager.h"
 #import "SpeakHelper.h"
+#import "UIButton+TapAnimation.h"
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
 const static NSInteger PauseViewHeight = 60;
+const static CGFloat ReadyViewHeight = 45;
 
 const char *INPOSITION = "InPosition";
 const char *OUTPOSITION = "OutPosition";
@@ -209,10 +211,6 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setLayout {
     
-    _readyView = [[ReadyView alloc] initWithText:@"适合户外跑步"];
-    _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, 45);
-    [self.view addSubview:_readyView];
-    
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_startButton setTitle:@"开始" forState:UIControlStateNormal];
     [_startButton setTintColor:[UIColor whiteColor]];
@@ -222,6 +220,7 @@ const char *OUTPOSITION = "OutPosition";
     _startButton.backgroundColor = [UIColor colorWithRed:97/255.0 green:187/255.0 blue:162/255.0 alpha:1];
     _startButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-10-_startButton.bounds.size.height/2);
     [self p_addShowdowWithView:_startButton];
+    _startButton.tag = 20001;
     [_startButton addTarget:self action:@selector(startButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_startButton];
     
@@ -235,6 +234,7 @@ const char *OUTPOSITION = "OutPosition";
     _pauseButton.frame = CGRectMake(0, 0, 100, 100);
     _pauseButton.layer.cornerRadius = _startButton.bounds.size.width/2;
     _pauseButton.clipsToBounds = YES;
+    _pauseButton.tag = 20002;
     _pauseButton.backgroundColor = [UIColor colorWithRed:255/255.0 green:143/255.0 blue:94/255.0 alpha:1];
 //    _pauseButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-50-_startButton.bounds.size.height/2);
     [self p_addShowdowWithView:_pauseButton];
@@ -253,6 +253,7 @@ const char *OUTPOSITION = "OutPosition";
     _contiuneButton.layer.cornerRadius = _contiuneButton.bounds.size.width/2;
     _contiuneButton.center = CGPointMake(-_contiuneButton.bounds.size.width/2-10, _startButton.center.y);
     [self.view addSubview:_contiuneButton];
+    _contiuneButton.tag = 20003;
     //    _contiuneButton.center = CGPointMake(self.view.bounds.size.width/4, _startButton.center.y);
     [self p_addShowdowWithView:_contiuneButton];
     [_contiuneButton addTarget:self action:@selector(contiuneButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
@@ -459,7 +460,7 @@ const char *OUTPOSITION = "OutPosition";
                                             cancelButtonTitle:@"继续"
                                             otherButtonTitles:@"重新开始", nil];
         [_runConfirmAlert show];
-        
+//
     } else {
         RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
         [self.navigationController pushViewController:vc animated:YES];
@@ -497,7 +498,7 @@ const char *OUTPOSITION = "OutPosition";
             [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"start"] AtLocation:_runManager.points.firstObject];
             
             [UIView animateWithDuration:0.3 animations:^{
-                _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
+                _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
             } completion:^(BOOL finished) {
                 [_readyView removeFromSuperview];
                 [UIView animateWithDuration:0.3 animations:^{
@@ -541,7 +542,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_addShowdowWithView:(UIView *)view {
     
     view.layer.masksToBounds = NO;
-    view.layer.shadowColor = [UIColor darkGrayColor].CGColor;
+    view.layer.shadowColor = [UIColor blackColor].CGColor;
     view.layer.shadowOpacity = 0.8;
     view.layer.shadowRadius = 4;
     view.layer.shadowOffset = CGSizeMake(1, 1.0);
@@ -571,24 +572,34 @@ const char *OUTPOSITION = "OutPosition";
                        NSLog(@"placemark.subLocality =%@",placemark.subLocality);
                        NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
                        
-                       _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subAdministrativeArea];
+                       _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subLocality];
                        
                        NSString *cityName;
-                       if ([placemark.subThoroughfare isEqualToString:@""] || !placemark.subThoroughfare) {//为直辖市
+                       if ([placemark.subAdministrativeArea isEqualToString:@""] || !placemark.subAdministrativeArea) {//为直辖市
                            cityName = placemark.administrativeArea;
                        } else {
-                           cityName = placemark.subLocality;
+                           cityName = placemark.subAdministrativeArea;
                        }
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
                        [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
                            _runManager.pm = pm25.AQI[0];
                            [self p_setTitle];
+                           
                        } failure:^(NSError *error) {}];
                        
                        [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
+                           
+                           _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
+                           _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
+                           [self.view addSubview:_readyView];
+                           
+                           [UIView animateWithDuration:0.5 animations:^{
+                               _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, ReadyViewHeight);
+                           }];
+                           
                        } failure:^(NSError *error) {}];
                        
                    }];
@@ -694,6 +705,7 @@ const char *OUTPOSITION = "OutPosition";
                                                    timestamp:newLocation.timestamp];
     }
     
+    //得到温度和PM
     if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
         [self p_getLocationNameWithLocation:newLocation];
     }
@@ -749,7 +761,7 @@ const char *OUTPOSITION = "OutPosition";
         [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
         
         RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
-        NSString *imageName = [NSString stringWithFormat:@"%@.jpg",[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]];
+        NSString *imageName = [NSString stringWithFormat:@"%@.png",[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]];
         imgM.localpath = [kPathImageFolder stringByAppendingPathComponent:imageName];
         UIImage *newImage = [ImageHeler compressImage:image LessThanKB:400];
         [DocumentHelper saveImage:newImage ToFolderName:kPathImageFolder WithImageName:imgM.localpath.lastPathComponent];
