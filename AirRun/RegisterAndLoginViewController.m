@@ -48,7 +48,7 @@ typedef enum : NSUInteger {
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     _state = RegisterAndLoginViewControllerStateSignUp;
     [self p_layout];
     
@@ -56,7 +56,6 @@ typedef enum : NSUInteger {
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -112,11 +111,11 @@ typedef enum : NSUInteger {
     [self.view addSubview:_changeButton];
     
     _iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 70, 70)];
-    _iconImageView.image = [UIImage imageNamed:@"logotiny.png"];
+    _iconImageView.image = [UIImage imageNamed:@"only_logo"];
     _iconImageView.clipsToBounds = YES;
     _iconImageView.layer.cornerRadius = _iconImageView.bounds.size.width/2;
-    _iconImageView.layer.borderWidth = 1;
-    _iconImageView.layer.borderColor = [UIColor blueColor].CGColor;
+    //_iconImageView.layer.borderWidth = 1;
+    //_iconImageView.layer.borderColor = [UIColor blueColor].CGColor;
     _iconImageView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2-_iconImageView.bounds.size.height/2-20);
     [self.view addSubview:_iconImageView];
     
@@ -256,6 +255,7 @@ typedef enum : NSUInteger {
                  postNotificationName:@"updateAratar" object:nil];
                 RunViewController *run = [[RunViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                [self.sideMenuViewController setPanGestureEnabled:YES];
                 [self.sideMenuViewController hideMenuViewController];
             } else {
                 [HUDHelper showError:@"登陆失败" addView:self.view addHUD:hud delay:2];
@@ -299,10 +299,14 @@ typedef enum : NSUInteger {
                 [hud hide:YES];
                 RunViewController *run = [[RunViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                [self.sideMenuViewController setPanGestureEnabled:YES];
                 [self.sideMenuViewController hideMenuViewController];
                 
             } else {
-                
+                if (error.code == 203) {
+                    [HUDHelper showError:@"该邮箱已被注册" addView:self.view addHUD:hud delay:2];
+                    NSLog(@"%@",error);
+                }
             }
         }];
         
@@ -399,11 +403,12 @@ typedef enum : NSUInteger {
             NSLog(@"微博登陆失败");
         }
         else if(object){
-            [hud hide:YES];
+            
             NSLog(@"%@",object);
             NSLog(@"微博登陆成功");
             
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
+                [hud hide:YES];
                 NSLog(@"%@",user);
                 if ([[user objectForKey:@"firstSSO"] isEqualToString:@"ok"]) {
                     [[NSNotificationCenter defaultCenter]
@@ -411,6 +416,7 @@ typedef enum : NSUInteger {
                      postNotificationName:@"updateAratar" object:nil];
                     RunViewController *run = [[RunViewController alloc] init];
                     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                    [self.sideMenuViewController setPanGestureEnabled:YES];
                     [self.sideMenuViewController hideMenuViewController];
                 }
                 //第一次登陆 ，获取登陆信息
@@ -432,6 +438,7 @@ typedef enum : NSUInteger {
                              postNotificationName:@"updateAratar" object:nil];
                             RunViewController *run = [[RunViewController alloc] init];
                             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                            [self.sideMenuViewController setPanGestureEnabled:YES];
                             [self.sideMenuViewController hideMenuViewController];
                         }
                         
@@ -471,6 +478,7 @@ typedef enum : NSUInteger {
                      postNotificationName:@"updateAratar" object:nil];
                     RunViewController *run = [[RunViewController alloc] init];
                     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                    [self.sideMenuViewController setPanGestureEnabled:YES];
                     [self.sideMenuViewController hideMenuViewController];
                 }
                 //第一次登陆 ，获取登陆信息
@@ -494,6 +502,7 @@ typedef enum : NSUInteger {
                                 postNotificationName:@"updateAratar" object:nil];
                             RunViewController *run = [[RunViewController alloc] init];
                             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
+                            [self.sideMenuViewController setPanGestureEnabled:YES];
                             [self.sideMenuViewController hideMenuViewController];
                             }
                             

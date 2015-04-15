@@ -46,7 +46,6 @@
 		96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 96F596B41ACC51E300F56BEA /* RunViewController.m */; };
 		E50BE0481AC8854A0030863D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0471AC8854A0030863D /* main.m */; };
 		E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04A1AC8854A0030863D /* AppDelegate.m */; };
-		E50BE04E1AC8854A0030863D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04D1AC8854A0030863D /* ViewController.m */; };
 		E50BE0511AC8854A0030863D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50BE04F1AC8854A0030863D /* Main.storyboard */; };
 		E50BE0531AC8854A0030863D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0521AC8854A0030863D /* Images.xcassets */; };
 		E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0541AC8854A0030863D /* LaunchScreen.xib */; };
@@ -205,8 +204,6 @@
 		E50BE0471AC8854A0030863D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E50BE0491AC8854A0030863D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E50BE04A1AC8854A0030863D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E50BE04C1AC8854A0030863D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		E50BE04D1AC8854A0030863D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E50BE0501AC8854A0030863D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E50BE0521AC8854A0030863D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E50BE0551AC8854A0030863D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -534,8 +531,6 @@
 				E5668F8C1ACA5CC7009A0D61 /* Sections */,
 				E50BE0491AC8854A0030863D /* AppDelegate.h */,
 				E50BE04A1AC8854A0030863D /* AppDelegate.m */,
-				E50BE04C1AC8854A0030863D /* ViewController.h */,
-				E50BE04D1AC8854A0030863D /* ViewController.m */,
 				E50BE04F1AC8854A0030863D /* Main.storyboard */,
 				E50BE0521AC8854A0030863D /* Images.xcassets */,
 				E50BE0541AC8854A0030863D /* LaunchScreen.xib */,
@@ -1144,7 +1139,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E52D16F11ACE6C1D00DBFA04 /* QBAssetsCollectionViewController.m in Sources */,
-				E50BE04E1AC8854A0030863D /* ViewController.m in Sources */,
 				E5AC95C61ACD6A6D00A6F133 /* WeatherModel.m in Sources */,
 				E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */,
 				E51E98871ADA6D460050AE69 /* NavViewController.m in Sources */,

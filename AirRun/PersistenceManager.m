@@ -30,35 +30,48 @@
 
 - (void)sync
 {
-    [self dowaloadRecord];
-    [self dowaloadImage];
-    [self uploadRecord];
-    [self uploadImage];
+    [self dowaloadRecordwithBlock:^(BOOL successed) {
+        
+    }];
+    [self dowaloadImagewithBlock:^(BOOL successed) {
+        
+    }];
+    
+    [self uploadRecordwithBlock:^(BOOL successed) {
+        
+    }];
+    [self uploadImagewithBlock:^(BOOL successed) {
+        
+    }];
 }
 
 
 - (void)syncWithComplete:(syncComplete)completeBlock
 {
     _block = completeBlock;
-    
-    dispatch_queue_t dispatchQueue = dispatch_queue_create("ted.queue.next", DISPATCH_QUEUE_CONCURRENT);
-    dispatch_group_t dispatchGroup = dispatch_group_create();
-    dispatch_group_async(dispatchGroup, dispatchQueue, ^(){
-        [self sync];
-    });
-    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
-        NSLog(@"end");
-        _block(YES);
-    });
+    [self dowaloadRecordwithBlock:^(BOOL successed) {
+        [self dowaloadImagewithBlock:^(BOOL successed) {
+            [self uploadRecordwithBlock:^(BOOL successed) {
+                [self uploadImagewithBlock:^(BOOL successed) {
+                    _block(YES);
+                }];
+            }];
+        }];
+    }];
 }
 
 
-- (void)dowaloadRecord
+- (void)dowaloadRecordwithBlock:(void (^)(BOOL successed))result
 {
     AVQuery *query = [RunningRecord query];
     [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
     
+        
+        if (error) {
+            result(NO);
+        }
+        
         for (RunningRecord *recordOnserver in objects) {
             RunningRecordEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:recordOnserver.objectId];
             
@@ -73,22 +86,27 @@
             //本地已经存在数据
             else
             {
-                
+#warning 本地存在数据，判断是否需要更新
                 
             }
             
         }
+        result(YES);
     }];
     
     
 }
 
 
-- (void)dowaloadImage
+- (void)dowaloadImagewithBlock:(void (^)(BOOL successed))result
 {
     AVQuery *query = [RunningImage query];
     [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        if (error) {
+            result(NO);
+        }
         
         for (RunningImage *imageOnserver in objects) {
             RunningImageEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:imageOnserver.objectId];
@@ -109,12 +127,14 @@
             }
             
         }
+        
+        result(YES);
     }];
     
     
 }
 
-- (void)uploadRecord
+- (void)uploadRecordwithBlock:(void (^)(BOOL successed))result
 {
     NSArray *dirtyRecord = [[AirLocalPersistence shareLocalPersistenceInstance] findDirtyRecord];
     //找到所有的待更新数据
@@ -201,12 +221,13 @@
       
         
     }
+    result(YES);
     
     
 }
 
 
-- (void)uploadImage
+- (void)uploadImagewithBlock:(void (^)(BOOL successed))result
 {
     NSArray *imagesRecord = [[AirLocalPersistence shareLocalPersistenceInstance] findDirtyImage];
     //找到所有的待更新数据
@@ -293,6 +314,7 @@
         
         
     }
+    result(YES);
     
     
 }

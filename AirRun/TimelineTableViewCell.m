@@ -13,6 +13,7 @@
 @interface TimelineTableViewCell()
 
 @property (nonatomic, strong) RunningRecordEntity *runningRecord;
+@property (nonatomic, strong) NSIndexPath *currentPath;
 
 @property (nonatomic, strong) UIView *mainView;
 @property (nonatomic, strong) UIView *headerView;
@@ -41,9 +42,10 @@
 
 @implementation TimelineTableViewCell
 
-- (void)config:(RunningRecordEntity *)runningRecord
+- (void)config:(RunningRecordEntity *)runningRecord rowAtIndexPath:(NSIndexPath *)indexPath
 {
     _runningRecord = runningRecord;
+    _currentPath = indexPath;
     [self commonInit];
 }
 
@@ -326,8 +328,8 @@
 
 - (void)TouchMore:(id)sender
 {
-    if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidSelcctMore:)]) {
-        [_delegate TimelineTableViewCellDidSelcctMore:_runningRecord];
+    if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidSelcctDelete:rowAtIndexPath:)]) {
+        [_delegate TimelineTableViewCellDidSelcctDelete:_runningRecord rowAtIndexPath:_currentPath];
     }
     
 }

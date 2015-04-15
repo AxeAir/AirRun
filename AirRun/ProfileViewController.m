@@ -17,6 +17,10 @@
 #import "NSDate+change.h"
 #import "ImageHeler.h"
 #import "HUDHelper.h"
+#import "RunningImageEntity.h"
+#import "RunningRecordEntity.h"
+
+
 @interface ProfileViewController ()<UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UIPickerView            *genderPickerView;
@@ -87,6 +91,7 @@
             [title setFrame:CGRectMake(18, 0, 100, 80)];
             [title setText:@"头像"];
             cell.detailTextLabel.text =@"";
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
             if (_avatarImageView == nil) {
                 _avatarImageView = [[UIImageView alloc] initWithFrame:CGRectMake(Main_Screen_Width-90, 10, 60, 60)];
                 [[_avatarImageView layer] setCornerRadius:30];
@@ -332,10 +337,26 @@
     }
     if (actionSheet.tag == 900001) {
         if (buttonIndex == 0) {
-            [AVUser logOut];
-            RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
-            [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:RegisterAndLogin] animated:YES];
-            [self.sideMenuViewController hideMenuViewController];
+            
+            
+            [RunningImageEntity deleteAllwithCompleteBlock:^{
+                [RunningRecordEntity deleteAllwithCompleteBlock:^{
+                    [AVUser logOut];
+                    RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
+                    [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:RegisterAndLogin] animated:YES];
+                    [self.sideMenuViewController setPanGestureEnabled:NO];
+                    [self.sideMenuViewController hideMenuViewController];
+                } withErrorBlock:^{
+                    
+                }];
+                
+            } withErrorBlock:^{
+                
+            }];
+            
+            
+            
+            
         }
         
         
@@ -411,7 +432,16 @@
 
         
     }
+    else
+    {
+        
+    }
     
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
 }
 
 

@@ -14,7 +14,7 @@ typedef void (^didMapSelect)(RunningRecordEntity *record);
 
 @interface TimelineTableViewCell : UITableViewCell
 
-- (void)config:(RunningRecordEntity *)runningRecord;
+- (void)config:(RunningRecordEntity *)runningRecord rowAtIndexPath:(NSIndexPath *)indexPath;
 
 @property (nonatomic, weak) id<TimelineTableViewCellDelegate> delegate;
 
@@ -25,5 +25,6 @@ typedef void (^didMapSelect)(RunningRecordEntity *record);
 
 - (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record;
 
-- (void)TimelineTableViewCellDidSelcctMore:(RunningRecordEntity *)record;
+- (void)TimelineTableViewCellDidSelcctDelete:(RunningRecordEntity *)record rowAtIndexPath:(NSIndexPath *)indexPath;
+
 @end

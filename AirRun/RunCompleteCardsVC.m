@@ -77,7 +77,7 @@ static const char *INDEX = "index";
         editImageView.currentIndex = index;
         editImageView.deleteBlock = ^(UIImage *image,NSInteger idx){
             RunningImageEntity *imgEntity = this.imgMs[idx];
-            [imgEntity deleteEntity];
+            [imgEntity deleteEntityFromContext];
             [this.imgMs removeObject:imgEntity];
             NSString *fileName = [imgEntity.localpath lastPathComponent];
             [DocumentHelper removeFile:fileName InFoler:kPathImageFolder];

@@ -14,12 +14,13 @@
 #import <GPUImage.h>
 #import "RecordDetailViewController.h"
 #import "ImageHeler.h"
+#import <UIActionSheet+BlocksKit.h>
 
 @interface TimelineController () <TimelineTableViewCellDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIImageView  *headerbackgroundImageView;
 @property (nonatomic, strong) UIImageView  *headerImageView;
-@property (nonatomic, strong) NSArray      *dataSource;
+@property (nonatomic, strong) NSMutableArray      *dataSource;
 @property (nonatomic, strong) UIButton     *navButton;
 @property (nonatomic, strong) UILabel      *nameLabel;
 
@@ -60,7 +61,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
-        _dataSource = arraydata;
+        _dataSource = [[NSMutableArray alloc] initWithArray:arraydata];
         //[self.tableView reloadData];
     } withErrorBlock:^{
         
@@ -92,7 +93,7 @@
             [v removeFromSuperview];
         }
     }
-    [cell config:record];
+    [cell config:record rowAtIndexPath:indexPath];
     
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     [cell setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
@@ -164,11 +165,22 @@
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-- (void)TimelineTableViewCellDidSelcctMore:(RunningRecordEntity *)record
+- (void)TimelineTableViewCellDidSelcctDelete:(RunningRecordEntity *)record rowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"分享", nil];
-    [actionsheet showInView:self.view];
     
+    UIActionSheet *actionsheet = [UIActionSheet bk_actionSheetWithTitle:@"删除"];
+    
+    [actionsheet bk_setDestructiveButtonWithTitle:@"删除" handler:^{
+        NSArray *deleteArray = @[indexPath];
+        [_dataSource removeObjectAtIndex:indexPath.row];
+        [record deleteEntity];
+        [self.tableView deleteRowsAtIndexPaths:deleteArray withRowAnimation:UITableViewRowAnimationFade];
+    }];
+    [actionsheet bk_setCancelButtonWithTitle:@"取消" handler:^{
+        
+    }];
+    
+    [actionsheet showInView:self.view];
 }
 
 #pragma mark KVC

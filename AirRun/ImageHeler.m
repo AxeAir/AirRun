@@ -140,7 +140,7 @@
         }];
     }
     else{
-        [imageview setImage:[UIImage imageNamed:@"weiboshare"]];
+        [imageview setImage:[self blurImage:[UIImage imageNamed:@"defaultTimeline"]]];
     }
     
     

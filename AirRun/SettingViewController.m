@@ -170,6 +170,8 @@
                     [HUDHelper showComplete:@"同步成功" addView:self.view addHUD:hud delay:2];
                     
                 }];
+                
+              
             }
         }
         break;

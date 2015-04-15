@@ -29,8 +29,11 @@
 
 - (void)savewithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 
-- (void)deleteEntity;
+- (void)deleteEntityFromContext;
+
+
 
 + (NSArray *)getEntitiesWithArrtribut:(NSString *)attribute WithValue:(id)value;
 
++ (void)deleteAllwithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 @end

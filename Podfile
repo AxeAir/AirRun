@@ -13,6 +13,7 @@ pod 'TMCache', '~> 1.2.3'
 pod 'AVOSCloud', '~> 3.0.2'
 pod 'AVOSCloudSNS', '~> 3.0.2'
 pod 'MagicalRecord', '~> 2.2'
+pod 'BlocksKit', '~> 2.2.5'
 end
 
 target 'AirRunTests' do

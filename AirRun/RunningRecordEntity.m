@@ -58,5 +58,68 @@
     }];
 }
 
+- (void)deleteEntity
+{
+    NSString *objectId = self.objectId;
+    
+    AVQuery *query = [RunningRecord query];
+    [query getObjectInBackgroundWithId:objectId block:^(AVObject *object, NSError *error) {
+        
+        //远端不存在该数据
+        if (object == nil) {
+            [[AirLocalPersistence shareLocalPersistenceInstance] deleteObject:self withCompleteBlock:^{
+                
+            } withErrorBlock:^{
+                
+            }];
+        }
+        else
+        {
+            RunningRecord *record = (RunningRecord *)object;
+            AVQuery *query = [RunningImage query];
+            [query whereKey:@"identifer" equalTo:record.identifer];
+            [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                
+                for (RunningImage *image in objects) {
+                    [image deleteEventually];
+                }
+                
+            }];
+            [[AirLocalPersistence shareLocalPersistenceInstance] deleteObject:self withCompleteBlock:^{
+                
+            } withErrorBlock:^{
+                
+            }];
+        }
+        
+    }];
+
+}
+
++ (void)deleteAllwithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"RunningRecordEntity" inManagedObjectContext:[NSManagedObjectContext MR_defaultContext]];
+    [request setEntity:description];
+    
+    NSArray *datas1 = [RunningRecordEntity MR_executeFetchRequest:request];
+    if (datas1 && [datas1 count])
+    {
+        for (RunningRecordEntity *obj in datas1)
+        {
+            [obj MR_deleteEntity];
+        }
+        [[NSManagedObjectContext MR_defaultContext] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                completeBlock();
+            }
+            if (error) {
+                errorBlock();
+            }
+        }];
+    }
+    completeBlock();
+}
+
 
 @end

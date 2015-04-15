@@ -73,6 +73,9 @@
     sideMenuViewController.contentViewShadowOpacity = 0.6;
     sideMenuViewController.contentViewShadowRadius = 12;
     sideMenuViewController.contentViewShadowEnabled = YES;
+    if ([AVUser currentUser] ==nil) {
+        [sideMenuViewController setPanGestureEnabled:NO];
+    }
     self.window.rootViewController = sideMenuViewController;
     
     self.window.backgroundColor = [UIColor whiteColor];
@@ -96,16 +99,16 @@
     }
     
     // Added Introduction View Controller
-    NSArray *coverImageNames = @[@"finish", @"finish", @"finish"];
+    NSArray *coverImageNames = @[@"intro_1", @"finish", @"finish"];
     NSArray *backgroundImageNames = @[@"seabg", @"seabg", @"seabg"];
     self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
     
-    // Example 2
-    //    UIButton *enterButton = [UIButton new];
-    //    [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
-    //    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
+     //Example 2
+        UIButton *enterButton = [UIButton new];
+        [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
+        self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
     
-    //[self.window addSubview:self.introductionView.view];
+    [self.window addSubview:self.introductionView.view];
     
     __weak AppDelegate *weakSelf = self;
     self.introductionView.didSelectedEnter = ^() {

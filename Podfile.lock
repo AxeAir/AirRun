@@ -1,0 +1,79 @@
+PODS:
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - AVOSCloud (3.0.2)
+  - AVOSCloudSNS (3.0.2):
+    - AVOSCloud
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - GPUImage (0.1.6)
+  - Kiwi (2.3.1)
+  - MagicalRecord (2.2):
+    - MagicalRecord/Core (= 2.2)
+  - MagicalRecord/Core (2.2)
+  - Mantle (1.5.4):
+    - Mantle/extobjc (= 1.5.4)
+  - Mantle/extobjc (1.5.4)
+  - MBProgressHUD (0.9.1)
+  - pop (1.0.7)
+  - TMCache (1.2.4)
+
+DEPENDENCIES:
+  - AFNetworking (~> 2.5.2)
+  - AVOSCloud (~> 3.0.2)
+  - AVOSCloudSNS (~> 3.0.2)
+  - BlocksKit (~> 2.2.5)
+  - GPUImage (~> 0.1.6)
+  - Kiwi
+  - MagicalRecord (~> 2.2)
+  - Mantle (~> 1.5.4)
+  - MBProgressHUD
+  - pop
+  - TMCache (~> 1.2.3)
+
+SPEC CHECKSUMS:
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  AVOSCloud: eeacd471d18b3e24c3cb0d089110453261084489
+  AVOSCloudSNS: 7d83ffbd3738b92c9ece62e93a65fa593587274b
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  GPUImage: 4675ce4a5370ca92fcea8623b2a08b8f0c51b940
+  Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
+  MagicalRecord: f8a56bb87ab6552f20c4bb8681a1958a197ea3cd
+  Mantle: 60acd0cd363e27d945bda0a6b8e90577112d28f3
+  MBProgressHUD: c47f2c166c126cf2ce36498d80f33e754d4e93ad
+  pop: 628ffc631644601567ee8bfaaaea493ebd7d0923
+  TMCache: a93984b045a5ee84bd8941bd5e0b54296059cc52
+
+COCOAPODS: 0.35.0

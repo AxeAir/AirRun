@@ -49,6 +49,9 @@
 + (void)findAllWithCompleteBlocks:(FetchCompleteBlock)completeBlock
                    withErrorBlock:(ErrorBlock)errorBlock;
 
+- (void)deleteEntity;
 
++ (void)deleteAllwithCompleteBlock:(CompleteBlock)completeBlock
+                    withErrorBlock:(ErrorBlock)errorBlock;
 
 @end
