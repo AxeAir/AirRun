@@ -46,13 +46,11 @@
 
 - (void)commonInit:(NSString *)sign
 {
-    
-    
-    _signTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 80, Main_Screen_Width, 140)];
+    _signTextView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 140)];
     [_signTextView setBackgroundColor:[UIColor whiteColor]];
     [_signTextView setFont:[UIFont systemFontOfSize:12]];
     [_signTextView setContentOffset:CGPointZero];
-    [_signTextView setContentInset:UIEdgeInsetsMake(-70, 0, 0, 0)];
+    //[_signTextView setContentInset:UIEdgeInsetsMake(-70, 0, 0, 0)];
     [_signTextView setText:sign];
     [self.view addSubview:_signTextView];
     [_signTextView becomeFirstResponder];

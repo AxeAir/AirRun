@@ -7,8 +7,14 @@
 //
 
 #import "NotificationTC.h"
+#import "UConstants.h"
+#import "AirPickerView.h"
+#import "DateHelper.h"
+#import <AVOSCloud.h>
 
 @interface NotificationTC ()
+@property (nonatomic, strong) UISwitch *switchButton;
+@property (nonatomic, strong) AVUser *user;
 
 @end
 
@@ -16,12 +22,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.separatorStyle = UITableViewCellSelectionStyleNone;
+    self.tableView.scrollEnabled = NO;
+    _user = [AVUser currentUser];
     
+}
+
+/**
+ *  页面即将离开的时候保存数据
+ *
+ *  @param animated <#animated description#>
+ */
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [_user saveInBackground];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    
 }
 
 #pragma mark - Table view data source
@@ -41,55 +60,67 @@
     static NSString *identifer = @"editNotifacationCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifer];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:identifer];
     }
     
+    UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, HEIGHT(cell))];
+    [title setFont:[UIFont systemFontOfSize:14]];
+    [cell.contentView addSubview:title];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+    
+    if (indexPath.row == 0) {
+        title.text = @"推送提示";
+        _switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(Main_Screen_Width-65, 7, 60, 30)];
+        [_switchButton addTarget:self action:@selector(switchNotificaton:) forControlEvents:UIControlEventValueChanged];
+        if ([[_user objectForKey:@"pushNotification"] isEqualToString:@"on"]) {
+            _switchButton.on = YES;
+        }
+        [cell addSubview:_switchButton];
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
+        [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
+        [cell.contentView addSubview:line];
+    }
+    if (indexPath.row == 1) {
+        title.text = @"提醒时间";
+        NSString *localpushTime = [_user objectForKey:@"localpushTime"];
+        if (localpushTime == nil || [localpushTime isEqualToString:@""]) {
+            localpushTime = @"22:00";
+        }
+        cell.detailTextLabel.text = localpushTime;
+    }
     return cell;
 }
 
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (indexPath.row == 1 && _switchButton.on) {
+        
+        NSString *localpushTime = [_user objectForKey:@"localpushTime"];
+        if (localpushTime == nil || [localpushTime isEqualToString:@""]) {
+            localpushTime = @"22:00";
+        }
+        AirPickerView *air = [[AirPickerView alloc] initWithTimePickerFrames:CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300) date:[DateHelper convertHourandMinuterToDate:localpushTime]];
+    
+        [air showTimeInView:self.view completeBlock:^(NSDate *date) {
+            [cell.detailTextLabel setText:[DateHelper convertDateToHourandMinuter:date]];
+            [_user setObject:[DateHelper convertDateToHourandMinuter:date] forKey:@"localpushTime"];
+        }];
+    }
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (void)switchNotificaton:(id)sender
+{
+    if (_switchButton.on) {
+        [_user setObject:@"on" forKey:@"pushNotification"];
+    }
+    else
+    {
+        [_user setObject:@"off" forKey:@"pushNotification"];
+    }
 }
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

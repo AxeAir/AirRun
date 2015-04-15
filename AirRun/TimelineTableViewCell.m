@@ -15,7 +15,6 @@
 @property (nonatomic, strong) RunningRecordEntity *runningRecord;
 
 @property (nonatomic, strong) UIView *mainView;
-
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIView *heartView;
 @property (nonatomic, strong) UIView *heartImageView;
@@ -35,35 +34,28 @@
 
 @property (nonatomic, strong) UILabel *heartLabel;
 
+@property (nonatomic, strong) NSArray *kcals;
+
 @end
 
 
 @implementation TimelineTableViewCell
 
-- (instancetype)initWithRunningRecord:(RunningRecordEntity *)aRunningrecord
+- (void)config:(RunningRecordEntity *)runningRecord
 {
-    self = [self init];
-    if (self) {
-        _runningRecord = aRunningrecord;
-        [self commonInit];
-    }
-    return self;
-}
-
-- (instancetype)initWithStyle:(UITableViewCellStyle)style
-              reuseIdentifier:(NSString *)reuseIdentifier
-                runningRecord:(RunningRecordEntity *)aRunningrecord
-{
-    self = [self initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-        _runningRecord = aRunningrecord;
-        [self commonInit];
-    }
-    return self;
+    _runningRecord = runningRecord;
+    [self commonInit];
 }
 
 - (void)commonInit
 {
+    _kcals = @[
+                       @{@"name":@"冰淇淋",@"kcal":@64,@"dw":@"个",@"image":@"ice"},
+                       @{@"name":@"蛋糕",@"kcal":@230,@"dw":@"块",@"image":@"cake"},
+                       @{@"name":@"米饭",@"kcal":@174,@"dw":@"碗",@"image":@"rice"},
+                       @{@"name":@"煎蛋",@"kcal":@100,@"dw":@"个",@"image":@"bread"},
+                       @{@"name":@"肉丝",@"kcal":@300,@"dw":@"盆",@"image":@"rose"},
+                       ];
     //主页面
     _mainView = [[UIView alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 200)];
 
@@ -71,37 +63,14 @@
     [[_mainView layer] setShadowRadius:1]; //为阴影四角圆角半径,默认值为
     [[_mainView layer] setShadowOpacity:0.5]; //为阴影透明度(取值为[0,1])
     [[_mainView layer] setShadowColor:[UIColor grayColor].CGColor]; //为阴影颜色
-    [_mainView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
+    [_mainView setBackgroundColor:[UIColor whiteColor]];
     [[_mainView layer] setCornerRadius:4];
     [self.contentView addSubview:_mainView];
     
+    [self createHeaderView];
     
-    if (_headerView ==nil) {
-        _headerView = [self createHeaderView];
-        [_mainView addSubview:_headerView];
-    }
-    
-    //地图截图
-    if (_mapImageView == nil) {
-        _mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, MaxY(_headerView), WIDTH(_mainView)-20, 150)];
-        _mapImageView.userInteractionEnabled = YES;
-        [_mainView addSubview:_mapImageView];
-        [_mapImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
-        _mapImageView.contentMode =  UIViewContentModeScaleAspectFill;
-        _mapImageView.clipsToBounds = YES;
-    }
-    
-    
-    NSString *imageName = [NSString stringWithFormat:@"%@.jpg",_runningRecord.identifer];
-    
-    UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
-    [_mapImageView setImage:image];
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disSelctMap:)];
-    
-    [_mapImageView addGestureRecognizer:tap];
-    [_mapImageView addSubview:[self createDataView]];
-    
-    
+    [self createMapImage];
+   
     NSArray *heartImages = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
 
     if (([_runningRecord.heart isEqualToString:@""]|| _runningRecord.heart ==nil) && [heartImages count]==0) {
@@ -123,22 +92,57 @@
         [_mainView setFrame:CGRectMake(10, 10, Main_Screen_Width-20, MaxY(_footerView))];
         [self setFrame:CGRectMake(0, 0, WIDTH(_mainView), MaxY(_footerView))];
     }
-    
     [self setFrame:CGRectMake(0, 0, 100, MaxY(_footerView)+20)];
+}
+
+- (void)createHeaderView
+{
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
+    [_mainView addSubview:_headerView];
+    
+    UIImageView *kcalview= [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
+    [kcalview setImage:[UIImage imageNamed:@"cal"]];
+    [_headerView addSubview:kcalview];
+
+    NSInteger index =  arc4random()%4;
+    NSDictionary *selectDic = [_kcals objectAtIndex:index];
+
+    UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
+    NSString *str = [NSString stringWithFormat:@"%ld Kcal   ≈   %.1f %@%@",[_runningRecord.kcar integerValue],[_runningRecord.kcar integerValue]/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
+    [kcal setText:str];
+    [kcal setTextColor:RGBCOLOR(255, 164, 74)];
+    [kcal sizeToFit];
+    [_headerView addSubview:kcal];
+    
+    UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(MaxX(kcal), 10, 30, 30)];
+    [icon setImage:[UIImage imageNamed:[selectDic objectForKey:@"image"]]];
+    
+    
+    
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(MaxX(_mainView) -40, 10, 30, 30)];
+    [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    [_headerView addSubview:shareButton];
+    [_headerView addSubview:icon];
 }
 
 
 
-- (UIView *)createHeaderView
+- (void)createMapImage
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
-    UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
-    [kcal setText:[self calculateKcal:[_runningRecord.kcar integerValue]]];
-    [kcal setTextColor:RGBCOLOR(255, 164, 74)];
+    //地图截图
+    _mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, MaxY(_headerView), WIDTH(_mainView)-20, 150)];
+    _mapImageView.userInteractionEnabled = YES;
+    [_mainView addSubview:_mapImageView];
+    [_mapImageView setContentScaleFactor:[[UIScreen mainScreen] scale]];
+    _mapImageView.contentMode =  UIViewContentModeScaleAspectFill;
+    _mapImageView.clipsToBounds = YES;
     
-    [headerView addSubview:kcal];
-    
-    return headerView;
+    NSString *imageName = [NSString stringWithFormat:@"%@.jpg",_runningRecord.identifer];
+    UIImage *image = [[UIImage alloc] initWithContentsOfFile:[DocumentHelper documentsFile:imageName AtFolder:kMapImageFolder]];
+    [_mapImageView setImage:image];
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(disSelctMap:)];
+    [_mapImageView addGestureRecognizer:tap];
+    [_mapImageView addSubview:[self createDataView]];
 }
 
 - (UIView *)createDataView
@@ -230,8 +234,7 @@
     [runningRecord setFont:[UIFont boldSystemFontOfSize:14]];
     [runningRecord setTextColor:RGBCOLOR(170, 170, 170)];
     [runningRecord setTextAlignment:NSTextAlignmentCenter];
-    [runningRecord setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
-    
+    [runningRecord setBackgroundColor:[UIColor whiteColor]];
     
     UIView *splitLine = [[UIView alloc] initWithFrame:CGRectMake(20, HEIGHT(runningRecord)/2+5, WIDTH(heart)-40, 1)];
     [splitLine setBackgroundColor:RGBCOLOR(227, 227, 277)];
@@ -276,7 +279,6 @@
                 }];
                 
             }
-            
             [view setFrame:CGRectMake((imagewidth+10)*index, 12.5, imagewidth, imagewidth)];
             [[view layer] setCornerRadius:5];
             [[view layer] setMasksToBounds:YES];
@@ -325,21 +327,5 @@
     [_delegate TimelineTableViewCellDidSelcct:_runningRecord];
 }
 
-- (NSString *)calculateKcal:(NSInteger)kcal
-{
-    
-    NSArray *kcals = @[
-                            @{@"name":@"冰淇淋",@"kcal":@64,@"dw":@"个"},
-                            @{@"name":@"蛋糕",@"kcal":@230,@"dw":@"块"},
-                            @{@"name":@"米饭",@"kcal":@174,@"dw":@"碗"},
-                            @{@"name":@"煎蛋",@"kcal":@100,@"dw":@"个"},
-                            @{@"name":@"肉丝",@"kcal":@300,@"dw":@"盆"},
-                            ];
-    
-    NSInteger index =  arc4random()%4;
-    NSDictionary *selectDic = [kcals objectAtIndex:index];
-    
-    return [NSString stringWithFormat:@"%ld Kcal   ≈   %.1f%@ %@",kcal,kcal/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
-}
 
 @end

@@ -93,14 +93,17 @@ static const char *INDEX = "index";
 - (void)p_setNavgation {
     
     self.title = @"详细记录";
-    UIBarButtonItem *sharButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"setting.png"] style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTouch:)];
+    UIBarButtonItem *sharButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTouch:)];
     self.navigationItem.rightBarButtonItem = sharButton;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
+    
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
 - (void)p_layout {
     _topView.layer.cornerRadius = 5;
-    
     _cardView.layer.cornerRadius = 5;
     _cardView.layer.shadowOffset = CGSizeMake(1, 1);
     _cardView.layer.shadowRadius = 5;
@@ -118,7 +121,6 @@ static const char *INDEX = "index";
     _durationLable.text = [DateHelper converSecondsToTimeString:[_record.time integerValue]];
     _distanceLable.text = [NSString stringWithFormat:@"%.2f",[_record.distance floatValue]/1000];
     _kcalLable.text = [NSString stringWithFormat:@"%.0f",[_record.kcar floatValue]/1000];
-//    @property (weak, nonatomic) IBOutlet UILabel *numAppleLabel;
 }
 
 - (void)p_setMapView {

@@ -396,6 +396,9 @@
     // Validation
     if (self.allowsMultipleSelection) {
         if ([self validateNumberOfSelections:(self.imagePickerController.selectedAssetURLs.count + 1)]) {
+            if (self.imagePickerController.selectedAssetURLs.count>=5) {
+                self.navigationItem.rightBarButtonItem.enabled = NO;
+            }
             [self showImportButton];
         }
     }
@@ -413,6 +416,10 @@
     // Validation
     if (self.allowsMultipleSelection) {        
         if (![self validateNumberOfSelections:(self.imagePickerController.selectedAssetURLs.count - 1)]) {
+            
+            if (self.imagePickerController.selectedAssetURLs.count<5) {
+                self.navigationItem.rightBarButtonItem.enabled = YES;
+            }
             [self dismissImportButton];
         }
     }

@@ -13,6 +13,7 @@
 #import <AVOSCloud.h>
 #import "AboutUsViewController.h"
 #import "NotificationTC.h"
+#import "HUDHelper.h"
 
 @interface SettingViewController ()
 @property (nonatomic, strong) AVUser *user;
@@ -153,7 +154,15 @@
                 [self.navigationController pushViewController:notification animated:YES];
             }
             if (indexPath.row ==2) {
-                [[PersistenceManager shareManager] sync];
+                
+                MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+                
+                [HUDHelper showHUD:@"同步中" andView:self.view andHUD:hud];
+                [[PersistenceManager shareManager] syncWithComplete:^(BOOL successed) {
+                    
+                    [hud hide:YES];
+                    
+                }];
             }
         }
         break;
@@ -173,12 +182,6 @@
             break;
     }
 }
-
-
-
-
-
-
 
 #pragma mark Action
 - (void)switchVoiceButton:(id)sender
