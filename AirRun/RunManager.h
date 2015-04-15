@@ -39,6 +39,7 @@ typedef enum : NSUInteger {
 - (void)saveToUserDefault;
 - (void)readFromUserDefault;
 - (void)removeUserDefault;
+- (void)reback;
 - (BOOL)checkUserDefaultIsAvailable;
 
 + (NSArray *)convertJsonStringToPath:(NSString *)json;

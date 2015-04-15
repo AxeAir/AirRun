@@ -279,15 +279,11 @@ static const char *INDEX = "index";
         }
     }
     
-    if ([_parameters.distance integerValue] > 20) {
+    [_parameters savewithCompleteBlock:^{
+        NSLog(@"数据本地持久化成功");
+    } withErrorBlock:^{
         
-        [_parameters savewithCompleteBlock:^{
-            NSLog(@"数据本地持久化成功");
-        } withErrorBlock:^{
-            
-        }];
-        
-    }
+    }];
     
     if (type == CompleteDisplayCardButtonTypeShare) {
         ShareView *share = [[ShareView alloc] init];

@@ -23,7 +23,7 @@
 		9673DD531AD4F516006E64B7 /* RunGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD521AD4F516006E64B7 /* RunGuideViewController.m */; };
 		9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD561AD4F52F006E64B7 /* GuideView.m */; };
 		967D3D651AD960D800A55B42 /* RunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 967D3D641AD960D800A55B42 /* RunManager.m */; };
-		967D3D671ADA678400A55B42 /* AfterRunView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 967D3D661ADA678400A55B42 /* AfterRunView.xib */; };
+		967F64CA1ADE430C0042A39D /* SpeakHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F64C91ADE430C0042A39D /* SpeakHelper.m */; };
 		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
@@ -159,7 +159,8 @@
 		9673DD561AD4F52F006E64B7 /* GuideView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GuideView.m; sourceTree = "<group>"; };
 		967D3D631AD960D800A55B42 /* RunManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunManager.h; sourceTree = "<group>"; };
 		967D3D641AD960D800A55B42 /* RunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunManager.m; sourceTree = "<group>"; };
-		967D3D661ADA678400A55B42 /* AfterRunView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AfterRunView.xib; sourceTree = "<group>"; };
+		967F64C81ADE430C0042A39D /* SpeakHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHelper.h; sourceTree = "<group>"; };
+		967F64C91ADE430C0042A39D /* SpeakHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakHelper.m; sourceTree = "<group>"; };
 		96982B401ACF7EE000040A50 /* ValidateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateHelper.h; sourceTree = "<group>"; };
 		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
 		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
@@ -435,7 +436,6 @@
 			children = (
 				9673DD551AD4F52F006E64B7 /* GuideView.h */,
 				9673DD561AD4F52F006E64B7 /* GuideView.m */,
-				967D3D661ADA678400A55B42 /* AfterRunView.xib */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -764,6 +764,8 @@
 				E591399B1ACBE13400F9D048 /* DateHelper.m */,
 				E52D16F61ACE780300DBFA04 /* ImageHeler.h */,
 				E52D16F71ACE780300DBFA04 /* ImageHeler.m */,
+				967F64C81ADE430C0042A39D /* SpeakHelper.h */,
+				967F64C91ADE430C0042A39D /* SpeakHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1035,7 +1037,6 @@
 				96982B681AD16D2900040A50 /* continue.m4a in Resources */,
 				96982B6A1AD16D2900040A50 /* start.m4a in Resources */,
 				96982B691AD16D2900040A50 /* pause.m4a in Resources */,
-				967D3D671ADA678400A55B42 /* AfterRunView.xib in Resources */,
 				96982B671AD16D2900040A50 /* 1kilo.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1214,6 +1215,7 @@
 				E5AC95B61ACD201600A6F133 /* PopInputView.m in Sources */,
 				96F596B21ACC51D600F56BEA /* MapViewDelegate.m in Sources */,
 				E52D16FB1ACE843800DBFA04 /* ImageViewer.m in Sources */,
+				967F64CA1ADE430C0042A39D /* SpeakHelper.m in Sources */,
 				E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */,
 				E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */,
 			);

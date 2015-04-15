@@ -61,22 +61,7 @@ static  NSString *const kRunMangerKey = @"RunManager";
 - (instancetype)init {
     self = [super init];
     if (self) {
-        
-        _runState = RunStateStop;
-        
-        _distance = 0;
-        _time = 0;
-        _speed = 0;
-        _currentSpeed = 0;
-        _kcal = 0;
-        
-        _currentLocationName = @"";
-        _temperature = @"";
-        _pm = @"";
-        
-        _points = [[NSMutableArray alloc] init];
-        _imageArray = [[NSMutableArray alloc] init];
-        
+        [self p_init];
     }
     return self;
 }
@@ -146,6 +131,10 @@ static  NSString *const kRunMangerKey = @"RunManager";
     _imageArray = [[RunManager convertJsonStringToImages:runManagerDic[@"imageArray"]] mutableCopy];
 }
 
+- (void)reback {
+    [self p_init];
+}
+
 - (void)removeUserDefault {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:kRunMangerKey];
 }
@@ -204,6 +193,23 @@ static  NSString *const kRunMangerKey = @"RunManager";
 
 
 #pragma mark Private
+
+- (void)p_init {
+    _runState = RunStateStop;
+    
+    _distance = 0;
+    _time = 0;
+    _speed = 0;
+    _currentSpeed = 0;
+    _kcal = 0;
+    
+    _currentLocationName = @"";
+    _temperature = @"";
+    _pm = @"";
+    
+    _points = [[NSMutableArray alloc] init];
+    _imageArray = [[NSMutableArray alloc] init];
+}
 
 - (NSString *)p_convertImageToString {
     
