@@ -17,6 +17,7 @@
 #import "CustomAnnotation.h"
 #import "EditImageView.h"
 #import <objc/runtime.h>
+#import <AFNetworking/UIImageView+AFNetworking.h>
 
 static const char *INDEX = "index";
 @interface RecordDetailViewController ()
@@ -146,12 +147,31 @@ static const char *INDEX = "index";
         
         NSString *imgName = [imgEntity.localpath lastPathComponent];
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgName AtFolder:kPathImageFolder]];
+        
+        if (!img) {
+            NSURL *requestURL = [[NSURL alloc] initWithString:imgEntity.remotepath];
+            [[[UIImageView alloc] init] setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:requestURL]
+                                              placeholderImage:nil
+                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                                                        
+                                                           NSInteger idx = [_imgEntities indexOfObject:imgEntity];
+                                                           objc_setAssociatedObject(img, INDEX, @(idx), OBJC_ASSOCIATION_ASSIGN);
+                                                           CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
+                                                           [_images insertObject:img atIndex:idx];
+                                                           [_mapViewDelegate addimage:img AnontationWithLocation:loc];
+                                                           
+                                                       } failure:nil];
+            continue;
+            
+        }
+        
         NSInteger idx = [_imgEntities indexOfObject:imgEntity];
         objc_setAssociatedObject(img, INDEX, @(idx), OBJC_ASSOCIATION_ASSIGN);
         CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
-        [_images addObject:img];
+        [_images insertObject:img atIndex:idx];
         [_mapViewDelegate addimage:img AnontationWithLocation:loc];
     }
+    
 }
 
 #pragma mark - Event

@@ -12,7 +12,7 @@ const static NSInteger Margin = 5;
 
 @interface RunPauseView ()
 
-@property (strong, nonatomic) UIView *bgView;
+@property (strong, nonatomic) UIImageView *bgView;
 
 @property (strong, nonatomic) UILabel *speedLabel;
 @property (strong, nonatomic) UILabel *speedUnitLable;
@@ -75,8 +75,8 @@ const static NSInteger Margin = 5;
 - (void)p_layout {
     
     if (!_bgView) {
-        _bgView = [[UIView alloc] init];
-        _bgView.backgroundColor = [UIColor colorWithRed:85/255.0 green:150/255.0 blue:204/255.0 alpha:0.9];
+        _bgView = [[UIImageView alloc] init];
+        _bgView.image = [UIImage imageNamed:@"pauseViewBg"];
         [self addSubview:_bgView];
     }
     _bgView.frame = self.bounds;

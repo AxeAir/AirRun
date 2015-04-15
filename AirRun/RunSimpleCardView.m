@@ -10,7 +10,7 @@
 
 @interface RunSimpleCardView ()
 
-@property (strong, nonatomic) UIView *bgView;
+@property (strong, nonatomic) UIImageView *bgView;
 
 @property (strong, nonatomic) UILabel *distanceLabel;
 @property (strong, nonatomic) UILabel *distanceUnitLable;
@@ -59,8 +59,8 @@
 - (void)layoutSubviews {
     
     if (!_bgView) {
-        _bgView = [[UIView alloc] initWithFrame:self.bounds];
-        _bgView.backgroundColor = [UIColor colorWithRed:85/255.0 green:150/255.0 blue:204/255.0 alpha:0.9];
+        _bgView = [[UIImageView alloc] initWithFrame:self.bounds];
+        _bgView.image = [UIImage imageNamed:@"runSimpleCardBg"];
         [self addSubview:_bgView];
     }
     _bgView.frame = self.bounds;

@@ -33,12 +33,12 @@
 - (void)p_commonInit {
     
     _bgImage = [[UIImageView alloc] initWithFrame:self.bounds];
-    _bgImage.image = [UIImage imageNamed:@"bg2.png"];
+    _bgImage.image = [UIImage imageNamed:@"readybg"];
     _bgImage.contentMode = UIViewContentModeScaleToFill;
     [self addSubview:_bgImage];
     
     _divideView = [[UIView alloc] initWithFrame:CGRectMake(15, 0, self.bounds.size.width-30, 1)];
-    _divideView.backgroundColor = [UIColor whiteColor];
+    _divideView.backgroundColor = [UIColor colorWithRed:63/255.0 green:154/255.0 blue:255/255.0 alpha:1];
     [self addSubview:_divideView];
     
     _textLable = [[UILabel alloc] init];
