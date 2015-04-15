@@ -32,6 +32,7 @@
 @property (nonatomic, strong) UILabel *speedLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *kcalLabel;
+@property (nonatomic, strong) UILabel *kcalTextLabel;
 
 @property (nonatomic, strong) UILabel *heartLabel;
 
@@ -109,12 +110,12 @@
     NSInteger index =  arc4random()%4;
     NSDictionary *selectDic = [_kcals objectAtIndex:index];
 
-    UILabel *kcal = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
+    _kcalTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
     NSString *str = [NSString stringWithFormat:@"%ld Kcal   ≈   %.1f %@%@",[_runningRecord.kcar integerValue],[_runningRecord.kcar integerValue]/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
-    [kcal setText:str];
-    [kcal setTextColor:RGBCOLOR(255, 164, 74)];
-    [kcal sizeToFit];
-    [_headerView addSubview:kcal];
+    [_kcalTextLabel setText:str];
+    [_kcalTextLabel setTextColor:RGBCOLOR(255, 164, 74)];
+    [_kcalTextLabel sizeToFit];
+    [_headerView addSubview:_kcalTextLabel];
     
     //UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(MaxX(kcal), 10, 30, 30)];
     //[icon setImage:[UIImage imageNamed:[selectDic objectForKey:@"image"]]];
@@ -323,7 +324,10 @@
 #pragma mark Action
 - (void)disSelctMap:(id)sender
 {
-    [_delegate TimelineTableViewCellDidSelcct:_runningRecord];
+    if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidSelcct:Kcal:)]) {
+        [_delegate TimelineTableViewCellDidSelcct:_runningRecord Kcal:_kcalTextLabel.text];
+    }
+    
 }
 
 - (void)TouchMore:(id)sender

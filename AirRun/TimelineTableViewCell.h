@@ -23,7 +23,7 @@ typedef void (^didMapSelect)(RunningRecordEntity *record);
 
 @protocol TimelineTableViewCellDelegate <NSObject>
 
-- (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record;
+- (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record Kcal:(NSString *)kcalText;
 
 - (void)TimelineTableViewCellDidSelcctDelete:(RunningRecordEntity *)record rowAtIndexPath:(NSIndexPath *)indexPath;
 
