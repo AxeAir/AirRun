@@ -221,6 +221,7 @@ const char *OUTPOSITION = "OutPosition";
     _startButton.clipsToBounds = YES;
     _startButton.backgroundColor = [UIColor colorWithRed:97/255.0 green:187/255.0 blue:162/255.0 alpha:1];
     _startButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-10-_startButton.bounds.size.height/2);
+    [self p_addShowdowWithView:_startButton];
     [_startButton addTarget:self action:@selector(startButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_startButton];
     
@@ -236,6 +237,7 @@ const char *OUTPOSITION = "OutPosition";
     _pauseButton.clipsToBounds = YES;
     _pauseButton.backgroundColor = [UIColor colorWithRed:255/255.0 green:143/255.0 blue:94/255.0 alpha:1];
 //    _pauseButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height-50-_startButton.bounds.size.height/2);
+    [self p_addShowdowWithView:_pauseButton];
     _pauseButton.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height+_pauseButton.bounds.size.height/2+10);
     [_pauseButton addTarget:self action:@selector(pauseButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_pauseButton];
@@ -470,11 +472,14 @@ const char *OUTPOSITION = "OutPosition";
     //动画
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
+        UIImageView *iamge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titlelogo"]];
+        self.navigationItem.titleView = iamge;
         
         //倒计时页面
         _countView = [[CountView alloc] initWithCount:5];
         _countView.frame = self.view.bounds;
         _countView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+        
         //加入view 甚至是navigationbar
         UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
         [currentWindow addSubview:_countView];
@@ -487,7 +492,6 @@ const char *OUTPOSITION = "OutPosition";
             self.navigationItem.leftBarButtonItem = _gpsButton;
             [_mapMaskView removeFromSuperview];
 //            [self p_audioPlay:@"start"];
-//            [[SpeakHelper shareInstance] speakString:@"跑步开始"];
             _runManager.runState = RunStateRunning;
             [_runTimer setFireDate:[NSDate distantPast]];
             [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"start"] AtLocation:_runManager.points.firstObject];
@@ -562,13 +566,11 @@ const char *OUTPOSITION = "OutPosition";
                        NSLog(@"placemarks=%@",[placemarks objectAtIndex:0]);
                        CLPlacemark *placemark = [placemarks objectAtIndex:0];
                        
-                       //                       NSLog(@"placemark.ISOcountryCode =%@",placemark.ISOcountryCode);
-                       //                       NSLog(@"placemark.country =%@",placemark.country);
-                       //                       NSLog(@"placemark.postalCode =%@",placemark.postalCode);
-                                              NSLog(@"placemark.administrativeArea =%@",placemark.administrativeArea);
-                                              NSLog(@"placemark.locality =%@",placemark.locality);
-                                              NSLog(@"placemark.subLocality =%@",placemark.subLocality);
-                                              NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
+                       NSLog(@"placemark.administrativeArea =%@",placemark.administrativeArea);
+                       NSLog(@"placemark.locality =%@",placemark.locality);
+                       NSLog(@"placemark.subLocality =%@",placemark.subLocality);
+                       NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
+                       
                        _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subAdministrativeArea];
                        
                        NSString *cityName;
@@ -794,8 +796,6 @@ const char *OUTPOSITION = "OutPosition";
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if (alertView == _recoverAlert) {
-        
-        
         
         if (buttonIndex == 1) {
             [self startButtonTouch:_startButton];
