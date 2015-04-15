@@ -27,6 +27,7 @@
 @dynamic identifer;
 @dynamic updateat;
 @dynamic dirty;
+@dynamic feel;
 
 - (instancetype)init
 {

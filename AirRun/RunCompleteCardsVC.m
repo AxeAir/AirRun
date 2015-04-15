@@ -258,9 +258,8 @@ static const char *INDEX = "index";
     
     _parameters.heart = _inputcard.textview.text;
     _parameters.finishtime = [[NSDate alloc] init];
-
     _parameters.dirty = @1;
-    //_parameters.city = @"李家沱";
+    _parameters.feel = @(_inputcard.currentFaceIndex);
 
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         
@@ -273,8 +272,8 @@ static const char *INDEX = "index";
             image.type = @"heart";
             image.dirty = @1;
             image.recordid = _parameters.identifer;
-            image.localpath = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
-            [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",timestamp,index]];
+            image.localpath = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",(long)timestamp,index]];
+            [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",(long)timestamp,index]];
             index++;
         }
     }

@@ -327,7 +327,6 @@
     if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidSelcct:Kcal:)]) {
         [_delegate TimelineTableViewCellDidSelcct:_runningRecord Kcal:_kcalTextLabel.text];
     }
-    
 }
 
 - (void)TouchMore:(id)sender
@@ -335,7 +334,6 @@
     if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidSelcctDelete:rowAtIndexPath:)]) {
         [_delegate TimelineTableViewCellDidSelcctDelete:_runningRecord rowAtIndexPath:_currentPath];
     }
-    
 }
 
 

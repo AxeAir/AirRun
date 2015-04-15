@@ -215,7 +215,7 @@
             NSMutableArray *temp = [[NSMutableArray alloc] init];
             NSInteger i = 140;
             for (; i<=200; i++) {
-                [temp addObject:[NSString stringWithFormat:@"%ld",i]];
+                [temp addObject:[NSString stringWithFormat:@"%ld",(long)i]];
             }
             AirPickerView *air = [[AirPickerView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300) dataSource:temp];
             [air showInView:self.view completeBlock:^(NSInteger index, NSString *string) {
@@ -231,7 +231,7 @@
             NSMutableArray *temp = [[NSMutableArray alloc] init];
             NSInteger i = 30;
             for (; i<=100; i++) {
-                [temp addObject:[NSString stringWithFormat:@"%ld",i]];
+                [temp addObject:[NSString stringWithFormat:@"%ld",(long)i]];
             }
             
             AirPickerView *air = [[AirPickerView alloc] initWithFrame:CGRectMake(0, Main_Screen_Height-300, Main_Screen_Width, 300) dataSource:temp];

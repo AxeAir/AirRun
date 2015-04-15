@@ -81,6 +81,35 @@
     return [entity MR_findFirstByAttribute:attrobute withValue:value];
 }
 
+
+- (void)PersistenceRecordsFromServerToLocal:(NSArray *)records
+                          withCompleteBlock:(CompleteBlock)completeBlock
+                             withErrorBlock:(ErrorBlock)errorBlock
+{
+    for (RunningRecord *recordOnserver in records) {
+        RunningRecordEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:recordOnserver.objectId];
+        
+        //如果本地不存在,将服务端的record写入数据库
+        if (localEntity == nil) {
+            [self createRecord:recordOnserver withCompleteBlock:^{
+                
+            } withErrorBlock:^{
+                errorBlock();
+            }];
+        }
+        //本地已经存在数据
+        else
+        {
+#warning 本地存在数据，判断是否需要更新
+            
+        }
+        
+    }
+    completeBlock();
+    
+}
+
+
 - (void)createRecord:(RunningRecord *)recordOnServer
    withCompleteBlock:(CompleteBlock)completeBlock
       withErrorBlock:(ErrorBlock)errorBlock;
@@ -101,6 +130,7 @@
     NSString *mapImageName = [NSString stringWithFormat:@"%@.jpg",recordOnServer.identifer];
     [DocumentHelper saveImage:mapShot ToFolderName:kMapImageFolder WithImageName:mapImageName];
     
+    entity.feel = recordOnServer.feel;
     entity.heart = recordOnServer.heart;
     entity.objectId = recordOnServer.objectId;
     entity.identifer = recordOnServer.identifer;
@@ -142,6 +172,34 @@
             completeBlock();
         }
     }];
+}
+
+- (void)PersistenceImagesFromServerToLocal:(NSArray *)images
+                         withCompleteBlock:(CompleteBlock)completeBlock
+                            withErrorBlock:(ErrorBlock)errorBlock
+{
+    for (RunningImage *imageOnserver in images) {
+        RunningImageEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:imageOnserver.objectId];
+        
+        //如果本地不存在,将服务端的record写入数据库
+        if (localEntity == nil) {
+            [self createImage:imageOnserver withCompleteBlock:^{
+                
+            } withErrorBlock:^{
+                errorBlock();
+            }];
+        }
+        //本地已经存在数据
+        else
+        {
+            
+            
+        }
+        
+    }
+    completeBlock();
+    
+    
 }
 
 @end

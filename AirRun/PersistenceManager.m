@@ -61,32 +61,16 @@
     AVQuery *query = [RunningRecord query];
     [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-    
         //下载失败
         if (error) {
             result(NO);
         }
+        [[AirLocalPersistence shareLocalPersistenceInstance] PersistenceRecordsFromServerToLocal:objects withCompleteBlock:^{
+            result(YES);
+        } withErrorBlock:^{
+            result(NO);
+        }];
         
-        for (RunningRecord *recordOnserver in objects) {
-            RunningRecordEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:recordOnserver.objectId];
-            
-            //如果本地不存在,将服务端的record写入数据库
-            if (localEntity == nil) {
-                [[AirLocalPersistence shareLocalPersistenceInstance] createRecord:recordOnserver withCompleteBlock:^{
-                    
-                } withErrorBlock:^{
-                    
-                }];
-            }
-            //本地已经存在数据
-            else
-            {
-#warning 本地存在数据，判断是否需要更新
-                
-            }
-            
-        }
-        result(YES);
     }];
     
     
@@ -102,28 +86,11 @@
         if (error) {
             result(NO);
         }
-        
-        for (RunningImage *imageOnserver in objects) {
-            RunningImageEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:imageOnserver.objectId];
-            
-            //如果本地不存在,将服务端的record写入数据库
-            if (localEntity == nil) {
-                [[AirLocalPersistence shareLocalPersistenceInstance] createImage:imageOnserver withCompleteBlock:^{
-                    
-                } withErrorBlock:^{
-                    
-                }];
-            }
-            //本地已经存在数据
-            else
-            {
-                
-                
-            }
-            
-        }
-        
-        result(YES);
+        [[AirLocalPersistence shareLocalPersistenceInstance] PersistenceImagesFromServerToLocal:objects withCompleteBlock:^{
+            result(YES);
+        } withErrorBlock:^{
+            result(NO);
+        }];
     }];
     
     
@@ -139,10 +106,6 @@
         //如果是本地未上传的数据
         if (record.objectId ==nil) {
             RunningRecord *newrecord = [RunningRecord object];
-            
-            AVACL *acl = [AVACL ACL];
-            [acl setReadAccess:YES forUser:[AVUser currentUser]]; //此处设置的是所有人的可读权限
-            [acl setWriteAccess:YES forUser:[AVUser currentUser]]; //而这里设置了文件创建者的写权限
             
             newrecord.path = record.path;
             newrecord.time = record.time;//跑步时间  整型  单位为s
