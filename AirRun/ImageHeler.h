@@ -41,4 +41,6 @@
 + (void)configAvatar:(UIImageView *)imageview;
 
 + (void)configAvatarBackground:(UIImageView *)imageview;
+
++ (UIImage *)convertViewToImage:(UIView*)v;
 @end

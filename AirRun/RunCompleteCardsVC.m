@@ -403,7 +403,7 @@ static const char *INDEX = "index";
 {
     if (buttonType == ShareViewButtonTypeWeiBo) {
         [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
-        [AVOSCloudSNS shareText:@"sfsdf" andLink:@"dsfsdf" andImage:nil toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:[ImageHeler convertViewToImage:_display] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
             NSLog(@"%@",error);
         } andProgress:^(float percent) {
@@ -416,10 +416,12 @@ static const char *INDEX = "index";
         SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
         req.scene = WXSceneTimeline;
         req.text = @"这里写你要分享的内容。";
-        req.bText = YES;
+        req.bText = NO;
         req.message = WXMediaMessage.message;
         req.message.title = @"ddd";
-
+        WXImageObject *imageObject = [[WXImageObject alloc] init];
+        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_display]);
+        req.message.mediaObject = imageObject;
         [WXApi sendReq:req];
        
     }

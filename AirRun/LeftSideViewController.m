@@ -63,24 +63,24 @@
         case 0:
             [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[RunViewController alloc] init]]
                                                          animated:NO];
+            [self.sideMenuViewController setPanGestureEnabled:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 1:
             [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]]
                                                          animated:NO];
+            [self.sideMenuViewController setPanGestureEnabled:YES];
             [self.sideMenuViewController hideMenuViewController];
             break;
         case 2:
             [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:[[SettingViewController alloc] init]]
                                                          animated:NO];
+            [self.sideMenuViewController setPanGestureEnabled:YES];
             [self.sideMenuViewController hideMenuViewController];
             
             break;
         case 3:
         {
-//            RunCompleteCardsVC *runVC = [[RunCompleteCardsVC alloc] init];
-//            [self.sideMenuViewController setContentViewController:runVC animated:NO];
-//            [self.sideMenuViewController hideMenuViewController];
             [self sendMailInApp];
         }
             break;
@@ -130,12 +130,14 @@
                 // 允许用户使用应用
                 ProfileViewController *profile = [[ProfileViewController alloc] initWithStyle:UITableViewStyleGrouped];
                 [self.sideMenuViewController setContentViewController:[[NavViewController alloc] initWithRootViewController:profile] animated:YES];
+                [self.sideMenuViewController setPanGestureEnabled:YES];
                 [self.sideMenuViewController hideMenuViewController];
                 
             } else {
                 //缓存用户对象为空时，可打开用户注册界面…
                 RegisterAndLoginViewController *RegisterAndLogin = [[RegisterAndLoginViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:RegisterAndLogin] animated:YES];
+                [self.sideMenuViewController setPanGestureEnabled:NO];
                 [self.sideMenuViewController hideMenuViewController];
             }
         }];
@@ -177,7 +179,7 @@
     
     if (indexPath.section == 1) {
         NSArray *titles = @[@"跑步", @"运动数据", @"设置",@"支持与反馈"];
-        NSArray *images = @[@"runner", @"timeline", @"setting",@"setting"];
+        NSArray *images = @[@"runner", @"timeline", @"setting",@"info"];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
         [image setImage:[UIImage imageNamed:[images objectAtIndex:indexPath.row]]];
