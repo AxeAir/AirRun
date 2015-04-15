@@ -12,6 +12,7 @@
 @interface RecordDetailViewController : UIViewController
 
 @property (strong, nonatomic) RunningRecordEntity *record;
-@property (weak, nonatomic) IBOutlet UILabel *kcalAppleLabel;
+@property (strong, nonatomic) NSString *kaclText;
+
 
 @end

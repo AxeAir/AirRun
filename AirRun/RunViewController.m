@@ -37,6 +37,7 @@
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
 const static NSInteger PauseViewHeight = 60;
+const static CGFloat ReadyViewHeight = 45;
 
 const char *INPOSITION = "InPosition";
 const char *OUTPOSITION = "OutPosition";
@@ -209,10 +210,6 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)p_setLayout {
-    
-    _readyView = [[ReadyView alloc] initWithText:@"适合户外跑步"];
-    _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, 45);
-    [self.view addSubview:_readyView];
     
     _startButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_startButton setTitle:@"开始" forState:UIControlStateNormal];
@@ -501,7 +498,7 @@ const char *OUTPOSITION = "OutPosition";
             [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"start"] AtLocation:_runManager.points.firstObject];
             
             [UIView animateWithDuration:0.3 animations:^{
-                _readyView.frame = CGRectMake(0, -25, self.view.bounds.size.width, 25);
+                _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
             } completion:^(BOOL finished) {
                 [_readyView removeFromSuperview];
                 [UIView animateWithDuration:0.3 animations:^{
@@ -588,11 +585,21 @@ const char *OUTPOSITION = "OutPosition";
                        [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
                            _runManager.pm = pm25.AQI[0];
                            [self p_setTitle];
+                           
                        } failure:^(NSError *error) {}];
                        
                        [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
+                           
+                           _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
+                           _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
+                           [self.view addSubview:_readyView];
+                           
+                           [UIView animateWithDuration:0.5 animations:^{
+                               _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, ReadyViewHeight);
+                           }];
+                           
                        } failure:^(NSError *error) {}];
                        
                    }];
@@ -698,6 +705,7 @@ const char *OUTPOSITION = "OutPosition";
                                                    timestamp:newLocation.timestamp];
     }
     
+    //得到温度和PM
     if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
         [self p_getLocationNameWithLocation:newLocation];
     }

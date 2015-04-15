@@ -153,11 +153,11 @@
 
 #pragma mark - Delegate
 
-- (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record {
+- (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record Kcal:(NSString *)kcalText{
     
     RecordDetailViewController *vc = [[RecordDetailViewController alloc] init];
     vc.record = record;
-    
+    vc.kaclText = kcalText;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
