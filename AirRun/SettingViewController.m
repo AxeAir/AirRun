@@ -79,6 +79,13 @@
     if (cell ==nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifer];
     }
+    else{
+        
+        for (UIView *v in cell.subviews) {
+            [v removeFromSuperview];
+        }
+        
+    }
     
     UILabel *title = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 100, HEIGHT(cell))];
     [title setFont:[UIFont systemFontOfSize:14]];
@@ -160,7 +167,7 @@
                 [HUDHelper showHUD:@"同步中" andView:self.view andHUD:hud];
                 [[PersistenceManager shareManager] syncWithComplete:^(BOOL successed) {
                     
-                    [hud hide:YES];
+                    [HUDHelper showComplete:@"同步成功" addView:self.view addHUD:hud delay:2];
                     
                 }];
             }

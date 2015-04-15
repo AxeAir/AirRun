@@ -9,7 +9,22 @@
 #import "WeatherManager.h"
 #import <TMCache.h>
 
+@interface WeatherManager()
+
+
+@end
+
 @implementation WeatherManager
+
++ (instancetype)shareManager
+{
+    static WeatherManager *manager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        manager = [[WeatherManager alloc] init];
+    });
+    return manager;
+}
 
 
 - (void)getPM25WithCityName:(NSString *)cityname success:(void (^)(PM25Model *))success failure:(void (^)(NSError *))failure
@@ -122,5 +137,43 @@
 - (void)getWeatherWithIPAddress:(NSString *)ip success:(void (^)(NSDictionary *))success failure:(void (^)(NSError *))failure
 {
     
+}
+
+- (void )getRecommandInfoWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude city:(NSString *)cityName result:(void (^)(NSString *recommand))block;
+{
+    __block WeatherModel *weatherModel =nil;
+    __block PM25Model *pm25Model =nil;
+    dispatch_queue_t dispatchQueue = dispatch_queue_create("ted.queue.next", DISPATCH_QUEUE_CONCURRENT);
+    dispatch_group_t dispatchGroup = dispatch_group_create();
+    dispatch_group_async(dispatchGroup, dispatchQueue, ^(){
+        [[WeatherManager shareManager] getWeatherWithLongitude:longitude latitude:latitude success:^(WeatherModel *responseObject) {
+            weatherModel = responseObject;
+            
+        } failure:^(NSError *error) {
+            
+        }];
+    });
+    dispatch_group_async(dispatchGroup, dispatchQueue, ^(){
+        [[WeatherManager shareManager] getPM25WithCityName:cityName success:^(PM25Model *pm25) {
+            pm25Model = pm25;
+        } failure:^(NSError *error) {
+            
+        }];
+    });
+    dispatch_group_notify(dispatchGroup, dispatch_get_main_queue(), ^(){
+        
+        if (weatherModel != nil && pm25Model !=nil) {
+            if ([pm25Model.AQI[0] integerValue]>150||[weatherModel.wind integerValue]>4) {
+                block(@"不适合");
+            }
+            
+            
+        }
+        else
+        {
+            block(nil);
+        }
+        
+    });
 }
 @end

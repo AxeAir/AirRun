@@ -693,7 +693,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
-//        [self p_getLocationNameWithLocation:newLocation];
+        //[self p_getLocationNameWithLocation:newLocation];
     }
     
     if (_runManager.runState == RunStateRunning) {//是在跑步过程中

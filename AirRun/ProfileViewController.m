@@ -240,8 +240,7 @@
             break;
             
         case 5:{
-            
-            
+        
             NSString *bir = [_user objectForKey:@"birthday"];
             
             if (bir ==nil || [bir isEqualToString:@""]) {

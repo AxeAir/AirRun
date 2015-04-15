@@ -87,7 +87,6 @@
 		E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668F9C1ACA5DB2009A0D61 /* LeftSideViewController.m */; };
 		E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FAA1ACBB55C009A0D61 /* HeaderView.m */; };
 		E5668FB71ACBC128009A0D61 /* JuheApisSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FB41ACBC128009A0D61 /* JuheApisSDK.a */; };
-		E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FBA1ACBC3A9009A0D61 /* AIRDataManager.m */; };
 		E5668FBD1ACBC650009A0D61 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FBC1ACBC650009A0D61 /* libc++.dylib */; };
 		E5668FBF1ACBC67F009A0D61 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FBE1ACBC67F009A0D61 /* CoreLocation.framework */; };
 		E5668FC11ACBC68C009A0D61 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FC01ACBC68C009A0D61 /* CoreTelephony.framework */; };
@@ -287,8 +286,6 @@
 		E5668FB41ACBC128009A0D61 /* JuheApisSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = JuheApisSDK.a; sourceTree = "<group>"; };
 		E5668FB51ACBC128009A0D61 /* JHAPISDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHAPISDK.h; sourceTree = "<group>"; };
 		E5668FB61ACBC128009A0D61 /* JHOpenidSupplier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JHOpenidSupplier.h; sourceTree = "<group>"; };
-		E5668FB91ACBC3A9009A0D61 /* AIRDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIRDataManager.h; sourceTree = "<group>"; };
-		E5668FBA1ACBC3A9009A0D61 /* AIRDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIRDataManager.m; sourceTree = "<group>"; };
 		E5668FBC1ACBC650009A0D61 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		E5668FBE1ACBC67F009A0D61 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		E5668FC01ACBC68C009A0D61 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -840,8 +837,6 @@
 		E5668FB81ACBC39A009A0D61 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				E5668FB91ACBC3A9009A0D61 /* AIRDataManager.h */,
-				E5668FBA1ACBC3A9009A0D61 /* AIRDataManager.m */,
 				E5668FC41ACBC739009A0D61 /* WeatherManager.h */,
 				E5668FC51ACBC739009A0D61 /* WeatherManager.m */,
 				E5B9A2BC1AD6B58D005BB981 /* PersistenceManager.h */,
@@ -1186,7 +1181,6 @@
 				E5B980061AD68344009771BF /* ShareView.m in Sources */,
 				E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */,
 				96982B6D1AD16DE600040A50 /* DocumentHelper.m in Sources */,
-				E5668FBB1ACBC3A9009A0D61 /* AIRDataManager.m in Sources */,
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
 				E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */,
 				9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */,
@@ -1364,6 +1358,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1375,8 +1370,10 @@
 					"$(PROJECT_DIR)/AirRun",
 					/Users/mrche/Downloads/WeChat_SDK_Sample/SDKExport,
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};

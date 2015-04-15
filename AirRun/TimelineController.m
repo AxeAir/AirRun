@@ -15,7 +15,7 @@
 #import "RecordDetailViewController.h"
 #import "ImageHeler.h"
 
-@interface TimelineController () <TimelineTableViewCellDelegate>
+@interface TimelineController () <TimelineTableViewCellDelegate,UIActionSheetDelegate>
 
 @property (nonatomic, strong) UIImageView  *headerbackgroundImageView;
 @property (nonatomic, strong) UIImageView  *headerImageView;
@@ -40,15 +40,7 @@
     [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
     [_navButton addTarget:self action:@selector(menuButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:_navButton];
-    
-    
-    [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
-        _dataSource = arraydata;
-        [self.tableView reloadData];
-    } withErrorBlock:^{
-        
-    }];
-   
+
 }
 
 
@@ -62,6 +54,17 @@
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 
     self.navigationController.navigationBarHidden = YES;
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
+        _dataSource = arraydata;
+        //[self.tableView reloadData];
+    } withErrorBlock:^{
+        
+    }];
 }
 
 #pragma mark - Table view data source
@@ -159,6 +162,13 @@
     vc.record = record;
     vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)TimelineTableViewCellDidSelcctMore:(RunningRecordEntity *)record
+{
+    UIActionSheet *actionsheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"删除" otherButtonTitles:@"分享", nil];
+    [actionsheet showInView:self.view];
+    
 }
 
 #pragma mark KVC

@@ -53,7 +53,7 @@
                        @{@"name":@"冰淇淋",@"kcal":@64,@"dw":@"个",@"image":@"ice"},
                        @{@"name":@"蛋糕",@"kcal":@230,@"dw":@"块",@"image":@"cake"},
                        @{@"name":@"米饭",@"kcal":@174,@"dw":@"碗",@"image":@"rice"},
-                       @{@"name":@"煎蛋",@"kcal":@100,@"dw":@"个",@"image":@"bread"},
+                       @{@"name":@"煎蛋",@"kcal":@100,@"dw":@"个",@"image":@"egg"},
                        @{@"name":@"肉丝",@"kcal":@300,@"dw":@"盆",@"image":@"rose"},
                        ];
     //主页面
@@ -116,16 +116,12 @@
     
     UIImageView *icon = [[UIImageView alloc] initWithFrame:CGRectMake(MaxX(kcal), 10, 30, 30)];
     [icon setImage:[UIImage imageNamed:[selectDic objectForKey:@"image"]]];
-    
-    
-    
-    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(MaxX(_mainView) -40, 10, 30, 30)];
-    [shareButton setImage:[UIImage imageNamed:@"share"] forState:UIControlStateNormal];
+    UIButton *shareButton = [[UIButton alloc] initWithFrame:CGRectMake(MaxX(_mainView) -50, 10, 30, 30)];
+    [shareButton setImage:[UIImage imageNamed:@"dot"] forState:UIControlStateNormal];
+    [shareButton addTarget:self action:@selector(TouchMore:) forControlEvents:UIControlEventTouchUpInside];
     [_headerView addSubview:shareButton];
     [_headerView addSubview:icon];
 }
-
-
 
 - (void)createMapImage
 {
@@ -322,9 +318,18 @@
 }
 
 
+#pragma mark Action
 - (void)disSelctMap:(id)sender
 {
     [_delegate TimelineTableViewCellDidSelcct:_runningRecord];
+}
+
+- (void)TouchMore:(id)sender
+{
+    if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidSelcctMore:)]) {
+        [_delegate TimelineTableViewCellDidSelcctMore:_runningRecord];
+    }
+    
 }
 
 

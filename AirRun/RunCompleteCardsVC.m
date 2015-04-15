@@ -260,7 +260,7 @@ static const char *INDEX = "index";
     _parameters.finishtime = [[NSDate alloc] init];
 
     _parameters.dirty = @1;
-    _parameters.city = @"李家沱";
+    //_parameters.city = @"李家沱";
 
     if (_ImageArray !=nil ||[_ImageArray count]!=0) {
         

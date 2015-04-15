@@ -14,10 +14,9 @@
 #import <Mantle.h>
 #import <TMCache.h>
 
-
 @interface WeatherManager : NSObject
 
-
++ (instancetype)shareManager;
 
 /**
  *  通过城市名称获得PM2.5
@@ -50,5 +49,7 @@
  */
 - (void)getWeatherWithIPAddress:(NSString *)ip success:(void (^)(NSDictionary * responseObject))success failure:(void (^)(NSError *error))failure;
 
+
+- (void )getRecommandInfoWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude city:(NSString *)cityName result:(void (^)(NSString *recommand))block;
 
 @end

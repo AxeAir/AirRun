@@ -39,7 +39,7 @@
     hud.mode = MBProgressHUDModeCustomView;
     hud.dimBackground = NO;
     hud.labelText = text;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark"]];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
     // Set custom view mode
     hud.mode = MBProgressHUDModeCustomView;
     [hud show:YES];
@@ -55,7 +55,7 @@
     hud.mode = MBProgressHUDModeCustomView;
     hud.dimBackground = NO;
     hud.labelText = text;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"no"]];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong"]];
     // Set custom view mode
     hud.mode = MBProgressHUDModeCustomView;
     [hud show:YES];
@@ -70,7 +70,7 @@
     hud.mode = MBProgressHUDModeCustomView;
     hud.dimBackground = NO;
     hud.labelText = text;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Checkmark"]];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"checkmark"]];
     // Set custom view mode
     [hud show:YES];
     [hud hide:YES afterDelay:delay];
@@ -83,7 +83,7 @@
     hud.mode = MBProgressHUDModeCustomView;
     hud.dimBackground = NO;
     hud.labelText = text;
-    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"no"]];
+    hud.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"wrong"]];
     // Set custom view mode
     [hud show:YES];
     [hud hide:YES afterDelay:delay];
