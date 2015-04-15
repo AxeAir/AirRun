@@ -8,8 +8,8 @@
 
 #import "GuideView.h"
 
-static const CGFloat MARGINSIDE = 5;
-static const CGFloat MARGINUP = 5;
+static const CGFloat MARGINSIDE = 10;
+static const CGFloat MARGINUP = 20;
 
 @interface GuideView ()
 

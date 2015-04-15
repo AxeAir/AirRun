@@ -592,13 +592,15 @@ const char *OUTPOSITION = "OutPosition";
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
                            
-                           _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
-                           _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
-                           [self.view addSubview:_readyView];
-                           
-                           [UIView animateWithDuration:0.5 animations:^{
-                               _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, ReadyViewHeight);
-                           }];
+                           if (!_readyView) {
+                               _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
+                               _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
+                               [self.view addSubview:_readyView];
+                               
+                               [UIView animateWithDuration:0.5 animations:^{
+                                   _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, ReadyViewHeight);
+                               }];
+                           }
                            
                        } failure:^(NSError *error) {}];
                        

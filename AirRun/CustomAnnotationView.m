@@ -9,10 +9,10 @@
 #import "CustomAnnotationView.h"
 #import "CustomAnnotation.h"
 
-static CGFloat kBottomMargin = 6.0;
-static CGFloat kLeftMargin = 6.0;
-static CGFloat kRightMargin = 6.0;
-static CGFloat kTopMargin = 6.0;
+static CGFloat kBottomMargin = 3.0;
+static CGFloat kLeftMargin = 3.0;
+static CGFloat kRightMargin = 3.0;
+static CGFloat kTopMargin = 3.0;
 static CGFloat kPointHeight = 14.0;
 
 @interface CustomAnnotationView ()
@@ -47,7 +47,7 @@ static CGFloat kPointHeight = 14.0;
     CustomAnnotation *customAnnotation = (CustomAnnotation *)self.annotation;
     if (customAnnotation) {
         
-        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 60, 60*customAnnotation.image.size.height/customAnnotation.image.size.width)];
+        _imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 40, 40*customAnnotation.image.size.height/customAnnotation.image.size.width)];
         _imageView.image = customAnnotation.image;
         //计算自身的frame大小
 //        CGFloat selfWidth = customAnnotation.imageArray.count * kImageViewWidth + (customAnnotation.imageArray.count - 1) *kSpanMargin + kLeftMargin + kRightMargin;
