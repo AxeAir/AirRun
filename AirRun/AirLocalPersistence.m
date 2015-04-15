@@ -179,7 +179,7 @@
                             withErrorBlock:(ErrorBlock)errorBlock
 {
     for (RunningImage *imageOnserver in images) {
-        RunningImageEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningRecordEntity class]withAttribute:@"objectId" withValue:imageOnserver.objectId];
+        RunningImageEntity *localEntity = [[AirLocalPersistence shareLocalPersistenceInstance] getObject: [RunningImageEntity class] withAttribute:@"objectId" withValue:imageOnserver.objectId];
         
         //如果本地不存在,将服务端的record写入数据库
         if (localEntity == nil) {
