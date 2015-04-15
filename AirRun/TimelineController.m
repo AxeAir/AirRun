@@ -161,7 +161,7 @@
     
     RecordDetailViewController *vc = [[RecordDetailViewController alloc] init];
     vc.record = record;
-    vc.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    
     [self.navigationController pushViewController:vc animated:YES];
 }
 

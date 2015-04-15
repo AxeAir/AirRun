@@ -43,7 +43,7 @@
     [self.view addSubview:_scrollView];
     
     GuideView *guideView1 = [[GuideView alloc] initWithFrame:CGRectMake(15, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
-    guideView1.image = [UIImage imageNamed:@"warmup"];
+    guideView1.image = [UIImage imageNamed:@"changweibo"];
     guideView1.closeBlock = ^(GuideView *view){
         [UIView transitionWithView:self.view.superview
                           duration:0.5
@@ -56,6 +56,7 @@
     [_scrollView addSubview:guideView1];
     
     GuideView *guideView2 = [[GuideView alloc] initWithFrame:CGRectMake(15+_scrollView.frame.size.width*1, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
+    guideView2.image = [UIImage imageNamed:@"rightway"];
     guideView2.closeBlock = ^(GuideView *view){
         [UIView transitionWithView:self.view.superview
                           duration:0.5
@@ -68,6 +69,7 @@
     [_scrollView addSubview:guideView2];
     
     GuideView *guideView3 = [[GuideView alloc] initWithFrame:CGRectMake(15+_scrollView.frame.size.width*2, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
+    guideView3.image = [UIImage imageNamed:@"shoes"];
     guideView3.closeBlock = ^(GuideView *view){
         
         [UIView transitionWithView:self.view.superview
@@ -90,6 +92,7 @@
                             [self.view removeFromSuperview];
                         } completion:nil];
     };
+    guideView4.image = [UIImage imageNamed:@"strech"];
     [self p_addShowdowToView:guideView4];
     [_scrollView addSubview:guideView4];
     

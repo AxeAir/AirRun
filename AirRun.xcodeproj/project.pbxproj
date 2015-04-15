@@ -24,6 +24,7 @@
 		9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9673DD561AD4F52F006E64B7 /* GuideView.m */; };
 		967D3D651AD960D800A55B42 /* RunManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 967D3D641AD960D800A55B42 /* RunManager.m */; };
 		967F64CA1ADE430C0042A39D /* SpeakHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F64C91ADE430C0042A39D /* SpeakHelper.m */; };
+		967F64CD1ADE878F0042A39D /* UIButton+TapAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F64CC1ADE878F0042A39D /* UIButton+TapAnimation.m */; };
 		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
@@ -161,6 +162,8 @@
 		967D3D641AD960D800A55B42 /* RunManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunManager.m; sourceTree = "<group>"; };
 		967F64C81ADE430C0042A39D /* SpeakHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpeakHelper.h; sourceTree = "<group>"; };
 		967F64C91ADE430C0042A39D /* SpeakHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpeakHelper.m; sourceTree = "<group>"; };
+		967F64CB1ADE878F0042A39D /* UIButton+TapAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+TapAnimation.h"; sourceTree = "<group>"; };
+		967F64CC1ADE878F0042A39D /* UIButton+TapAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+TapAnimation.m"; sourceTree = "<group>"; };
 		96982B401ACF7EE000040A50 /* ValidateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateHelper.h; sourceTree = "<group>"; };
 		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
 		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
@@ -646,6 +649,8 @@
 			children = (
 				E52BAC4C1AD2B4A000EC051C /* NSDate+change.h */,
 				E52BAC4D1AD2B4A000EC051C /* NSDate+change.m */,
+				967F64CB1ADE878F0042A39D /* UIButton+TapAnimation.h */,
+				967F64CC1ADE878F0042A39D /* UIButton+TapAnimation.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -1183,6 +1188,7 @@
 				E5B9A2BE1AD6B58D005BB981 /* PersistenceManager.m in Sources */,
 				96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
+				967F64CD1ADE878F0042A39D /* UIButton+TapAnimation.m in Sources */,
 				96982B451ACF804200040A50 /* HUDHelper.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,
 				E59BF3EB1ACBF7E10033D1DC /* CompleteDisplayCard.m in Sources */,
