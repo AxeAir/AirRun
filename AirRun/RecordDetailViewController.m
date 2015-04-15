@@ -145,7 +145,6 @@ static const char *INDEX = "index";
 - (void)p_addPhotoAnnotation {
     _images = [[NSMutableArray alloc] init];
     for (RunningImageEntity *imgEntity in _imgEntities) {
-        
         NSString *imgName = [imgEntity.localpath lastPathComponent];
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgName AtFolder:kPathImageFolder]];
         NSInteger idx = [_imgEntities indexOfObject:imgEntity];

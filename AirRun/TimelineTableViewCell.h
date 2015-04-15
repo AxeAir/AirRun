@@ -25,4 +25,5 @@ typedef void (^didMapSelect)(RunningRecordEntity *record);
 
 - (void)TimelineTableViewCellDidSelcct:(RunningRecordEntity *)record;
 
+- (void)TimelineTableViewCellDidSelcctMore:(RunningRecordEntity *)record;
 @end
