@@ -55,10 +55,9 @@ static const CGFloat MARGINUP = 5;
     [_scrollView addSubview:_imageView];
     
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [_closeButton setImage:[UIImage imageNamed:@"cancel"] forState:UIControlStateNormal];
+    [_closeButton setImage:[UIImage imageNamed:@"closetips"] forState:UIControlStateNormal];
     [_closeButton sizeToFit];
     _closeButton.center = CGPointMake(self.bounds.size.width-5-_closeButton.bounds.size.width/2, 5+_closeButton.bounds.size.height/2);
-    _closeButton.backgroundColor = [UIColor redColor];
     [_closeButton addTarget:self action:@selector(closeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_closeButton];
     
