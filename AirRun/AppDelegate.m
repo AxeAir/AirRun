@@ -99,8 +99,8 @@
     }
     
     // Added Introduction View Controller
-    NSArray *coverImageNames = @[@"intro_1", @"finish", @"finish"];
-    NSArray *backgroundImageNames = @[@"seabg", @"seabg", @"seabg"];
+    NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"finish"];
+    NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"seabg"];
     self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
     
      //Example 2
