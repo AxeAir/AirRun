@@ -24,5 +24,6 @@
 @property (nonatomic, strong) AVFile    *mapshot;
 @property (nonatomic, strong) NSString  *heart;
 @property (nonatomic, strong) NSString  *city;
+@property (nonatomic, strong) NSNumber  *feel;
 
 @end

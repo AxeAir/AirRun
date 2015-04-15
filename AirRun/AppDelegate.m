@@ -49,7 +49,7 @@
     [DocumentHelper creatFolderAtDocument:kPathImageFolder];
     [DocumentHelper creatFolderAtDocument:kHeartImage];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    
+    [[UIApplication sharedApplication] setStatusBarHidden:YES];
     UINavigationController *navigationController = nil;
     
     if ([AVUser currentUser]==nil) {
@@ -76,11 +76,6 @@
     if ([AVUser currentUser] ==nil) {
         [sideMenuViewController setPanGestureEnabled:NO];
     }
-    self.window.rootViewController = sideMenuViewController;
-    
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
-    
     if (FSystenVersion>=8) {
         UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
                                                 | UIUserNotificationTypeBadge
@@ -98,9 +93,13 @@
          UIRemoteNotificationTypeSound];
     }
     
+    self.window.rootViewController = sideMenuViewController;
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
+    
     // Added Introduction View Controller
-    NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"finish"];
-    NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"seabg"];
+    NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"intro_3_text"];
+    NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"intro_3"];
     self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
     
      //Example 2
@@ -118,6 +117,7 @@
         // enter main view , write your code ...
         //        ViewController *mainVC = [[ViewController alloc] init];
         //        weakSelf.window.rootViewController = mainVC;
+    
         
     };
     

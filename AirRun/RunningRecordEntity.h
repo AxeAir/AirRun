@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSString * city;
 @property (nonatomic, retain) NSNumber * dirty;
 @property (nonatomic, retain) NSDate   * updateat;
+@property (nonatomic, retain) NSNumber * feel;
 
 @property (nonatomic, retain) NSDictionary *heartimages;
 

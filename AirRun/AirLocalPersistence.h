@@ -52,16 +52,49 @@
 
 #pragma maek Server Persistence
 
+/**
+ *  将一条本地不存在记录的数据持久化
+ *
+ *  @param recordOnServer 一条本地不存在的远程数据
+ *  @param completeBlock  成功
+ *  @param errorBlock     失败
+ */
 - (void)createRecord:(RunningRecord *)recordOnServer
    withCompleteBlock:(CompleteBlock)completeBlock
       withErrorBlock:(ErrorBlock)errorBlock;
 
+/**
+ *  将网络上的数据持久化到本地
+ *
+ *  @param records       数组record
+ *  @param completeBlock 成功回调
+ *  @param errorBlock    失败
+ */
+- (void)PersistenceRecordsFromServerToLocal:(NSArray *)records
+                          withCompleteBlock:(CompleteBlock)completeBlock
+                             withErrorBlock:(ErrorBlock)errorBlock;
 
-- (void)PersistenceRecord;
-
-
+/**
+ *  将一条本地不存在图片记录进行持久化
+ *
+ *  @param imageObServer 一条本地不存在的远端图片数据
+ *  @param completeBlock 成功
+ *  @param errorBlock    失败
+ */
 - (void)createImage:(RunningImage *)imageObServer
   withCompleteBlock:(CompleteBlock)completeBlock
      withErrorBlock:(ErrorBlock)errorBlock;
+
+
+/**
+ *  将网络上的图片数据持久化到本地
+ *
+ *  @param records       图片记录数组
+ *  @param completeBlock 成功回调
+ *  @param errorBlock    失败
+ */
+- (void)PersistenceImagesFromServerToLocal:(NSArray *)images
+                          withCompleteBlock:(CompleteBlock)completeBlock
+                             withErrorBlock:(ErrorBlock)errorBlock;
 
 @end

@@ -21,6 +21,9 @@
 @dynamic mapshot;
 @dynamic heart;
 @dynamic city;
+@dynamic feel;
+
+
 + (NSString *)parseClassName {
     return @"RunningRecord";
 }

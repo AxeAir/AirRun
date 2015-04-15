@@ -17,6 +17,7 @@
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dirty" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="distance" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="feel" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="finishtime" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="heart" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="identifer" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,6 +32,6 @@
     </entity>
     <elements>
         <element name="RunningImageEntity" positionX="-54" positionY="63" width="128" height="195"/>
-        <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="270"/>
+        <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="285"/>
     </elements>
 </model>
