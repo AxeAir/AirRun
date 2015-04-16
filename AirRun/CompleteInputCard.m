@@ -30,30 +30,7 @@
 
 - (void)commomInit
 {
-//    //time
-//    UILabel *dayLabel = [[UILabel alloc] init];
-//    [dayLabel setFrame:CGRectMake(20, 10, 0, 0)];
-//    [dayLabel setText:[DateHelper getFormatterDate:@"dd"]];
-//    [dayLabel setFont:[UIFont systemFontOfSize:25]];
-//    [dayLabel setTextColor:[UIColor whiteColor]];
-//    [dayLabel sizeToFit];
-//    [self addSubview:dayLabel];
-//    
-//    UILabel *weekLabel = [[UILabel alloc] init];
-//    [weekLabel setFrame:CGRectMake(MaxX(dayLabel)+5, 10, 0, 0)];
-//    [weekLabel setText:[[DateHelper getFormatterDate:@"EEEE"] stringByReplacingOccurrencesOfString:@"星期" withString:@"周"]];
-//    [weekLabel setFont:[UIFont systemFontOfSize:12]];
-//    [weekLabel setTextColor:[UIColor whiteColor]];
-//    [weekLabel sizeToFit];
-//    [self addSubview:weekLabel];
-//    
-//    UILabel *monthLabel = [[UILabel alloc] init];
-//    [monthLabel setFrame:CGRectMake(MaxX(dayLabel)+5, MaxY(weekLabel), 0, 0)];
-//    [monthLabel setText:[NSString stringWithFormat:@"%@月",[DateHelper getFormatterDate:@"MM"]]];
-//    [monthLabel setFont:[UIFont systemFontOfSize:12]];
-//    [monthLabel setTextColor:[UIColor whiteColor]];
-//    [monthLabel sizeToFit];
-//    [self addSubview:monthLabel];
+
     
     UILabel *feelLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, WIDTH(self), 20)];
     [feelLabel setText:@"本次运动的感觉如何"];

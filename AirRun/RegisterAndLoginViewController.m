@@ -97,7 +97,7 @@ typedef enum : NSUInteger {
 - (void)p_layout {
     
     _bgImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    _bgImage.image = [UIImage imageNamed:@"bg.png"];
+    _bgImage.image = [UIImage imageNamed:@"bg"];
     [self.view addSubview:_bgImage];
     
     _changeButton = [UIButton buttonWithType:UIButtonTypeSystem];

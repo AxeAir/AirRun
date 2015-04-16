@@ -61,7 +61,9 @@
     UINavigationController *navigationController = nil;
     
     if ([AVUser currentUser]==nil) {
-         navigationController = [[UINavigationController alloc] initWithRootViewController:[[RegisterAndLoginViewController alloc] init]];
+        RegisterAndLoginViewController *registerAndLogin =[[RegisterAndLoginViewController alloc] init];
+        navigationController = [[UINavigationController alloc] initWithRootViewController:registerAndLogin];
+        [registerAndLogin startAnimation];
     }
     else
     {
