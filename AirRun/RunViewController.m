@@ -117,9 +117,6 @@ const char *OUTPOSITION = "OutPosition";
     [_runManager addObserver:self forKeyPath:@"speed" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [_runManager addObserver:self forKeyPath:@"kcal" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:
-     UIApplicationWillEnterForegroundNotification object:nil];
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -327,11 +324,6 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 #pragma mark - Event
-#pragma mark Notification Event
-
-- (void)appWillEnterBackground:(NSNotificationCenter *)notification {
-    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-}
 
 #pragma mark Gesture Event
 
@@ -365,10 +357,13 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)pauseButtonTouch:(UIButton *)sender {
+    [self p_audioPlay:@"pause"];
     
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
+        
         [self p_pause];
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.runcardView.frame = CGRectMake(0, -RuncardViewHieght, self.view.bounds.size.width, RuncardViewHieght);
         } completion:^(BOOL finished) {
@@ -413,10 +408,11 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)contiuneButtonTouch:(UIButton *)sender {
+    [self p_audioPlay:@"continue"];
     
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
-        [self p_audioPlay:@"continue"];
+        
         [self p_continue];
         
         [RunViewControllerAnimation view:_contiuneButton
@@ -450,6 +446,8 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
+    [self p_audioPlay:@"finish"];
+    
     _runManager.runState = RunStateStop;
     
     if (_runManager.distance <= 25) {
@@ -469,6 +467,7 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
+    [self p_audioPlay:@"start"];
     
     //动画
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
@@ -489,6 +488,7 @@ const char *OUTPOSITION = "OutPosition";
             [_countView removeFromSuperview];
             
             //逻辑
+            
             self.navigationItem.rightBarButtonItem = _photoButton;
             self.navigationItem.leftBarButtonItem = _gpsButton;
             [_mapMaskView removeFromSuperview];
@@ -634,7 +634,7 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_audioPlay:(NSString *)name {
     
-    NSURL *startUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@"m4a"];
+    NSURL *startUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@"wav"];
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:startUrl error:nil];
     [_audioPlayer prepareToPlay];
     [_audioPlayer play];

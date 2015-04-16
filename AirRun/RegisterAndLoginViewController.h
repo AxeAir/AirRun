@@ -10,4 +10,6 @@
 
 @interface RegisterAndLoginViewController : UIViewController
 
+- (void)startAnimation;
+
 @end
