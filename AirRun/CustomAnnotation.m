@@ -19,6 +19,12 @@
     MKAnnotationView *returnedAnnotationView = nil;
     returnedAnnotationView = [[CustomAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"CustomeAnnotationView"];
     
+    returnedAnnotationView.layer.masksToBounds = NO;
+    returnedAnnotationView.layer.shadowColor = [UIColor blackColor].CGColor;
+    returnedAnnotationView.layer.shadowOpacity = 0.8;
+    returnedAnnotationView.layer.shadowRadius = 4;
+    returnedAnnotationView.layer.shadowOffset = CGSizeMake(1, 1.0);
+    
     return returnedAnnotationView;
 }
 

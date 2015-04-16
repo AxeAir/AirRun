@@ -98,7 +98,7 @@ static const char *INDEX = "index";
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbar"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg127"] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
 }
 
@@ -115,7 +115,7 @@ static const char *INDEX = "index";
     formatter.dateFormat = @"MM-dd HH:mm";
     _timeLable.text = [formatter stringFromDate:_record.finishtime];
     
-    _tempertureAndPMLable.text = [NSString stringWithFormat:@"%@ ℃\nPM %ld",_record.weather,[_record.pm25 longValue]];
+    _tempertureAndPMLable.text = [NSString stringWithFormat:@"%@\nPM %ld",_record.weather,[_record.pm25 longValue]];
     
     _avgSpeedLable.text = [NSString stringWithFormat:@"%.1f",[_record.averagespeed floatValue]];
     _durationLable.text = [DateHelper converSecondsToTimeString:[_record.time integerValue]];
@@ -133,8 +133,24 @@ static const char *INDEX = "index";
         
         UIImage *img = annotation.image;
         NSInteger index = [objc_getAssociatedObject(img, INDEX) integerValue];
-        EditImageView *editImageView = [[EditImageView alloc] initWithImages:this.images InView:this.view Editeable:NO];
-        editImageView.currentIndex = index;
+        
+        UIWindow* currentWindow = [UIApplication sharedApplication].keyWindow;
+        
+         __block EditImageView *editImageView;
+        
+        [UIView transitionWithView:currentWindow
+                          duration:0.5
+                           options:UIViewAnimationOptionTransitionCrossDissolve
+                        animations:^{
+                            editImageView = [[EditImageView alloc] initWithImages:this.images InView:currentWindow Editeable:NO];
+                        } completion:^(BOOL finished) {
+                            UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:this action:@selector(edieImageViewTap:)];
+                            [editImageView addGestureRecognizer:tapGesture];
+                            
+                            editImageView.currentIndex = index;
+                        }];
+        
+        
         
     };
     [_mapViewDelegate addMaksGrayWorldOverlay];
@@ -188,6 +204,20 @@ static const char *INDEX = "index";
 }
 
 #pragma mark - Event
+#pragma mark Gesture event
+
+- (void)edieImageViewTap:(UITapGestureRecognizer *)gesture {
+    UIView *view = gesture.view.superview;
+    
+    [UIView transitionWithView:view
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [gesture.view removeFromSuperview];
+                    } completion:nil];
+    
+    
+}
 #pragma mark Button event
 - (void)shareButtonTouch:(UIBarButtonItem *)button {
     
