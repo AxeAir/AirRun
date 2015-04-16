@@ -189,7 +189,6 @@
         [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
         [dataview addSubview:_timeLabel];
         [_timeLabel setText:[NSString stringWithFormat:@"%@",[self formatTime:(long)[_runningRecord.time integerValue]]]];
-
     
     return dataview;
 }
@@ -263,6 +262,7 @@
         for (RunningImageEntity *o in date) {
             
             UIImageView *view = [[UIImageView alloc] init];
+            view.tag = index +28888;
             if (![o.localpath isEqualToString:@""] && o.localpath !=nil) {
                 [view setImage:[UIImage imageWithContentsOfFile:[DocumentHelper DocumentPath:o.localpath]]];
             }
@@ -274,10 +274,16 @@
                 }];
                 
             }
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
+            [view setUserInteractionEnabled:YES];
+            [view addGestureRecognizer:tap];
             [view setFrame:CGRectMake((imagewidth+10)*index, 12.5, imagewidth, imagewidth)];
             [[view layer] setCornerRadius:5];
             [[view layer] setMasksToBounds:YES];
             [_heartImageView addSubview:view];
+            
+           
+            
             index ++;
         }
     }
@@ -346,6 +352,17 @@
         return [NSString stringWithFormat:@"%0.2ld:%0.2ld",seconds/60,seconds%60];
     }
     return nil;
+}
+
+
+- (void)handleTap:(UITapGestureRecognizer *)gesture
+{
+    if ([_delegate respondsToSelector:@selector(TimelineTableViewCellDidTapImage:AtIndex:)]) {
+        NSArray *date = [RunningImageEntity getHeartArrayByIdentifer:_runningRecord.identifer];
+        UIImageView *image = (UIImageView *)gesture.view;
+        [_delegate TimelineTableViewCellDidTapImage:date AtIndex:image.tag - 28888];
+    }
+   
 }
 
 @end

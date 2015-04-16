@@ -51,7 +51,6 @@
 		E50BE04B1AC8854A0030863D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE04A1AC8854A0030863D /* AppDelegate.m */; };
 		E50BE0511AC8854A0030863D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50BE04F1AC8854A0030863D /* Main.storyboard */; };
 		E50BE0531AC8854A0030863D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0521AC8854A0030863D /* Images.xcassets */; };
-		E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0541AC8854A0030863D /* LaunchScreen.xib */; };
 		E50BE0621AC8854A0030863D /* AirRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0611AC8854A0030863D /* AirRunTests.m */; };
 		E50BE07B1AC887200030863D /* DemoTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE07A1AC887200030863D /* DemoTestsSpec.m */; };
 		E51E98831ADA5D2B0050AE69 /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E51E98821ADA5D2B0050AE69 /* ZWIntroductionViewController.m */; };
@@ -106,6 +105,7 @@
 		E5AC95CF1ACD80FB00A6F133 /* UIView+CHQuartz.m in Sources */ = {isa = PBXBuildFile; fileRef = E5AC95CE1ACD80FB00A6F133 /* UIView+CHQuartz.m */; };
 		E5B980061AD68344009771BF /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B980051AD68344009771BF /* ShareView.m */; };
 		E5B9A2BE1AD6B58D005BB981 /* PersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5B9A2BD1AD6B58D005BB981 /* PersistenceManager.m */; };
+		E5DA8B661AE038B000A478C8 /* PhotoViewerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5DA8B651AE038B000A478C8 /* PhotoViewerController.m */; };
 		E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */; };
 		E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */; };
 		E5FAC7EC1AD0E9BE00A2C7DD /* RunningImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7EB1AD0E9BE00A2C7DD /* RunningImage.m */; };
@@ -216,7 +216,6 @@
 		E50BE04A1AC8854A0030863D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E50BE0501AC8854A0030863D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E50BE0521AC8854A0030863D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E50BE0551AC8854A0030863D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		E50BE05B1AC8854A0030863D /* AirRunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirRunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0601AC8854A0030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50BE0611AC8854A0030863D /* AirRunTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirRunTests.m; sourceTree = "<group>"; };
@@ -322,6 +321,8 @@
 		E5B980051AD68344009771BF /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareView.m; sourceTree = "<group>"; };
 		E5B9A2BC1AD6B58D005BB981 /* PersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceManager.h; sourceTree = "<group>"; };
 		E5B9A2BD1AD6B58D005BB981 /* PersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceManager.m; sourceTree = "<group>"; };
+		E5DA8B641AE038B000A478C8 /* PhotoViewerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhotoViewerController.h; sourceTree = "<group>"; };
+		E5DA8B651AE038B000A478C8 /* PhotoViewerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhotoViewerController.m; sourceTree = "<group>"; };
 		E5FAC7E21AD0106C00A2C7DD /* TimelineController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineController.h; sourceTree = "<group>"; };
 		E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TimelineController.m; sourceTree = "<group>"; };
 		E5FAC7E51AD0169B00A2C7DD /* TimelineTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TimelineTableViewCell.h; sourceTree = "<group>"; };
@@ -542,7 +543,6 @@
 				E50BE04A1AC8854A0030863D /* AppDelegate.m */,
 				E50BE04F1AC8854A0030863D /* Main.storyboard */,
 				E50BE0521AC8854A0030863D /* Images.xcassets */,
-				E50BE0541AC8854A0030863D /* LaunchScreen.xib */,
 				E50BE0451AC8854A0030863D /* Supporting Files */,
 			);
 			path = AirRun;
@@ -897,9 +897,19 @@
 			name = Draw;
 			sourceTree = "<group>";
 		};
+		E5DA8B601AE037BC00A478C8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E5DA8B641AE038B000A478C8 /* PhotoViewerController.h */,
+				E5DA8B651AE038B000A478C8 /* PhotoViewerController.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		E5FAC7E11AD0103200A2C7DD /* TimeLine */ = {
 			isa = PBXGroup;
 			children = (
+				E5DA8B601AE037BC00A478C8 /* Views */,
 				E5FAC7E21AD0106C00A2C7DD /* TimelineController.h */,
 				E5FAC7E31AD0106C00A2C7DD /* TimelineController.m */,
 				E5FAC7E51AD0169B00A2C7DD /* TimelineTableViewCell.h */,
@@ -1047,7 +1057,6 @@
 				961547C91AD8313A00D3CA5B /* RecordDetailViewController.xib in Resources */,
 				967F64D81ADFCE6F0042A39D /* start.wav in Resources */,
 				E50BE0511AC8854A0030863D /* Main.storyboard in Resources */,
-				E50BE0561AC8854A0030863D /* LaunchScreen.xib in Resources */,
 				967F64D71ADFCE6F0042A39D /* pause.wav in Resources */,
 				E50BE0531AC8854A0030863D /* Images.xcassets in Resources */,
 				E51E98921ADC2E670050AE69 /* read_me.txt in Resources */,
@@ -1176,6 +1185,7 @@
 				967D3D651AD960D800A55B42 /* RunManager.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
 				E52BAC491AD2761C00EC051C /* EditSignViewController.m in Sources */,
+				E5DA8B661AE038B000A478C8 /* PhotoViewerController.m in Sources */,
 				96982B611AD16CE600040A50 /* CountView.m in Sources */,
 				961547BF1AD7B6E100D3CA5B /* AboutUsViewController.m in Sources */,
 				E51E98831ADA5D2B0050AE69 /* ZWIntroductionViewController.m in Sources */,
@@ -1279,14 +1289,6 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		E50BE0541AC8854A0030863D /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E50BE0551AC8854A0030863D /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -1371,6 +1373,7 @@
 			baseConfigurationReference = 06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;
@@ -1393,6 +1396,7 @@
 			baseConfigurationReference = 8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = AirRun/Info.plist;

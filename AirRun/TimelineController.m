@@ -15,6 +15,8 @@
 #import "RecordDetailViewController.h"
 #import "ImageHeler.h"
 #import <UIActionSheet+BlocksKit.h>
+#import "PhotoViewerController.h"
+#import "DocumentHelper.h"
 
 @interface TimelineController () <TimelineTableViewCellDelegate,UIActionSheetDelegate>
 
@@ -179,6 +181,42 @@
     [actionsheet showInView:self.view];
 }
 
+- (void)TimelineTableViewCellDidTapImage:(NSArray *)path AtIndex:(NSInteger)index
+{
+    
+    BOOL isLocalFull = YES;
+    NSMutableArray *temp = [[NSMutableArray alloc] init];
+    for (RunningImageEntity *entity in path) {
+        if (![entity.localpath isEqualToString:@""] && entity.localpath !=nil) {
+            if ([DocumentHelper checkPathExist:[DocumentHelper DocumentPath:entity.localpath]]) {
+                [temp addObject:[UIImage imageWithContentsOfFile:[DocumentHelper DocumentPath:entity.localpath]]];
+            }
+            else{
+                isLocalFull = NO;
+                break;
+            }
+        }
+        else{
+            isLocalFull =NO;
+            break;
+        }
+    }
+    if (isLocalFull) {
+       [self presentViewController:[[PhotoViewerController alloc] initWithImageArray:temp AtIndex:index] animated:YES completion:^{
+           
+       }];
+    }
+    else
+    {
+        [self presentViewController:[[PhotoViewerController alloc] initWithURLArray:path AtIndex:index] animated:YES completion:^{
+            
+        }];
+    }
+    
+    
+    
+}
+
 #pragma mark KVC
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context{
     if (![keyPath isEqualToString:@"contentOffset"]) {
@@ -193,7 +231,7 @@
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    NSLog(@"%f",offsetY);
+    //NSLog(@"%f",offsetY);
     
     [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
     
@@ -201,7 +239,7 @@
         CGRect currentFrame = _headerbackgroundImageView.frame;
         currentFrame.origin.y = offsetY;
         currentFrame.size.height = 200+(-1)*offsetY;
-        NSLog(@"height:%f", currentFrame.size.height);
+        //NSLog(@"height:%f", currentFrame.size.height);
         _headerbackgroundImageView.frame = currentFrame;
         CGRect currentButton = _navButton.frame;
         currentButton.origin.y = offsetY+25;

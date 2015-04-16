@@ -27,4 +27,5 @@ typedef void (^didMapSelect)(RunningRecordEntity *record);
 
 - (void)TimelineTableViewCellDidSelcctDelete:(RunningRecordEntity *)record rowAtIndexPath:(NSIndexPath *)indexPath;
 
+- (void)TimelineTableViewCellDidTapImage:(NSArray *)path AtIndex:(NSInteger)index;
 @end
