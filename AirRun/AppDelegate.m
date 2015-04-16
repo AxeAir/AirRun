@@ -24,6 +24,7 @@
 #import "RunManager.h"
 #import "WeatherManager.h"
 #import "BackgroundModelManager.h"
+#import "LocationManager.h"
 
 
 @interface AppDelegate ()
@@ -171,7 +172,10 @@
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
     
-    if ([RunManager shareInstance].runState == RunStateRunning) {
+    if ([RunManager shareInstance].runState != RunStateStop) {
+//        [[LocationManager shareInstance].locationManager stopUpdatingLocation];
+//        [[LocationManager shareInstance].backgroundLocationManager startMonitoringSignificantLocationChanges];
+        
         [[BackgroundModelManager sharedInstance] openBackgroundModel];
         [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:nil];
     }
@@ -180,6 +184,12 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
+//    if ([RunManager shareInstance].runState != RunStateStop) {
+//        [[LocationManager shareInstance].backgroundLocationManager stopMonitoringSignificantLocationChanges];
+//        [[LocationManager shareInstance].locationManager startUpdatingLocation];
+//    }
+    
     [[BackgroundModelManager sharedInstance] closeBackgroundModel];
 }
 
