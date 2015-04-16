@@ -124,9 +124,10 @@ const static NSInteger kTopCenterViewMargin = 30;
 
     if (!_distanceUnitLabel) {
         _distanceUnitLabel = [[UILabel alloc] init];
-        _distanceUnitLabel.text = @"距离km";
-        _distanceUnitLabel.font = [UIFont systemFontOfSize:14];
+        _distanceUnitLabel.text = @"距离 km";
+        _distanceUnitLabel.font = [UIFont systemFontOfSize:13];
         _distanceUnitLabel.textColor = [UIColor whiteColor];
+        [_distanceUnitLabel setAlpha:0.8];
         [_distanceUnitLabel sizeToFit];
         [_topView addSubview:_distanceUnitLabel];
     }
@@ -141,7 +142,7 @@ const static NSInteger kTopCenterViewMargin = 30;
     [path moveToPoint:CGPointMake(0, _topView.bounds.size.height)];
     [path addLineToPoint:CGPointMake(_topView.bounds.size.width, _topView.bounds.size.height)];
     
-    _topLineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
+    _topLineLayer.strokeColor = [UIColor colorWithRed:73/255.0 green:158/255.0 blue:227/255.0 alpha:0.6].CGColor;
     _topLineLayer.lineWidth = 1;
     _topLineLayer.path = path.CGPath;
     [_topView.layer addSublayer:_topLineLayer];
@@ -158,9 +159,10 @@ const static NSInteger kTopCenterViewMargin = 30;
     
     if (!_speedUnitLabel) {
         _speedUnitLabel = [[UILabel alloc] init];
-        _speedUnitLabel.text = @"平均速度";
+        _speedUnitLabel.text = @"均速 km/h";
+        [_speedUnitLabel setAlpha:0.8];
         _speedUnitLabel.textColor = [UIColor whiteColor];
-        _speedUnitLabel.font = [UIFont systemFontOfSize:14];
+        _speedUnitLabel.font = [UIFont systemFontOfSize:13];
         [_speedUnitLabel sizeToFit];
         [_centerView addSubview:_speedUnitLabel];
     }
@@ -189,6 +191,7 @@ const static NSInteger kTopCenterViewMargin = 30;
     if (!_timeUnitLabel) {
         _timeUnitLabel = [[UILabel alloc] init];
         _timeUnitLabel.text = @"时间";
+        [_timeUnitLabel setAlpha:0.8];
         [_timeUnitLabel sizeToFit];
         _timeUnitLabel.textColor = [UIColor whiteColor];
         _timeUnitLabel.font = [UIFont systemFontOfSize:14];
@@ -200,7 +203,8 @@ const static NSInteger kTopCenterViewMargin = 30;
     if (!_kcalUnitLabel) {
         _kcalUnitLabel = [[UILabel alloc] init];
         _kcalUnitLabel.textColor = [UIColor whiteColor];
-        _kcalUnitLabel.text = @"卡路里kcal";
+        _kcalUnitLabel.text = @"卡路里";
+        [_kcalUnitLabel setAlpha:0.8];
         _kcalUnitLabel.font = [UIFont systemFontOfSize:14];
         [_kcalUnitLabel sizeToFit];
         [_centerView addSubview:_kcalUnitLabel];
@@ -226,7 +230,7 @@ const static NSInteger kTopCenterViewMargin = 30;
     [path moveToPoint:CGPointMake(0, _centerView.bounds.size.height)];
     [path addLineToPoint:CGPointMake(_centerView.bounds.size.width, _centerView.bounds.size.height)];
     
-    _centerLineLayer.strokeColor = [UIColor colorWithRed:145/255.0 green:194/255.0 blue:235/255.0 alpha:1].CGColor;
+    _centerLineLayer.strokeColor = [UIColor colorWithRed:73/255.0 green:158/255.0 blue:227/255.0 alpha:0.6].CGColor;
     _centerLineLayer.lineWidth = 1;
     _centerLineLayer.path = path.CGPath;
     [_centerView.layer addSublayer:_centerLineLayer];
@@ -242,9 +246,8 @@ const static NSInteger kTopCenterViewMargin = 30;
     _bottomView.frame =CGRectMake(0, CGRectGetMaxY(_centerView.frame), self.bounds.size.width, self.bounds.size.height-5-CGRectGetMaxY(_centerView.frame));
     
     if (!_retractButton) {
-        _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_retractButton setTintColor:[UIColor whiteColor]];
-        [_retractButton setImage:[UIImage imageNamed:@"narrowup.png"] forState:UIControlStateNormal];
+        _retractButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_retractButton setImage:[UIImage imageNamed:@"narrowup"] forState:UIControlStateNormal];
         [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [_retractButton sizeToFit];
         [_bottomView addSubview:_retractButton];
