@@ -56,7 +56,10 @@
                                                                                attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor],
                                                                                             NSFontAttributeName:[UIFont systemFontOfSize:14]}];
         [_nickNameField setKeyboardType:UIKeyboardTypeEmailAddress];
+        [_nickNameField setReturnKeyType:UIReturnKeyNext];
         _nickNameField.textColor = [UIColor whiteColor];
+        _nickNameField.tag = 100001;
+        [_nickNameField setDelegate:self];
         [_nickNameView addSubview:_nickNameField];
     }
     _nickNameField.frame = CGRectMake(CGRectGetMaxX(_nickNameImageView.frame)+15, _nickNameView.bounds.size.height/2-15, _nickNameView.bounds.size.width-CGRectGetMaxX(_nickNameImageView.frame)-15, 30);
@@ -81,6 +84,7 @@
         _emailImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
         _emailImageView.image = [UIImage imageNamed:@"email"];
         [_emailView addSubview:_emailImageView];
+        
     }
     _emailImageView.center = CGPointMake(15+_emailImageView.bounds.size.width/2, _emailView.bounds.size.height/2);
     
@@ -92,6 +96,9 @@
         _emailField.borderStyle = UITextBorderStyleNone;
         _emailField.textColor = [UIColor whiteColor];
         [_emailField setKeyboardType:UIKeyboardTypeEmailAddress];
+        [_emailField setReturnKeyType:UIReturnKeyNext];
+        [_emailField setTag:100002];
+        [_emailField setDelegate:self];
         [_emailView addSubview:_emailField];
     }
     _emailField.frame = CGRectMake(CGRectGetMaxX(_emailImageView.frame)+15, _emailView.bounds.size.height/2-15, _emailView.bounds.size.width-CGRectGetMaxX(_emailImageView.frame)-15, 30);
@@ -129,7 +136,9 @@
         _passwordField.textColor = [UIColor whiteColor];
         _passwordField.secureTextEntry = YES;
         [_passwordField setKeyboardType:UIKeyboardTypeEmailAddress];
+        [_passwordField setReturnKeyType:UIReturnKeyJoin];
         [_passwordView addSubview:_passwordField];
+        [_passwordField setTag:100003];
         _passwordField.delegate = self;
     }
     _passwordField.frame = CGRectMake(CGRectGetMaxX(_passwordImageView.frame)+15, _passwordView.bounds.size.height/2-15, _passwordView.bounds.size.width-CGRectGetMaxX(_passwordImageView.frame)-15, 30);
@@ -149,12 +158,19 @@
     return YES;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code  
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if (textField.tag == 100001) {
+        [_emailField becomeFirstResponder];
+    }
+    if (textField.tag == 100002) {
+        [_passwordField becomeFirstResponder];
+    }
+    if (textField.tag == 100003) {
+        [_passwordField resignFirstResponder];
+    }
+    
+    return YES;
 }
-*/
 
 @end

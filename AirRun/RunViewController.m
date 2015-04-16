@@ -742,11 +742,13 @@ const char *OUTPOSITION = "OutPosition";
         _runManager.points = [[NSMutableArray alloc] initWithArray:@[newLocation,newLocation]];
         
     } else {
+        NSLog(@"%f %f",newLocation.coordinate.latitude , newLocation.coordinate.longitude);
         [_runManager.points addObject:newLocation];
     }
     
     [_mapViewDelegate drawGradientPolyLineWithPoints:_runManager.points];
 //    [_mapViewDelegate drawLineWithPoints:_runManager.points];
+    
     
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);

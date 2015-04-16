@@ -62,7 +62,6 @@
     }
     
     LeftSideViewController *leftMenuViewController = [[LeftSideViewController alloc] init];
-    
     RESideMenu *sideMenuViewController = [[RESideMenu alloc] initWithContentViewController:navigationController
                                                                     leftMenuViewController:leftMenuViewController
                                                                    rightMenuViewController:nil];
@@ -94,33 +93,58 @@
          UIRemoteNotificationTypeSound];
     }
     
-    self.window.rootViewController = sideMenuViewController;
-    self.window.backgroundColor = [UIColor whiteColor];
-    [self.window makeKeyAndVisible];
     
-    // Added Introduction View Controller
-    NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"intro_3_text"];
-    NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"intro_3"];
-    self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
     
-     //Example 2
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    NSString *first = [userdefault objectForKey:@"firstcome"];
+    if (first) {
+        self.window.rootViewController = sideMenuViewController;
+        self.window.backgroundColor = [UIColor whiteColor];
+        [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        
+        // Added Introduction View Controller
+        NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"intro_3_text"];
+        NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"intro_3"];
+        self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
+        
+        //Example 2
         UIButton *enterButton = [UIButton new];
-        [enterButton setBackgroundImage:[UIImage imageNamed:@"bg_bar"] forState:UIControlStateNormal];
+        [enterButton setTitle:@"立即开始" forState:UIControlStateNormal];
+        [[enterButton layer] setBorderColor:[UIColor whiteColor].CGColor];
+        [[enterButton layer] setBorderWidth:1.0];
+        [[enterButton layer] setCornerRadius:5];
         self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames button:enterButton];
-    
-    [self.window addSubview:self.introductionView.view];
-    
-    __weak AppDelegate *weakSelf = self;
-    self.introductionView.didSelectedEnter = ^() {
-        [weakSelf.introductionView.view removeFromSuperview];
-        weakSelf.introductionView = nil;
         
-        // enter main view , write your code ...
-        //        ViewController *mainVC = [[ViewController alloc] init];
-        //        weakSelf.window.rootViewController = mainVC;
-    
+        self.window.rootViewController = sideMenuViewController;
+        self.window.backgroundColor = [UIColor whiteColor];
+        [self.window makeKeyAndVisible];
+        [self.window addSubview:self.introductionView.view];
         
-    };
+        __weak AppDelegate *weakSelf = self;
+    
+        self.introductionView.didSelectedEnter = ^() {
+            
+            [UIView animateWithDuration:0.4 animations:^{
+                
+                [weakSelf.introductionView.view setAlpha:0];
+               
+                
+            } completion:^(BOOL finished) {
+                [weakSelf.introductionView.view removeFromSuperview];
+                weakSelf.introductionView = nil;
+                
+            
+            }];
+            
+
+        };
+        
+    }
+    
+    
     
     return YES;
 

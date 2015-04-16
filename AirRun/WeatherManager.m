@@ -154,8 +154,6 @@
         else{
             block(responseObject.travelIndex);
         }
-        
-            
         } failure:^(NSError *error) {
             block(@"没查到");
         }];
