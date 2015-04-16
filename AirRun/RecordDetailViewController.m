@@ -85,7 +85,7 @@ static const char *INDEX = "index";
         [_path addObject:loc];
     }
     
-    _imgEntities = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_record.identifer];
+    _imgEntities = [RunningImageEntity getPathArrayByIdentifer:_record.identifer];
     
 }
 
@@ -180,7 +180,9 @@ static const char *INDEX = "index";
                                                            [_images insertObject:img atIndex:idx];
                                                            [_mapViewDelegate addimage:img AnontationWithLocation:loc];
                                                            
-                                                       } failure:nil];
+                                                       } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                                                           NSLog(@"%@",error);
+                                                       }];
             continue;
             
         }

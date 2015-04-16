@@ -76,6 +76,19 @@
 
 
 + (NSArray *)getEntitiesWithArrtribut:(NSString *)attribute WithValue:(id)value {
+   
    return [RunningImageEntity MR_findByAttribute:attribute withValue:value];
+}
+
++ (NSArray *)getHeartArrayByIdentifer:(NSString *)identfier
+{
+    NSPredicate *presdicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"type == 'heart' AND recordid == '%@'",identfier]];
+    return [RunningImageEntity MR_findAllWithPredicate:presdicate];
+}
+
++ (NSArray *)getPathArrayByIdentifer:(NSString *)identfier
+{
+    NSPredicate *presdicate = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"type == '路线图片' AND recordid == '%@'",identfier]];
+    return [RunningImageEntity MR_findAllWithPredicate:presdicate];
 }
 @end

@@ -35,5 +35,9 @@
 
 + (NSArray *)getEntitiesWithArrtribut:(NSString *)attribute WithValue:(id)value;
 
++ (NSArray *)getHeartArrayByIdentifer:(NSString *)identfier;
+
++ (NSArray *)getPathArrayByIdentifer:(NSString *)identfier;
+
 + (void)deleteAllwithCompleteBlock:(CompleteBlock)completeBlock withErrorBlock:(ErrorBlock)errorBlock;
 @end
