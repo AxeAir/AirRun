@@ -755,6 +755,7 @@ const char *OUTPOSITION = "OutPosition";
         imgM.longitude = @(_locManager.currentLocation.coordinate.longitude);
         imgM.latitude = @(_locManager.currentLocation.coordinate.latitude);
         imgM.type = @"路线图片";
+        imgM.dirty = @1;
         
         [_runManager.imageArray addObject:imgM];
         
