@@ -117,9 +117,6 @@ const char *OUTPOSITION = "OutPosition";
     [_runManager addObserver:self forKeyPath:@"speed" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [_runManager addObserver:self forKeyPath:@"kcal" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillEnterBackground:) name:
-     UIApplicationWillEnterForegroundNotification object:nil];
-    
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -327,11 +324,6 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 #pragma mark - Event
-#pragma mark Notification Event
-
-- (void)appWillEnterBackground:(NSNotificationCenter *)notification {
-    _locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters;
-}
 
 #pragma mark Gesture Event
 
@@ -365,10 +357,13 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)pauseButtonTouch:(UIButton *)sender {
+    [self p_audioPlay:@"pause"];
     
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
+        
         [self p_pause];
+        
         [UIView animateWithDuration:0.3 animations:^{
             self.runcardView.frame = CGRectMake(0, -RuncardViewHieght, self.view.bounds.size.width, RuncardViewHieght);
         } completion:^(BOOL finished) {
@@ -413,10 +408,11 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)contiuneButtonTouch:(UIButton *)sender {
+    [self p_audioPlay:@"continue"];
     
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
-        [self p_audioPlay:@"continue"];
+        
         [self p_continue];
         
         [RunViewControllerAnimation view:_contiuneButton
@@ -450,6 +446,8 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)completeButtonTouch:(UIButton *)sender {
     
+    [self p_audioPlay:@"finish"];
+    
     _runManager.runState = RunStateStop;
     
     if (_runManager.distance <= 25) {
@@ -469,6 +467,7 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)startButtonTouch:(UIButton *)sender {
+    [self p_audioPlay:@"start"];
     
     //动画
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
@@ -489,6 +488,7 @@ const char *OUTPOSITION = "OutPosition";
             [_countView removeFromSuperview];
             
             //逻辑
+            
             self.navigationItem.rightBarButtonItem = _photoButton;
             self.navigationItem.leftBarButtonItem = _gpsButton;
             [_mapMaskView removeFromSuperview];
@@ -542,7 +542,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_addShowdowWithView:(UIView *)view {
     
     view.layer.masksToBounds = NO;
-    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowColor = [UIColor colorWithRed:138/255.0 green:138/255.0 blue:138/255.0 alpha:1].CGColor;
     view.layer.shadowOpacity = 0.8;
     view.layer.shadowRadius = 4;
     view.layer.shadowOffset = CGSizeMake(1, 1.0);
@@ -582,7 +582,7 @@ const char *OUTPOSITION = "OutPosition";
                        }
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
-                       [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
+                       [weatherManager getPM25WithCityName:@"chongqing" success:^(PM25Model *pm25) {
                            _runManager.pm = pm25.AQI[0];
                            [self p_setTitle];
                            
@@ -592,7 +592,7 @@ const char *OUTPOSITION = "OutPosition";
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
                            
-                           if (!_readyView) {
+                           if (!_readyView && _runManager.runState == RunStateStop) {
                                _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
                                _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
                                [self.view addSubview:_readyView];
@@ -634,7 +634,7 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_audioPlay:(NSString *)name {
     
-    NSURL *startUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@"m4a"];
+    NSURL *startUrl = [[NSBundle mainBundle] URLForResource:name withExtension:@"wav"];
     _audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:startUrl error:nil];
     [_audioPlayer prepareToPlay];
     [_audioPlayer play];
@@ -732,8 +732,8 @@ const char *OUTPOSITION = "OutPosition";
             NSInteger km = _runcardView.distance/1000;
             NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
             [[SpeakHelper shareInstance] speakString:words];
-            
-            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"1km"] AtLocation:newLocation];
+            NSString *imageName = [NSString stringWithFormat:@"%ldkm",(long)km];
+            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:imageName] AtLocation:newLocation];
         }
     }
     
@@ -748,6 +748,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     [_mapViewDelegate drawGradientPolyLineWithPoints:_runManager.points];
+//    [_mapViewDelegate drawLineWithPoints:_runManager.points];
     
     
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);

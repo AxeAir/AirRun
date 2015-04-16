@@ -69,14 +69,14 @@ typedef enum : NSUInteger {
     
     [super viewDidAppear:animated];
     
-    [self p_startAnimation];
+//    [self p_startAnimation];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
-    
+    [super viewDidDisappear:animated];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
@@ -185,7 +185,7 @@ typedef enum : NSUInteger {
 
 #pragma mark - Animation
 
-- (void)p_startAnimation {
+- (void)startAnimation {
     
     [UIView animateWithDuration:3 animations:^{
         _iconImageView.center = CGPointMake(self.view.bounds.size.width/2, 70+_iconImageView.bounds.size.height/2);

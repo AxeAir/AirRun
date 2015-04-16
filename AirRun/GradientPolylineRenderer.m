@@ -30,7 +30,7 @@
         polyline = ((GradientPolylineOverlay*)self.overlay);
         float *velocity = polyline.velocity;
         int count = (int)polyline.pointCount;
-        [self velocity:velocity ToHue:&hues count:count];
+//        [self velocity:velocity ToHue:&hues count:count];
         [self getColorsWithVelocity:velocity Count:count];
         [self createPath];
     }
@@ -48,14 +48,14 @@
  *
  *  @return An array of hues mapping each velocity.
  */
--(void) velocity:(float*)velocity ToHue:(float**)_hue count:(int)count{
-    *_hue = malloc(sizeof(float)*count);
-    for (int i=0;i<count;i++){
-        float curVelo = velocity[i];
-        curVelo = ((curVelo < V_MIN) ? V_MIN : (curVelo  > V_MAX) ? V_MAX : curVelo);
-        (*_hue)[i] = H_MIN + ((curVelo-V_MIN)*(H_MAX-H_MIN))/(V_MAX-V_MIN);
-    }
-}
+//-(void) velocity:(float*)velocity ToHue:(float**)_hue count:(int)count{
+//    *_hue = malloc(sizeof(float)*count);
+//    for (int i=0;i<count;i++){
+//        float curVelo = velocity[i];
+//        curVelo = ((curVelo < V_MIN) ? V_MIN : (curVelo  > V_MAX) ? V_MAX : curVelo);
+//        (*_hue)[i] = H_MIN + ((curVelo-V_MIN)*(H_MAX-H_MIN))/(V_MAX-V_MIN);
+//    }
+//}
 
 - (void)getColorsWithVelocity:(float *)velocity Count:(int)count {
     colorArray = [[NSMutableArray alloc] init];
@@ -140,7 +140,7 @@
             CGGradientRelease(gradient);
             CGContextRestoreGState(context);
         }
-        pcolor = [UIColor colorWithCGColor:ccolor.CGColor];
+        pcolor = ccolor;
     }
 
 }

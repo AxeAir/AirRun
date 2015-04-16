@@ -66,7 +66,7 @@
 
 - (void)startCountWithCompleteBlock:(completeBlock)block {
     
-    _countTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(count:) userInfo:[[NSMutableDictionary alloc] initWithDictionary:@{@"count":@(_count + 1)}] repeats:YES];
+    _countTimer = [NSTimer scheduledTimerWithTimeInterval:1.5 target:self selector:@selector(count:) userInfo:[[NSMutableDictionary alloc] initWithDictionary:@{@"count":@(_count)}] repeats:YES];
     
     if (block) {
         _completeBlock = block;
