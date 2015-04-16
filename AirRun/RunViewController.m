@@ -84,11 +84,6 @@ const char *OUTPOSITION = "OutPosition";
     
     _runManager = [RunManager shareInstance];
     
-    NSError *sessionError = nil;
-    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryAmbient error:&sessionError];
-    [[AVAudioSession sharedInstance] setActive:YES error:&sessionError];
-    
-    
     [self p_setNavgation];
     [self p_setMapView];
     [self p_setLocationManager];

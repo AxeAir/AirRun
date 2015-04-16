@@ -10,6 +10,7 @@
 #import "RunViewController.h"
 #import "LeftSideViewController.h"
 #import <AVOSCloud.h>
+#import <AVFoundation/AVFoundation.h>
 #import "DocumentHelper.h"
 #import "UConstants.h"
 #import "RunningRecord.h"
@@ -51,6 +52,11 @@
     [DocumentHelper creatFolderAtDocument:kHeartImage];
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
+    
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    [session setCategory:AVAudioSessionCategoryPlayback error:nil];
+    [session setActive:YES error:nil];
+    
     UINavigationController *navigationController = nil;
     
     if ([AVUser currentUser]==nil) {
