@@ -208,11 +208,14 @@
             
 #warning 判断文件是否存在
             
-            UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]];
+            if ([DocumentHelper checkFileExist:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]]) {
+                UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]];
+                
+                AVFile *avfile = [AVFile fileWithName:imageEntiy.localpath data:UIImagePNGRepresentation(imagefile)];
+                
+                newrecord.image = avfile;//距离，整型，单位为米
+            }
             
-            AVFile *avfile = [AVFile fileWithName:imageEntiy.localpath data:UIImagePNGRepresentation(imagefile)];
-            
-            newrecord.image = avfile;//距离，整型，单位为米
             [newrecord setObject:[[AVUser currentUser] objectId] forKey:@"userID"];
             [newrecord saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 

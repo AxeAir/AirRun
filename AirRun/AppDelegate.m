@@ -151,7 +151,6 @@
     if (runManger.runState != RunStateStop) {
         [runManger saveToUserDefault];
     }
-    
     [MagicalRecord cleanUp];
     
 }

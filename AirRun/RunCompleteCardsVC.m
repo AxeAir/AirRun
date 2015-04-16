@@ -423,7 +423,6 @@ static const char *INDEX = "index";
         imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_display]);
         req.message.mediaObject = imageObject;
         [WXApi sendReq:req];
-       
     }
     
     

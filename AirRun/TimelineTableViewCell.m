@@ -218,7 +218,7 @@
     UIView *location = [self createLocationView];
     
     
-    [location setFrame:CGRectMake(Main_Screen_Width-75-30, 10, 75, 20)];
+    
     [footer addSubview:location];
     
     return footer;
@@ -305,12 +305,14 @@
     [locationImageView setImage:[UIImage imageNamed:@"location"]];
     [location addSubview:locationImageView];
     
-    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(locationImageView)+3, 3, 100, 14)];
-    
+    UILabel *cityLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(locationImageView)+3, 3, 0, 0)];
     cityLabel.text = _runningRecord.city;
     [cityLabel setFont:[UIFont systemFontOfSize:12]];
     [cityLabel setTextColor:RGBCOLOR(143, 143, 143)];
+    [cityLabel sizeToFit];
     [location addSubview:cityLabel];
+    
+    [location setFrame:CGRectMake(Main_Screen_Width-WIDTH(cityLabel)-30 -20, 10, WIDTH(cityLabel)+25, 20)];
     return location;
 }
 
