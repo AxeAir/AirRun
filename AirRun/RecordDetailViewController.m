@@ -18,9 +18,10 @@
 #import "EditImageView.h"
 #import <objc/runtime.h>
 #import <AFNetworking/UIImageView+AFNetworking.h>
-
+#import "ShareView.h"
+#import "ImageHeler.h"
 static const char *INDEX = "index";
-@interface RecordDetailViewController ()
+@interface RecordDetailViewController ()<ShareViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *cardView;
 
@@ -193,16 +194,6 @@ static const char *INDEX = "index";
     
 }
 
-- (UIImage *)p_captureView {
-    CGRect rect =_cardView.bounds;
-    UIGraphicsBeginImageContext(rect.size);
-    CGContextRef context = UIGraphicsGetCurrentContext();
-    [_cardView.layer renderInContext:context];
-    UIImage *cardImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return cardImage;
-}
-
 #pragma mark - Event
 #pragma mark Gesture event
 
@@ -220,10 +211,10 @@ static const char *INDEX = "index";
 }
 #pragma mark Button event
 - (void)shareButtonTouch:(UIBarButtonItem *)button {
-    
-    UIImage *image = [self p_captureView];
-    
-    
+
+    ShareView *share = [ShareView shareInstance];
+    share.delegate  = self;
+    [share showInView:self.view];
 }
 - (IBAction)foucsButtonTouch:(id)sender {
     [_mapViewDelegate zoomToFitMapPoints:_path];
@@ -239,18 +230,14 @@ static const char *INDEX = "index";
     }
     
 }
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+#pragma mark Delegate 
 
+- (void)shareview:(ShareView *)shareview didSelectButton:(ShareViewButtonType)buttonType
+{
+    if(buttonType == ShareViewButtonTypeWeiBo)
+    {
+        
+    }
+}
 @end

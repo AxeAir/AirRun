@@ -73,14 +73,14 @@
     
     UILabel *degree = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH(self)/2+10, 10, 130, 30)];
     [degree setTextColor:[UIColor whiteColor]];
-    [degree setText:@"24℃"];
+    [degree setText:_runningentity.weather];
     [degree setFont:[UIFont systemFontOfSize:16]];
     [_titleView addSubview:degree];
     
     
     UILabel *pm25 = [[UILabel alloc] init];
     [pm25 setTextColor:[UIColor whiteColor]];
-    [pm25 setText:@"200"];
+    [pm25 setText:[NSString stringWithFormat:@"%ld",[_runningentity.pm25 integerValue]]];
     [pm25 setFont:[UIFont boldSystemFontOfSize:16]];
     [pm25 sizeToFit];
     [pm25 setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25)-10, 10, WIDTH(pm25), HEIGHT(pm25))];

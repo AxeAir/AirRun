@@ -13,9 +13,9 @@
 
 @property (nonatomic, strong) UIView *maskBackgroundView;
 @property (nonatomic, strong) UIView *shareView;
-
 @property (nonatomic, strong) UIButton *cancelButton;
 
+@property (nonatomic, getter=isShow) BOOL show;
 @end
 
 @implementation ShareView
@@ -35,6 +35,7 @@
     self = [super init];
     if (self) {
         [self commonInit];
+        _show = NO;
     }
     return self;
 }
@@ -99,19 +100,22 @@
 
 - (void)showInView:(UIView *)superView
 {
-    [self createMaskView];
-    [superView addSubview:_maskBackgroundView];
-    [superView addSubview:self];
-    
-    CGRect finalFrame = self.frame;
-    
-    [self setFrame:CGRectMake(0, Main_Screen_Height, finalFrame.size.width, finalFrame.size.height)];
-    [UIView animateWithDuration:0.2 animations:^{
-        [_maskBackgroundView setAlpha:1];
-        [self setFrame:finalFrame];
-    } completion:^(BOOL finished) {
+    if (!self.isShow) {
+        [self createMaskView];
+        [superView addSubview:_maskBackgroundView];
+        [superView addSubview:self];
         
-    }];
+        CGRect finalFrame = CGRectMake(0, Main_Screen_Height - HEIGHT(_shareView)-HEIGHT(_cancelButton), Main_Screen_Width, 200);
+        
+        [self setFrame:CGRectMake(0, Main_Screen_Height, Main_Screen_Width, 200)];
+        [UIView animateWithDuration:0.2 animations:^{
+            [_maskBackgroundView setAlpha:1];
+            [self setFrame:finalFrame];
+        } completion:^(BOOL finished) {
+            _show = YES;
+        }];
+    }
+    
 }
 
 - (void)dismiss
@@ -123,6 +127,7 @@
         [_maskBackgroundView setAlpha:0];
     } completion:^(BOOL finished) {
         [_maskBackgroundView removeFromSuperview];
+        _show = NO;
     }];
 }
 - (void)createMaskView
