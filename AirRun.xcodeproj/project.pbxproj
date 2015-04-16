@@ -12,6 +12,8 @@
 		961547C31AD7B6F500D3CA5B /* PersonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547C21AD7B6F500D3CA5B /* PersonView.m */; };
 		961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */; };
 		961547C91AD8313A00D3CA5B /* RecordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */; };
+		963CE2C11AE03EA900844D70 /* WeatherTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963CE2C01AE03EA900844D70 /* WeatherTitleView.m */; };
+		963CE2C41AE0488100844D70 /* CreatImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 963CE2C31AE0488100844D70 /* CreatImageHelper.m */; };
 		96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D0B1ACDB62200DECE02 /* RunPauseView.m */; };
 		96474D0F1ACDB62200DECE02 /* RunSimpleCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D0D1ACDB62200DECE02 /* RunSimpleCardView.m */; };
 		96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96474D111ACDB64500DECE02 /* RunViewControllerAnimation.m */; };
@@ -140,6 +142,10 @@
 		961547C51AD8313A00D3CA5B /* RecordDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordDetailViewController.h; sourceTree = "<group>"; };
 		961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordDetailViewController.m; sourceTree = "<group>"; };
 		961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordDetailViewController.xib; sourceTree = "<group>"; };
+		963CE2BF1AE03EA900844D70 /* WeatherTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherTitleView.h; sourceTree = "<group>"; };
+		963CE2C01AE03EA900844D70 /* WeatherTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherTitleView.m; sourceTree = "<group>"; };
+		963CE2C21AE0488100844D70 /* CreatImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreatImageHelper.h; sourceTree = "<group>"; };
+		963CE2C31AE0488100844D70 /* CreatImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreatImageHelper.m; sourceTree = "<group>"; };
 		96474D0A1ACDB62200DECE02 /* RunPauseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunPauseView.h; sourceTree = "<group>"; };
 		96474D0B1ACDB62200DECE02 /* RunPauseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunPauseView.m; sourceTree = "<group>"; };
 		96474D0C1ACDB62200DECE02 /* RunSimpleCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunSimpleCardView.h; sourceTree = "<group>"; };
@@ -500,6 +506,8 @@
 				96F596AE1ACC51B800F56BEA /* RunCardView.m */,
 				96F399031AD4E13B0090CCD8 /* ReadyView.h */,
 				96F399041AD4E13B0090CCD8 /* ReadyView.m */,
+				963CE2BF1AE03EA900844D70 /* WeatherTitleView.h */,
+				963CE2C01AE03EA900844D70 /* WeatherTitleView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -777,6 +785,8 @@
 				E52D16F71ACE780300DBFA04 /* ImageHeler.m */,
 				967F64C81ADE430C0042A39D /* SpeakHelper.h */,
 				967F64C91ADE430C0042A39D /* SpeakHelper.m */,
+				963CE2C21AE0488100844D70 /* CreatImageHelper.h */,
+				963CE2C31AE0488100844D70 /* CreatImageHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1182,6 +1192,7 @@
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */,
 				E50BE0481AC8854A0030863D /* main.m in Sources */,
+				963CE2C41AE0488100844D70 /* CreatImageHelper.m in Sources */,
 				967D3D651AD960D800A55B42 /* RunManager.m in Sources */,
 				96474D121ACDB64500DECE02 /* RunViewControllerAnimation.m in Sources */,
 				E52BAC491AD2761C00EC051C /* EditSignViewController.m in Sources */,
@@ -1208,6 +1219,7 @@
 				E5B9A2BE1AD6B58D005BB981 /* PersistenceManager.m in Sources */,
 				96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */,
 				E59BF3EE1ACBF8FE0033D1DC /* BaseCardView.m in Sources */,
+				963CE2C11AE03EA900844D70 /* WeatherTitleView.m in Sources */,
 				967F64CD1ADE878F0042A39D /* UIButton+TapAnimation.m in Sources */,
 				96982B451ACF804200040A50 /* HUDHelper.m in Sources */,
 				E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */,

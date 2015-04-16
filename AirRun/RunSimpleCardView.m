@@ -145,9 +145,8 @@
     _speedLabel.center = CGPointMake(_speedUnitLable.center.x, self.bounds.size.height/2-_speedLabel.bounds.size.height/2);
     
     if (!_retractButton) {
-        _retractButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        [_retractButton setImage:[UIImage imageNamed:@"narrowup.png"] forState:UIControlStateNormal];
-        _retractButton.tintColor = [UIColor whiteColor];
+        _retractButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_retractButton setImage:[UIImage imageNamed:@"narrowup"] forState:UIControlStateNormal];
         [_retractButton addTarget:self action:@selector(retractButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_retractButton];
     }

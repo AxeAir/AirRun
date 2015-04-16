@@ -34,6 +34,8 @@
 #import "SpeakHelper.h"
 #import "UIButton+TapAnimation.h"
 #import "LocationManager.h"
+#import "WeatherTitleView.h"
+#import "CreatImageHelper.h"
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
@@ -148,9 +150,17 @@ const char *OUTPOSITION = "OutPosition";
     _photoButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"camera.png"] style:UIBarButtonItemStylePlain target:self action:@selector(photoButtonTouch:)];
     
     _gpsButton = [[UIBarButtonItem alloc] initWithTitle:@"GPS" style:UIBarButtonItemStylePlain target:self action:nil];
+    [_gpsButton setTitleTextAttributes:@{
+                                         NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:14.0]
+                                         }
+                              forState:UIControlStateNormal];
     [_gpsButton setTintColor:[UIColor redColor]];
     
     UIBarButtonItem *guideButton = [[UIBarButtonItem alloc] initWithTitle:@"跑步指导" style:UIBarButtonItemStylePlain target:self action:@selector(guideButtonTouch:)];
+    [guideButton setTitleTextAttributes:@{
+                                           NSFontAttributeName:[UIFont fontWithName:@"Helvetica-Bold" size:14.0]
+                                           }
+                               forState:UIControlStateNormal];
     self.navigationItem.rightBarButtonItem = guideButton;
 
     [self p_setTitle];
@@ -158,12 +168,17 @@ const char *OUTPOSITION = "OutPosition";
 }
 
 - (void)p_setTitle {
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 50)];
-    titleLable.text = [NSString stringWithFormat:@"%@\nPM %@",_runManager.temperature,_runManager.pm];
-    titleLable.textColor = [UIColor whiteColor];
-    titleLable.font = [UIFont systemFontOfSize:12];
-    titleLable.numberOfLines = 2;
-    self.navigationItem.titleView = titleLable;
+    
+    NSString *pmStr = @"";
+    if (_runManager.pm && ![_runManager.pm isEqualToString:@""]) {
+        pmStr = [NSString stringWithFormat:@"PM %@",_runManager.pm];
+    }
+    
+    WeatherTitleView *titleView = [[WeatherTitleView alloc] initWithImage:[UIImage imageNamed:@"weather"]
+                                                        WithWeatherString:_runManager.temperature
+                                                             WithPMString:pmStr];
+
+    self.navigationItem.titleView = titleView;
 }
 - (void)p_setMapView {
     
@@ -236,8 +251,10 @@ const char *OUTPOSITION = "OutPosition";
                 NSInteger km = _runcardView.distance/1000;
                 NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
                 [[SpeakHelper shareInstance] speakString:words];
-                NSString *imageName = [NSString stringWithFormat:@"%ldkm",(long)km];
-                [this.mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:imageName] AtLocation:newLocation];
+                
+                UIImage *nodeImage = [CreatImageHelper generateDistanceNodeImage:[NSString stringWithFormat:@"%ld",(long)km]];
+                
+                [this.mapViewDelegate addPointAnnotationImage:nodeImage AtLocation:newLocation];
             }
         }
         
@@ -547,6 +564,8 @@ const char *OUTPOSITION = "OutPosition";
     [RunViewControllerAnimation scalAnimationWithView:sender WithCompleteBlock:^(POPAnimation *anim, BOOL finished) {
         
         UIImageView *iamge = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"titlelogo"]];
+        [iamge setFrame:CGRectMake(0, 0, 20, 20)];
+        [iamge setAlpha:0.8];
         self.navigationItem.titleView = iamge;
         
         //倒计时页面
