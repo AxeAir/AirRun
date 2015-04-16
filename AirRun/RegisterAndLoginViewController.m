@@ -50,7 +50,7 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     
     _state = RegisterAndLoginViewControllerStateSignUp;
-    [self p_layout];
+    [self p_layoutBeforeAnimation];
     
 }
 
@@ -69,7 +69,9 @@ typedef enum : NSUInteger {
     
     [super viewDidAppear:animated];
     
-//    [self p_startAnimation];
+    if (_isAutoAnimation) {
+        [self startAnimation];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -94,7 +96,7 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Layout
-- (void)p_layout {
+- (void)p_layoutBeforeAnimation {
     
     _bgImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
     _bgImage.image = [UIImage imageNamed:@"bg"];
