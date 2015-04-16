@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450810534.497687"
+            timestampString = "450862161.002701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "755"
-            endingLineNumber = "755"
+            startingLineNumber = "756"
+            endingLineNumber = "756"
             landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
@@ -271,7 +271,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "359"
             endingLineNumber = "359"
-            landmarkName = "-keyboardShow:"
+            landmarkName = "-changeButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/MapViewDelegate.m"
-            timestampString = "450697904.890642"
+            timestampString = "450864205.100038"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "271"
+            endingLineNumber = "271"
             landmarkName = "-mapView:viewForAnnotation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -465,38 +465,6 @@
             endingLineNumber = "144"
             landmarkName = "-getRecommandInfoWithLongitude:latitude:result:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[WeatherManager getRecommandInfoWithLongitude:latitude:result:]"
-                  moduleName = "AirRun"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Jason/Desktop/airRun/AirRun/WeatherManager.m"
-                  timestampString = "450812458.468822"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "144"
-                  endingLineNumber = "144"
-                  offsetFromSymbolStart = "132">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__64-[WeatherManager getRecommandInfoWithLongitude:latitude:result:]_block_invoke"
-                  moduleName = "AirRun"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/Jason/Desktop/airRun/AirRun/WeatherManager.m"
-                  timestampString = "450812458.469212"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "144"
-                  endingLineNumber = "144"
-                  offsetFromSymbolStart = "56">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

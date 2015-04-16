@@ -542,7 +542,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_addShowdowWithView:(UIView *)view {
     
     view.layer.masksToBounds = NO;
-    view.layer.shadowColor = [UIColor blackColor].CGColor;
+    view.layer.shadowColor = [UIColor colorWithRed:138/255.0 green:138/255.0 blue:138/255.0 alpha:1].CGColor;
     view.layer.shadowOpacity = 0.8;
     view.layer.shadowRadius = 4;
     view.layer.shadowOffset = CGSizeMake(1, 1.0);
@@ -582,7 +582,7 @@ const char *OUTPOSITION = "OutPosition";
                        }
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
-                       [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
+                       [weatherManager getPM25WithCityName:@"chongqing" success:^(PM25Model *pm25) {
                            _runManager.pm = pm25.AQI[0];
                            [self p_setTitle];
                            
@@ -592,7 +592,7 @@ const char *OUTPOSITION = "OutPosition";
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
                            
-                           if (!_readyView) {
+                           if (!_readyView && _runManager.runState == RunStateStop) {
                                _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
                                _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
                                [self.view addSubview:_readyView];
@@ -732,8 +732,8 @@ const char *OUTPOSITION = "OutPosition";
             NSInteger km = _runcardView.distance/1000;
             NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
             [[SpeakHelper shareInstance] speakString:words];
-            
-            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:@"1km"] AtLocation:newLocation];
+            NSString *imageName = [NSString stringWithFormat:@"%ldkm",(long)km];
+            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:imageName] AtLocation:newLocation];
         }
     }
     
@@ -747,6 +747,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     [_mapViewDelegate drawGradientPolyLineWithPoints:_runManager.points];
+//    [_mapViewDelegate drawLineWithPoints:_runManager.points];
     
     CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);

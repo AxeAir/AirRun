@@ -115,7 +115,7 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
     [self drawLineWithPoints:pointArray];
     
     
-    
+    free(points);
     free(velocity);
     
 }
@@ -216,8 +216,9 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
 }
 
 - (UIImage *)captureMapView {
+    
     CGRect rect =_mapView.bounds;
-    UIGraphicsBeginImageContext(rect.size);
+    UIGraphicsBeginImageContextWithOptions(rect.size, NO, [UIScreen mainScreen].scale);
     CGContextRef context = UIGraphicsGetCurrentContext();
     [_mapView.layer renderInContext:context];
     UIImage *mapImage = UIGraphicsGetImageFromCurrentImageContext();

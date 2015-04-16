@@ -106,7 +106,7 @@
     [_fouseButton addTarget:self action:@selector(fouchsButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_fouseButton];
     
-    _mapImageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    _mapImageButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [_mapImageButton setImage:[UIImage imageNamed:@"nophoto"] forState:UIControlStateNormal];
     [_mapImageButton sizeToFit];
     _mapImageButton.center = CGPointMake(WIDTH(self)-5-WIDTH(_mapImageButton)/2, Y(_fouseButton)-5-HEIGHT(_mapImageButton)/2);
