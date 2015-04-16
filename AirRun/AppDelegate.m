@@ -141,7 +141,12 @@
             } completion:^(BOOL finished) {
                 [weakSelf.introductionView.view removeFromSuperview];
                 weakSelf.introductionView = nil;
-                
+                if ([[navigationController.childViewControllers objectAtIndex:0] isKindOfClass:[RegisterAndLoginViewController class]]) {
+                    RegisterAndLoginViewController *regi = [navigationController.childViewControllers objectAtIndex:0];
+                    [regi startAnimation];
+                    [userdefault setObject:@"ok" forKey:@"firstcome"];
+                    [userdefault synchronize];
+                }
             
             }];
             
