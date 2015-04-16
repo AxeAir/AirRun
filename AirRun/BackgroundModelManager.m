@@ -21,8 +21,9 @@
 @implementation BackgroundModelManager
 
 + (BackgroundModelManager *)sharedInstance {
+    
     static BackgroundModelManager *singleton = nil;
-    dispatch_once_t once;
+    static dispatch_once_t once;
     dispatch_once(&once, ^{
         singleton = [[BackgroundModelManager alloc] init];
     });
