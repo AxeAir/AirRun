@@ -323,6 +323,23 @@ const char *OUTPOSITION = "OutPosition";
     
     
 }
+
+- (void)p_setReadyViewWithString:(NSString *)string {
+    
+    if (!_readyView) {
+        _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",string]];
+    }
+    
+    if (_readyView && _runManager.runState == RunStateStop) {
+        
+        _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
+        [self.view addSubview:_readyView];
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, ReadyViewHeight);
+        }];
+    }
+}
 #pragma mark - Event
 
 #pragma mark Gesture Event
@@ -556,21 +573,13 @@ const char *OUTPOSITION = "OutPosition";
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     [geocoder reverseGeocodeLocation:_locationManager.location
                    completionHandler:^(NSArray *placemarks, NSError *error) {
-                       NSLog(@"reverseGeocodeLocation:completionHandler: Completion Handler called!");
-                       
                        if (error){
                            NSLog(@"Geocode failed with error: %@", error);
                            return;
                            
                        }
                        
-                       NSLog(@"placemarks=%@",[placemarks objectAtIndex:0]);
                        CLPlacemark *placemark = [placemarks objectAtIndex:0];
-                       
-                       NSLog(@"placemark.administrativeArea =%@",placemark.administrativeArea);
-                       NSLog(@"placemark.locality =%@",placemark.locality);
-                       NSLog(@"placemark.subLocality =%@",placemark.subLocality);
-                       NSLog(@"placemark.subThoroughfare =%@",placemark.subThoroughfare);
                        
                        _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subLocality];
                        
@@ -591,17 +600,7 @@ const char *OUTPOSITION = "OutPosition";
                        [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
-                           
-                           if (!_readyView && _runManager.runState == RunStateStop) {
-                               _readyView = [[ReadyView alloc] initWithText:[NSString stringWithFormat:@"%@跑步",responseObject.exerciseIndex]];
-                               _readyView.frame = CGRectMake(0, -ReadyViewHeight, self.view.bounds.size.width, ReadyViewHeight);
-                               [self.view addSubview:_readyView];
-                               
-                               [UIView animateWithDuration:0.5 animations:^{
-                                   _readyView.frame = CGRectMake(0, 63, self.view.bounds.size.width, ReadyViewHeight);
-                               }];
-                           }
-                           
+                           [self p_setReadyViewWithString:responseObject.exerciseIndex];
                        } failure:^(NSError *error) {}];
                        
                    }];
@@ -708,7 +707,7 @@ const char *OUTPOSITION = "OutPosition";
     }
     
     //得到温度和PM
-    if ([_runManager.currentLocationName isEqualToString:@""] || !_runManager.currentLocationName) {
+    if (!_readyView) {
         [self p_getLocationNameWithLocation:newLocation];
     }
     

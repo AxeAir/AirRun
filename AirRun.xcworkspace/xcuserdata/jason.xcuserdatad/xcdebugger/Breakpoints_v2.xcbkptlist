@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450875244.805095"
+            timestampString = "450878285.035643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "332"
-            endingLineNumber = "332"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
             landmarkName = "-mapMaskTapGesture:"
             landmarkType = "5">
          </BreakpointContent>
@@ -154,12 +154,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450875535.310663"
+            timestampString = "450878285.035643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "756"
-            endingLineNumber = "756"
-            landmarkName = "-locationManager:didUpdateLocations:"
+            startingLineNumber = "763"
+            endingLineNumber = "763"
+            landmarkName = "-imagePickerController:didFinishPickingMediaWithInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450875535.310663"
+            timestampString = "450878285.035643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "663"
-            endingLineNumber = "663"
+            startingLineNumber = "670"
+            endingLineNumber = "670"
             landmarkName = "-p_getCalorie:speed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450875535.310663"
+            timestampString = "450878285.035643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "735"
-            endingLineNumber = "735"
+            startingLineNumber = "742"
+            endingLineNumber = "742"
             landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
@@ -425,22 +425,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "AirRun/RunViewController.m"
-            timestampString = "450875535.310663"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "558"
-            endingLineNumber = "558"
-            landmarkName = "-p_getLocationNameWithLocation:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "AirRun/TimelineController.m"
             timestampString = "450806061.592547"
             startingColumnNumber = "9223372036854775807"
@@ -465,6 +449,38 @@
             endingLineNumber = "144"
             landmarkName = "-getRecommandInfoWithLongitude:latitude:result:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[WeatherManager getRecommandInfoWithLongitude:latitude:result:]"
+                  moduleName = "AirRun"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Jason/Desktop/airRun/AirRun/WeatherManager.m"
+                  timestampString = "450878866.895635"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "102">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__64-[WeatherManager getRecommandInfoWithLongitude:latitude:result:]_block_invoke"
+                  moduleName = "AirRun"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/Jason/Desktop/airRun/AirRun/WeatherManager.m"
+                  timestampString = "450878866.8961"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "144"
+                  endingLineNumber = "144"
+                  offsetFromSymbolStart = "54">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -522,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450875535.310663"
+            timestampString = "450878285.035643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
             landmarkName = "-startButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -538,11 +554,59 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450875535.310663"
+            timestampString = "450878285.035643"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "592"
-            endingLineNumber = "592"
+            startingLineNumber = "609"
+            endingLineNumber = "609"
+            landmarkName = "-p_setGPS:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirRun/RunViewController.m"
+            timestampString = "450878532.961906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "709"
+            endingLineNumber = "709"
+            landmarkName = "-locationManager:didUpdateLocations:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirRun/RunViewController.m"
+            timestampString = "450878672.951012"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "576"
+            endingLineNumber = "576"
+            landmarkName = "-p_getLocationNameWithLocation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirRun/RunViewController.m"
+            timestampString = "450878766.898353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "603"
+            endingLineNumber = "603"
             landmarkName = "-p_getLocationNameWithLocation:"
             landmarkType = "5">
          </BreakpointContent>
