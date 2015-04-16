@@ -62,8 +62,8 @@
     
     if ([AVUser currentUser]==nil) {
         RegisterAndLoginViewController *registerAndLogin =[[RegisterAndLoginViewController alloc] init];
+        registerAndLogin.isAutoAnimation = YES;
         navigationController = [[UINavigationController alloc] initWithRootViewController:registerAndLogin];
-        [registerAndLogin startAnimation];
     }
     else
     {
