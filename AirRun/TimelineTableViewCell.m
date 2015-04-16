@@ -151,46 +151,44 @@
     UIView *bgMask = [[UIView alloc] initWithFrame:CGRectMake(0, 0, dataview.frame.size.width, dataview.frame.size.height)];
     [bgMask setBackgroundColor:RGBACOLOR(107, 107, 107, 0.8)];
     [dataview addSubview:bgMask];
-        if (_distanceIconImageView == nil) {
-            _distanceIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20,8, 20, 20)];
-            [_distanceIconImageView setImage:[UIImage imageNamed:@"distancetiny"]];
-            [dataview addSubview:_distanceIconImageView];
-        }
+  
+        _distanceIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20,8, 20, 20)];
+        [_distanceIconImageView setImage:[UIImage imageNamed:@"distancetiny"]];
     
-        if (_distanceLabel == nil) {
-            _distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_distanceIconImageView)+5, 8, 100, 20)];
-            [_distanceLabel setTextColor:RGBCOLOR(207, 207, 207)];
-            [dataview addSubview:_distanceLabel];
-        }
+        [dataview addSubview:_distanceIconImageView];
+    
+    
+        _distanceLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_distanceIconImageView)+5, 8, 100, 20)];
+        [_distanceLabel setTextColor:RGBCOLOR(207, 207, 207)];
+        [dataview addSubview:_distanceLabel];
+    
 
         [_distanceLabel setText:[NSString stringWithFormat:@"%.2f km",[_runningRecord.distance integerValue]/1000.0]];
     
     
-        if (_speedIconImageView == nil) {
-            _speedIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3, 8, 20, 20)];
-            [_speedIconImageView setImage:[UIImage imageNamed:@"speedtiny"]];
-            [dataview addSubview:_speedIconImageView];
-        }
     
-        if (_speedLabel == nil) {
-            _speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_speedIconImageView)+5, 8, 100, 20)];
-            [_speedLabel setTextColor:RGBCOLOR(207, 207, 207)];
-            [dataview addSubview:_speedLabel];
-        }
+        _speedIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3, 8, 20, 20)];
+        [_speedIconImageView setImage:[UIImage imageNamed:@"speedtiny"]];
+        [dataview addSubview:_speedIconImageView];
+    
+    
+ 
+        _speedLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_speedIconImageView)+5, 8, 100, 20)];
+        [_speedLabel setTextColor:RGBCOLOR(207, 207, 207)];
+        [dataview addSubview:_speedLabel];
+    
         [_speedLabel setText:[NSString stringWithFormat:@"%.1lf km/h",[_runningRecord.averagespeed floatValue]]];
     
-        if (_timeIconImageView == nil) {
-            _timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3*2, 8, 20, 20)];
-            [_timeIconImageView setImage:[UIImage imageNamed:@"timetiny"]];
-            [dataview addSubview:_timeIconImageView];
-        }
     
-        if (_timeLabel == nil) {
-            _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+5, 8, 100, 20)];
-            [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
-            [dataview addSubview:_timeLabel];
-        }
-
+        _timeIconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(20+(Main_Screen_Width-40)/3*2, 8, 20, 20)];
+        [_timeIconImageView setImage:[UIImage imageNamed:@"timetiny"]];
+        [dataview addSubview:_timeIconImageView];
+    
+    
+    
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+5, 8, 100, 20)];
+        [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
+        [dataview addSubview:_timeLabel];
         [_timeLabel setText:[NSString stringWithFormat:@"%ld",(long)[_runningRecord.time integerValue]]];
 
     return dataview;

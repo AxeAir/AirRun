@@ -4,8 +4,6 @@
 <dict>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>UIStatusBarHidden</key>
-	<true/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>zh_CN</string>
 	<key>CFBundleExecutable</key>

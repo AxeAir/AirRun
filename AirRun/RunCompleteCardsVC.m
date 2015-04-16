@@ -293,8 +293,9 @@ static const char *INDEX = "index";
     }
     else if(type == CompleteDisplayCardButtonTypeComplete)
     {
-        [self.sideMenuViewController setContentViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
-                                                     animated:NO];
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
+]                                                     animated:NO];
+        [self.sideMenuViewController setPanGestureEnabled:YES];
         [self.sideMenuViewController hideMenuViewController];
     }
 }
@@ -375,24 +376,12 @@ static const char *INDEX = "index";
     //当选择的类型是图片
     if ([type isEqualToString:@"public.image"])
     {
-#warning 压缩图片
         //先把图片转成NSData
         UIImage* image = [info objectForKey:UIImagePickerControllerOriginalImage];
-//        NSData *data;
-//        data = UIImageJPEGRepresentation(image, 0.8);
-//        //图片保存的路径
-//        //这里将图片放在沙盒的documents文件夹中
-//        NSString * DocumentsPath = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-//        //文件管理器
-//        NSFileManager *fileManager = [NSFileManager defaultManager];
-//        //把刚刚图片转换的data对象拷贝至沙盒中 并保存为image.png
-//        [fileManager createDirectoryAtPath:DocumentsPath withIntermediateDirectories:YES attributes:nil error:nil];
-//        [fileManager createFileAtPath:[DocumentsPath stringByAppendingString:@"/image.png"] contents:data attributes:nil];
-        //得到选择后沙盒中图片的完整路径
-        //NSString *imgPath = [[NSString alloc]initWithFormat:@"%@%@",DocumentsPath,  @"/image.png"];
-        //关闭相册界面
+
         [picker dismissViewControllerAnimated:YES completion:nil];
-        [_ImageArray addObject:image];
+        ;
+        [_ImageArray addObject:[ImageHeler compressImage:image LessThanKB:200]];
         [_popview addSmallPictures:_ImageArray];
     }
 }

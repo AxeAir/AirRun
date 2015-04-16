@@ -99,11 +99,9 @@
          UIRemoteNotificationTypeSound];
     }
     
-    
-    
     NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
     NSString *first = [userdefault objectForKey:@"firstcome"];
-    if (first) {
+    if (first!=nil) {
         self.window.rootViewController = sideMenuViewController;
         self.window.backgroundColor = [UIColor whiteColor];
         [self.window makeKeyAndVisible];
@@ -139,13 +137,14 @@
                
                 
             } completion:^(BOOL finished) {
+                [userdefault setObject:@"ok" forKey:@"firstcome"];
+                [userdefault synchronize];
                 [weakSelf.introductionView.view removeFromSuperview];
                 weakSelf.introductionView = nil;
                 if ([[navigationController.childViewControllers objectAtIndex:0] isKindOfClass:[RegisterAndLoginViewController class]]) {
                     RegisterAndLoginViewController *regi = [navigationController.childViewControllers objectAtIndex:0];
                     [regi startAnimation];
-                    [userdefault setObject:@"ok" forKey:@"firstcome"];
-                    [userdefault synchronize];
+                    
                 }
             
             }];

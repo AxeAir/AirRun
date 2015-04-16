@@ -67,7 +67,7 @@
     [query getObjectInBackgroundWithId:objectId block:^(AVObject *object, NSError *error) {
         
         //远端不存在该数据
-        if (object == nil) {
+        if ([object objectId] == nil) {
             [[AirLocalPersistence shareLocalPersistenceInstance] deleteObject:self withCompleteBlock:^{
                 
             } withErrorBlock:^{

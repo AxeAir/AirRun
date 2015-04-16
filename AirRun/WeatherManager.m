@@ -29,7 +29,9 @@
 
 - (void)getPM25WithCityName:(NSString *)cityname success:(void (^)(PM25Model *))success failure:(void (^)(NSError *))failure
 {
-    
+    if (TARGET_IPHONE_SIMULATOR) {
+        return;
+    }
     NSDictionary *weather = [[TMCache sharedCache] objectForKey:@"pm25Cache"];
     if (weather) {
         NSString *timestamp = [weather objectForKey:@"timestamp"];
@@ -83,6 +85,10 @@
 - (void)getWeatherWithLongitude:(NSNumber *)longitude latitude:(NSNumber *)latitude success:(void (^)(WeatherModel *))success failure:(void (^)(NSError *))failure
 {
     
+    if (TARGET_IPHONE_SIMULATOR) {
+        return;
+    }
+ 
     NSDictionary *weather = [[TMCache sharedCache] objectForKey:@"weatherCache"];
     if (weather) {
         NSString *timestamp = [weather objectForKey:@"timestamp"];
@@ -94,6 +100,7 @@
             return;
         }
     }
+    
     
     [[JHOpenidSupplier shareSupplier] registerJuheAPIByOpenId:@"JH33e45daec2d71d0d5f9a9c05da34aff9"];
     NSString *path = @"http://v.juhe.cn/weather/geo";

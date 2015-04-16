@@ -67,9 +67,18 @@
     _titleView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(self), 50)];
     [self addSubview:_titleView];
     
-    UIImageView *location = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"location"]];
-    [location setFrame:CGRectMake(10, 10, 30, 30)];
+    UIImageView *location = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"locationwhite"]];
+    [location setFrame:CGRectMake(10, 15, 20, 20)];
     [_titleView addSubview:location];
+    
+    UILabel *cityName = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(location)+5, 10, 100, 30)];
+    
+    [cityName setText:_runningentity.city];
+    [cityName setTextColor:[UIColor whiteColor]];
+    [cityName sizeToFit];
+    [cityName setFont:[UIFont systemFontOfSize:14]];
+    [cityName setCenter:CGPointMake(MaxX(location)+5+WIDTH(cityName)/2, 25)];
+    [_titleView addSubview:cityName];
     
     UILabel *degree = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH(self)/2+10, 10, 130, 30)];
     [degree setTextColor:[UIColor whiteColor]];
@@ -91,7 +100,7 @@
     [pm25d setText:@"PM"];
     [pm25d setFont:[UIFont systemFontOfSize:12]];
     [pm25d sizeToFit];
-    [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25)-10, MaxY(pm25), WIDTH(pm25), HEIGHT(pm25d))];
+    [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25)-20, MaxY(pm25), WIDTH(pm25d), HEIGHT(pm25d))];
     [pm25d setTextAlignment:NSTextAlignmentCenter];
     [_titleView addSubview:pm25d];
     
@@ -121,7 +130,7 @@
     _pagecontrol.alpha = 0;
     [self addSubview:_pagecontrol];
     
-    _distanceAndCarl = [self creatDistance:[NSString stringWithFormat:@"%.2f",[_runningentity.distance floatValue]] andCarl:[NSString stringWithFormat:@"%ld",[_runningentity.kcar integerValue]]];
+    _distanceAndCarl = [self creatDistance:[NSString stringWithFormat:@"%.2f",[_runningentity.distance floatValue]/1000] andCarl:[NSString stringWithFormat:@"%.2f",[_runningentity.kcar floatValue]]];
     [_distanceAndCarl setFrame:CGRectMake(0, MaxY(_pagecontrol)+10, WIDTH(self), 50)];
     
     [self addSubview:_distanceAndCarl];

@@ -58,7 +58,7 @@
     UILabel *feelLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 10, WIDTH(self), 20)];
     [feelLabel setText:@"本次运动的感觉如何"];
     [feelLabel setTextAlignment:NSTextAlignmentCenter];
-    [feelLabel setTextColor:RGBCOLOR(170, 170, 170)];
+    [feelLabel setTextColor:[UIColor whiteColor]];
     [feelLabel setFont:[UIFont systemFontOfSize:14]];
     [self addSubview:feelLabel];
     
