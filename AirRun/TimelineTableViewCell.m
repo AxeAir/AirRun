@@ -74,7 +74,7 @@
     
     [self createMapImage];
    
-    NSArray *heartImages = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
+    NSArray *heartImages = [RunningImageEntity getHeartArrayByIdentifer:_runningRecord.identifer];
 
     if (([_runningRecord.heart isEqualToString:@""]|| _runningRecord.heart ==nil) && [heartImages count]==0) {
         
@@ -184,13 +184,13 @@
         [_timeIconImageView setImage:[UIImage imageNamed:@"timetiny"]];
         [dataview addSubview:_timeIconImageView];
     
-    
-    
+
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(_timeIconImageView)+5, 8, 100, 20)];
         [_timeLabel setTextColor:RGBCOLOR(207, 207, 207)];
         [dataview addSubview:_timeLabel];
-        [_timeLabel setText:[NSString stringWithFormat:@"%ld",(long)[_runningRecord.time integerValue]]];
+        [_timeLabel setText:[NSString stringWithFormat:@"%@",[self formatTime:(long)[_runningRecord.time integerValue]]]];
 
+    
     return dataview;
 }
 
@@ -214,9 +214,7 @@
     [footer addSubview:detailTime];
     
     UIView *location = [self createLocationView];
-    
-    
-    
+
     [footer addSubview:location];
     
     return footer;
@@ -256,7 +254,7 @@
     [heart addSubview:_heartLabel];
     
     
-    NSArray *date = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_runningRecord.identifer];
+    NSArray *date = [RunningImageEntity getHeartArrayByIdentifer:_runningRecord.identifer];
     if ([date count]!=0) {
         _heartImageView = [[UIView alloc] initWithFrame:CGRectMake(0, MaxY(_heartLabel), WIDTH(heart), 80)];
 
@@ -336,5 +334,18 @@
     }
 }
 
+
+#pragma mark function
+- (NSString *)formatTime:(NSInteger)seconds
+{
+    if (seconds > 3600) {
+        return [NSString stringWithFormat:@"%0.2ld:%0.2ld:%0.2ld",seconds/3600,seconds/60,seconds%60];
+    }
+    else
+    {
+        return [NSString stringWithFormat:@"%0.2ld:%0.2ld",seconds/60,seconds%60];
+    }
+    return nil;
+}
 
 @end

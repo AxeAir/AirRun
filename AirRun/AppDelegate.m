@@ -46,23 +46,31 @@
     
     //[WXApi registerApp:@"wx54fac834bc555603"];
     
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
     [DocumentHelper creatFolderAtDocument:kPathImageFolder];
     [DocumentHelper creatFolderAtDocument:kHeartImage];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-    [[UIApplication sharedApplication] setStatusBarHidden:YES];
+
+    //Push
+    [self registerNotification];
     
     AVAudioSession *session = [AVAudioSession sharedInstance];
     [session setCategory:AVAudioSessionCategoryPlayback error:nil];
     [session setActive:YES error:nil];
     
+    
+    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
+    NSString *first = [userdefault objectForKey:@"firstcome"];
+    
+    
     UINavigationController *navigationController = nil;
     
     if ([AVUser currentUser]==nil) {
+        
         RegisterAndLoginViewController *registerAndLogin =[[RegisterAndLoginViewController alloc] init];
-        registerAndLogin.isAutoAnimation = YES;
+        if (!first) {
+            registerAndLogin.isAutoAnimation = NO;
+        }
         navigationController = [[UINavigationController alloc] initWithRootViewController:registerAndLogin];
     }
     else
@@ -85,25 +93,9 @@
     if ([AVUser currentUser] ==nil) {
         [sideMenuViewController setPanGestureEnabled:NO];
     }
-    if (FSystenVersion>=8) {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
-                                                | UIUserNotificationTypeBadge
-                                                | UIUserNotificationTypeSound
-                                                                                 categories:nil];
-        [application registerUserNotificationSettings:settings];
-        [application registerForRemoteNotifications];
-    }
-    else
-    {
-        // Register for push notifications
-        [application registerForRemoteNotificationTypes:
-         UIRemoteNotificationTypeBadge |
-         UIRemoteNotificationTypeAlert |
-         UIRemoteNotificationTypeSound];
-    }
     
-    NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
-    NSString *first = [userdefault objectForKey:@"firstcome"];
+    
+    
     if (first!=nil) {
         self.window.rootViewController = sideMenuViewController;
         self.window.backgroundColor = [UIColor whiteColor];
@@ -161,6 +153,29 @@
     
     return YES;
 
+    
+}
+
+
+
+- (void)registerNotification
+{
+    if (FSystenVersion>=8) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert
+                                                | UIUserNotificationTypeBadge
+                                                | UIUserNotificationTypeSound
+                                                                                 categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        // Register for push notifications
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+         UIRemoteNotificationTypeBadge |
+         UIRemoteNotificationTypeAlert |
+         UIRemoteNotificationTypeSound];
+    }
     
 }
 

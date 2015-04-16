@@ -44,11 +44,20 @@ typedef enum : NSUInteger {
 
 @implementation RegisterAndLoginViewController
 
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _isAutoAnimation = YES;
+    }
+    return self;
+}
+
 #pragma mark - Lifecycle
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     _state = RegisterAndLoginViewControllerStateSignUp;
     [self p_layoutBeforeAnimation];
     

@@ -208,7 +208,7 @@
             
 #warning 判断文件是否存在
             
-            if ([DocumentHelper checkFileExist:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]]) {
+            if ([DocumentHelper checkPathExist:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]]) {
                 UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]];
                 
                 AVFile *avfile = [AVFile fileWithName:imageEntiy.localpath data:UIImagePNGRepresentation(imagefile)];

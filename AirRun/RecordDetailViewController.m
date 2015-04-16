@@ -85,7 +85,7 @@ static const char *INDEX = "index";
         [_path addObject:loc];
     }
     
-    _imgEntities = [RunningImageEntity getEntitiesWithArrtribut:@"recordid" WithValue:_record.identifer];
+    _imgEntities = [RunningImageEntity getPathArrayByIdentifer:_record.identifer];
     
 }
 
@@ -169,18 +169,24 @@ static const char *INDEX = "index";
         UIImage *img = [UIImage imageWithContentsOfFile:[DocumentHelper documentsFile:imgName AtFolder:kPathImageFolder]];
         
         if (!img) {
-            NSURL *requestURL = [[NSURL alloc] initWithString:imgEntity.remotepath];
-            [[[UIImageView alloc] init] setImageWithURLRequest:[[NSURLRequest alloc] initWithURL:requestURL]
-                                              placeholderImage:nil
-                                                       success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-                                                        
-                                                           NSInteger idx = [_imgEntities indexOfObject:imgEntity];
-                                                           objc_setAssociatedObject(img, INDEX, @(idx), OBJC_ASSOCIATION_ASSIGN);
-                                                           CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
-                                                           [_images insertObject:img atIndex:idx];
-                                                           [_mapViewDelegate addimage:img AnontationWithLocation:loc];
-                                                           
-                                                       } failure:nil];
+           
+            AVFile *file = [AVFile fileWithURL:imgEntity.remotepath];
+            [file getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+                
+                UIImage *image = [UIImage imageWithData:data];
+                NSInteger idx = [_imgEntities indexOfObject:imgEntity];
+                objc_setAssociatedObject(image, INDEX, @(idx), OBJC_ASSOCIATION_ASSIGN);
+                CLLocation *loc = [[CLLocation alloc] initWithLatitude:[imgEntity.latitude doubleValue] longitude:[imgEntity.longitude doubleValue]];
+                [_images insertObject:image atIndex:idx];
+                [_mapViewDelegate addimage:image AnontationWithLocation:loc];
+            }];
+            
+            [file getThumbnail:YES width:100 height:100 withBlock:^(UIImage *image, NSError *error) {
+                
+                
+                
+                
+            }];
             continue;
             
         }
