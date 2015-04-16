@@ -30,6 +30,7 @@
 		967F64D61ADFCE6F0042A39D /* finish.wav in Resources */ = {isa = PBXBuildFile; fileRef = 967F64D21ADFCE6F0042A39D /* finish.wav */; };
 		967F64D71ADFCE6F0042A39D /* pause.wav in Resources */ = {isa = PBXBuildFile; fileRef = 967F64D31ADFCE6F0042A39D /* pause.wav */; };
 		967F64D81ADFCE6F0042A39D /* start.wav in Resources */ = {isa = PBXBuildFile; fileRef = 967F64D41ADFCE6F0042A39D /* start.wav */; };
+		967F64DB1ADFFF8D0042A39D /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 967F64DA1ADFFF8D0042A39D /* LocationManager.m */; };
 		96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B411ACF7EE000040A50 /* ValidateHelper.m */; };
 		96982B451ACF804200040A50 /* HUDHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B441ACF804200040A50 /* HUDHelper.m */; };
 		96982B4A1AD0198900040A50 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 96982B471AD0198900040A50 /* CustomAnnotation.m */; };
@@ -171,6 +172,8 @@
 		967F64D21ADFCE6F0042A39D /* finish.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = finish.wav; sourceTree = "<group>"; };
 		967F64D31ADFCE6F0042A39D /* pause.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pause.wav; sourceTree = "<group>"; };
 		967F64D41ADFCE6F0042A39D /* start.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = start.wav; sourceTree = "<group>"; };
+		967F64D91ADFFF8D0042A39D /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationManager.h; sourceTree = "<group>"; };
+		967F64DA1ADFFF8D0042A39D /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationManager.m; sourceTree = "<group>"; };
 		96982B401ACF7EE000040A50 /* ValidateHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValidateHelper.h; sourceTree = "<group>"; };
 		96982B411ACF7EE000040A50 /* ValidateHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ValidateHelper.m; sourceTree = "<group>"; };
 		96982B431ACF804200040A50 /* HUDHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HUDHelper.h; sourceTree = "<group>"; };
@@ -848,6 +851,8 @@
 				E5B9A2BD1AD6B58D005BB981 /* PersistenceManager.m */,
 				967D3D631AD960D800A55B42 /* RunManager.h */,
 				967D3D641AD960D800A55B42 /* RunManager.m */,
+				967F64D91ADFFF8D0042A39D /* LocationManager.h */,
+				967F64DA1ADFFF8D0042A39D /* LocationManager.m */,
 			);
 			name = Manager;
 			sourceTree = "<group>";
@@ -1203,6 +1208,7 @@
 				96474D0E1ACDB62200DECE02 /* RunPauseView.m in Sources */,
 				E52D16D61ACE4F3300DBFA04 /* SettingViewController.m in Sources */,
 				E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */,
+				967F64DB1ADFFF8D0042A39D /* LocationManager.m in Sources */,
 				96F596B51ACC51E300F56BEA /* RunViewController.m in Sources */,
 				96F398F81ACCED270090CCD8 /* GradientPolylineOverlay.m in Sources */,
 				96474D621ACED60300DECE02 /* SignUpView.m in Sources */,

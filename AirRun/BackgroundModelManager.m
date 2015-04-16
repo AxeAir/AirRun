@@ -11,11 +11,11 @@
 #import <UIKit/UIKit.h>
 
 @interface BackgroundModelManager()
-{
+
     // 后台播放器
-    AVAudioPlayer *_player;
-    NSTimer *_timer;  // 定时器
-}
+    @property (strong, nonatomic) AVAudioPlayer *player;
+    @property (strong, nonatomic) NSTimer *timer;  // 定时器
+
 @end
 
 @implementation BackgroundModelManager
@@ -94,7 +94,7 @@
     // 每隔一分钟去检查剩余的时间
     if (_timer == nil)
     {
-        [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(tik) userInfo:nil repeats:YES];
+        _timer = [NSTimer scheduledTimerWithTimeInterval:60.0f target:self selector:@selector(tik) userInfo:nil repeats:YES];
     }
     [_timer setFireDate:[NSDate distantPast]];
 }

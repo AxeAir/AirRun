@@ -33,6 +33,7 @@
 #import "RunManager.h"
 #import "SpeakHelper.h"
 #import "UIButton+TapAnimation.h"
+#import "LocationManager.h"
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
@@ -54,8 +55,7 @@ const char *OUTPOSITION = "OutPosition";
 @property (strong, nonatomic) MKMapView *mapView;
 @property (strong, nonatomic) UIView *mapMaskView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
-@property (strong, nonatomic) CLLocationManager *locationManager;
-@property (strong, nonatomic) CLLocation *currentLocation;
+@property (strong, nonatomic) LocationManager *locManager;
 
 @property (strong, nonatomic) UIButton *startButton;
 @property (strong, nonatomic) UIButton *pauseButton;
@@ -185,20 +185,82 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)p_setLocationManager {
     
-    _locationManager = [[CLLocationManager alloc] init];
-    _locationManager.delegate = self;
-    _locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    _locationManager.distanceFilter = 5.0f;
+    _locManager = [LocationManager shareInstance];
     
-    //检查是否是ios8 如果是就获得许可
-    if ([_locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [_locationManager requestAlwaysAuthorization];
-    }
     
-    [_locationManager startUpdatingLocation];
+    __weak RunViewController *this = self;
+    _locManager.updateBlock = ^(CLLocationManager *manager,NSArray *locations){
+        
+        CLLocation *newLocation = locations[0];
+        
+        //更新坐标点
+        if (newLocation.coordinate.latitude == 0 || newLocation.coordinate.longitude == 0) {
+            return;
+        }
+        
+        //判断是不是属于国内范围
+        if (![WGS84TOGCJ02 isLocationOutOfChina:[newLocation coordinate]]) {
+            //转换后的coord
+            CLLocationCoordinate2D coord = [WGS84TOGCJ02 transformFromWGSToGCJ:[newLocation coordinate]];
+            newLocation = [[CLLocation alloc] initWithCoordinate:coord
+                                                        altitude:newLocation.altitude
+                                              horizontalAccuracy:newLocation.horizontalAccuracy
+                                                verticalAccuracy:newLocation.verticalAccuracy
+                                                          course:newLocation.course
+                                                           speed:newLocation.speed
+                                                       timestamp:newLocation.timestamp];
+        }
+        
+        //得到温度和PM
+        if (!this.readyView) {
+            [this p_getLocationNameWithLocation:newLocation];
+        }
+        
+        if (_runManager.runState == RunStateRunning) {//是在跑步过程中
+            
+            CLLocationDistance distance = [newLocation distanceFromLocation:this.locManager.currentLocation];
+            if (distance < 5.0) {
+                return;
+            }
+            this.runManager.currentSpeed = newLocation.speed;
+            this.runManager.distance += distance;
+            this.runManager.speed = _runcardView.distance/_runcardView.time;
+            this.runManager.kcal += [this p_getCalorie:2.0/3600.0 speed:_runManager.currentSpeed*3.6];
+            
+            [this p_setGPS:newLocation.horizontalAccuracy];
+            
+            //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
+            if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
+                _runCardLastKmDistance = _runcardView.distance;
+                
+                NSInteger km = _runcardView.distance/1000;
+                NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
+                [[SpeakHelper shareInstance] speakString:words];
+                NSString *imageName = [NSString stringWithFormat:@"%ldkm",(long)km];
+                [this.mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:imageName] AtLocation:newLocation];
+            }
+        }
+        
+        this.locManager.currentLocation = newLocation;
+        
+        if (_runManager.runState == RunStateStop) {
+            this.runManager.points = [[NSMutableArray alloc] initWithArray:@[newLocation,newLocation]];
+            
+        } else {
+            NSLog(@"%f %f",newLocation.coordinate.latitude , newLocation.coordinate.longitude);
+            [this.runManager.points addObject:newLocation];
+        }
+        
+        if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
+            [this.mapViewDelegate drawGradientPolyLineWithPoints:this.runManager.points];
+        }
+        
+        CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
+        MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
+        [this.mapView setRegion:region animated:YES];
+        
+    };
     
-    if (![CLLocationManager locationServicesEnabled] ) {
-    }
 }
 
 - (void)p_setLayout {
@@ -566,7 +628,7 @@ const char *OUTPOSITION = "OutPosition";
 - (void)p_getLocationNameWithLocation:(CLLocation *)location {
     
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
-    [geocoder reverseGeocodeLocation:_locationManager.location
+    [geocoder reverseGeocodeLocation:_locManager.currentLocation
                    completionHandler:^(NSArray *placemarks, NSError *error) {
                        if (error){
                            NSLog(@"Geocode failed with error: %@", error);
@@ -592,7 +654,7 @@ const char *OUTPOSITION = "OutPosition";
                            
                        } failure:^(NSError *error) {}];
                        
-                       [weatherManager getWeatherWithLongitude:@(_currentLocation.coordinate.longitude) latitude:@(_currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
+                       [weatherManager getWeatherWithLongitude:@(_locManager.currentLocation.coordinate.longitude) latitude:@(_locManager.currentLocation.coordinate.latitude) success:^(WeatherModel *responseObject) {
                            _runManager.temperature = responseObject.temperature;
                            [self p_setTitle];
                            [self p_setReadyViewWithString:responseObject.exerciseIndex];
@@ -677,95 +739,21 @@ const char *OUTPOSITION = "OutPosition";
     return calorie;
 }
 
-#pragma mark - CLLocationManager Delegate
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    
-    CLLocation *newLocation = locations[0];
-    
-    //更新坐标点
-    if (newLocation.coordinate.latitude == 0 || newLocation.coordinate.longitude == 0) {
-        return;
-    }
-    
-    //判断是不是属于国内范围
-    if (![WGS84TOGCJ02 isLocationOutOfChina:[newLocation coordinate]]) {
-        //转换后的coord
-        CLLocationCoordinate2D coord = [WGS84TOGCJ02 transformFromWGSToGCJ:[newLocation coordinate]];
-        newLocation = [[CLLocation alloc] initWithCoordinate:coord
-                                                    altitude:newLocation.altitude
-                                          horizontalAccuracy:newLocation.horizontalAccuracy
-                                            verticalAccuracy:newLocation.verticalAccuracy
-                                                      course:newLocation.course
-                                                       speed:newLocation.speed
-                                                   timestamp:newLocation.timestamp];
-    }
-    
-    //得到温度和PM
-    if (!_readyView) {
-        [self p_getLocationNameWithLocation:newLocation];
-    }
-    
-    if (_runManager.runState == RunStateRunning) {//是在跑步过程中
-        
-        CLLocationDistance distance = [newLocation distanceFromLocation:_currentLocation];
-        if (distance < 5.0) {
-            return;
-        }
-        _runManager.currentSpeed = newLocation.speed;
-        _runManager.distance += distance;
-        _runManager.speed = _runcardView.distance/_runcardView.time;
-        _runManager.kcal += [self p_getCalorie:2.0/3600.0 speed:_runManager.currentSpeed*3.6];
-        
-        [self p_setGPS:newLocation.horizontalAccuracy];
-        
-        //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
-        if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
-            _runCardLastKmDistance = _runcardView.distance;
-            
-            NSInteger km = _runcardView.distance/1000;
-            NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
-            [[SpeakHelper shareInstance] speakString:words];
-            NSString *imageName = [NSString stringWithFormat:@"%ldkm",(long)km];
-            [_mapViewDelegate addPointAnnotationImage:[UIImage imageNamed:imageName] AtLocation:newLocation];
-        }
-    }
-    
-    self.currentLocation = newLocation;
-    
-    if (_runManager.runState == RunStateStop) {
-        _runManager.points = [[NSMutableArray alloc] initWithArray:@[newLocation,newLocation]];
-        
-    } else {
-        NSLog(@"%f %f",newLocation.coordinate.latitude , newLocation.coordinate.longitude);
-        [_runManager.points addObject:newLocation];
-    }
-    
-    [_mapViewDelegate drawGradientPolyLineWithPoints:_runManager.points];
-//    [_mapViewDelegate drawLineWithPoints:_runManager.points];
-    
-    
-    CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 250, 250);
-    [self.mapView setRegion:region animated:YES];
-    
-}
-
 #pragma mark - UIImagePickerController Delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     if (info) {
         UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
-        [_mapViewDelegate addimage:image AnontationWithLocation:_currentLocation];
+        [_mapViewDelegate addimage:image AnontationWithLocation:_locManager.currentLocation];
         
         RunningImageEntity *imgM = [[RunningImageEntity alloc] init];
         NSString *imageName = [NSString stringWithFormat:@"%@.png",[DateHelper getFormatterDate:@"yyyyMMddHHmmss"]];
         imgM.localpath = [kPathImageFolder stringByAppendingPathComponent:imageName];
         UIImage *newImage = [ImageHeler compressImage:image LessThanKB:400];
         [DocumentHelper saveImage:newImage ToFolderName:kPathImageFolder WithImageName:imgM.localpath.lastPathComponent];
-        imgM.longitude = @(_currentLocation.coordinate.longitude);
-        imgM.latitude = @(_currentLocation.coordinate.latitude);
+        imgM.longitude = @(_locManager.currentLocation.coordinate.longitude);
+        imgM.latitude = @(_locManager.currentLocation.coordinate.latitude);
         imgM.type = @"路线图片";
         
         [_runManager.imageArray addObject:imgM];
@@ -813,7 +801,7 @@ const char *OUTPOSITION = "OutPosition";
             
             [_runManager readFromUserDefault];
             _runManager.points = _runManager.pointsBackUp;
-            _currentLocation = _runManager.points.lastObject;
+            _locManager.currentLocation = _runManager.points.lastObject;
             
             [_mapViewDelegate drawPath:_runManager.points IsStart:NO IsTerminate:NO];
             for (RunningImageEntity *imgEntity in _runManager.imageArray) {
