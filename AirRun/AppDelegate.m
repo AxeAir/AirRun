@@ -41,7 +41,7 @@
     [RunningImage registerSubclass];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
-    [WXApi registerApp:@"wx54fac834bc555603"];
+    //[WXApi registerApp:@"wx54fac834bc555603"];
     
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -159,7 +159,8 @@
     
     NSString *string =[url absoluteString];
     if ([string hasPrefix:@"weixin"]) {
-        return [WXApi handleOpenURL:url delegate:self];
+        //return [WXApi handleOpenURL:url delegate:self];
+        return nil;
     }else
         return [AVOSCloudSNS handleOpenURL:url];
 }
@@ -168,7 +169,8 @@
 {
     NSString *string =[url absoluteString];
     if ([string hasPrefix:@"weixin"]) {
-        return [WXApi handleOpenURL:url delegate:self];
+        //return [WXApi handleOpenURL:url delegate:self];
+        return nil;
     }else
         return [AVOSCloudSNS handleOpenURL:url];
 }

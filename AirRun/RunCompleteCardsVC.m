@@ -413,16 +413,16 @@ static const char *INDEX = "index";
     
     if(buttonType == ShareViewButtonTypeWeChat)
     {
-        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-        req.scene = WXSceneTimeline;
-        req.text = @"这里写你要分享的内容。";
-        req.bText = NO;
-        req.message = WXMediaMessage.message;
-        req.message.title = @"ddd";
-        WXImageObject *imageObject = [[WXImageObject alloc] init];
-        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_display]);
-        req.message.mediaObject = imageObject;
-        [WXApi sendReq:req];
+//        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+//        req.scene = WXSceneTimeline;
+//        req.text = @"这里写你要分享的内容。";
+//        req.bText = NO;
+//        req.message = WXMediaMessage.message;
+//        req.message.title = @"ddd";
+//        WXImageObject *imageObject = [[WXImageObject alloc] init];
+//        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_display]);
+//        req.message.mediaObject = imageObject;
+//        [WXApi sendReq:req];
     }
     
     
