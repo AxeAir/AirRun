@@ -8,6 +8,7 @@
 
 #import "AboutUsViewController.h"
 #import "PersonView.h"
+#import <AVOSCloud.h>
 
 @interface AboutUsViewController ()
 
@@ -35,6 +36,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"关于我们页面"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"关于我们页面"];
 }
 
 #pragma mark - Layout

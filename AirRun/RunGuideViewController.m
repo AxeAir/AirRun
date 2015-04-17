@@ -8,6 +8,7 @@
 
 #import "RunGuideViewController.h"
 #import "GuideView.h"
+#import <AVOSCloud.h>
 
 @interface RunGuideViewController () <UIScrollViewDelegate>
 
@@ -29,6 +30,17 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"跑前指导页面"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"跑前指导页面"];
 }
 
 - (void)p_layout {

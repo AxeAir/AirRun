@@ -55,16 +55,19 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
+    [AVAnalytics endLogPageView:@"Timeline页面"];
     [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"Timeline页面"];
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 
     self.navigationController.navigationBarHidden = YES;
     
 }
+    
 
 #pragma mark - Table view data source
 
