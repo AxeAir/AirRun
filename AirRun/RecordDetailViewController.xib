@@ -355,7 +355,7 @@
         <image name="distanceshare" width="32" height="32"/>
         <image name="fire" width="32" height="32"/>
         <image name="focus" width="32" height="33"/>
-        <image name="intro_4" width="375" height="666"/>
+        <image name="intro_4" width="375" height="667"/>
         <image name="locationshare" width="32" height="32"/>
         <image name="nophoto" width="32" height="33"/>
         <image name="shareclose" width="32" height="32"/>

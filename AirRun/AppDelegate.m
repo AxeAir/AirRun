@@ -44,7 +44,7 @@
     [RunningImage registerSubclass];
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
-    //[WXApi registerApp:@"wx54fac834bc555603"];
+    [WXApi registerApp:@"wx54fac834bc555603"];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
@@ -131,7 +131,7 @@
                
                 
             } completion:^(BOOL finished) {
-                //[userdefault setObject:@"ok" forKey:@"firstcome"];
+                [userdefault setObject:@"ok" forKey:@"firstcome"];
                 [userdefault synchronize];
                 [weakSelf.introductionView.view removeFromSuperview];
                 weakSelf.introductionView = nil;
@@ -229,8 +229,7 @@
     
     NSString *string =[url absoluteString];
     if ([string hasPrefix:@"weixin"]) {
-        //return [WXApi handleOpenURL:url delegate:self];
-        return nil;
+        return [WXApi handleOpenURL:url delegate:self];
     }else
         return [AVOSCloudSNS handleOpenURL:url];
 }
@@ -239,8 +238,7 @@
 {
     NSString *string =[url absoluteString];
     if ([string hasPrefix:@"weixin"]) {
-        //return [WXApi handleOpenURL:url delegate:self];
-        return nil;
+        return [WXApi handleOpenURL:url delegate:self];
     }else
         return [AVOSCloudSNS handleOpenURL:url];
 }
