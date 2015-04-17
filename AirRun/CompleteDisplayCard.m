@@ -154,7 +154,6 @@
     [self addSubview:_speedAndTime];
 }
 
-
 - (void)changeToNormalModel
 {
     [_shareButton setAlpha:1];

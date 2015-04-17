@@ -23,7 +23,7 @@ typedef void(^imgAnnotationTapBlock)(CustomAnnotation *annotation);
 
 - (void)drawLineWithPoints:(NSArray *)points;
 - (void)drawPath:(NSArray *)path IsStart:(BOOL)start IsTerminate:(BOOL)terminate;
-- (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray;
+- (void)drawGradientPolyLineWithPoints:(NSArray *)pointArray WithGrayLine:(BOOL)grayLine;
 
 //- (void)addImage:(UIImage *)image AtLocation:(CLLocation *)location;
 - (void)deletePhotoAnnotation;
