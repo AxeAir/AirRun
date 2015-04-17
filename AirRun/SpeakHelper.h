@@ -8,10 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class AVSpeechSynthesizer;
+@class AVSpeechUtterance;
+
+typedef void(^speakCompleteBlock)(AVSpeechSynthesizer *synthesizer,AVSpeechUtterance *utterance);
+
 @interface SpeakHelper : NSObject
 
 + (SpeakHelper *)shareInstance;
 
 - (void)speakString:(NSString *)words;
+- (void)speakString:(NSString *)words WithCompleteBlock:(speakCompleteBlock) completeBlock;
 
 @end
