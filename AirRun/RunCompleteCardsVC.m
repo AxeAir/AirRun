@@ -25,6 +25,7 @@
 #import "ShareView.h"
 #import <AVOSCloudSNS.h>
 #import "WXApi.h"
+#import "HUDHelper.h"
 
 static const char *INDEX = "index";
 
@@ -398,12 +399,25 @@ static const char *INDEX = "index";
 {
     if (buttonType == ShareViewButtonTypeWeiBo) {
         [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
+        [_display changeToshareModel];
         
-        [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:[ImageHeler convertViewToImage:[_display getSharingCopy]] toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        UIImage *shareimage = [ImageHeler convertViewToImage:_display ];
+        [_display changeToNormalModel];
+        
+        MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+        [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:shareimage toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            
+            if (error) {
+                [HUDHelper showError:@"分享失败" addView:self.view addHUD:hud delay:1];
+            }
+            else if(object)
+            {
+                [HUDHelper showComplete:@"分享成功" addView:self.view addHUD:hud delay:1];
+            }
             
             NSLog(@"%@",error);
         } andProgress:^(float percent) {
-            
+            [HUDHelper showHUD:@"分享中" andView:self.view andHUD:hud];
         }];
     }
     

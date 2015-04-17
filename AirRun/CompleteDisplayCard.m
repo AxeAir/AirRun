@@ -93,8 +93,9 @@
     
     UILabel *timeLable = [[UILabel alloc] init];
     timeLable.text = [DateHelper getDateFormatter:@"mm:ss" FromDate:_runningentity.finishtime];
-    [timeLable sizeToFit];
     [timeLable setFont:[UIFont systemFontOfSize:12]];
+    [timeLable sizeToFit];
+    [timeLable setAlpha:0.8];
     [timeLable setTextColor:[UIColor whiteColor]];
     [timeLable setCenter:CGPointMake(WIDTH(_titleView)/2, 25+8)];
     [_titleView addSubview:timeLable];
@@ -112,7 +113,7 @@
     [pm25d setText:[NSString stringWithFormat:@"PM %ld",[_runningentity.pm25 integerValue]]];
     [pm25d setFont:[UIFont systemFontOfSize:12]];
     [pm25d sizeToFit];
-    [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(degree)-20, MaxY(degree), WIDTH(pm25d), HEIGHT(pm25d))];
+    [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25d)-20, MaxY(degree), WIDTH(pm25d), HEIGHT(pm25d))];
     [pm25d setTextAlignment:NSTextAlignmentCenter];
     [_titleView addSubview:pm25d];
     
@@ -151,6 +152,18 @@
     [_speedAndTime setFrame:CGRectMake(0, MaxY(_distanceAndCarl)+15, WIDTH(self), 50)];
     
     [self addSubview:_speedAndTime];
+}
+
+- (void)changeToNormalModel
+{
+    [_shareButton setAlpha:1];
+    [_completeButton setAlpha:1];
+}
+
+- (void)changeToshareModel
+{
+    [_shareButton setAlpha:0];
+    [_completeButton setAlpha:0];
 }
 
 - (UIView *)creatDistance:(NSString *)distance andCarl:(NSString *)carl
