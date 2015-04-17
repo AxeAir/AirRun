@@ -204,7 +204,9 @@ const char *OUTPOSITION = "OutPosition";
     _mapMaskView = [[UIView alloc] initWithFrame:_mapView.frame];
     _mapMaskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskTapGesture:)];
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskTapGesture:)];
     [_mapMaskView addGestureRecognizer:tapGesture];
+    [_mapMaskView addGestureRecognizer:swipeGesture];
     [self.view addSubview:_mapMaskView];
     
 }
@@ -430,9 +432,17 @@ const char *OUTPOSITION = "OutPosition";
 
 #pragma mark Gesture Event
 
-- (void)mapMaskTapGesture:(UITapGestureRecognizer *)tapGesture {
+- (void)mapMaskTapGesture:(UIGestureRecognizer *)tapGesture {
     UIView *view = tapGesture.view;
-    [view removeFromSuperview];
+//    [view removeFromSuperview];
+    
+    [UIView transitionWithView:view.superview
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [view removeFromSuperview];
+                    } completion:nil];
+    
 }
 
 #pragma mark Timer Event
@@ -500,8 +510,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)photoButtonTouch:(UIBarButtonItem *)sender {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
@@ -551,7 +561,7 @@ const char *OUTPOSITION = "OutPosition";
     
     [self p_audioPlay:@"finish"];
     
-    _runManager.runState = RunStateStop;
+    
     
     if (_runManager.distance <= 25) {
         
@@ -570,6 +580,7 @@ const char *OUTPOSITION = "OutPosition";
         [[SpeakHelper shareInstance] speakString:words WithCompleteBlock:^(AVSpeechSynthesizer *synthesizer, AVSpeechUtterance *utterance) {
             RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
             [self.navigationController pushViewController:vc animated:YES];
+            _runManager.runState = RunStateStop;
         }];
         
     }
