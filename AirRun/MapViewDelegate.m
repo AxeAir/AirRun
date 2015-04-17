@@ -14,6 +14,7 @@
 #import "CustomAnnotation.h"
 #import "CustomAnnotationView.h"
 #import <objc/runtime.h>
+#import "CreatImageHelper.h"
 
 static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
 
@@ -58,7 +59,7 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
 - (void)drawPath:(NSArray *)path IsStart:(BOOL)start IsTerminate:(BOOL)terminate {
     
     //画路线
-    [self drawGradientPolyLineWithPoints:path];
+    [self drawGradientPolyLineWithPoints:path WithGrayLine:YES];
     
     //地图适应
     [self zoomToFitMapPoints:path];
@@ -80,7 +81,8 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
         if ([location distanceFromLocation:lastKMLocation] >= 1000) {
             kmIndex++;
             lastKMLocation = location;
-            [self addPointAnnotationImage:[UIImage imageNamed:@"1km"] AtLocation:location];
+            UIImage *image = [CreatImageHelper generateDistanceNodeImage:[NSString stringWithFormat:@"%ld",(long)kmIndex]];
+            [self addPointAnnotationImage:image AtLocation:location];
         }
     }
     
@@ -93,7 +95,7 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
     
 }
 
--(void)drawGradientPolyLineWithPoints:(NSArray *)pointArray{
+-(void)drawGradientPolyLineWithPoints:(NSArray *)pointArray WithGrayLine:(BOOL)grayLine{
     
     CLLocationCoordinate2D *points;
     float *velocity;
@@ -112,7 +114,11 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
     
     self.gradientLineOverlay = [[GradientPolylineOverlay alloc] initWithPoints:points velocity:velocity count:pointArray.count];
     [self.mapView insertOverlay:self.gradientLineOverlay belowOverlay:_imageOverlay];
-    [self drawLineWithPoints:pointArray];
+    
+    if (grayLine) {
+        [self drawLineWithPoints:pointArray];
+    }
+    
     
     
     free(points);

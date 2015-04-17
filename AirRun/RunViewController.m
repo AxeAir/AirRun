@@ -120,6 +120,10 @@ const char *OUTPOSITION = "OutPosition";
         [_runTimer setFireDate:[NSDate distantFuture]];
     }
     
+    if (_runManager.runState != RunStateStop) {
+        [_mapViewDelegate drawGradientPolyLineWithPoints:_runManager.points WithGrayLine:NO];
+    }
+    
     [_runManager addObserver:self forKeyPath:@"distance" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [_runManager addObserver:self forKeyPath:@"time" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [_runManager addObserver:self forKeyPath:@"speed" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
@@ -204,7 +208,7 @@ const char *OUTPOSITION = "OutPosition";
     _mapMaskView = [[UIView alloc] initWithFrame:_mapView.frame];
     _mapMaskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskTapGesture:)];
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskTapGesture:)];
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskSwipeGesture:)];
     [_mapMaskView addGestureRecognizer:tapGesture];
     [_mapMaskView addGestureRecognizer:swipeGesture];
     [self.view addSubview:_mapMaskView];
@@ -283,7 +287,7 @@ const char *OUTPOSITION = "OutPosition";
         }
         
         if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateBackground) {
-            [this.mapViewDelegate drawGradientPolyLineWithPoints:this.runManager.points];
+            [this.mapViewDelegate drawGradientPolyLineWithPoints:this.runManager.points WithGrayLine:NO];
         }
         
         CLLocationCoordinate2D center = CLLocationCoordinate2DMake(newLocation.coordinate.latitude+0.000215, newLocation.coordinate.longitude);
@@ -443,6 +447,20 @@ const char *OUTPOSITION = "OutPosition";
                         [view removeFromSuperview];
                     } completion:nil];
     
+}
+
+- (void)mapMaskSwipeGesture:(UIGestureRecognizer *)swipeGesture {
+    
+    UIView *view = swipeGesture.view;
+    //    [view removeFromSuperview];
+    
+    [UIView transitionWithView:view.superview
+                      duration:0.5
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [view removeFromSuperview];
+                    } completion:nil];
+
 }
 
 #pragma mark Timer Event
