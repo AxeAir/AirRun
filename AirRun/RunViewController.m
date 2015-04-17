@@ -581,7 +581,7 @@ const char *OUTPOSITION = "OutPosition";
     
     
     
-    if (_runManager.distance < 0) {
+    if (_runManager.distance < 20) {
         
         _runConfirmAlert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                       message:@"您跑步的距离过段是否重新开始"
