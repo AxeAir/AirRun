@@ -77,6 +77,7 @@
     _cheView = [[PersonView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_yetiView.frame)+25, self.view.bounds.size.width-30, 90)];
     _cheView.layer.cornerRadius = 10;
     _cheView.nameLable.text = @"陈浩";
+    _cheView.headImg = [UIImage imageNamed:@"harries"];
     _cheView.engNameLable.text = @"Harries";
     _cheView.roleLable.text = @"开发";
     [_scrollView addSubview:_cheView];
