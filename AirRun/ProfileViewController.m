@@ -52,9 +52,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)viewWillDisappear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
-    [_user saveEventually];
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"个人设置页面"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"个人设置页面"];
+     [_user saveEventually];
 }
 
 #pragma mark - Table view data source

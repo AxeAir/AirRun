@@ -46,6 +46,12 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"设置页面"];
+}
+
 /**
  *  页面即将离开的时候保存数据
  *
@@ -54,7 +60,12 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [_user saveInBackground];
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"设置页面"];
 }
+
+
+
 
 
 #pragma mark UITableview Delegate
