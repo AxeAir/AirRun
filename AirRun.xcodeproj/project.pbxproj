@@ -95,6 +95,7 @@
 		E5668FC11ACBC68C009A0D61 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FC01ACBC68C009A0D61 /* CoreTelephony.framework */; };
 		E5668FC31ACBC694009A0D61 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FC21ACBC694009A0D61 /* AdSupport.framework */; };
 		E5668FC61ACBC739009A0D61 /* WeatherManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E5668FC51ACBC739009A0D61 /* WeatherManager.m */; };
+		E57BC1A41AE175B100333EAD /* SettingHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E57BC1A31AE175B100333EAD /* SettingHelper.m */; };
 		E59139951ACBDA5600F9D048 /* RunCompleteCardsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E59139941ACBDA5600F9D048 /* RunCompleteCardsVC.m */; };
 		E59139991ACBDDCF00F9D048 /* CompleteInputCard.m in Sources */ = {isa = PBXBuildFile; fileRef = E59139981ACBDDCF00F9D048 /* CompleteInputCard.m */; };
 		E591399C1ACBE13400F9D048 /* DateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = E591399B1ACBE13400F9D048 /* DateHelper.m */; };
@@ -303,6 +304,8 @@
 		E5668FC21ACBC694009A0D61 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		E5668FC41ACBC739009A0D61 /* WeatherManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherManager.h; sourceTree = "<group>"; };
 		E5668FC51ACBC739009A0D61 /* WeatherManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherManager.m; sourceTree = "<group>"; };
+		E57BC1A21AE175B100333EAD /* SettingHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingHelper.h; sourceTree = "<group>"; };
+		E57BC1A31AE175B100333EAD /* SettingHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingHelper.m; sourceTree = "<group>"; };
 		E59139931ACBDA5600F9D048 /* RunCompleteCardsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunCompleteCardsVC.h; sourceTree = "<group>"; };
 		E59139941ACBDA5600F9D048 /* RunCompleteCardsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunCompleteCardsVC.m; sourceTree = "<group>"; };
 		E59139971ACBDDCF00F9D048 /* CompleteInputCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteInputCard.h; sourceTree = "<group>"; };
@@ -787,6 +790,8 @@
 				967F64C91ADE430C0042A39D /* SpeakHelper.m */,
 				963CE2C21AE0488100844D70 /* CreatImageHelper.h */,
 				963CE2C31AE0488100844D70 /* CreatImageHelper.m */,
+				E57BC1A21AE175B100333EAD /* SettingHelper.h */,
+				E57BC1A31AE175B100333EAD /* SettingHelper.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -1179,6 +1184,7 @@
 				E51E98871ADA6D460050AE69 /* NavViewController.m in Sources */,
 				96474D171ACDB65F00DECE02 /* ImageOverLay.m in Sources */,
 				E5AC95BD1ACD5AEE00A6F133 /* RunningRecord.m in Sources */,
+				E57BC1A41AE175B100333EAD /* SettingHelper.m in Sources */,
 				E52D16F41ACE6C1D00DBFA04 /* QBImagePickerGroupCell.m in Sources */,
 				96F398F91ACCED270090CCD8 /* GradientPolylineRenderer.m in Sources */,
 				E51E988B1ADB6EBA0050AE69 /* NotificationTC.m in Sources */,

@@ -76,7 +76,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (section == 0) {
-        return 3;
+        return 2;
     }
     return 3;
 }
@@ -126,13 +126,13 @@
             
                 [cell addSubview:switchButton];
             }
+//            if (indexPath.row == 1) {
+//                title.text = @"锻炼提醒";
+//                UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
+//                [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
+//                [cell.contentView addSubview:line];
+//            }
             if (indexPath.row == 1) {
-                title.text = @"锻炼提醒";
-                UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
-                [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
-                [cell.contentView addSubview:line];
-            }
-            if (indexPath.row == 2) {
                 title.text = @"同步数据";
             }
             
@@ -171,11 +171,11 @@
     switch (indexPath.section) {
         case 0:
         {
-            if (indexPath.row == 1) {
-                NotificationTC * notification = [[NotificationTC alloc] initWithStyle:UITableViewStyleGrouped];
-                [self.navigationController pushViewController:notification animated:YES];
-            }
-            if (indexPath.row ==2) {
+//            if (indexPath.row == 1) {
+//                NotificationTC * notification = [[NotificationTC alloc] initWithStyle:UITableViewStyleGrouped];
+//                [self.navigationController pushViewController:notification animated:YES];
+//            }
+            if (indexPath.row ==1) {
                 
                 MBProgressHUD *hud = [[MBProgressHUD alloc] init];
                 
