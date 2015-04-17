@@ -22,6 +22,7 @@
                 <outlet property="monthDayLable" destination="0o2-SK-sdJ" id="cH8-TS-xOo"/>
                 <outlet property="secondsLabel" destination="LSL-3r-uYc" id="cNu-f5-dpD"/>
                 <outlet property="shareButton" destination="QhC-7s-YhV" id="eGd-Z2-3Ja"/>
+                <outlet property="shareImgButton" destination="bz9-1a-7cQ" id="Gqj-sj-dTr"/>
                 <outlet property="shareView" destination="1YI-Vt-GRS" id="Dkx-mi-6zr"/>
                 <outlet property="tempertureAndPMLable" destination="HFy-SP-HxO" id="zxE-21-q0H"/>
                 <outlet property="topView" destination="ZxY-a2-Iv7" id="Byw-xx-aVi"/>
@@ -40,13 +41,13 @@
                     <rect key="frame" x="5" y="35" width="404" height="691"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="toB-fa-PJT" userLabel="shareView">
-                            <rect key="frame" x="0.0" y="651" width="404" height="40"/>
+                            <rect key="frame" x="0.0" y="646" width="404" height="45"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTc-iI-jtE">
-                                    <rect key="frame" x="10" y="13" width="15" height="15"/>
+                                    <rect key="frame" x="10" y="13" width="20" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="zTc-iI-jtE" secondAttribute="height" multiplier="1:1" id="3ox-P8-PgP"/>
-                                        <constraint firstAttribute="height" constant="15" id="kUI-ml-SFT"/>
+                                        <constraint firstAttribute="height" constant="20" id="kUI-ml-SFT"/>
                                     </constraints>
                                     <state key="normal" image="shareclose">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -56,31 +57,38 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QhC-7s-YhV">
-                                    <rect key="frame" x="334" y="6" width="60" height="28"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" secondItem="QhC-7s-YhV" secondAttribute="height" multiplier="17:8" id="JDH-Et-TyM"/>
-                                        <constraint firstAttribute="width" constant="60" id="zMG-xA-wFA"/>
-                                    </constraints>
+                                    <rect key="frame" x="364" y="9" width="30" height="28"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                    <state key="normal" title="分享" image="sharedeep">
-                                        <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="分享">
+                                        <color key="titleColor" red="0.37647058823529411" green="0.49019607843137253" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                     <connections>
                                         <action selector="shareButtonTouch:" destination="-1" eventType="touchUpInside" id="Zn4-lX-eMv"/>
                                     </connections>
                                 </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bz9-1a-7cQ">
+                                    <rect key="frame" x="327" y="7" width="32" height="32"/>
+                                    <state key="normal" image="sharedeep">
+                                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="shareButtonTouch:" destination="-1" eventType="touchUpInside" id="Eae-vZ-hSQ"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <constraints>
-                                <constraint firstAttribute="height" constant="40" id="0G2-Mc-2Tv"/>
+                                <constraint firstAttribute="height" constant="45" id="0G2-Mc-2Tv"/>
                                 <constraint firstAttribute="centerY" secondItem="zTc-iI-jtE" secondAttribute="centerY" id="Nns-hy-2TL"/>
                                 <constraint firstAttribute="trailing" secondItem="QhC-7s-YhV" secondAttribute="trailing" constant="10" id="ii2-uD-ShZ"/>
                                 <constraint firstItem="zTc-iI-jtE" firstAttribute="leading" secondItem="toB-fa-PJT" secondAttribute="leading" constant="10" id="j4e-hU-FWC"/>
+                                <constraint firstItem="QhC-7s-YhV" firstAttribute="leading" secondItem="bz9-1a-7cQ" secondAttribute="trailing" constant="5" id="jHc-85-eEP"/>
                                 <constraint firstAttribute="centerY" secondItem="QhC-7s-YhV" secondAttribute="centerY" id="pm7-NW-fGQ"/>
+                                <constraint firstAttribute="centerY" secondItem="bz9-1a-7cQ" secondAttribute="centerY" id="zcn-qM-dj3"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00h-pJ-b5p" userLabel="cardView">
-                            <rect key="frame" x="0.0" y="0.0" width="404" height="651"/>
+                            <rect key="frame" x="0.0" y="0.0" width="404" height="646"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZxY-a2-Iv7" userLabel="topView">
                                     <rect key="frame" x="0.0" y="0.0" width="404" height="45"/>
@@ -141,13 +149,13 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="©轻跑" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FzF-Ef-lyt">
-                                    <rect key="frame" x="5" y="629" width="40" height="17"/>
+                                    <rect key="frame" x="5" y="624" width="40" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfX-Q8-n5u">
-                                    <rect key="frame" x="0.0" y="569" width="404" height="60"/>
+                                    <rect key="frame" x="0.0" y="564" width="404" height="60"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="fire" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6y-gH4">
                                             <rect key="frame" x="71" y="10" width="40" height="40"/>
@@ -187,14 +195,14 @@
                                     </variation>
                                 </view>
                                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Pv-qq-G6f" userLabel="lineView">
-                                    <rect key="frame" x="15" y="568" width="374" height="1"/>
+                                    <rect key="frame" x="15" y="563" width="374" height="1"/>
                                     <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="X4i-cP-wYV"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hv1-7e-n5r">
-                                    <rect key="frame" x="0.0" y="508" width="404" height="60"/>
+                                    <rect key="frame" x="0.0" y="503" width="404" height="60"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="speedshare" translatesAutoresizingMaskIntoConstraints="NO" id="i4t-B2-BTl">
                                             <rect key="frame" x="5" y="42" width="15" height="15"/>
@@ -248,8 +256,8 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13.4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzS-TL-jcw">
-                                            <rect key="frame" x="340" y="5" width="49" height="30"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                            <rect key="frame" x="341" y="5" width="48" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -277,10 +285,10 @@
                                     </constraints>
                                 </view>
                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="buD-1b-OBr">
-                                    <rect key="frame" x="0.0" y="45" width="404" height="463"/>
+                                    <rect key="frame" x="0.0" y="45" width="404" height="458"/>
                                 </mapView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fLF-U6-OJr">
-                                    <rect key="frame" x="362" y="460" width="32" height="33"/>
+                                    <rect key="frame" x="362" y="455" width="32" height="33"/>
                                     <state key="normal" image="focus">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -289,7 +297,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="10001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXM-7g-Qs6">
-                                    <rect key="frame" x="362" y="419" width="32" height="33"/>
+                                    <rect key="frame" x="362" y="414" width="32" height="33"/>
                                     <state key="normal" image="nophoto">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>

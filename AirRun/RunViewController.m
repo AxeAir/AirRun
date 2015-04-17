@@ -266,6 +266,7 @@ const char *OUTPOSITION = "OutPosition";
             //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
             if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
                 
+                
                 //每次跑步1千米，就备份
                 [this.runManager saveToUserDefault];
                 _runCardLastKmDistance = _runcardView.distance;
@@ -273,8 +274,9 @@ const char *OUTPOSITION = "OutPosition";
                 NSInteger km = _runcardView.distance/1000;
                 
                 if ([SettingHelper isOpenVoice]) {
+                    [this p_audioPlay:@"pause"];
                     [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"您已经跑了%ld公里",(long)km]];
-                    [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"本公里用时%@",[this.locManager timeFormatted:(this.runManager.time - this.locManager.lastDistanceTime)]]];
+                    [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"用时%@",[this.locManager timeFormatted:(this.runManager.time - this.locManager.lastDistanceTime)]]];
                 }
                 
                 this.locManager.lastDistanceTime = this.runManager.time;
@@ -822,6 +824,8 @@ const char *OUTPOSITION = "OutPosition";
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
+   
+    
     if (info) {
         UIImage *image = info[@"UIImagePickerControllerOriginalImage"];
         [_mapViewDelegate addimage:image AnontationWithLocation:_locManager.currentLocation];
@@ -842,6 +846,7 @@ const char *OUTPOSITION = "OutPosition";
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

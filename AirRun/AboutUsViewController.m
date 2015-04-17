@@ -70,12 +70,14 @@
     
     _yetiView = [[PersonView alloc] initWithFrame:CGRectMake(15, 0, self.view.bounds.size.width-30, 90)];
     _yetiView.engNameLable.text = @"Yeti";
+    _yetiView.headImg = [UIImage imageNamed:@"yeti"];
     _yetiView.layer.cornerRadius = 10;
     [_scrollView addSubview:_yetiView];
     
     _cheView = [[PersonView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_yetiView.frame)+25, self.view.bounds.size.width-30, 90)];
     _cheView.layer.cornerRadius = 10;
     _cheView.nameLable.text = @"陈浩";
+    _cheView.headImg = [UIImage imageNamed:@"harries"];
     _cheView.engNameLable.text = @"Harries";
     _cheView.roleLable.text = @"开发";
     [_scrollView addSubview:_cheView];
@@ -90,6 +92,7 @@
     
     _desitinoView = [[PersonView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_jasonView.frame)+25, self.view.bounds.size.width-30, 90)];
     _desitinoView.layer.cornerRadius = 10;
+    _desitinoView.headImg = [UIImage imageNamed:@"destino"];
     _desitinoView.nameLable.text = @"梁锦峰";
     _desitinoView.engNameLable.text = @"Destino";
     _desitinoView.roleLable.text = @"开发";
