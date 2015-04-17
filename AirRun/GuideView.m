@@ -9,7 +9,7 @@
 #import "GuideView.h"
 
 static const CGFloat MARGINSIDE = 10;
-static const CGFloat MARGINUP = 20;
+static const CGFloat MARGINUP = 30;
 
 @interface GuideView ()
 
@@ -55,8 +55,8 @@ static const CGFloat MARGINUP = 20;
     [_scrollView addSubview:_imageView];
     
     _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _closeButton.frame = CGRectMake(0, 0, 20, 20);
     [_closeButton setImage:[UIImage imageNamed:@"closetips"] forState:UIControlStateNormal];
-    [_closeButton sizeToFit];
     _closeButton.center = CGPointMake(self.bounds.size.width-5-_closeButton.bounds.size.width/2, 5+_closeButton.bounds.size.height/2);
     [_closeButton addTarget:self action:@selector(closeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_closeButton];
