@@ -55,6 +55,7 @@
 - (void)p_layout {
     
     _bgImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    _bgImage.image = [UIImage imageNamed:@"aboutusbg"];
     [self.view addSubview:_bgImage];
     
     _closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -81,6 +82,7 @@
     
     _jasonView = [[PersonView alloc] initWithFrame:CGRectMake(15, CGRectGetMaxY(_cheView.frame)+25, self.view.bounds.size.width-30, 90)];
     _jasonView.layer.cornerRadius = 10;
+    _jasonView.headImage.image = [UIImage imageNamed:@"wj"];
     _jasonView.nameLable.text = @"吴健";
     _jasonView.engNameLable.text = @"Jason";
     _jasonView.roleLable.text = @"开发";
