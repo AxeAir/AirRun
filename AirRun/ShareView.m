@@ -138,14 +138,6 @@
     [_maskBackgroundView setAlpha:0];
 }
 
-
-
-- (void)drawRect:(CGRect)rect
-{
-    
-}
-
-
 - (void)ShareButtonTouch:(id)sender
 {
     UIButton *button = (UIButton *)sender;
