@@ -71,7 +71,7 @@ static const char *INDEX = "index";
     
     [self p_getData];
     [self p_layout];
-    [self p_setMapView];
+    
     
 }
 
@@ -88,6 +88,7 @@ static const char *INDEX = "index";
 
 - (void)viewDidAppear:(BOOL)animated {
     [self p_setViewTopCornor:_cardView];
+    [self p_setMapView];
 }
 
 - (void)p_getData {

@@ -31,6 +31,9 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="intro_4" translatesAutoresizingMaskIntoConstraints="NO" id="32y-hi-cTI">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1YI-Vt-GRS" userLabel="shareView">
                     <rect key="frame" x="5" y="35" width="404" height="691"/>
                     <subviews>
@@ -338,6 +341,10 @@
                 <constraint firstItem="1YI-Vt-GRS" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="35" id="CMp-mk-rV2"/>
                 <constraint firstAttribute="bottom" secondItem="1YI-Vt-GRS" secondAttribute="bottom" constant="10" id="RqA-RL-rU3"/>
                 <constraint firstAttribute="trailing" secondItem="1YI-Vt-GRS" secondAttribute="trailing" constant="5" id="d0j-X6-p1G"/>
+                <constraint firstItem="32y-hi-cTI" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="hyP-cB-jgq"/>
+                <constraint firstAttribute="bottom" secondItem="32y-hi-cTI" secondAttribute="bottom" id="pkI-zq-Hd3"/>
+                <constraint firstItem="32y-hi-cTI" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="qcl-e9-fac"/>
+                <constraint firstAttribute="trailing" secondItem="32y-hi-cTI" secondAttribute="trailing" id="uFT-uA-SYj"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
             <point key="canvasLocation" x="289" y="36"/>
@@ -348,6 +355,7 @@
         <image name="distanceshare" width="32" height="32"/>
         <image name="fire" width="32" height="32"/>
         <image name="focus" width="32" height="33"/>
+        <image name="intro_4" width="375" height="666"/>
         <image name="locationshare" width="32" height="32"/>
         <image name="nophoto" width="32" height="33"/>
         <image name="shareclose" width="32" height="32"/>

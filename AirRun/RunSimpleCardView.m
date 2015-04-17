@@ -83,7 +83,7 @@
     
     if (!_distanceUnitLable) {
         _distanceUnitLable = [[UILabel alloc] init];
-        _distanceUnitLable.text = @"距离km";
+        _distanceUnitLable.text = @"距离 km";
         _distanceUnitLable.textColor = [UIColor whiteColor];
         _distanceUnitLable.font = [UIFont systemFontOfSize:14];
         [_distanceUnitLable sizeToFit];
@@ -126,7 +126,7 @@
     
     if (!_speedUnitLable) {
         _speedUnitLable = [[UILabel alloc] init];
-        _speedUnitLable.text = @"平均速度";
+        _speedUnitLable.text = @"均速 km/h";
         _speedUnitLable.textColor = [UIColor whiteColor];
         _speedUnitLable.font = [UIFont systemFontOfSize:14];
         [_speedUnitLable sizeToFit];

@@ -182,7 +182,7 @@
     
     UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+5, MaxY(distanceLabel), 100, 14)];
     [km setFont:[UIFont boldSystemFontOfSize:12]];
-    [km setText:@"距离Km"];
+    [km setText:@"距离 km"];
     [km setTextAlignment:NSTextAlignmentLeft];
     [km setTextColor:[UIColor whiteColor]];
     [view addSubview:km];
@@ -203,7 +203,7 @@
     
     UILabel *ca = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, MaxY(calLabel), 100, 14)];
     [ca setFont:[UIFont boldSystemFontOfSize:12]];
-    [ca setText:@"卡路里Kcal"];
+    [ca setText:@"卡路里 kcal"];
     [ca setTextAlignment:NSTextAlignmentLeft];
     [ca setTextColor:[UIColor whiteColor]];
     [view addSubview:ca];
@@ -232,7 +232,7 @@
     
     UILabel *km = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(flag)+5, MaxY(distanceLabel), 100, 14)];
     [km setFont:[UIFont boldSystemFontOfSize:12]];
-    [km setText:@"速度Km"];
+    [km setText:@"均速 km/h"];
     [km setTextAlignment:NSTextAlignmentLeft];
     [km setTextColor:[UIColor whiteColor]];
     [view addSubview:km];
@@ -293,6 +293,7 @@
     _shareButton.center = CGPointMake(WIDTH(self)/2, MaxY(_heartLabel)+45);
     
     [_shareButton setTitle:@"分享跑步卡片" forState:UIControlStateNormal];
+    _shareButton.layer.cornerRadius = 3;
     [[_shareButton titleLabel] setFont:[UIFont boldSystemFontOfSize:16]];
     [_shareButton setBackgroundColor:RGBCOLOR(97, 187, 162)];
     [_shareButton addTarget:self action:@selector(shareButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
