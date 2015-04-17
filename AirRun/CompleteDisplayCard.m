@@ -99,11 +99,6 @@
     [timeLable setCenter:CGPointMake(WIDTH(_titleView)/2, 25+8)];
     [_titleView addSubview:timeLable];
     
-    
-    
-    
-    
-
     UILabel *degree = [[UILabel alloc] init];
     [degree setTextColor:[UIColor whiteColor]];
     [degree setText:[NSString stringWithFormat:@"%@",_runningentity.weather]];
@@ -156,8 +151,17 @@
     [_speedAndTime setFrame:CGRectMake(0, MaxY(_distanceAndCarl)+15, WIDTH(self), 50)];
     
     [self addSubview:_speedAndTime];
+}
+
+
+- (UIView *)getSharingCopy
+{
+    UIView *copy = [self duplicate:self];
+    CGRect orignFrame = [copy frame];
     
-    
+    orignFrame.size.height -= 100;
+    [copy setFrame:orignFrame];
+    return copy;
 }
 
 - (UIView *)creatDistance:(NSString *)distance andCarl:(NSString *)carl
@@ -302,24 +306,19 @@
     [_completeButton setFrame:CGRectMake(0, 0, 140, 30)];
     _completeButton.center = CGPointMake(WIDTH(self)/2, MaxY(_shareButton)+35);
     
-    [_completeButton setTitle:@"暂不分享" forState:UIControlStateNormal];
+    [_completeButton setTitle:@"完成" forState:UIControlStateNormal];
     [[_completeButton titleLabel] setFont:[UIFont boldSystemFontOfSize:16]];
     [_completeButton addTarget:self action:@selector(completeButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
     [self addSubview:_completeButton];
     
-
     if (MaxY(_completeButton)+20>Main_Screen_Height+1) {
         [self setFrame:CGRectMake(10, 10, WIDTH(self), MaxY(_completeButton)+10)];
     }
     else
     {
         [self setFrame:CGRectMake(10, 10, WIDTH(self), Main_Screen_Height-20)];
-       
     }
-    
     [self setNeedsDisplay];
-    
-    
 }
 
 
@@ -331,8 +330,6 @@
     if (_heart !=nil) {
         [self drawLineFrom:CGPointMake(20, MaxY(_speedAndTime)+7.5) to:CGPointMake(WIDTH(self)-20, MaxY(_speedAndTime)+7.5) color:RGBCOLOR(145, 194, 235) width:1];
     }
-    
-
 }
 
 #pragma mark Action
@@ -342,7 +339,6 @@
     if ([_delegate respondsToSelector:@selector(completeDisplayCard:imageButtouTouch:)]) {
         [_delegate completeDisplayCard:self imageButtouTouch:sender];
     }
-    
 }
 
 - (void)shareButtonTouch:(id)sender
@@ -376,5 +372,6 @@
     }
     return nil;
 }
+
 
 @end
