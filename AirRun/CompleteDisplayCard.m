@@ -11,6 +11,7 @@
 #import "UIView+CHQuartz.h"
 #import "MapViewDelegate.h"
 #import <MapKit/MapKit.h>
+#import "DateHelper.h"
 
 @interface CompleteDisplayCard()<UIScrollViewDelegate>
 
@@ -72,7 +73,6 @@
     [_titleView addSubview:location];
     
     UILabel *cityName = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(location)+5, 10, 100, 30)];
-    
     [cityName setText:_runningentity.city];
     [cityName setTextColor:[UIColor whiteColor]];
     [cityName sizeToFit];
@@ -80,27 +80,44 @@
     [cityName setCenter:CGPointMake(MaxX(location)+5+WIDTH(cityName)/2, 25)];
     [_titleView addSubview:cityName];
     
-    UILabel *degree = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH(self)/2+10, 10, 130, 30)];
+    
+    UILabel *monthDayLable = [[UILabel alloc] init];
+    monthDayLable.text = [DateHelper getDateFormatter:@"MM-dd" FromDate:_runningentity.finishtime];
+    [monthDayLable sizeToFit];
+    [monthDayLable setFont:[UIFont systemFontOfSize:16]];
+    [monthDayLable setTextColor:[UIColor whiteColor]];
+    [monthDayLable setCenter:CGPointMake(WIDTH(_titleView)/2, 25 -8)];
+    [_titleView addSubview:monthDayLable];
+    
+    
+    
+    UILabel *timeLable = [[UILabel alloc] init];
+    timeLable.text = [DateHelper getDateFormatter:@"mm:ss" FromDate:_runningentity.finishtime];
+    [timeLable sizeToFit];
+    [timeLable setFont:[UIFont systemFontOfSize:12]];
+    [timeLable setTextColor:[UIColor whiteColor]];
+    [timeLable setCenter:CGPointMake(WIDTH(_titleView)/2, 25+8)];
+    [_titleView addSubview:timeLable];
+    
+    
+    
+    
+    
+
+    UILabel *degree = [[UILabel alloc] init];
     [degree setTextColor:[UIColor whiteColor]];
-    [degree setText:_runningentity.weather];
-    [degree setFont:[UIFont systemFontOfSize:16]];
+    [degree setText:[NSString stringWithFormat:@"%@",_runningentity.weather]];
+    [degree setFont:[UIFont boldSystemFontOfSize:16]];
+    [degree sizeToFit];
+    [degree setFrame:CGRectMake(WIDTH(self)-WIDTH(degree)-10, 10, WIDTH(degree), HEIGHT(degree))];
     [_titleView addSubview:degree];
-    
-    
-    UILabel *pm25 = [[UILabel alloc] init];
-    [pm25 setTextColor:[UIColor whiteColor]];
-    [pm25 setText:[NSString stringWithFormat:@"%ld",[_runningentity.pm25 integerValue]]];
-    [pm25 setFont:[UIFont boldSystemFontOfSize:16]];
-    [pm25 sizeToFit];
-    [pm25 setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25)-10, 10, WIDTH(pm25), HEIGHT(pm25))];
-    [_titleView addSubview:pm25];
     
     UILabel *pm25d = [[UILabel alloc] init];
     [pm25d setTextColor:[UIColor whiteColor]];
-    [pm25d setText:@"PM"];
+    [pm25d setText:[NSString stringWithFormat:@"PM %ld",[_runningentity.pm25 integerValue]]];
     [pm25d setFont:[UIFont systemFontOfSize:12]];
     [pm25d sizeToFit];
-    [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25)-20, MaxY(pm25), WIDTH(pm25d), HEIGHT(pm25d))];
+    [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(degree)-20, MaxY(degree), WIDTH(pm25d), HEIGHT(pm25d))];
     [pm25d setTextAlignment:NSTextAlignmentCenter];
     [_titleView addSubview:pm25d];
     
