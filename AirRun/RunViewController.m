@@ -528,8 +528,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)photoButtonTouch:(UIBarButtonItem *)sender {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }
@@ -596,7 +596,7 @@ const char *OUTPOSITION = "OutPosition";
         [[SpeakHelper shareInstance] speakString:words];
         RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
         [self.navigationController pushViewController:vc animated:YES];
-        _runManager.runState = RunStateStop;
+        [_runManager reback];
         
     }
     

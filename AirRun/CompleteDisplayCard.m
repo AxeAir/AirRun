@@ -153,17 +153,6 @@
     [self addSubview:_speedAndTime];
 }
 
-
-- (UIView *)getSharingCopy
-{
-    UIView *copy = [self duplicate:self];
-    CGRect orignFrame = [copy frame];
-    
-    orignFrame.size.height -= 100;
-    [copy setFrame:orignFrame];
-    return copy;
-}
-
 - (UIView *)creatDistance:(NSString *)distance andCarl:(NSString *)carl
 {
     
