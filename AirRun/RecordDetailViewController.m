@@ -20,6 +20,10 @@
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "ShareView.h"
 #import "ImageHeler.h"
+#import <AVOSCloudSNS.h>
+#import "HUDHelper.h"
+#import "UConstants.h"
+
 static const char *INDEX = "index";
 @interface RecordDetailViewController ()<ShareViewDelegate>
 
@@ -53,7 +57,6 @@ static const char *INDEX = "index";
     // Do any additional setup after loading the view from its nib.
     
     [self p_getData];
-    [self p_setNavgation];
     [self p_layout];
     [self p_setMapView];
     
@@ -61,7 +64,6 @@ static const char *INDEX = "index";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    self.navigationController.navigationBarHidden = NO;
 }
 
 - (void)p_getData {
@@ -89,21 +91,10 @@ static const char *INDEX = "index";
     
 }
 
-#pragma mark - Layout
-
-- (void)p_setNavgation {
-    
-    self.title = @"详细记录";
-    UIBarButtonItem *sharButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(shareButtonTouch:)];
-    self.navigationItem.rightBarButtonItem = sharButton;
-    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
-    
-    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
-    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"navbg127"] forBarMetrics:UIBarMetricsDefault];
-    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-}
-
 - (void)p_layout {
+    
+    [self.view setBackgroundColor:RGBACOLOR(1, 1, 1, 0.5)];
+    
     _topView.layer.cornerRadius = 5;
     _cardView.layer.cornerRadius = 5;
     _cardView.layer.shadowOffset = CGSizeMake(1, 1);
@@ -243,6 +234,26 @@ static const char *INDEX = "index";
 {
     if(buttonType == ShareViewButtonTypeWeiBo)
     {
+        [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
+        
+        
+        MBProgressHUD *hud = [[MBProgressHUD alloc] init];
+        
+        [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:[ImageHeler convertViewToImage:_cardView]toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+            
+            if (error) {
+                NSLog(@"分享失败");
+                [HUDHelper showError:@"分享失败" addView:self.view addHUD:hud delay:2];
+            }
+            else if(object){
+                NSLog(@"分享成功");
+                [HUDHelper showComplete:@"分享成功" addView:self.view addHUD:hud delay:2];
+                [[ShareView shareInstance] dismiss];
+            }
+            NSLog(@"%@",error);
+        } andProgress:^(float percent) {
+            [HUDHelper showHUD:@"分享中" andView:self.view andHUD:hud];
+        }];
         
     }
 }
