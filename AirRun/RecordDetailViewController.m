@@ -62,8 +62,15 @@ static const char *INDEX = "index";
     
 }
 
-- (void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated
+{
     [super viewWillAppear:animated];
+    [AVAnalytics beginLogPageView:@"详细记录页面"];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [AVAnalytics endLogPageView:@"详细记录页面"];
 }
 
 - (void)p_getData {

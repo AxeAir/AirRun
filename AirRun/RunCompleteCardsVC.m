@@ -100,7 +100,13 @@ static const char *INDEX = "index";
     
     [super viewWillAppear:animated];
     self.navigationController.navigationBarHidden = YES;
+    [AVAnalytics  beginLogPageView:@"完成页面"];
     
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [AVAnalytics endLogPageView:@"完成页面"];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
