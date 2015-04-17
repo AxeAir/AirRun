@@ -31,17 +31,30 @@ static const char *INDEX = "index";
 
 @property (weak, nonatomic) IBOutlet UILabel *locationNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *topView;
-@property (weak, nonatomic) IBOutlet UILabel *timeLable;
+
+
+
 @property (weak, nonatomic) IBOutlet UILabel *tempertureAndPMLable;
 
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property (strong, nonatomic) MapViewDelegate *mapViewDelegate;
+@property (weak, nonatomic) IBOutlet UILabel *monthDayLable;
+@property (weak, nonatomic) IBOutlet UILabel *secondsLabel;
 
 @property (weak, nonatomic) IBOutlet UILabel *avgSpeedLable;
+@property (weak, nonatomic) IBOutlet UILabel *avgSpeedUnitLabel;
+
 @property (weak, nonatomic) IBOutlet UILabel *durationLable;
+@property (weak, nonatomic) IBOutlet UILabel *durationUnitLabel;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *distanceLable;
+@property (weak, nonatomic) IBOutlet UILabel *distanceUnitLabel;
+
+
 @property (weak, nonatomic) IBOutlet UILabel *kcalAppleLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *shareView;
 
 
 @property (strong, nonatomic) NSMutableArray *path;
@@ -64,6 +77,10 @@ static const char *INDEX = "index";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [self p_setViewTopCornor:_cardView];
 }
 
 - (void)p_getData {
@@ -92,26 +109,37 @@ static const char *INDEX = "index";
 }
 
 - (void)p_layout {
+
+
+//    _cardView.layer.cornerRadius = 5;
+//    [self p_setViewTopCornor:_cardView];
+    _cardView.layer.shadowOffset = CGSizeMake(0, 2);
+    _cardView.layer.shadowRadius = 1;
+    _cardView.layer.shadowColor = [UIColor colorWithRed:194/255.0 green:194/255.0 blue:194/255.0 alpha:1].CGColor;
+    _cardView.layer.shadowOpacity = 1;
     
-    [self.view setBackgroundColor:RGBACOLOR(1, 1, 1, 0.5)];
-    
-    _topView.layer.cornerRadius = 5;
-    _cardView.layer.cornerRadius = 5;
-    _cardView.layer.shadowOffset = CGSizeMake(1, 1);
-    _cardView.layer.shadowRadius = 5;
-    _cardView.layer.shadowOpacity = 0.5;
+    _shareView.layer.cornerRadius = 5;
+    _shareView.layer.shadowOffset = CGSizeMake(1, 1);
+    _shareView.layer.shadowRadius = 5;
+    _shareView.layer.shadowColor = [UIColor blackColor].CGColor;
+    _shareView.layer.shadowOpacity = 1;
     
     _locationNameLabel.text = _record.city;
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"MM-dd HH:mm";
-    _timeLable.text = [formatter stringFromDate:_record.finishtime];
+    _monthDayLable.text = [DateHelper getDateFormatter:@"MM-dd" FromDate:_record.finishtime];
+    [_monthDayLable sizeToFit];
+    _secondsLabel.text = [DateHelper getDateFormatter:@"mm:ss" FromDate:_record.finishtime];
+    [_secondsLabel sizeToFit];
+    _secondsLabel.alpha = 0.6;
     
     _tempertureAndPMLable.text = [NSString stringWithFormat:@"%@\nPM %ld",_record.weather,[_record.pm25 longValue]];
     
     _avgSpeedLable.text = [NSString stringWithFormat:@"%.1f",[_record.averagespeed floatValue]];
+    _avgSpeedUnitLabel.alpha = 0.8;
     _durationLable.text = [DateHelper converSecondsToTimeString:[_record.time integerValue]];
+    _durationUnitLabel.alpha = 0.8;
     _distanceLable.text = [NSString stringWithFormat:@"%.2f",[_record.distance floatValue]/1000];
+    _distanceUnitLabel.alpha = 0.8;
     
     _kcalAppleLabel.text = _kaclText;
     [_kcalAppleLabel sizeToFit];
@@ -149,6 +177,18 @@ static const char *INDEX = "index";
     [_mapViewDelegate drawPath:_path IsStart:YES IsTerminate:YES];
     [self p_addPhotoAnnotation];
     
+}
+
+- (void)p_setViewTopCornor:(UIView *)view {
+    UIBezierPath *maskPath;
+    maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, view.bounds.size.width, view.bounds.size.height+40)
+                                     byRoundingCorners:(UIRectCornerTopLeft|UIRectCornerTopRight)
+                                           cornerRadii:CGSizeMake(5.0, 5.0)];
+    
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = view.bounds;
+    maskLayer.path = maskPath.CGPath;
+    view.layer.mask = maskLayer;
 }
 
 #pragma mark - Action
@@ -207,12 +247,18 @@ static const char *INDEX = "index";
     
 }
 #pragma mark Button event
-- (void)shareButtonTouch:(UIBarButtonItem *)button {
 
+- (IBAction)shareButtonTouch:(id)sender {
+    
     ShareView *share = [ShareView shareInstance];
     share.delegate  = self;
     [share showInView:self.view];
+    
 }
+- (IBAction)closeButtonTouch:(id)sender {
+    
+}
+
 - (IBAction)foucsButtonTouch:(id)sender {
     [_mapViewDelegate zoomToFitMapPoints:_path];
 }
