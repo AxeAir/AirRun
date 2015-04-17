@@ -60,7 +60,6 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     _state = RegisterAndLoginViewControllerStateSignUp;
     [self p_layoutBeforeAnimation];
-    
 }
 
 - (void)didReceiveMemoryWarning {
