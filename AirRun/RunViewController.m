@@ -575,13 +575,10 @@ const char *OUTPOSITION = "OutPosition";
     } else {
         
         NSString *words = [NSString stringWithFormat:@"本次运动共跑了%ld千米%ld米  总共用时%@",(long)_runManager.distance/1000,(long)_runManager.distance%1000,[_locManager timeFormatted:_runManager.time]];
-        
-        
-        [[SpeakHelper shareInstance] speakString:words WithCompleteBlock:^(AVSpeechSynthesizer *synthesizer, AVSpeechUtterance *utterance) {
-            RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
-            [self.navigationController pushViewController:vc animated:YES];
-            _runManager.runState = RunStateStop;
-        }];
+        [[SpeakHelper shareInstance] speakString:words];
+        RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
+        [self.navigationController pushViewController:vc animated:YES];
+        _runManager.runState = RunStateStop;
         
     }
     
