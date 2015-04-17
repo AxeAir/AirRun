@@ -105,8 +105,8 @@
     {
         
         // Added Introduction View Controller
-        NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"intro_3_text"];
-        NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"intro_3"];
+        NSArray *coverImageNames = @[@"intro_1_text", @"intro_2_text", @"intro_3_text",@"intro_4_text"];
+        NSArray *backgroundImageNames = @[@"intro_1", @"intro_2", @"intro_3",@"intro_4"];
         self.introductionView = [[ZWIntroductionViewController alloc] initWithCoverImageNames:coverImageNames backgroundImageNames:backgroundImageNames];
         
         //Example 2
@@ -132,7 +132,7 @@
                
                 
             } completion:^(BOOL finished) {
-                [userdefault setObject:@"ok" forKey:@"firstcome"];
+                //[userdefault setObject:@"ok" forKey:@"firstcome"];
                 [userdefault synchronize];
                 [weakSelf.introductionView.view removeFromSuperview];
                 weakSelf.introductionView = nil;
@@ -155,6 +155,8 @@
 
     
 }
+
+
 
 
 
