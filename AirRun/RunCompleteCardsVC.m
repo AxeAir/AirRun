@@ -397,12 +397,14 @@ static const char *INDEX = "index";
 
 - (void)shareview:(ShareView *)shareview didSelectButton:(ShareViewButtonType)buttonType
 {
+    
+    [_display changeToshareModel];
+    UIImage *shareimage = [ImageHeler convertViewToImage:_display ];
+    [_display changeToNormalModel];
+    
     if (buttonType == ShareViewButtonTypeWeiBo) {
         [AVOSCloudSNS setupPlatform:AVOSCloudSNSSinaWeibo withAppKey:@"151240750" andAppSecret:@"0488e8710bf0bcd29244f968cdcf2812" andRedirectURI:@"http://open.weibo.com/apps/151240750/privilege/oauth"];
-        [_display changeToshareModel];
         
-        UIImage *shareimage = [ImageHeler convertViewToImage:_display ];
-        [_display changeToNormalModel];
         
         MBProgressHUD *hud = [[MBProgressHUD alloc] init];
         [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:shareimage toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
@@ -423,16 +425,26 @@ static const char *INDEX = "index";
     
     if(buttonType == ShareViewButtonTypeWeChat)
     {
-//        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-//        req.scene = WXSceneTimeline;
-//        req.text = @"这里写你要分享的内容。";
-//        req.bText = NO;
-//        req.message = WXMediaMessage.message;
-//        req.message.title = @"ddd";
-//        WXImageObject *imageObject = [[WXImageObject alloc] init];
-//        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_display]);
-//        req.message.mediaObject = imageObject;
-//        [WXApi sendReq:req];
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.scene = WXSceneTimeline;
+        req.text = @"这里写你要分享的内容。";
+        req.bText = NO;
+        req.message = WXMediaMessage.message;
+        WXImageObject *imageObject = [[WXImageObject alloc] init];
+        imageObject.imageData = UIImagePNGRepresentation(shareimage);
+        req.message.mediaObject = imageObject;
+        [WXApi sendReq:req];
+    }
+    if (buttonType == ShareViewButtonTypeFriends) {
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.scene = WXSceneSession;
+        req.text = @"这里写你要分享的内容。";
+        req.bText = NO;
+        req.message = WXMediaMessage.message;
+        WXImageObject *imageObject = [[WXImageObject alloc] init];
+        imageObject.imageData = UIImagePNGRepresentation(shareimage);
+        req.message.mediaObject = imageObject;
+        [WXApi sendReq:req];
     }
     
     

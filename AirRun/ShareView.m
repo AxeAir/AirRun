@@ -68,10 +68,10 @@
                               @{@"image":@"weiboshare",
                                 @"title":@"分享到微博"
                                 },
-                              @{@"image":@"weixinshare",
+                              @{@"image":@"friendshare",
                                 @"title":@"分享到微信"
                                 },
-                              @{@"image":@"friendshare",
+                              @{@"image":@"weixinshare",
                                 @"title":@"分享到朋友圈"
                                 },
                               ];
@@ -145,10 +145,15 @@
         [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeiBo];
         [AVAnalytics event:[NSString stringWithFormat:@"share"] label:@"weibo"];
     }
-    else if (1001)
+    else if ( button.tag == 1001)
     {
         [AVAnalytics event:[NSString stringWithFormat:@"share"] label:@"wechat"];
         [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeChat];
+    }
+    else if (button.tag == 1002)
+    {
+        [AVAnalytics event:[NSString stringWithFormat:@"share"] label:@"friend"];
+        [_delegate shareview:self didSelectButton:ShareViewButtonTypeFriends];
     }
 }
 
