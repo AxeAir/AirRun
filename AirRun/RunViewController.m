@@ -500,8 +500,8 @@ const char *OUTPOSITION = "OutPosition";
 - (void)photoButtonTouch:(UIBarButtonItem *)sender {
     
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
     imagePicker.delegate = self;
     [self presentViewController:imagePicker animated:YES completion:nil];
 }

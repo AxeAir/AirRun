@@ -221,9 +221,6 @@ static const char *INDEX = "index";
             
             [file getThumbnail:YES width:100 height:100 withBlock:^(UIImage *image, NSError *error) {
                 
-                
-                
-                
             }];
             continue;
             
@@ -263,7 +260,7 @@ static const char *INDEX = "index";
     
 }
 - (IBAction)closeButtonTouch:(id)sender {
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)foucsButtonTouch:(id)sender {
