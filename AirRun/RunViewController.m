@@ -264,6 +264,9 @@ const char *OUTPOSITION = "OutPosition";
             
             //距离上一次提醒已经超过1公里了-----进行公里提醒和地图上显示图标
             if (_runcardView.distance - _runCardLastKmDistance >= 1000) {
+                
+                //每次跑步1千米，就备份
+                [this.runManager saveToUserDefault];
                 _runCardLastKmDistance = _runcardView.distance;
                 
                 NSInteger km = _runcardView.distance/1000;
@@ -606,6 +609,7 @@ const char *OUTPOSITION = "OutPosition";
         RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
         [self.navigationController pushViewController:vc animated:YES];
         
+        [_runManager removeUserDefault];
         [_runManager reback];
         
     }
