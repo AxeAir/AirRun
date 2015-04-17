@@ -143,7 +143,7 @@
     _pagecontrol.alpha = 0;
     [self addSubview:_pagecontrol];
     
-    _distanceAndCarl = [self creatDistance:[NSString stringWithFormat:@"%.2f",[_runningentity.distance floatValue]/1000] andCarl:[NSString stringWithFormat:@"%.2f",[_runningentity.kcar floatValue]]];
+    _distanceAndCarl = [self creatDistance:[NSString stringWithFormat:@"%.2f",[_runningentity.distance floatValue]/1000] andCarl:[NSString stringWithFormat:@"%.1f",[_runningentity.kcar floatValue]]];
     [_distanceAndCarl setFrame:CGRectMake(0, MaxY(_pagecontrol)+10, WIDTH(self), 50)];
     
     [self addSubview:_distanceAndCarl];
