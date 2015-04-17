@@ -36,7 +36,6 @@
     [self addSubview:_bgView];
     
     _headImage = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 65, 65)];
-    _headImage.backgroundColor = [UIColor greenColor];
     _headImage.layer.cornerRadius = _headImage.bounds.size.width/2;
     _headImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _headImage.layer.borderWidth = 1;
