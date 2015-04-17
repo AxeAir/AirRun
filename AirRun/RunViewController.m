@@ -564,10 +564,14 @@ const char *OUTPOSITION = "OutPosition";
 //
     } else {
         
+        NSString *words = [NSString stringWithFormat:@"本次运动共跑了%ld千米%ld米  总共用时%@",(long)_runManager.distance/1000,(long)_runManager.distance%1000,[_locManager timeFormatted:_runManager.time]];
         
         
-        RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
-        [self.navigationController pushViewController:vc animated:YES];
+        [[SpeakHelper shareInstance] speakString:words WithCompleteBlock:^(AVSpeechSynthesizer *synthesizer, AVSpeechUtterance *utterance) {
+            RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
+            [self.navigationController pushViewController:vc animated:YES];
+        }];
+        
     }
     
 }
@@ -672,7 +676,7 @@ const char *OUTPOSITION = "OutPosition";
                        
                        CLPlacemark *placemark = [placemarks objectAtIndex:0];
                        
-                       _runManager.currentLocationName = [NSString stringWithFormat:@"%@,%@",placemark.administrativeArea,placemark.subLocality];
+                       _runManager.currentLocationName = placemark.subLocality;
                        
                        NSString *cityName;
                        if ([placemark.subAdministrativeArea isEqualToString:@""] || !placemark.subAdministrativeArea) {//为直辖市
