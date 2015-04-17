@@ -37,6 +37,17 @@
     [self.tableView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
+    
+    if (_dataSource == 0) {
+        
+        UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
+        UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"defaulttimeline-1"]];
+        [image setFrame:CGRectMake((Main_Screen_Width-200)/2, 0, 200, 200)];
+        [footer addSubview:image];
+        self.tableView.tableFooterView = footer;
+    }
+    
+    
     _navButton = [[UIButton alloc] init];
     [_navButton setImage:[UIImage imageNamed:@"navicon"] forState:UIControlStateNormal];
     [_navButton setFrame:CGRectMake(15, 25, 32, 32)];

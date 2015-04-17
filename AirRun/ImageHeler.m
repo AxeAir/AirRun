@@ -102,7 +102,7 @@
         [imageview setImageWithURL:[NSURL URLWithString:[currentuser objectForKey:@"qqavatar"]]];
     }
     else{
-        [imageview setImage:[UIImage imageNamed:@"weiboshare"]];
+        [imageview setImage:[UIImage imageNamed:@"defaultavatar"]];
     }
     
 }
