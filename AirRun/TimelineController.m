@@ -178,6 +178,8 @@
         [_dataSource removeObjectAtIndex:indexPath.row];
         [record deleteEntity];
         [self.tableView deleteRowsAtIndexPaths:deleteArray withRowAnimation:UITableViewRowAnimationFade];
+        [self.tableView reloadData];
+        [self findButton];
     }];
     [actionsheet bk_setCancelButtonWithTitle:@"取消" handler:^{
         
@@ -233,18 +235,23 @@
     }
 }
 
+
+- (void)findButton
+{
+    [_navButton removeFromSuperview];
+    [self.view addSubview:_navButton];
+}
+
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    //NSLog(@"%f",offsetY);
-    
+  
     [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
     
     if(offsetY < 0) {
         CGRect currentFrame = _headerbackgroundImageView.frame;
         currentFrame.origin.y = offsetY;
         currentFrame.size.height = 200+(-1)*offsetY;
-        //NSLog(@"height:%f", currentFrame.size.height);
         _headerbackgroundImageView.frame = currentFrame;
         CGRect currentButton = _navButton.frame;
         currentButton.origin.y = offsetY+25;

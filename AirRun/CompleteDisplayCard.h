@@ -31,8 +31,9 @@ typedef NS_ENUM(NSInteger, CompleteDisplayCardButtonType) {
 
 - (void)adjust:(NSString *)heart;
 
-- (UIView *)getSharingCopy;
+- (void)changeToshareModel;
 
+- (void)changeToNormalModel;
 @end
 
 
