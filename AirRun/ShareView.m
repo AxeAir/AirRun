@@ -68,11 +68,11 @@
                               @{@"image":@"weiboshare",
                                 @"title":@"分享到微博"
                                 },
-                              @{@"image":@"friendshare",
-                                @"title":@"分享到微信"
-                                },
                               @{@"image":@"weixinshare",
                                 @"title":@"分享到朋友圈"
+                                },
+                              @{@"image":@"friendshare",
+                                @"title":@"分享给好友"
                                 },
                               ];
     

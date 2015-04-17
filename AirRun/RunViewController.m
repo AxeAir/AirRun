@@ -37,6 +37,7 @@
 #import "WeatherTitleView.h"
 #import "CreatImageHelper.h"
 #import "SettingHelper.h"
+#import <AVOSCloud.h>
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
@@ -589,7 +590,7 @@ const char *OUTPOSITION = "OutPosition";
     
     
     
-    if (_runManager.distance < 20) {
+    if (_runManager.distance < 20 && ![[[AVUser currentUser] username] isEqualToString:@"info@mrchenhao.com"]) {
         
         _runConfirmAlert = [[UIAlertView alloc] initWithTitle:@"提示"
                                                       message:@"您跑步的距离过段是否重新开始"

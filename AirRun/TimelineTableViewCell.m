@@ -103,15 +103,15 @@
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH(_mainView), 50)];
     [_mainView addSubview:_headerView];
     
-    UIImageView *kcalview= [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 30, 30)];
+    UIImageView *kcalview= [[UIImageView alloc] initWithFrame:CGRectMake(10, 15, 20, 20)];
     [kcalview setImage:[UIImage imageNamed:@"cal"]];
     [_headerView addSubview:kcalview];
 
     NSInteger index =  arc4random()%4;
     NSDictionary *selectDic = [_kcals objectAtIndex:index];
 
-    _kcalTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(30, 15, 300,25)];
-    NSString *str = [NSString stringWithFormat:@"%ld Kcal   ≈   %.1f %@%@",[_runningRecord.kcar integerValue],[_runningRecord.kcar integerValue]/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
+    _kcalTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 15, 300,25)];
+    NSString *str = [NSString stringWithFormat:@"%ld kcal   ≈   %.1f %@%@",[_runningRecord.kcar integerValue],[_runningRecord.kcar integerValue]/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
     [_kcalTextLabel setText:str];
     [_kcalTextLabel setTextColor:RGBCOLOR(255, 164, 74)];
     [_kcalTextLabel sizeToFit];
