@@ -10,7 +10,7 @@
 
 @interface PersonView : UIView
 
-@property (strong, nonatomic) UIImageView *headImage;
+@property (strong, nonatomic) UIImage *headImg;
 @property (strong, nonatomic) UILabel *nameLable;
 @property (strong, nonatomic) UILabel *engNameLable;
 @property (strong, nonatomic) UILabel *roleLable;

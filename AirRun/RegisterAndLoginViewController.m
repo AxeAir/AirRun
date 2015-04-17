@@ -60,7 +60,6 @@ typedef enum : NSUInteger {
     [super viewDidLoad];
     _state = RegisterAndLoginViewControllerStateSignUp;
     [self p_layoutBeforeAnimation];
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,6 +92,11 @@ typedef enum : NSUInteger {
 }
 
 #pragma mark - Override
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
     

@@ -36,6 +36,7 @@
 #import "LocationManager.h"
 #import "WeatherTitleView.h"
 #import "CreatImageHelper.h"
+#import "SettingHelper.h"
 
 const static NSInteger RuncardViewHieght = 150;
 const static NSInteger RunSimpleCardViewHeight = 90;
@@ -208,9 +209,9 @@ const char *OUTPOSITION = "OutPosition";
     _mapMaskView = [[UIView alloc] initWithFrame:_mapView.frame];
     _mapMaskView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskTapGesture:)];
-    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskSwipeGesture:)];
+    UIPanGestureRecognizer *panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(mapMaskPanGesture:)];
     [_mapMaskView addGestureRecognizer:tapGesture];
-    [_mapMaskView addGestureRecognizer:swipeGesture];
+    [_mapMaskView addGestureRecognizer:panGesture];
     [self.view addSubview:_mapMaskView];
     
 }
@@ -266,8 +267,12 @@ const char *OUTPOSITION = "OutPosition";
                 _runCardLastKmDistance = _runcardView.distance;
                 
                 NSInteger km = _runcardView.distance/1000;
-                [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"您已经跑了%ld公里",(long)km]];
-                [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"本公里用时%@",[this.locManager timeFormatted:(this.runManager.time - this.locManager.lastDistanceTime)]]];
+                
+                if ([SettingHelper isOpenVoice]) {
+                    [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"您已经跑了%ld公里",(long)km]];
+                    [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"本公里用时%@",[this.locManager timeFormatted:(this.runManager.time - this.locManager.lastDistanceTime)]]];
+                }
+                
                 this.locManager.lastDistanceTime = this.runManager.time;
                 
                 UIImage *nodeImage = [CreatImageHelper generateDistanceNodeImage:[NSString stringWithFormat:@"%ld",(long)km]];
@@ -449,9 +454,9 @@ const char *OUTPOSITION = "OutPosition";
     
 }
 
-- (void)mapMaskSwipeGesture:(UIGestureRecognizer *)swipeGesture {
+- (void)mapMaskPanGesture:(UIGestureRecognizer *)panGesture {
     
-    UIView *view = swipeGesture.view;
+    UIView *view = panGesture.view;
     //    [view removeFromSuperview];
     
     [UIView transitionWithView:view.superview
@@ -593,7 +598,11 @@ const char *OUTPOSITION = "OutPosition";
     } else {
         
         NSString *words = [NSString stringWithFormat:@"本次运动共跑了%ld千米%ld米  总共用时%@",(long)_runManager.distance/1000,(long)_runManager.distance%1000,[_locManager timeFormatted:_runManager.time]];
-        [[SpeakHelper shareInstance] speakString:words];
+        
+        if ([SettingHelper isOpenVoice]) {
+            [[SpeakHelper shareInstance] speakString:words];
+        }
+        
         RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
         [self.navigationController pushViewController:vc animated:YES];
         

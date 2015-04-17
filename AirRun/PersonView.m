@@ -11,11 +11,17 @@
 @interface PersonView ()
 
 @property (strong, nonatomic) UIView *bgView;
+@property (strong, nonatomic) UIImageView *headImage;
 @property (strong, nonatomic) UIButton *infoButton;
 
 @end
 
 @implementation PersonView
+
+- (void)setHeadImg:(UIImage *)headImg {
+    _headImg = headImg;
+    _headImage.image = headImg;
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
