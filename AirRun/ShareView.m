@@ -8,6 +8,7 @@
 
 #import "ShareView.h"
 #import "UConstants.h"
+#import <AVOSCloud.h>
 
 @interface ShareView()
 
@@ -150,9 +151,11 @@
     UIButton *button = (UIButton *)sender;
     if (button.tag == 1000) {
         [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeiBo];
+        [AVAnalytics event:[NSString stringWithFormat:@"share"] label:@"weibo"];
     }
     else if (1001)
     {
+        [AVAnalytics event:[NSString stringWithFormat:@"share"] label:@"wechat"];
         [_delegate shareview:self didSelectButton:ShareViewButtonTypeWeChat];
     }
 }

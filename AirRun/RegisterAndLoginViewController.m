@@ -125,8 +125,6 @@ typedef enum : NSUInteger {
     _iconImageView.image = [UIImage imageNamed:@"only_logo"];
     _iconImageView.clipsToBounds = YES;
     _iconImageView.layer.cornerRadius = _iconImageView.bounds.size.width/2;
-    //_iconImageView.layer.borderWidth = 1;
-    //_iconImageView.layer.borderColor = [UIColor blueColor].CGColor;
     _iconImageView.center = CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2-_iconImageView.bounds.size.height/2-20);
     [self.view addSubview:_iconImageView];
     
@@ -262,6 +260,7 @@ typedef enum : NSUInteger {
         [AVUser logInWithUsernameInBackground:email password:password block:^(AVUser *user, NSError *error) {
             if (user != nil) {
                 [hud hide:YES];
+                [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"邮箱登陆成功"];
                 [[NSNotificationCenter defaultCenter]
                  postNotificationName:@"updateAratar" object:nil];
                 RunViewController *run = [[RunViewController alloc] init];
@@ -270,7 +269,7 @@ typedef enum : NSUInteger {
                 [self.sideMenuViewController hideMenuViewController];
             } else {
                 [HUDHelper showError:@"登陆失败" addView:self.view addHUD:hud delay:2];
-                NSLog(@"%@",error);
+                 [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"邮箱登陆失败"];
             }
         }];
         
@@ -308,6 +307,7 @@ typedef enum : NSUInteger {
         [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
                 [hud hide:YES];
+                [AVAnalytics event:[NSString stringWithFormat:@"Register"] label:@"邮箱注册成功"];
                 RunViewController *run = [[RunViewController alloc] init];
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                 [self.sideMenuViewController setPanGestureEnabled:YES];
@@ -316,7 +316,7 @@ typedef enum : NSUInteger {
             } else {
                 if (error.code == 203) {
                     [HUDHelper showError:@"该邮箱已被注册" addView:self.view addHUD:hud delay:2];
-                    NSLog(@"%@",error);
+                    [AVAnalytics event:[NSString stringWithFormat:@"Register"] label:@"注册失败，邮箱存在"];
                 }
             }
         }];
@@ -410,17 +410,13 @@ typedef enum : NSUInteger {
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         if (error) {
             [hud hide:YES];
-            NSLog(@"%@",error);
-            NSLog(@"微博登陆失败");
+            [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"微博登陆失败"];
         }
         else if(object){
             
-            NSLog(@"%@",object);
-            NSLog(@"微博登陆成功");
-            
+            [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"微博登陆成功"];
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformWeiBo block:^(AVUser *user, NSError *error) {
                 [hud hide:YES];
-                NSLog(@"%@",user);
                 if ([[user objectForKey:@"firstSSO"] isEqualToString:@"ok"]) {
                     [[NSNotificationCenter defaultCenter]
                      
@@ -436,7 +432,6 @@ typedef enum : NSUInteger {
                     NSDictionary *rawuser = [object objectForKey:@"raw-user"];
                     NSString     *gender = [rawuser objectForKey:@"gender"];
                     NSString     *nickname = [object objectForKey:@"username"];
-                    
                     
                     [user setObject:nickname forKey:@"nickName"];
                     [user setObject:@"ok" forKey:@"firstSSO"];
@@ -461,7 +456,6 @@ typedef enum : NSUInteger {
                 
             }];
         }
-        NSLog(@"%@",error);
         
     } toPlatform:AVOSCloudSNSSinaWeibo];
 }
@@ -475,11 +469,10 @@ typedef enum : NSUInteger {
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         
         if (error) {
-            NSLog(@"QQ快速登陆失败");
+             [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"qq登陆失败"];
         }
         else if(object){
-            NSLog(@"QQ快速登陆成功");
-            NSLog(@"%@",object);
+            [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"qq登陆成功"];
             [AVUser loginWithAuthData:object platform:AVOSCloudSNSPlatformQQ block:^(AVUser *user, NSError *error) {
                 [hud hide:YES];
                 //
@@ -524,8 +517,6 @@ typedef enum : NSUInteger {
 
             }];
         }
-        NSLog(@"%@",error);
-        
     } toPlatform:AVOSCloudSNSQQ];
 
 }
