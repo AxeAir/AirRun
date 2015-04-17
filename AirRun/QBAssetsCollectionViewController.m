@@ -395,6 +395,12 @@
     
     // Validation
     if (self.allowsMultipleSelection) {
+        
+        
+        if (self.imagePickerController.selectedAssetURLs.count>=4) {
+            self.navigationItem.rightBarButtonItem.enabled = NO;
+        }
+        
         if ([self validateNumberOfSelections:(self.imagePickerController.selectedAssetURLs.count + 1)]) {
             if (self.imagePickerController.selectedAssetURLs.count>=5) {
                 self.navigationItem.rightBarButtonItem.enabled = NO;
@@ -414,12 +420,16 @@
     ALAsset *asset = self.assets[indexPath.row];
     
     // Validation
-    if (self.allowsMultipleSelection) {        
+    if (self.allowsMultipleSelection) {
+        NSLog(@"%d",self.imagePickerController.selectedAssetURLs.count);
+        if (self.imagePickerController.selectedAssetURLs.count<=5) {
+            self.navigationItem.rightBarButtonItem.enabled = YES;
+            
+        }
+        
         if (![self validateNumberOfSelections:(self.imagePickerController.selectedAssetURLs.count - 1)]) {
             
-            if (self.imagePickerController.selectedAssetURLs.count<5) {
-                self.navigationItem.rightBarButtonItem.enabled = YES;
-            }
+            
             [self dismissImportButton];
         }
     }

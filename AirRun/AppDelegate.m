@@ -62,11 +62,10 @@
     NSUserDefaults *userdefault = [NSUserDefaults standardUserDefaults];
     NSString *first = [userdefault objectForKey:@"firstcome"];
     
-    
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     UINavigationController *navigationController = nil;
     
     if ([AVUser currentUser]==nil) {
-        
         RegisterAndLoginViewController *registerAndLogin =[[RegisterAndLoginViewController alloc] init];
         if (!first) {
             registerAndLogin.isAutoAnimation = NO;

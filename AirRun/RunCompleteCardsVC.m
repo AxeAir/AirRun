@@ -55,7 +55,7 @@ static const char *INDEX = "index";
     _scrollview = [[UIScrollView alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     _scrollview.delegate = self;
     [_scrollview setBackgroundColor:[UIColor clearColor]];
-    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"cardbg.jpg"]]];
+    [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"sharebg"]]];
     
     _inputcard = [[CompleteInputCard alloc] initWithFrame:CGRectMake(10, 10, Main_Screen_Width-20, 180)];
     _inputcard.delegate = self;
