@@ -38,7 +38,11 @@
                             <rect key="frame" x="0.0" y="641" width="404" height="50"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTc-iI-jtE">
-                                    <rect key="frame" x="5" y="9" width="32" height="32"/>
+                                    <rect key="frame" x="5" y="13" width="25" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="zTc-iI-jtE" secondAttribute="height" multiplier="1:1" id="3ox-P8-PgP"/>
+                                        <constraint firstAttribute="height" constant="25" id="kUI-ml-SFT"/>
+                                    </constraints>
                                     <state key="normal" image="shareclose">
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -47,7 +51,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QhC-7s-YhV">
-                                    <rect key="frame" x="331" y="9" width="68" height="32"/>
+                                    <rect key="frame" x="326" y="9" width="68" height="32"/>
                                     <state key="normal" title="分享" image="sharedeep">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,7 +64,7 @@
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="0G2-Mc-2Tv"/>
                                 <constraint firstAttribute="centerY" secondItem="zTc-iI-jtE" secondAttribute="centerY" id="Nns-hy-2TL"/>
-                                <constraint firstAttribute="trailing" secondItem="QhC-7s-YhV" secondAttribute="trailing" constant="5" id="ii2-uD-ShZ"/>
+                                <constraint firstAttribute="trailing" secondItem="QhC-7s-YhV" secondAttribute="trailing" constant="10" id="ii2-uD-ShZ"/>
                                 <constraint firstItem="zTc-iI-jtE" firstAttribute="leading" secondItem="toB-fa-PJT" secondAttribute="leading" constant="5" id="j4e-hU-FWC"/>
                                 <constraint firstAttribute="centerY" secondItem="QhC-7s-YhV" secondAttribute="centerY" id="pm7-NW-fGQ"/>
                             </constraints>
@@ -72,14 +76,14 @@
                                     <rect key="frame" x="0.0" y="0.0" width="404" height="40"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="locationshare" translatesAutoresizingMaskIntoConstraints="NO" id="osQ-r5-Jiv">
-                                            <rect key="frame" x="5" y="5" width="30" height="30"/>
+                                            <rect key="frame" x="5" y="10" width="20" height="20"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="30" id="7ft-Qp-Zge"/>
+                                                <constraint firstAttribute="width" constant="20" id="7ft-Qp-Zge"/>
                                                 <constraint firstAttribute="width" secondItem="osQ-r5-Jiv" secondAttribute="height" multiplier="1:1" id="AXj-H6-KwT"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="渝北" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ybc-uF-9TZ">
-                                            <rect key="frame" x="40" y="12" width="26" height="16"/>
+                                            <rect key="frame" x="30" y="12" width="26" height="16"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -135,7 +139,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yfX-Q8-n5u">
                                     <rect key="frame" x="0.0" y="559" width="404" height="60"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calgray" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6y-gH4">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fire" translatesAutoresizingMaskIntoConstraints="NO" id="bRq-6y-gH4">
                                             <rect key="frame" x="71" y="10" width="40" height="40"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="bRq-6y-gH4" secondAttribute="height" multiplier="1:1" id="6SC-3t-Iz3"/>
@@ -335,8 +339,8 @@
         </view>
     </objects>
     <resources>
-        <image name="calgray" width="32" height="32"/>
         <image name="distancetiny" width="32" height="32"/>
+        <image name="fire" width="32" height="32"/>
         <image name="focus" width="32" height="33"/>
         <image name="locationshare" width="32" height="32"/>
         <image name="nophoto" width="32" height="33"/>
