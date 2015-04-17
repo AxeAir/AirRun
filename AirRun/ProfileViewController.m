@@ -413,17 +413,17 @@
         HUD.mode = MBProgressHUDModeDeterminate;
         [HUD showAnimated:YES whileExecutingBlock:^{
             [imageFile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                NSLog(@"上传成功");
+//                NSLog(@"上传成功");
                 AVUser *user = [AVUser currentUser];
                 [user setObject:imageFile forKey:@"avatar"];
                 [user save];
                 [currentAvatar deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    NSLog(@"%@",error);
+//                    NSLog(@"%@",error);
                 }];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"updateAratar" object:nil];
                 
             } progressBlock:^(NSInteger percentDone) {
-                NSLog(@"%ld",percentDone);
+//                NSLog(@"%ld",percentDone);
                 HUD.progress = percentDone/100.0;
                 
             }];

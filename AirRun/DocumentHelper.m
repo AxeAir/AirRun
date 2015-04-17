@@ -73,7 +73,7 @@
 
 + (void)creatFolderAtDocument:(NSString *)folerName {
     
-    NSLog(@"%@",[self documentsPath]);
+//    NSLog(@"%@",[self documentsPath]);
     NSString *path = [[self documentsPath] stringByAppendingPathComponent:folerName];
     if (![[NSFileManager defaultManager] fileExistsAtPath:path]) {
         [[NSFileManager defaultManager] createDirectoryAtPath:path withIntermediateDirectories:YES attributes:nil error:nil];

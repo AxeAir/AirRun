@@ -69,7 +69,7 @@
     [_infoButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];
     [_infoButton sizeToFit];
     _infoButton.center = CGPointMake(self.bounds.size.width-10-_infoButton.bounds.size.width/2, self.bounds.size.height/2);
-    [self addSubview:_infoButton];
+    //[self addSubview:_infoButton];
     
     _roleLable = [[UILabel alloc] init];
     _roleLable.text = @"产品设计";

@@ -135,7 +135,7 @@ static CGFloat kPointHeight = 14.0;
 #pragma mark - Timer Event
 //激活按钮
 - (void)buttonActive:(NSTimer *)timer {
-    NSLog(@"button enabled");
+//    NSLog(@"button enabled");
     self.bgButton.enabled = YES;
 }
 

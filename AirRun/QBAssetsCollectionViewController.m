@@ -421,7 +421,7 @@
     
     // Validation
     if (self.allowsMultipleSelection) {
-        NSLog(@"%d",self.imagePickerController.selectedAssetURLs.count);
+//        NSLog(@"%d",self.imagePickerController.selectedAssetURLs.count);
         if (self.imagePickerController.selectedAssetURLs.count<=5) {
             self.navigationItem.rightBarButtonItem.enabled = YES;
             

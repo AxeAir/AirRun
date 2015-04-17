@@ -136,7 +136,7 @@
                         if (error) {
                             
                         } else if (success) {
-                            NSLog(@"本地上传成功");
+//                            NSLog(@"本地上传成功");
                         }
                     }];
                 }
@@ -153,18 +153,18 @@
             NSComparisonResult result = [record.updateat compare:existrecord.updatedAt];
             
             if (result == NSOrderedSame) {
-                NSLog(@"本地与远端数据一致");
+//                NSLog(@"本地与远端数据一致");
                 record.dirty = @0;
             }
             //本地早于远端,采用远端的数据
             else if(result == NSOrderedAscending)
             {
-                NSLog(@"ddd");
+//                NSLog(@"ddd");
             }
             //本地晚于远端,采用本地的数据
             else if(result == NSOrderedDescending)
             {
-                NSLog(@"ddddd");
+//                NSLog(@"ddddd");
             }
         }
         
@@ -172,7 +172,7 @@
             if (error) {
                 
             } else if (success) {
-                NSLog(@"本地数据修改成功");
+//                NSLog(@"本地数据修改成功");
             }
         }];
         
@@ -226,15 +226,15 @@
                     imageEntiy.type = newrecord.type;
                     [[NSManagedObjectContext MR_contextForCurrentThread] MR_saveToPersistentStoreWithCompletion:^(BOOL success, NSError *error) {
                         if (error) {
-                            NSLog(@"%@",error);
+//                            NSLog(@"%@",error);
                         } else if (success) {
-                            NSLog(@"本地上传成功");
+//                            NSLog(@"本地上传成功");
                         }
                     }];
                 }
                 else if (error)
                 {
-                    NSLog(@"%@",error);
+//                    NSLog(@"%@",error);
                 }
             }];
             
@@ -249,18 +249,18 @@
             NSComparisonResult result = [imageEntiy.updateat compare:existrecord.updatedAt];
             
             if (result == NSOrderedSame) {
-                NSLog(@"本地与远端数据一致");
+//                NSLog(@"本地与远端数据一致");
                 imageEntiy.dirty = @0;
             }
             //本地早于远端,采用远端的数据
             else if(result == NSOrderedAscending)
             {
-                NSLog(@"ddd");
+//                NSLog(@"ddd");
             }
             //本地晚于远端,采用本地的数据
             else if(result == NSOrderedDescending)
             {
-                NSLog(@"ddddd");
+//                NSLog(@"ddddd");
             }
         }
         
@@ -268,7 +268,7 @@
             if (error) {
                 
             } else if (success) {
-                NSLog(@"本地数据修改成功");
+//                NSLog(@"本地数据修改成功");
             }
         }];
         

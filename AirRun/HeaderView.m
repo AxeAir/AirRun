@@ -58,7 +58,7 @@
 
 - (void)selectavatar
 {
-    NSLog(@"点击头像事件触发");
+//    NSLog(@"点击头像事件触发");
     _selectBlock();
 }
 
