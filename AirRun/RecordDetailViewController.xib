@@ -41,7 +41,7 @@
                             <rect key="frame" x="0.0" y="651" width="404" height="40"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTc-iI-jtE">
-                                    <rect key="frame" x="5" y="13" width="15" height="15"/>
+                                    <rect key="frame" x="10" y="13" width="15" height="15"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="zTc-iI-jtE" secondAttribute="height" multiplier="1:1" id="3ox-P8-PgP"/>
                                         <constraint firstAttribute="height" constant="15" id="kUI-ml-SFT"/>
@@ -73,7 +73,7 @@
                                 <constraint firstAttribute="height" constant="40" id="0G2-Mc-2Tv"/>
                                 <constraint firstAttribute="centerY" secondItem="zTc-iI-jtE" secondAttribute="centerY" id="Nns-hy-2TL"/>
                                 <constraint firstAttribute="trailing" secondItem="QhC-7s-YhV" secondAttribute="trailing" constant="10" id="ii2-uD-ShZ"/>
-                                <constraint firstItem="zTc-iI-jtE" firstAttribute="leading" secondItem="toB-fa-PJT" secondAttribute="leading" constant="5" id="j4e-hU-FWC"/>
+                                <constraint firstItem="zTc-iI-jtE" firstAttribute="leading" secondItem="toB-fa-PJT" secondAttribute="leading" constant="10" id="j4e-hU-FWC"/>
                                 <constraint firstAttribute="centerY" secondItem="QhC-7s-YhV" secondAttribute="centerY" id="pm7-NW-fGQ"/>
                             </constraints>
                         </view>
@@ -208,8 +208,8 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13.45" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xi4-cU-RvH">
-                                            <rect key="frame" x="17" y="5" width="71" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                            <rect key="frame" x="22" y="5" width="62" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -227,8 +227,8 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20:10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dg1-x2-Avw">
-                                            <rect key="frame" x="167" y="5" width="71" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                            <rect key="frame" x="171" y="5" width="62" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -246,8 +246,8 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="13.4" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TzS-TL-jcw">
-                                            <rect key="frame" x="337" y="5" width="56" height="30"/>
-                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="25"/>
+                                            <rect key="frame" x="340" y="5" width="49" height="30"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -355,7 +355,7 @@
         <image name="distanceshare" width="32" height="32"/>
         <image name="fire" width="32" height="32"/>
         <image name="focus" width="32" height="33"/>
-        <image name="intro_4" width="375" height="666"/>
+        <image name="intro_4" width="375" height="667"/>
         <image name="locationshare" width="32" height="32"/>
         <image name="nophoto" width="32" height="33"/>
         <image name="shareclose" width="32" height="32"/>

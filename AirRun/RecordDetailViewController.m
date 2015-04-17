@@ -118,9 +118,6 @@ static const char *INDEX = "index";
 
 - (void)p_layout {
 
-
-//    _cardView.layer.cornerRadius = 5;
-//    [self p_setViewTopCornor:_cardView];
     _cardView.layer.shadowOffset = CGSizeMake(0, 2);
     _cardView.layer.shadowRadius = 1;
     _cardView.layer.shadowColor = [UIColor colorWithRed:194/255.0 green:194/255.0 blue:194/255.0 alpha:1].CGColor;
