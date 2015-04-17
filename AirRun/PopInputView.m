@@ -10,6 +10,7 @@
 #import "UConstants.h"
 #import "UIView+CHQuartz.h"
 #import "ImageViewer.h"
+#import "UConstants.h"
 @interface PopInputView() 
 
 @property (nonatomic, strong) UIView *BackgroundMaksView;
@@ -145,7 +146,14 @@
     
     [UIView animateWithDuration:1 delay:0.0 usingSpringWithDamping:0.4 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseIn animations:^{
         
-        [self setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
+        if (ISIPHONE4) {
+            [self setFrame:CGRectMake(30, 50, Main_Screen_Width-60, 190)];
+        }
+        else
+        {
+            [self setFrame:CGRectMake(30, 100, Main_Screen_Width-60, 190)];
+        }
+        
     } completion:^(BOOL finished) {
         [_textView becomeFirstResponder];
     }];

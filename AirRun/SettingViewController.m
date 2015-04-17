@@ -139,19 +139,19 @@
             break;
             
         case 1:
+//            if (indexPath.row == 0) {
+//                title.text = @"意见反馈";
+//                UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
+//                [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
+//                [cell.contentView addSubview:line];
+//            }
             if (indexPath.row == 0) {
-                title.text = @"意见反馈";
-                UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
-                [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
-                [cell.contentView addSubview:line];
-            }
-            if (indexPath.row == 1) {
                 title.text = @"评价我们";
                 UIView *line = [[UIView alloc] initWithFrame:CGRectMake(15, HEIGHT(cell)-1, Main_Screen_Width-15, 0.5)];
                 [line setBackgroundColor:RGBCOLOR(235, 235, 235)];
                 [cell.contentView addSubview:line];
             }
-            if (indexPath.row == 2) {
+            if (indexPath.row == 1) {
                 title.text = @"关于我们";
             }
             
@@ -192,11 +192,11 @@
         break;
         case 1:
         {
-            if (indexPath.row == 1) {
+            if (indexPath.row == 0) {
                 [self rate];
             }
             
-            if (indexPath.row == 2) {
+            if (indexPath.row == 1) {
                 AboutUsViewController *vc = [[AboutUsViewController alloc] init];
                 [self.navigationController pushViewController:vc animated:YES];
             }
