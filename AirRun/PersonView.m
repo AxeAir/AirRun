@@ -45,6 +45,9 @@
     _headImage.layer.cornerRadius = _headImage.bounds.size.width/2;
     _headImage.layer.borderColor = [UIColor whiteColor].CGColor;
     _headImage.layer.borderWidth = 1;
+    [_headImage setContentScaleFactor:[[UIScreen mainScreen] scale]];
+    _headImage.contentMode =  UIViewContentModeScaleAspectFill;
+    _headImage.clipsToBounds = YES;
     _headImage.center = CGPointMake(10+_headImage.bounds.size.width/2, self.bounds.size.height/2);
     [self addSubview:_headImage];
     

@@ -62,6 +62,7 @@ static const char *INDEX = "index";
 @property (strong, nonatomic) NSMutableArray *images;
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 @property (weak, nonatomic) IBOutlet UIButton *shareButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareImgButton;
 
 @end
 
