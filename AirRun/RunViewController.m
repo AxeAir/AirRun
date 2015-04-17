@@ -249,8 +249,9 @@ const char *OUTPOSITION = "OutPosition";
                 _runCardLastKmDistance = _runcardView.distance;
                 
                 NSInteger km = _runcardView.distance/1000;
-                NSString *words = [NSString stringWithFormat:@"您已经跑了%ld千米",(long)km];
-                [[SpeakHelper shareInstance] speakString:words];
+                [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"您已经跑了%ld公里",(long)km]];
+                [[SpeakHelper shareInstance] speakString:[NSString stringWithFormat:@"本公里用时%@",[this.locManager timeFormatted:(this.runManager.time - this.locManager.lastDistanceTime)]]];
+                this.locManager.lastDistanceTime = this.runManager.time;
                 
                 UIImage *nodeImage = [CreatImageHelper generateDistanceNodeImage:[NSString stringWithFormat:@"%ld",(long)km]];
                 
@@ -551,6 +552,9 @@ const char *OUTPOSITION = "OutPosition";
         [_runConfirmAlert show];
 //
     } else {
+        
+        
+        
         RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
         [self.navigationController pushViewController:vc animated:YES];
     }

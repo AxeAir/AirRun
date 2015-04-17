@@ -14,11 +14,13 @@ typedef void(^locationManagerDidUpdateLocationsBlock)(CLLocationManager *manager
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLLocationManager *backgroundLocationManager;
-
 @property (strong, nonatomic) CLLocation *currentLocation;
+
+@property (assign, nonatomic) NSInteger lastDistanceTime;
 
 @property (copy, nonatomic) locationManagerDidUpdateLocationsBlock updateBlock;
 
 + (LocationManager *)shareInstance;
+- (NSString *)timeFormatted:(int)totalSeconds;
 
 @end

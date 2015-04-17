@@ -62,6 +62,28 @@
     }
 }
 
+#pragma mark - Action
+
+- (NSString *)timeFormatted:(int)totalSeconds
+{
+    
+    int seconds = totalSeconds % 60;
+    int minutes = (totalSeconds / 60) % 60;
+    int hours = totalSeconds / 3600;
+    
+    NSString *secondsStr = [NSString stringWithFormat:@"%d秒",seconds];
+    NSString *minutesStr = @"";
+    if (minutes > 0) {
+        minutesStr = [NSString stringWithFormat:@"%d分",minutes];
+    }
+    NSString *hourStr = @"";
+    if (hours>0) {
+        hourStr = [NSString stringWithFormat:@"%d小时",hours];
+    }
+    
+    return [NSString stringWithFormat:@"%@%@%@",hourStr, minutesStr, secondsStr];
+}
+
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
