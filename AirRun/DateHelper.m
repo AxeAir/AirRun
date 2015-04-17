@@ -19,6 +19,12 @@
     return [dateformatter stringFromDate:[NSDate date]];
 }
 
++(NSString *)getDateFormatter:(NSString *)formatter FromDate:(NSDate *)date {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = formatter;
+    return [dateFormatter stringFromDate:date];
+}
+
 + (NSString *)converSecondsToTimeString:(NSInteger)seconds {
     
     NSInteger tempSeconds = seconds;

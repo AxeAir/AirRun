@@ -11,6 +11,7 @@
 @interface DateHelper : NSObject
 
 + (NSString *)getFormatterDate:(NSString *)formatter;
++ (NSString *)getDateFormatter:(NSString *)formatter FromDate:(NSDate *)date;
 
 + (NSString *)converSecondsToTimeString:(NSInteger)seconds;
 
