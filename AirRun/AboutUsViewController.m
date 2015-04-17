@@ -30,6 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [self p_layout];
 }
 
@@ -55,8 +56,6 @@
     
     _bgImage = [[UIImageView alloc] initWithFrame:self.view.bounds];
     [self.view addSubview:_bgImage];
-    
-    
     
     _closeButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [_closeButton setImage:[UIImage imageNamed:@"close.png"] forState:UIControlStateNormal];

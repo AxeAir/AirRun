@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450977366.081423"
+            timestampString = "450979254.880068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "798"
-            endingLineNumber = "798"
+            startingLineNumber = "799"
+            endingLineNumber = "799"
             landmarkName = "-p_getCalorie:speed:"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450977366.081423"
+            timestampString = "450979254.880068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "711"
-            endingLineNumber = "711"
+            startingLineNumber = "712"
+            endingLineNumber = "712"
             landmarkName = "-p_getLocationNameWithLocation:"
             landmarkType = "5">
          </BreakpointContent>
@@ -506,11 +506,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450977366.081423"
+            timestampString = "450979254.880068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "650"
-            endingLineNumber = "650"
+            startingLineNumber = "651"
+            endingLineNumber = "651"
             landmarkName = "-startButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -522,11 +522,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450977366.081423"
+            timestampString = "450979254.880068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
             landmarkName = "-startButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -538,11 +538,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "AirRun/RunViewController.m"
-            timestampString = "450977366.081423"
+            timestampString = "450979254.880068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "644"
-            endingLineNumber = "644"
+            startingLineNumber = "645"
+            endingLineNumber = "645"
             landmarkName = "-startButtonTouch:"
             landmarkType = "5">
          </BreakpointContent>

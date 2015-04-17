@@ -596,6 +596,7 @@ const char *OUTPOSITION = "OutPosition";
         [[SpeakHelper shareInstance] speakString:words];
         RunCompleteCardsVC *vc = [[RunCompleteCardsVC alloc] initWithParameters:[_runManager generateRecordEntity] WithPoints:_runManager.points WithImages:_runManager.imageArray];
         [self.navigationController pushViewController:vc animated:YES];
+        
         [_runManager reback];
         
     }

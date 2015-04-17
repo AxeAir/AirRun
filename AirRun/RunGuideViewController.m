@@ -55,9 +55,8 @@
     [self.view addSubview:_scrollView];
     
     GuideView *guideView1 = [[GuideView alloc] initWithFrame:CGRectMake(15, 0, _scrollView.frame.size.width-30, _scrollView.frame.size.height)];
-    guideView1.image = [UIImage imageNamed:@"changweibo"];
+    guideView1.image = [UIImage imageNamed:@"warmup"];
     guideView1.closeBlock = ^(GuideView *view){
-        NSLog(@"ccc");
         [UIView transitionWithView:self.view.superview
                           duration:0.5
                            options:UIViewAnimationOptionTransitionCrossDissolve
