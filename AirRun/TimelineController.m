@@ -160,7 +160,9 @@
     RecordDetailViewController *vc = [[RecordDetailViewController alloc] init];
     vc.record = record;
     vc.kaclText = kcalText;
-    [self.navigationController pushViewController:vc animated:YES];
+    [self presentViewController:vc animated:YES completion:^{
+        
+    }];
 }
 
 - (void)TimelineTableViewCellDidSelcctDelete:(RunningRecordEntity *)record rowAtIndexPath:(NSIndexPath *)indexPath
