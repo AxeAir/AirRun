@@ -11,6 +11,7 @@
                 <outlet property="avgSpeedLable" destination="xi4-cU-RvH" id="bd3-93-Tu6"/>
                 <outlet property="avgSpeedUnitLabel" destination="T8P-L5-6xa" id="gp4-51-VaG"/>
                 <outlet property="cardView" destination="00h-pJ-b5p" id="cUp-Ch-sl6"/>
+                <outlet property="closeButton" destination="zTc-iI-jtE" id="tW8-gx-6Zz"/>
                 <outlet property="distanceLable" destination="TzS-TL-jcw" id="7bC-zq-DMx"/>
                 <outlet property="distanceUnitLabel" destination="rlB-2c-AXv" id="pFv-eY-krt"/>
                 <outlet property="durationLable" destination="dg1-x2-Avw" id="25z-FY-Lnk"/>
@@ -20,6 +21,7 @@
                 <outlet property="mapView" destination="buD-1b-OBr" id="mX0-Lo-z6S"/>
                 <outlet property="monthDayLable" destination="0o2-SK-sdJ" id="cH8-TS-xOo"/>
                 <outlet property="secondsLabel" destination="LSL-3r-uYc" id="cNu-f5-dpD"/>
+                <outlet property="shareButton" destination="QhC-7s-YhV" id="eGd-Z2-3Ja"/>
                 <outlet property="shareView" destination="1YI-Vt-GRS" id="Dkx-mi-6zr"/>
                 <outlet property="tempertureAndPMLable" destination="HFy-SP-HxO" id="zxE-21-q0H"/>
                 <outlet property="topView" destination="ZxY-a2-Iv7" id="Byw-xx-aVi"/>

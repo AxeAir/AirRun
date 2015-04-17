@@ -60,6 +60,8 @@ static const char *INDEX = "index";
 @property (strong, nonatomic) NSMutableArray *path;
 @property (strong, nonatomic) NSArray *imgEntities;
 @property (strong, nonatomic) NSMutableArray *images;
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+@property (weak, nonatomic) IBOutlet UIButton *shareButton;
 
 @end
 
@@ -287,7 +289,9 @@ static const char *INDEX = "index";
         
         MBProgressHUD *hud = [[MBProgressHUD alloc] init];
         
-        [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:[ImageHeler convertViewToImage:_cardView]toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
+        _closeButton.hidden = YES;
+        _shareButton.hidden = YES;
+        [AVOSCloudSNS shareText:@"我在轻跑" andLink:nil andImage:[ImageHeler convertViewToImage:_shareView]toPlatform:AVOSCloudSNSSinaWeibo withCallback:^(id object, NSError *error) {
             
             if (error) {
                 NSLog(@"分享失败");
@@ -302,6 +306,9 @@ static const char *INDEX = "index";
         } andProgress:^(float percent) {
             [HUDHelper showHUD:@"分享中" andView:self.view andHUD:hud];
         }];
+        
+        _closeButton.hidden = NO;
+        _shareButton.hidden = NO;
         
     }
 }
