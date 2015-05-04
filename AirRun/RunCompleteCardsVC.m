@@ -425,26 +425,33 @@ static const char *INDEX = "index";
     
     if(buttonType == ShareViewButtonTypeWeChat)
     {
-        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-        req.scene = WXSceneTimeline;
-        req.text = @"这里写你要分享的内容。";
-        req.bText = NO;
-        req.message = WXMediaMessage.message;
-        WXImageObject *imageObject = [[WXImageObject alloc] init];
-        imageObject.imageData = UIImagePNGRepresentation(shareimage);
-        req.message.mediaObject = imageObject;
-        [WXApi sendReq:req];
+#ifdef TARGET_OS_IPHONE
+//        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+//        req.scene = WXSceneTimeline;
+//        req.text = @"这里写你要分享的内容。";
+//        req.bText = NO;
+//        req.message = WXMediaMessage.message;
+//        WXImageObject *imageObject = [[WXImageObject alloc] init];
+//        imageObject.imageData = UIImagePNGRepresentation(shareimage);
+//        req.message.mediaObject = imageObject;
+//        [WXApi sendReq:req];
+#endif
     }
     if (buttonType == ShareViewButtonTypeFriends) {
-        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-        req.scene = WXSceneSession;
-        req.text = @"这里写你要分享的内容。";
-        req.bText = NO;
-        req.message = WXMediaMessage.message;
-        WXImageObject *imageObject = [[WXImageObject alloc] init];
-        imageObject.imageData = UIImagePNGRepresentation(shareimage);
-        req.message.mediaObject = imageObject;
-        [WXApi sendReq:req];
+        
+#ifdef TARGET_OS_IPHONE
+       
+//            SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+//            req.scene = WXSceneSession;
+//            req.text = @"这里写你要分享的内容。";
+//            req.bText = NO;
+//            req.message = WXMediaMessage.message;
+//            WXImageObject *imageObject = [[WXImageObject alloc] init];
+//            imageObject.imageData = UIImagePNGRepresentation(shareimage);
+//            req.message.mediaObject = imageObject;
+//            [WXApi sendReq:req];
+#endif
+       
     }
     
     

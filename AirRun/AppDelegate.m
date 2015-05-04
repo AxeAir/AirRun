@@ -45,6 +45,7 @@
     [MagicalRecord setupCoreDataStackWithAutoMigratingSqliteStoreNamed:@"AexAir.sqlite"];
     
     [WXApi registerApp:@"wx54fac834bc555603"];
+
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     [DocumentHelper creatFolderAtDocument:kMapImageFolder];//创建图片文件夹
@@ -245,13 +246,12 @@
 
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     AVInstallation *currentInstallation = [AVInstallation currentInstallation];
-    //NSLog(@"%@",deviceToken);
     [currentInstallation setDeviceTokenFromData:deviceToken];
     [currentInstallation saveInBackground];
 }
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error
 {
-    //NSLog(@"%@",error);
+    
 }
 @end
