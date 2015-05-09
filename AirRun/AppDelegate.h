@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import "RESideMenu.h"
+#import "WXApi.h"
+@interface AppDelegate : UIResponder <UIApplicationDelegate,RESideMenuDelegate,WXApiDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

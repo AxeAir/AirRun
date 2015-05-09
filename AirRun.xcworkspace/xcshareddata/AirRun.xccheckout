@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>847C792E-AE39-4EEA-9846-D01F9F6548F3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>AirRun</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>D01325B803B505A35E0F89248F306DE778780692</key>
+		<string>87.106.63.102:aexair/airrun.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>AirRun.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>D01325B803B505A35E0F89248F306DE778780692</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>87.106.63.102:aexair/airrun.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>D01325B803B505A35E0F89248F306DE778780692</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>D01325B803B505A35E0F89248F306DE778780692</string>
+			<key>IDESourceControlWCCName</key>
+			<string>AirRun</string>
+		</dict>
+	</array>
+</dict>
+</plist>
