@@ -80,6 +80,7 @@
 		E52D16F51ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16EB1ACE6C1D00DBFA04 /* QBImagePickerThumbnailView.m */; };
 		E52D16F81ACE780300DBFA04 /* ImageHeler.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16F71ACE780300DBFA04 /* ImageHeler.m */; };
 		E52D16FB1ACE843800DBFA04 /* ImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = E52D16FA1ACE843800DBFA04 /* ImageViewer.m */; };
+		E52F2FE11AFE258A00B18C25 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = E52F2FE01AFE258A00B18C25 /* UINavigationBar+Awesome.m */; };
 		E55606871AE1B31100B54DB8 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E5668FC21ACBC694009A0D61 /* AdSupport.framework */; };
 		E55BCC891AD3BC1B00F9B5F2 /* AirLocalPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */; };
 		E55BCC8C1AD3BC3900F9B5F2 /* AirServerPersistence.m in Sources */ = {isa = PBXBuildFile; fileRef = E55BCC8B1AD3BC3900F9B5F2 /* AirServerPersistence.m */; };
@@ -277,6 +278,8 @@
 		E52D16F71ACE780300DBFA04 /* ImageHeler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHeler.m; sourceTree = "<group>"; };
 		E52D16F91ACE843800DBFA04 /* ImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageViewer.h; sourceTree = "<group>"; };
 		E52D16FA1ACE843800DBFA04 /* ImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageViewer.m; sourceTree = "<group>"; };
+		E52F2FDF1AFE258A00B18C25 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		E52F2FE01AFE258A00B18C25 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		E55BCC871AD3BC1B00F9B5F2 /* AirLocalPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirLocalPersistence.h; sourceTree = "<group>"; };
 		E55BCC881AD3BC1B00F9B5F2 /* AirLocalPersistence.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AirLocalPersistence.m; sourceTree = "<group>"; };
 		E55BCC8A1AD3BC3900F9B5F2 /* AirServerPersistence.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AirServerPersistence.h; sourceTree = "<group>"; };
@@ -709,6 +712,15 @@
 			name = ImagePickerController;
 			sourceTree = "<group>";
 		};
+		E52F2FDE1AFE257B00B18C25 /* NavigationBar */ = {
+			isa = PBXGroup;
+			children = (
+				E52F2FDF1AFE258A00B18C25 /* UINavigationBar+Awesome.h */,
+				E52F2FE01AFE258A00B18C25 /* UINavigationBar+Awesome.m */,
+			);
+			name = NavigationBar;
+			sourceTree = "<group>";
+		};
 		E55BCC861AD3BBE900F9B5F2 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,6 +765,7 @@
 		E5668F8D1ACA5D0A009A0D61 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				E52F2FDE1AFE257B00B18C25 /* NavigationBar */,
 				E51E988C1ADC2E540050AE69 /* WeChat */,
 				E51E98801ADA5D160050AE69 /* startup */,
 				E52D16D71ACE6C0900DBFA04 /* ImagePickerController */,
@@ -1194,6 +1207,7 @@
 				96F398FC1AD2CFAD0090CCD8 /* EditImageView.m in Sources */,
 				E5668F9D1ACA5DB2009A0D61 /* LeftSideViewController.m in Sources */,
 				E5668FAB1ACBB55C009A0D61 /* HeaderView.m in Sources */,
+				E52F2FE11AFE258A00B18C25 /* UINavigationBar+Awesome.m in Sources */,
 				96F399011AD4C5ED0090CCD8 /* RunningImageEntity.m in Sources */,
 				96474D181ACDB65F00DECE02 /* ImageOverLayRenderer.m in Sources */,
 				961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */,

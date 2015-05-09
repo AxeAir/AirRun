@@ -37,7 +37,7 @@
 - (void)generateIdentifer
 {
     NSInteger timestamp = (long)[[NSDate dateWithTimeIntervalSinceNow:0] timeIntervalSince1970];
-    self.identifer = [NSString stringWithFormat:@"%@%ld",[[AVUser currentUser] objectId],timestamp];
+    self.identifer = [NSString stringWithFormat:@"%@%ld",[[AVUser currentUser] objectId],(long)timestamp];
 }
 
 

@@ -279,8 +279,8 @@ static const char *INDEX = "index";
             image.type = @"heart";
             image.dirty = @1;
             image.recordid = _parameters.identifer;
-            image.localpath = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",(long)timestamp,index]];
-            [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",(long)timestamp,index]];
+            image.localpath = [kHeartImage stringByAppendingPathComponent:[NSString stringWithFormat:@"%ld_1_%ld.png",(long)timestamp,(long)index]];
+            [DocumentHelper saveImage:save ToFolderName:kHeartImage WithImageName:[NSString stringWithFormat:@"%ld_1_%ld.png",(long)timestamp,(long)index]];
             index++;
         }
     }
@@ -300,7 +300,7 @@ static const char *INDEX = "index";
     }
     else if(type == CompleteDisplayCardButtonTypeComplete)
     {
-        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[[TimelineController alloc] initWithStyle:UITableViewStylePlain]
+        [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:[TimelineController alloc]
 ]                                                     animated:NO];
         [self.sideMenuViewController setPanGestureEnabled:YES];
         [self.sideMenuViewController hideMenuViewController];

@@ -111,7 +111,7 @@
     NSDictionary *selectDic = [_kcals objectAtIndex:index];
 
     _kcalTextLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 15, 300,25)];
-    NSString *str = [NSString stringWithFormat:@"%ld kcal   ≈   %.1f %@%@",[_runningRecord.kcar integerValue],[_runningRecord.kcar integerValue]/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
+    NSString *str = [NSString stringWithFormat:@"%ld kcal   ≈   %.1f %@%@",(long)[_runningRecord.kcar integerValue],[_runningRecord.kcar integerValue]/[[selectDic objectForKey:@"kcal"] floatValue],[selectDic objectForKey:@"dw"],[selectDic objectForKey:@"name"]];
     [_kcalTextLabel setText:str];
     [_kcalTextLabel setTextColor:RGBCOLOR(255, 164, 74)];
     [_kcalTextLabel sizeToFit];
@@ -344,11 +344,11 @@
 - (NSString *)formatTime:(NSInteger)seconds
 {
     if (seconds > 3600) {
-        return [NSString stringWithFormat:@"%0.2ld:%0.2ld:%0.2ld",seconds/3600,seconds/60,seconds%60];
+        return [NSString stringWithFormat:@"%0.2ld:%0.2ld:%0.2ld",(long)seconds/3600,(long)seconds/60,(long)seconds%60];
     }
     else
     {
-        return [NSString stringWithFormat:@"%0.2ld:%0.2ld",seconds/60,seconds%60];
+        return [NSString stringWithFormat:@"%0.2ld:%0.2ld",(long)seconds/60,(long)seconds%60];
     }
     return nil;
 }

@@ -434,7 +434,7 @@ typedef enum : NSUInteger {
                 else{
                     NSString     *avatar = [object objectForKey:@"avatar"];
                     NSDictionary *rawuser = [object objectForKey:@"raw-user"];
-                    NSString     *gender = [rawuser objectForKey:@"gender"];
+                    //NSString     *gender = [rawuser objectForKey:@"gender"];
                     NSString     *nickname = [object objectForKey:@"username"];
                     
                     [user setObject:nickname forKey:@"nickName"];
