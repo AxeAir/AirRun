@@ -206,7 +206,7 @@
             newrecord.longitude = imageEntiy.longitude;//卡路里，float类型
             newrecord.type = imageEntiy.type;
             
-#warning 判断文件是否存在
+//#warning 判断文件是否存在
             
             if ([DocumentHelper checkPathExist:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]]) {
                 UIImage *imagefile  = [UIImage imageWithContentsOfFile:[NSString stringWithFormat:@"%@",[DocumentHelper DocumentPath:imageEntiy.localpath]]];

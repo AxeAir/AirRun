@@ -17,14 +17,17 @@
 #import <UIActionSheet+BlocksKit.h>
 #import "PhotoViewerController.h"
 #import "DocumentHelper.h"
+#import "UINavigationBar+Awesome.h"
 
-@interface TimelineController () <TimelineTableViewCellDelegate,UIActionSheetDelegate>
+#define NAVBAR_CHANGE_POINT 50
 
-@property (nonatomic, strong) UIImageView  *headerbackgroundImageView;
-@property (nonatomic, strong) UIImageView  *headerImageView;
-@property (nonatomic, strong) NSMutableArray      *dataSource;
-@property (nonatomic, strong) UIButton     *navButton;
-@property (nonatomic, strong) UILabel      *nameLabel;
+@interface TimelineController () <TimelineTableViewCellDelegate,UIActionSheetDelegate,UITableViewDataSource,UITableViewDelegate>
+
+@property (nonatomic, strong) UITableView           *tableView;
+@property (nonatomic, strong) UIImageView           *headerbackgroundImageView;
+@property (nonatomic, strong) UIImageView           *headerImageView;
+@property (nonatomic, strong) NSMutableArray        *dataSource;
+@property (nonatomic, strong) UILabel               *nameLabel;
 
 @end
 
@@ -33,14 +36,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    [self.view addSubview:self.tableView];
+   
+    
     self.tableView.tableHeaderView = [self tableHeaderView];
     [self.tableView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    _navButton = [[UIButton alloc] init];
-    [_navButton setImage:[UIImage imageNamed:@"navicon"] forState:UIControlStateNormal];
-    [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
-    [_navButton addTarget:self action:@selector(menuButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_navButton];
+    [self.navigationController.navigationBar lt_setBackgroundColor:[UIColor clearColor]];
+    UIBarButtonItem *menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"navicon"] style:UIBarButtonItemStylePlain target:self action:@selector(menuButtonTouch:)];
+    self.navigationItem.leftBarButtonItem = menuButton;
+    [self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
     
     [RunningRecordEntity findAllWithCompleteBlocks:^(NSArray *arraydata) {
         _dataSource = [[NSMutableArray alloc] initWithArray:arraydata];
@@ -51,7 +57,6 @@
 
 }
 
-
 - (void)viewWillDisappear:(BOOL)animated
 {
     [AVAnalytics endLogPageView:@"Timeline页面"];
@@ -60,10 +65,11 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     [AVAnalytics beginLogPageView:@"Timeline页面"];
     [self.tableView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 
-    self.navigationController.navigationBarHidden = YES;
+    //self.navigationController.navigationBarHidden = YES;
     if ([_dataSource count] == 0) {
         UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
         UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"defaulttimeline-1"]];
@@ -189,7 +195,6 @@
         [record deleteEntity];
         [self.tableView deleteRowsAtIndexPaths:deleteArray withRowAnimation:UITableViewRowAnimationFade];
         [self.tableView reloadData];
-        [self findButton];
     }];
     [actionsheet bk_setCancelButtonWithTitle:@"取消" handler:^{
         
@@ -245,28 +250,17 @@
     }
 }
 
-
-- (void)findButton
-{
-    [_navButton removeFromSuperview];
-    [self.view addSubview:_navButton];
-}
-
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-  
-    [_navButton setFrame:CGRectMake(15, 25, 32, 32)];
+    
+    NSLog(@"%f",offsetY);
     
     if(offsetY < 0) {
         CGRect currentFrame = _headerbackgroundImageView.frame;
         currentFrame.origin.y = offsetY;
         currentFrame.size.height = 200+(-1)*offsetY;
         _headerbackgroundImageView.frame = currentFrame;
-        CGRect currentButton = _navButton.frame;
-        currentButton.origin.y = offsetY+25;
-        _navButton.frame = currentButton;
-        
     }
     
     CGFloat sectionHeaderHeight = 20;
@@ -276,11 +270,35 @@
         scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
     }
     
+    [_headerImageView setAlpha:1-offsetY*2/100.0];
+
+    UIColor * color = [UIColor colorWithPatternImage:[UIImage imageNamed:@"navbg127"]];
+    if (offsetY > NAVBAR_CHANGE_POINT) {
+        CGFloat alpha = 1 - ((NAVBAR_CHANGE_POINT + 64 - offsetY) / 64);
+        
+        [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:alpha]];
+    } else {
+        [self.navigationController.navigationBar lt_setBackgroundColor:[color colorWithAlphaComponent:0]];
+    }
+    
 }
 
 - (void)menuButtonTouch:(UIButton *)sender {
     [self.sideMenuViewController presentLeftMenuViewController];
 }
 
+
+
+#pragma mark getter and setter
+
+- (UITableView *)tableView
+{
+    if (!_tableView) {
+        _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -64, Main_Screen_Width, Main_Screen_Height) style:UITableViewStylePlain];
+        _tableView.delegate =  self;
+        _tableView.dataSource = self;
+    }
+    return _tableView;
+}
 
 @end

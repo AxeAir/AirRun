@@ -110,7 +110,7 @@
     
     UILabel *pm25d = [[UILabel alloc] init];
     [pm25d setTextColor:[UIColor whiteColor]];
-    [pm25d setText:[NSString stringWithFormat:@"PM %ld",[_runningentity.pm25 integerValue]]];
+    [pm25d setText:[NSString stringWithFormat:@"PM %ld",(long)[_runningentity.pm25 integerValue]]];
     [pm25d setFont:[UIFont systemFontOfSize:12]];
     [pm25d sizeToFit];
     [pm25d setFrame:CGRectMake(WIDTH(self)-WIDTH(pm25d)-20, MaxY(degree), WIDTH(pm25d), HEIGHT(pm25d))];

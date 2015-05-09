@@ -65,7 +65,7 @@
                                     NSDate* nowdate = [NSDate dateWithTimeIntervalSinceNow:0];
                                     NSInteger now = (long)[nowdate timeIntervalSince1970];
                                     
-                                    NSDictionary *weather = @{@"timestamp":[NSString stringWithFormat:@"%ld",now],@"pm25":[MTLJSONAdapter modelOfClass:[PM25Model class] fromJSONDictionary:responseObject error:nil]};
+                                    NSDictionary *weather = @{@"timestamp":[NSString stringWithFormat:@"%ld",(long)now],@"pm25":[MTLJSONAdapter modelOfClass:[PM25Model class] fromJSONDictionary:responseObject error:nil]};
                                     
                                     [[TMCache sharedCache] setObject:weather forKey:@"pm25Cache"];
                                     success([MTLJSONAdapter modelOfClass:[PM25Model class] fromJSONDictionary:responseObject error:nil]);
@@ -124,7 +124,7 @@
                                     NSDate* nowdate = [NSDate dateWithTimeIntervalSinceNow:0];
                                     NSInteger now = (long)[nowdate timeIntervalSince1970];
                                     
-                                    NSDictionary *weather = @{@"timestamp":[NSString stringWithFormat:@"%ld",now],@"weather":[MTLJSONAdapter modelOfClass:[WeatherModel class] fromJSONDictionary:responseObject error:nil]};
+                                    NSDictionary *weather = @{@"timestamp":[NSString stringWithFormat:@"%ld",(long)now],@"weather":[MTLJSONAdapter modelOfClass:[WeatherModel class] fromJSONDictionary:responseObject error:nil]};
                                     
                                     [[TMCache sharedCache] setObject:weather forKey:@"weatherCache"];
                                     success([MTLJSONAdapter modelOfClass:[WeatherModel class] fromJSONDictionary:responseObject error:nil]);
