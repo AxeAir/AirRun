@@ -465,7 +465,7 @@
 
 - (void)logout:(id)sender
 {
-    UIActionSheet *actionsheet =[[UIActionSheet alloc] initWithTitle:@"退出登陆会清楚本地所有数据，是否继续" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil, nil];
+    UIActionSheet *actionsheet =[[UIActionSheet alloc] initWithTitle:@"退出登陆会清除本地所有数据，是否继续" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登陆" otherButtonTitles:nil, nil];
     [actionsheet setTag:900001];
     [actionsheet showInView:self.view];
 

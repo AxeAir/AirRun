@@ -315,26 +315,26 @@ static const char *INDEX = "index";
     }
     if(buttonType == ShareViewButtonTypeWeChat)
     {
-//        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-//        req.scene = WXSceneTimeline;
-//        req.text = @"这里写你要分享的内容。";
-//        req.bText = NO;
-//        req.message = WXMediaMessage.message;
-//        WXImageObject *imageObject = [[WXImageObject alloc] init];
-//        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_cardView]);
-//        req.message.mediaObject = imageObject;
-//        [WXApi sendReq:req];
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.scene = WXSceneTimeline;
+        req.text = @"这里写你要分享的内容。";
+        req.bText = NO;
+        req.message = WXMediaMessage.message;
+        WXImageObject *imageObject = [[WXImageObject alloc] init];
+        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_cardView]);
+        req.message.mediaObject = imageObject;
+        [WXApi sendReq:req];
     }
     if (buttonType == ShareViewButtonTypeFriends) {
-//        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
-//        req.scene = WXSceneSession;
-//        req.text = @"这里写你要分享的内容。";
-//        req.bText = NO;
-//        req.message = WXMediaMessage.message;
-//        WXImageObject *imageObject = [[WXImageObject alloc] init];
-//        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_cardView]);
-//        req.message.mediaObject = imageObject;
-//        [WXApi sendReq:req];
+        SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+        req.scene = WXSceneSession;
+        req.text = @"这里写你要分享的内容。";
+        req.bText = NO;
+        req.message = WXMediaMessage.message;
+        WXImageObject *imageObject = [[WXImageObject alloc] init];
+        imageObject.imageData = UIImagePNGRepresentation([ImageHeler convertViewToImage:_cardView]);
+        req.message.mediaObject = imageObject;
+        [WXApi sendReq:req];
     }
     
 }
