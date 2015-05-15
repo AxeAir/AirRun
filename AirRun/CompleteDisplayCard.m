@@ -192,7 +192,7 @@
     
     UIImageView *water = [[UIImageView alloc] initWithFrame:CGRectMake(WIDTH(self)/2+30,  15, 30, 30)];
     
-    [water setImage:[UIImage imageNamed:@"cal"]];
+    [water setImage:[UIImage imageNamed:@"calwhite"]];
     [view addSubview:water];
     
     UILabel *calLabel = [[UILabel alloc] initWithFrame:CGRectMake(MaxX(water)+5, 0, 0, 0)];

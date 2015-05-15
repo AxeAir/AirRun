@@ -3,6 +3,8 @@
 target :KiwiUnitTest, :exclusive => true do
         pod 'Kiwi'
 end
+inhibit_all_warnings!
+
 target 'AirRun' do
 pod 'AFNetworking', '~> 2.5.2'
 pod 'pop'

@@ -595,7 +595,7 @@ const char *OUTPOSITION = "OutPosition";
     if (_runManager.distance < 20 && ![[[AVUser currentUser] username] isEqualToString:@"info@mrchenhao.com"]) {
         
         _runConfirmAlert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                      message:@"您跑步的距离过段是否重新开始"
+                                                      message:@"您跑步的距离过短是否重新开始"
                                                      delegate:self
                                             cancelButtonTitle:@"继续"
                                             otherButtonTitles:@"重新开始", nil];
@@ -816,7 +816,7 @@ const char *OUTPOSITION = "OutPosition";
         }
     }
     CGFloat K = 30.0/speed;
-    CGFloat calorie = weight * time * K;
+    CGFloat calorie = weight * time * K * 6;
     return calorie;
 }
 

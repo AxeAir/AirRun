@@ -133,7 +133,7 @@ static const char*POINTANNOTATIONIMAGE = "pointAnnotationImage";
     MKMapPoint *mapPoints = malloc(sizeof(CLLocationCoordinate2D)*points.count);
     
     for (NSUInteger idx = 0; idx < points.count; idx++) {
-        //        NSLog(@"%lu",idx);
+
         CLLocation *location = points[idx];
         CLLocationDegrees latitude = location.coordinate.latitude;
         CLLocationDegrees longitude = location.coordinate.longitude;
