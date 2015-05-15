@@ -729,7 +729,7 @@ const char *OUTPOSITION = "OutPosition";
                        }
                        
                        WeatherManager *weatherManager = [[WeatherManager alloc] init];
-                       [weatherManager getPM25WithCityName:@"chongqing" success:^(PM25Model *pm25) {
+                       [weatherManager getPM25WithCityName:cityName success:^(PM25Model *pm25) {
                            _runManager.pm = pm25.AQI[0];
                            [self p_setTitle];
                            
