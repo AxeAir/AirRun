@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D131" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7549" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="RunningImageEntity" representedClassName="RunningImageEntity" syncable="YES">
         <attribute name="dirty" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="isheart" optional="YES" attributeType="Boolean" syncable="YES"/>
@@ -31,7 +31,7 @@
         <attribute name="weather" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="RunningImageEntity" positionX="-54" positionY="63" width="128" height="195"/>
-        <element name="RunningRecordEntity" positionX="-63" positionY="-18" width="128" height="285"/>
+        <element name="RunningImageEntity" positionX="18" positionY="77" width="128" height="193"/>
+        <element name="RunningRecordEntity" positionX="-227" positionY="63" width="128" height="283"/>
     </elements>
 </model>
