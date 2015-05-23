@@ -166,23 +166,32 @@ typedef enum : NSUInteger {
 
 - (void)p_layoutAfterAnimation {
     
-    _signUpView = [[SignUpView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-20, 150)];
+    if(!_signUpView){
+        _signUpView = [[SignUpView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-20, 150)];
+        [self.view addSubview:_signUpView];
+    }
     _signUpView.center = CGPointMake(self.view.bounds.size.width/2, CGRectGetMaxY(_iconImageView.frame) + 60 +_signUpView.bounds.size.height/2);
     _signUpView.layer.cornerRadius = 5;
     _signUpView.layer.borderWidth = 1;
     _signUpView.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
     _signUpView.alpha = 0;
-    [self.view addSubview:_signUpView];
     
-    _signInView = [[SignInView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-20, 100)];
+    
+    if (!_signInView) {
+        _signInView = [[SignInView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width-20, 100)];
+        [self.view addSubview:_signInView];
+    }
     _signInView.center = CGPointMake(self.view.bounds.size.width+10+_signInView.bounds.size.width/2, CGRectGetMaxY(_iconImageView.frame)+60+_signInView.bounds.size.height/2);
     _signInView.layer.cornerRadius = 5;
     _signInView.layer.borderWidth = 1;
     _signInView.layer.borderColor = [UIColor colorWithWhite:0 alpha:0.1].CGColor;
-    [self.view addSubview:_signInView];
     
     
-    _signInOrUpButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    if (!_signInOrUpButton) {
+        _signInOrUpButton = [UIButton buttonWithType:UIButtonTypeSystem];
+        [self.view addSubview:_signInOrUpButton];
+    }
+    
     [_signInOrUpButton setTitle:@"注册" forState:UIControlStateNormal];
     [_signInOrUpButton setTintColor:[UIColor whiteColor]];
     _signInOrUpButton.frame = CGRectMake(0, 0, self.view.bounds.size.width-50, 40);
@@ -192,7 +201,7 @@ typedef enum : NSUInteger {
     _signInOrUpButton.layer.borderColor = [UIColor whiteColor].CGColor;
     _signInOrUpButton.alpha = 0;
     [_signInOrUpButton addTarget:self action:@selector(signInOrSignUpButtonTouch:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:_signInOrUpButton];
+    
     
 }
 
@@ -473,7 +482,8 @@ typedef enum : NSUInteger {
     [AVOSCloudSNS loginWithCallback:^(id object, NSError *error) {
         
         if (error) {
-             [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"qq登陆失败"];
+            [hud hide:YES];
+            [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"qq登陆失败"];
         }
         else if(object){
             [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"qq登陆成功"];
