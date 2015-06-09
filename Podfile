@@ -16,6 +16,7 @@ pod 'AVOSCloud', '~> 3.0.2'
 pod 'AVOSCloudSNS', '~> 3.0.2'
 pod 'MagicalRecord', '~> 2.2'
 pod 'BlocksKit', '~> 2.2.5'
+pod 'Masonry', '~> 0.6.1'
 end
 
 target 'AirRunTests' do

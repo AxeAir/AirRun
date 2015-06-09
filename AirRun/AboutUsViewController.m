@@ -9,6 +9,7 @@
 #import "AboutUsViewController.h"
 #import <AVOSCloud.h>
 
+
 @interface AboutUsViewController ()
 
 @property (strong, nonatomic) UIImageView *bgImage;
@@ -44,6 +45,12 @@
 
 - (void)p_layout {
     [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"bg"]]];
+    UIImageView *only_logoImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"only_logo"]];
+    only_logoImageView.center = self.view.center;
+    [self.view addSubview:only_logoImageView];
+    
+    UILabel *airRunLabel = [[UILabel alloc] init];
+    //airRunLabel
     
     
 }
