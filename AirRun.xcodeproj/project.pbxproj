@@ -539,7 +539,7 @@
 				E5668F8F1ACA5D35009A0D61 /* Helper */,
 				E5668F8E1ACA5D2B009A0D61 /* Resources */,
 				E5668F8D1ACA5D0A009A0D61 /* Vendors */,
-				E5668F8C1ACA5CC7009A0D61 /* Sections */,
+				E5668F8C1ACA5CC7009A0D61 /* Views */,
 				E50BE0491AC8854A0030863D /* AppDelegate.h */,
 				E50BE04A1AC8854A0030863D /* AppDelegate.m */,
 				E50BE04F1AC8854A0030863D /* Main.storyboard */,
@@ -731,7 +731,7 @@
 			name = Entity;
 			sourceTree = "<group>";
 		};
-		E5668F8C1ACA5CC7009A0D61 /* Sections */ = {
+		E5668F8C1ACA5CC7009A0D61 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				E51E98841ADA6D2D0050AE69 /* Nav */,
@@ -746,7 +746,7 @@
 				E59139921ACBD9D800F9D048 /* RunCompleteCards */,
 				E5668F9A1ACA5D99009A0D61 /* Side */,
 			);
-			name = Sections;
+			name = Views;
 			sourceTree = "<group>";
 		};
 		E5668F8D1ACA5D0A009A0D61 /* Vendors */ = {
