@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		628F663BFB502D4B71C8F3D9 /* libPods-AirRun.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */; };
 		961547BF1AD7B6E100D3CA5B /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547BE1AD7B6E100D3CA5B /* AboutUsViewController.m */; };
-		961547C31AD7B6F500D3CA5B /* PersonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547C21AD7B6F500D3CA5B /* PersonView.m */; };
 		961547C81AD8313A00D3CA5B /* RecordDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */; };
 		961547C91AD8313A00D3CA5B /* RecordDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */; };
 		963CE2C11AE03EA900844D70 /* WeatherTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 963CE2C01AE03EA900844D70 /* WeatherTitleView.m */; };
@@ -139,8 +138,6 @@
 		8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirRun.release.xcconfig"; path = "Pods/Target Support Files/Pods-AirRun/Pods-AirRun.release.xcconfig"; sourceTree = "<group>"; };
 		961547BD1AD7B6E100D3CA5B /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
 		961547BE1AD7B6E100D3CA5B /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
-		961547C11AD7B6F500D3CA5B /* PersonView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonView.h; sourceTree = "<group>"; };
-		961547C21AD7B6F500D3CA5B /* PersonView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonView.m; sourceTree = "<group>"; };
 		961547C51AD8313A00D3CA5B /* RecordDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecordDetailViewController.h; sourceTree = "<group>"; };
 		961547C61AD8313A00D3CA5B /* RecordDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecordDetailViewController.m; sourceTree = "<group>"; };
 		961547C71AD8313A00D3CA5B /* RecordDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordDetailViewController.xib; sourceTree = "<group>"; };
@@ -396,20 +393,10 @@
 		961547BC1AD7B6C700D3CA5B /* AboutUs */ = {
 			isa = PBXGroup;
 			children = (
-				961547C01AD7B6E400D3CA5B /* View */,
 				961547BD1AD7B6E100D3CA5B /* AboutUsViewController.h */,
 				961547BE1AD7B6E100D3CA5B /* AboutUsViewController.m */,
 			);
 			name = AboutUs;
-			sourceTree = "<group>";
-		};
-		961547C01AD7B6E400D3CA5B /* View */ = {
-			isa = PBXGroup;
-			children = (
-				961547C11AD7B6F500D3CA5B /* PersonView.h */,
-				961547C21AD7B6F500D3CA5B /* PersonView.m */,
-			);
-			name = View;
 			sourceTree = "<group>";
 		};
 		961547C41AD8311C00D3CA5B /* RecordDetail */ = {
@@ -1234,7 +1221,6 @@
 				96F596AA1ACC518B00F56BEA /* WGS84TOGCJ02.m in Sources */,
 				E5FAC7E41AD0106C00A2C7DD /* TimelineController.m in Sources */,
 				9673DD571AD4F52F006E64B7 /* GuideView.m in Sources */,
-				961547C31AD7B6F500D3CA5B /* PersonView.m in Sources */,
 				96F596AF1ACC51B800F56BEA /* RunCardView.m in Sources */,
 				E5B9A2BE1AD6B58D005BB981 /* PersistenceManager.m in Sources */,
 				96982B421ACF7EE000040A50 /* ValidateHelper.m in Sources */,
