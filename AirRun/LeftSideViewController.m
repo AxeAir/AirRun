@@ -17,8 +17,8 @@
 #import <AVOSCloud.h>
 #import "ProfileViewController.h"
 #import "NavViewController.h"
-#import <MessageUI/MFMailComposeViewController.h>
-@interface LeftSideViewController ()<MFMailComposeViewControllerDelegate>
+
+@interface LeftSideViewController ()
 
 @property (strong, readwrite, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) HeaderView *header;
@@ -79,11 +79,7 @@
             [self.sideMenuViewController hideMenuViewController];
             
             break;
-        case 3:
-        {
-            [self sendMailInApp];
-        }
-            break;
+
         default:
             break;
     }
@@ -109,7 +105,7 @@
     if (sectionIndex == 0) {
         return 1;
     }
-    return 4;
+    return 3;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -178,7 +174,7 @@
     }
     
     if (indexPath.section == 1) {
-        NSArray *titles = @[@"跑步", @"运动数据", @"设置",@"支持与反馈"];
+        NSArray *titles = @[@"跑步", @"运动数据", @"设置"];
         NSArray *images = @[@"runner", @"timeline", @"setting",@"info"];
         
         UIImageView *image = [[UIImageView alloc] initWithFrame:CGRectMake(30, 11, 22, 22)];
@@ -196,67 +192,5 @@
     
     return cell;
 }
-
-- (void)sendMailInApp
-{
-    Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
-    if (!mailClass) {
-        //[self alertWithMessage:@"当前系统版本不支持应用内发送邮件功能，您可以使用mailto方法代替"];
-        return;
-    }
-   
-    
-    if (![mailClass canSendMail]) {
-        //[self alertWithMessage:@"用户没有设置邮件账户"];
-        return;
-    }
-    [self displayMailPicker];
-}
-
-//调出邮件发送窗口
-- (void)displayMailPicker
-{
-    MFMailComposeViewController *mailPicker = [[MFMailComposeViewController alloc] init];
-    mailPicker.mailComposeDelegate = self;
-    
-    //设置主题
-    [mailPicker setSubject: @"关于轻跑"];
-    //添加收件人
-    NSArray *toRecipients = [NSArray arrayWithObject: @"info@mrchenhao.com"];
-    [mailPicker setToRecipients: toRecipients];
-    
-    NSString *emailBody = @"您好！<br/>我是";
-    [mailPicker setMessageBody:emailBody isHTML:YES];
-    [self presentViewController:mailPicker animated:YES completion:nil];
-}
-
-
-#pragma mark - 实现 MFMailComposeViewControllerDelegate
-- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
-{
-    //关闭邮件发送窗口
-    
-    NSString *msg;
-    switch (result) {
-        case MFMailComposeResultCancelled:
-            msg = @"用户取消编辑邮件";
-            break;
-        case MFMailComposeResultSaved:
-            msg = @"用户成功保存邮件";
-            break;
-        case MFMailComposeResultSent:
-            msg = @"用户点击发送，将邮件放到队列中，还没发送";
-            break;
-        case MFMailComposeResultFailed:
-            msg = @"用户试图保存或者发送邮件失败";
-            break;
-        default:
-            msg = @"";
-            break;
-    }
-    [self dismissViewControllerAnimated:YES completion:nil];
-    //[self alertWithMessage:msg];
-}
-
 
 @end
