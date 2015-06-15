@@ -11,6 +11,7 @@
 @interface RegisterAndLoginViewController : UIViewController
 
 @property (assign, nonatomic) BOOL isAutoAnimation;
+
 - (void)startAnimation;
 
 @end

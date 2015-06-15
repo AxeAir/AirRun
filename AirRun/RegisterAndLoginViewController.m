@@ -16,6 +16,8 @@
 #import "RESideMenu.h"
 #import "RunViewController.h"
 #import <AFURLSessionManager.h>
+#import "PersistenceManager.h"
+#import <UIAlertView+BlocksKit.h>
 
 typedef enum : NSUInteger {
     RegisterAndLoginViewControllerStateSignUp,
@@ -242,6 +244,42 @@ typedef enum : NSUInteger {
     
 }
 
+#pragma mark Private method
+
+/**
+ *  登陆完成过后同步检查
+ */
+- (void)checkUpdate
+{
+    AVQuery *query = [RunningRecord query];
+    [query whereKey:@"userID" equalTo:[[AVUser currentUser] objectId]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        //下载失败
+        if ([objects count]>0) {
+            [UIAlertView bk_showAlertViewWithTitle:@"提示" message:@"云端存在数据，是否需要同步？" cancelButtonTitle:@"否" otherButtonTitles:@[@"是"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
+                
+                if (buttonIndex == 1) {
+                    [[PersistenceManager shareManager] syncWithComplete:^(BOOL successed) {
+                        if (successed) {
+                            
+                        }
+                        else{
+                            [HUDHelper showError:@"同步失败，请重试!" addView:self.view delay:2];
+                        }
+                        
+                    }];
+                }
+            }];
+        }
+        
+    }];
+    
+    
+    
+    
+    
+}
+
 
 #pragma mark - Event
 #pragma mark Button Event
@@ -280,6 +318,7 @@ typedef enum : NSUInteger {
                 [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                 [self.sideMenuViewController setPanGestureEnabled:YES];
                 [self.sideMenuViewController hideMenuViewController];
+                [self checkUpdate];
             } else {
                 [HUDHelper showError:@"登陆失败" addView:self.view addHUD:hud delay:2];
                  [AVAnalytics event:[NSString stringWithFormat:@"Login"] label:@"邮箱登陆失败"];
@@ -438,11 +477,12 @@ typedef enum : NSUInteger {
                     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                     [self.sideMenuViewController setPanGestureEnabled:YES];
                     [self.sideMenuViewController hideMenuViewController];
+                    [self checkUpdate];
                 }
                 //第一次登陆 ，获取登陆信息
                 else{
                     NSString     *avatar = [object objectForKey:@"avatar"];
-                    NSDictionary *rawuser = [object objectForKey:@"raw-user"];
+                    //NSDictionary *rawuser = [object objectForKey:@"raw-user"];
                     //NSString     *gender = [rawuser objectForKey:@"gender"];
                     NSString     *nickname = [object objectForKey:@"username"];
                     
@@ -498,6 +538,7 @@ typedef enum : NSUInteger {
                     [self.sideMenuViewController setContentViewController:[[UINavigationController alloc] initWithRootViewController:run] animated:YES];
                     [self.sideMenuViewController setPanGestureEnabled:YES];
                     [self.sideMenuViewController hideMenuViewController];
+                    [self checkUpdate];
                 }
                 //第一次登陆 ，获取登陆信息
                 else{
