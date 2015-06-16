@@ -1403,7 +1403,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3ad28ff-e75b-41a0-9dc3-b9b8efc77b98";
+				PROVISIONING_PROFILE = "02971d2e-a673-4132-a88a-735e79a59e34";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1425,7 +1425,7 @@
 					/Users/mrche/Downloads/WeChat_SDK_Sample/SDKExport,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b3ad28ff-e75b-41a0-9dc3-b9b8efc77b98";
+				PROVISIONING_PROFILE = "02971d2e-a673-4132-a88a-735e79a59e34";
 			};
 			name = Release;
 		};

@@ -223,7 +223,7 @@
             }];
         [airRunLabel setFont:[UIFont systemFontOfSize:14]];
         [airRunLabel setTextColor:[UIColor whiteColor]];
-        [airRunLabel setText:@"v1.1 (Build 1150)"];
+        [airRunLabel setText:@"v1.2 (Build 1210)"];
     }
     return _headerView;
 }
