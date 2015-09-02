@@ -15,24 +15,16 @@
 
 @interface CompleteDisplayCard()<UIScrollViewDelegate>
 
-
-@property (nonatomic, strong) UIView *titleView;
-
-@property (strong, nonatomic) UIButton *fouseButton;
-@property (strong, nonatomic) UIButton *mapImageButton;
-
-@property (nonatomic, strong) UIPageControl* pagecontrol;
-
-@property (nonatomic, strong) UIView   *speedAndTime;
-@property (nonatomic, strong) UIView   *distanceAndCarl;
-
-@property (nonatomic, strong) UILabel  *heartLabel;
-@property (nonatomic, strong) UIButton *shareButton;
-@property (nonatomic, strong) UIButton *completeButton;
-
-
-@property (nonatomic, strong) NSString *heart;//新的体会
-
+@property (nonatomic, strong) UIView        *titleView;
+@property (strong, nonatomic) UIButton      *fouseButton;
+@property (strong, nonatomic) UIButton      *mapImageButton;
+@property (nonatomic, strong) UIPageControl *pagecontrol;
+@property (nonatomic, strong) UIView        *speedAndTime;
+@property (nonatomic, strong) UIView        *distanceAndCarl;
+@property (nonatomic, strong) UILabel       *heartLabel;
+@property (nonatomic, strong) UIButton      *shareButton;
+@property (nonatomic, strong) UIButton      *completeButton;
+@property (nonatomic, strong) NSString      *heart;//新的体会
 
 @property (nonatomic, strong) RunningRecordEntity *runningentity;
 
@@ -353,9 +345,7 @@
     if ([_delegate respondsToSelector:@selector(completeDisplayCard:FoucsButtouTouch:)]) {
         [_delegate completeDisplayCard:self FoucsButtouTouch:sender];
     }
-    
 }
-
 
 - (void)completeButtonTouch:(id)sender
 {
