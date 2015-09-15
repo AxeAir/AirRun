@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
-#import <CoreData+MagicalRecord.h>
+#import <MagicalRecord/MagicalRecord.h>
 #import "BlockMacro.h"
 #import "RunningRecordEntity.h"
 #import "RunningRecord.h"

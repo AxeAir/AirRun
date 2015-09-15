@@ -7,7 +7,6 @@
 //
 
 #import "RunningImageEntity.h"
-#import <CoreData+MagicalRecord.h>
 
 
 @implementation RunningImageEntity

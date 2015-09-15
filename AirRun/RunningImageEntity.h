@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "BlockMacro.h"
-#import <CoreData+MagicalRecord.h>
 #import "AirLocalPersistence.h"
 
 @interface RunningImageEntity : NSManagedObject

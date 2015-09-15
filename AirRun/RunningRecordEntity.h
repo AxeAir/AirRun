@@ -10,7 +10,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
 #import <AVOSCloud.h>
-#import <CoreData+MagicalRecord.h>
 #import "AirLocalPersistence.h"
 #import "BlockMacro.h"
 

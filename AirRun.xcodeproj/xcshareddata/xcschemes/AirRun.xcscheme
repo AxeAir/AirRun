@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0630"
+   LastUpgradeVersion = "0700"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -34,20 +34,6 @@
                ReferencedContainer = "container:AirRun.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E50BE06E1AC886000030863D"
-               BuildableName = "KiwiUnitTest.xctest"
-               BlueprintName = "KiwiUnitTest"
-               ReferencedContainer = "container:AirRun.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -63,16 +49,6 @@
                BlueprintIdentifier = "E50BE05A1AC8854A0030863D"
                BuildableName = "AirRunTests.xctest"
                BlueprintName = "AirRunTests"
-               ReferencedContainer = "container:AirRun.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E50BE06E1AC886000030863D"
-               BuildableName = "KiwiUnitTest.xctest"
-               BlueprintName = "KiwiUnitTest"
                ReferencedContainer = "container:AirRun.xcodeproj">
             </BuildableReference>
          </TestableReference>

@@ -16,7 +16,6 @@
 #import "RunningRecord.h"
 #import "RunningImage.h"
 #import <AVOSCloudSNS.h>
-#import <CoreData+MagicalRecord.h>
 #import "RegisterAndLoginViewController.h"
 #import "SettingViewController.h"
 #import "UConstants.h"

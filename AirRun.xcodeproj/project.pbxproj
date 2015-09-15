@@ -53,7 +53,6 @@
 		E50BE0511AC8854A0030863D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E50BE04F1AC8854A0030863D /* Main.storyboard */; };
 		E50BE0531AC8854A0030863D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E50BE0521AC8854A0030863D /* Images.xcassets */; };
 		E50BE0621AC8854A0030863D /* AirRunTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE0611AC8854A0030863D /* AirRunTests.m */; };
-		E50BE07B1AC887200030863D /* DemoTestsSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = E50BE07A1AC887200030863D /* DemoTestsSpec.m */; };
 		E51E98831ADA5D2B0050AE69 /* ZWIntroductionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E51E98821ADA5D2B0050AE69 /* ZWIntroductionViewController.m */; };
 		E51E98871ADA6D460050AE69 /* NavViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E51E98861ADA6D460050AE69 /* NavViewController.m */; };
 		E51E988B1ADB6EBA0050AE69 /* NotificationTC.m in Sources */ = {isa = PBXBuildFile; fileRef = E51E988A1ADB6EBA0050AE69 /* NotificationTC.m */; };
@@ -113,18 +112,10 @@
 		E5FAC7E71AD0169B00A2C7DD /* TimelineTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7E61AD0169B00A2C7DD /* TimelineTableViewCell.m */; };
 		E5FAC7EC1AD0E9BE00A2C7DD /* RunningImage.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7EB1AD0E9BE00A2C7DD /* RunningImage.m */; };
 		E5FAC7F21AD1191E00A2C7DD /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E5FAC7F11AD1191E00A2C7DD /* ProfileViewController.m */; };
-		F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		E50BE05C1AC8854A0030863D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E50BE03A1AC8854A0030863D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = E50BE0411AC8854A0030863D;
-			remoteInfo = AirRun;
-		};
-		E50BE0751AC886000030863D /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E50BE03A1AC8854A0030863D /* Project object */;
 			proxyType = 1;
@@ -211,7 +202,6 @@
 		96F596B11ACC51D600F56BEA /* MapViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewDelegate.m; sourceTree = "<group>"; };
 		96F596B31ACC51E300F56BEA /* RunViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RunViewController.h; sourceTree = "<group>"; };
 		96F596B41ACC51E300F56BEA /* RunViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunViewController.m; sourceTree = "<group>"; };
-		AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.release.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.release.xcconfig"; sourceTree = "<group>"; };
 		B4EF9A1DB729F2EF20AAAD9D /* libPods-KiwiUnitTest.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KiwiUnitTest.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FACE97A81FF7A986C2D1B9 /* libPods-AirRun.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-AirRun.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0421AC8854A0030863D /* AirRun.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirRun.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -224,9 +214,6 @@
 		E50BE05B1AC8854A0030863D /* AirRunTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AirRunTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E50BE0601AC8854A0030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E50BE0611AC8854A0030863D /* AirRunTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AirRunTests.m; sourceTree = "<group>"; };
-		E50BE06F1AC886000030863D /* KiwiUnitTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KiwiUnitTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E50BE0721AC886000030863D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E50BE07A1AC887200030863D /* DemoTestsSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTestsSpec.m; sourceTree = "<group>"; };
 		E51E98811ADA5D2B0050AE69 /* ZWIntroductionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZWIntroductionViewController.h; sourceTree = "<group>"; };
 		E51E98821ADA5D2B0050AE69 /* ZWIntroductionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZWIntroductionViewController.m; sourceTree = "<group>"; };
 		E51E98851ADA6D460050AE69 /* NavViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavViewController.h; sourceTree = "<group>"; };
@@ -340,7 +327,6 @@
 		E5FAC7EB1AD0E9BE00A2C7DD /* RunningImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RunningImage.m; sourceTree = "<group>"; };
 		E5FAC7F01AD1191E00A2C7DD /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		E5FAC7F11AD1191E00A2C7DD /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
-		F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KiwiUnitTest.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -368,22 +354,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E50BE06C1AC886000030863D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F68C6314769783DB64D2C398 /* libPods-KiwiUnitTest.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		896B3C15DAF772AF64691F6A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */,
-				AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */,
 				06A981F16C2171FCA3E5399F /* Pods-AirRun.debug.xcconfig */,
 				8825BA6167225E1D71CD46DD /* Pods-AirRun.release.xcconfig */,
 			);
@@ -510,7 +486,6 @@
 			children = (
 				E50BE0441AC8854A0030863D /* AirRun */,
 				E50BE05E1AC8854A0030863D /* AirRunTests */,
-				E50BE0701AC886000030863D /* KiwiUnitTest */,
 				E50BE0431AC8854A0030863D /* Products */,
 				896B3C15DAF772AF64691F6A /* Pods */,
 				F0F87C6BE6D51CCC8BAF920F /* Frameworks */,
@@ -522,7 +497,6 @@
 			children = (
 				E50BE0421AC8854A0030863D /* AirRun.app */,
 				E50BE05B1AC8854A0030863D /* AirRunTests.xctest */,
-				E50BE06F1AC886000030863D /* KiwiUnitTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -571,23 +545,6 @@
 			isa = PBXGroup;
 			children = (
 				E50BE0601AC8854A0030863D /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		E50BE0701AC886000030863D /* KiwiUnitTest */ = {
-			isa = PBXGroup;
-			children = (
-				E50BE0711AC886000030863D /* Supporting Files */,
-				E50BE07A1AC887200030863D /* DemoTestsSpec.m */,
-			);
-			path = KiwiUnitTest;
-			sourceTree = "<group>";
-		};
-		E50BE0711AC886000030863D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				E50BE0721AC886000030863D /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1001,33 +958,13 @@
 			productReference = E50BE05B1AC8854A0030863D /* AirRunTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		E50BE06E1AC886000030863D /* KiwiUnitTest */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = E50BE0771AC886000030863D /* Build configuration list for PBXNativeTarget "KiwiUnitTest" */;
-			buildPhases = (
-				258ED9F4C21A29196850054B /* Check Pods Manifest.lock */,
-				E50BE06B1AC886000030863D /* Sources */,
-				E50BE06C1AC886000030863D /* Frameworks */,
-				E50BE06D1AC886000030863D /* Resources */,
-				C8B543BDF53D2743FEFED493 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				E50BE0761AC886000030863D /* PBXTargetDependency */,
-			);
-			name = KiwiUnitTest;
-			productName = KiwiUnitTest;
-			productReference = E50BE06F1AC886000030863D /* KiwiUnitTest.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		E50BE03A1AC8854A0030863D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = AEXAIR;
 				TargetAttributes = {
 					E50BE0411AC8854A0030863D = {
@@ -1035,10 +972,6 @@
 						DevelopmentTeam = F86ABKXNGB;
 					};
 					E50BE05A1AC8854A0030863D = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = E50BE0411AC8854A0030863D;
-					};
-					E50BE06E1AC886000030863D = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = E50BE0411AC8854A0030863D;
 					};
@@ -1059,7 +992,6 @@
 			targets = (
 				E50BE0411AC8854A0030863D /* AirRun */,
 				E50BE05A1AC8854A0030863D /* AirRunTests */,
-				E50BE06E1AC886000030863D /* KiwiUnitTest */,
 			);
 		};
 /* End PBXProject section */
@@ -1087,13 +1019,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E50BE06D1AC886000030863D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -1112,21 +1037,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-AirRun/Pods-AirRun-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		258ED9F4C21A29196850054B /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		3D5D9312119D6C20E86976F6 /* Find unused imports */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1140,21 +1050,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "";
-		};
-		C8B543BDF53D2743FEFED493 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KiwiUnitTest/Pods-KiwiUnitTest-resources.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 		D241FAE866F6F587363BA22E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1275,14 +1170,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E50BE06B1AC886000030863D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				E50BE07B1AC887200030863D /* DemoTestsSpec.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1290,11 +1177,6 @@
 			isa = PBXTargetDependency;
 			target = E50BE0411AC8854A0030863D /* AirRun */;
 			targetProxy = E50BE05C1AC8854A0030863D /* PBXContainerItemProxy */;
-		};
-		E50BE0761AC886000030863D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = E50BE0411AC8854A0030863D /* AirRun */;
-			targetProxy = E50BE0751AC886000030863D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1330,6 +1212,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1403,6 +1286,7 @@
 					"$(PROJECT_DIR)/AirRun",
 				);
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "AEXAIR.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "51ac36e4-24a8-4f21-86d0-f333fced8042";
 				VALID_ARCHS = "armv7 armv7s arm64";
@@ -1426,6 +1310,7 @@
 					"$(PROJECT_DIR)/AirRun",
 					/Users/mrche/Downloads/WeChat_SDK_Sample/SDKExport,
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "AEXAIR.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "51ac36e4-24a8-4f21-86d0-f333fced8042";
 			};
@@ -1445,6 +1330,7 @@
 				);
 				INFOPLIST_FILE = AirRunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "AEXAIR.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AirRun.app/AirRun";
 			};
@@ -1460,42 +1346,7 @@
 				);
 				INFOPLIST_FILE = AirRunTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AirRun.app/AirRun";
-			};
-			name = Release;
-		};
-		E50BE0781AC886000030863D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = F787788395CC9F02138512B6 /* Pods-KiwiUnitTest.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = KiwiUnitTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AirRun.app/AirRun";
-			};
-			name = Debug;
-		};
-		E50BE0791AC886000030863D /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AA78C5701070FCE649399215 /* Pods-KiwiUnitTest.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = KiwiUnitTest/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "AEXAIR.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AirRun.app/AirRun";
 			};
@@ -1527,15 +1378,6 @@
 			buildConfigurations = (
 				E50BE0691AC8854A0030863D /* Debug */,
 				E50BE06A1AC8854A0030863D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		E50BE0771AC886000030863D /* Build configuration list for PBXNativeTarget "KiwiUnitTest" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				E50BE0781AC886000030863D /* Debug */,
-				E50BE0791AC886000030863D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
