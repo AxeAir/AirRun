@@ -3,3 +3,4 @@ osx_image: xcode7
 xcode_workspace: AirRun.xcworkspace
 xcode_scheme: AirRun
 xcode_sdk: iphonesimulator9.0
+script: xctool -workspace AirRun.xcworkspace -scheme AirRun -sdk iphonesimulator9.0 build  
