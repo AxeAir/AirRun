@@ -36,10 +36,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     [self.view addSubview:self.tableView];
-   
-    
     self.tableView.tableHeaderView = [self tableHeaderView];
     [self.tableView setBackgroundColor:RGBACOLOR(252, 248, 240, 1)];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
@@ -57,8 +54,7 @@
 
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [AVAnalytics endLogPageView:@"Timeline页面"];
     [self.tableView removeObserver:self forKeyPath:@"contentOffset"];
 }
@@ -119,29 +115,24 @@
 }
 
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     TimelineTableViewCell *cell = (TimelineTableViewCell*)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     return cell.frame.size.height;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 150;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 0.0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.0;
 }
 
-- (UIView *)tableHeaderView
-{
+- (UIView *)tableHeaderView {
     UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
     
     _headerbackgroundImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, Main_Screen_Width, 200)];
@@ -244,17 +235,11 @@
     if (![keyPath isEqualToString:@"contentOffset"]) {
         return;
     }
-    else
-    {
-        [self scrollViewDidScroll:self.tableView];
-    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView*)scrollView
 {
     CGFloat offsetY = scrollView.contentOffset.y;
-    
-    NSLog(@"%f",offsetY);
     
     if(offsetY < 0) {
         CGRect currentFrame = _headerbackgroundImageView.frame;

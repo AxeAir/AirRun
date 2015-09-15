@@ -1,3 +1,5 @@
+![](https://travis-ci.org/AxeAir/AirRun.svg?branch=develop)
+
 #future
 
 * 导航栏
